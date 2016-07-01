@@ -1,0 +1,32 @@
+---
+# Configurações técnicas passadas para o pandoc
+fontsize: 12pt
+papersize: a4
+classoption: openright,twoside
+documentclass: abntex2
+lang: pt-BR
+# Configurações do autor
+title: "Modelo Canônico de Trabalho Acadêmico com abnTeX"
+author: Equipe abnTeX
+date: 2016
+local: Brasil
+orientador: Lauro César Araujo
+coorientador: Equipe abnTeX
+instituicao: Universidade do Brasil -- UBr
+curso: Faculdade de Arquitetura da Informação
+programa: Programa de Pós-Graduação
+tipotrabalho: "Tese (Doutorado)"
+preambulo: "Modelo canônico de trabalho monográfico acadêmico em conformidade com
+as normas ABNT apresentado à comunidade de usuários \LaTeX."
+keywords: 
+  - abnt
+  - latex
+  - abntex
+  - abntex2
+  - trabalho
+  - acadêmico
+colorlinks:
+  linkcolor: Maroon
+  citecolor: Blue
+  urlcolor: Blue
+---

@@ -1,0 +1,45 @@
+\usepackage{lastpage}			% Usado pela Ficha catalográfica OK
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção. OK
+\usepackage{lipsum}				% para geração de dummy text
+\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage[alf]{abntex2cite}	  % Citações padrão ABNT
+
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+\titulo{$title$}
+\autor{$author$}
+\local{$local$}
+\data{$date$}
+\orientador{$orientador$}
+\coorientador{$coorientador$}
+\instituicao{%
+  $instituicao$
+  \par
+  $curso$
+  \par
+  $programa$}
+\tipotrabalho{$tipotrabalho$}
+
+% O preambulo deve conter o tipo do trabalho, o objetivo, 
+% o nome da instituição e a área de concentração 
+\preambulo{$preambulo$}
+
+
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% ---
+% compila o indice
+% ---
+\makeindex
+% ---
+
