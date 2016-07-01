@@ -1,6 +1,7 @@
 require 'open3'
 require 'yaml'
 #require 'io'
+require  'rake/clean'
 
 
 def valida_yaml
@@ -28,6 +29,8 @@ task :tex => [:custom] do
 # --template=abntex2-trabalho-academico
   system "pandoc -f markdown -s --normalize --chapter  --include-in-header=preambulo-customizado.tex  --include-before-body=pretextual-customizado.tex metadados.yaml trabalho-academico.md  -o trabalho-academico.tex"
 end
+
+CLEAN.include(["trabalho-academico.aux","trabalho-academico.idx","trabalho-academico.lof", "trabalho-academico.pdf","trabalho-academico.fdb_latexmk","trabalho-academico.ilg","trabalho-academico.log","*.*~","trabalho-academico.tex","trabalho-academico.fls","trabalho-academico.ind","trabalho-academico.lot","trabalho-academico.out","trabalho-academico.toc","preambulo-customizado.tex","pretextual-customizado.tex"])
 
 
 task :default => [:tex, :compile]
