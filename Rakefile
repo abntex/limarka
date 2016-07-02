@@ -5,10 +5,11 @@ require  'rake/clean'
 
 
 def valida_yaml
-  metadados = IO.read("metadados.yaml")
+  metadados = IO.read("metadados.yaml") # Valida o arquivo de metadados
   puts YAML.load(metadados)
 end
 
+desc "Compila arquivo tex em PDF"
 task :compile do
   system "latexmk --xelatex trabalho-academico.tex"
 end
@@ -21,9 +22,9 @@ task :custom do
   system "pandoc -f markdown --data-dir=. --template=abntex2-pretextual metadados.yaml -o pretextual-customizado.tex"
   puts "Gerando postextual-customizado.tex"
   system "pandoc -f markdown --data-dir=. --template=abntex2-postextual metadados.yaml -o postextual-customizado.tex"
-
 end
 
+desc "Gera trabalho-academico.tex a partir do arquivo markdown e metadados."
 task :tex => [:custom] do
   valida_yaml
   #system "pandoc --smart --standalone --wrap=none --data-dir=. -f markdown -t latex trabalho-academico.md metadados/matedados.yaml -o trabalho-academico.tex"
