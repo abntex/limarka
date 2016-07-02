@@ -1,29 +1,30 @@
 # Introdução {#indroducao}
 
-Introdução do trabalho.
+Introdução do trabalho.[^intro]
 
-\lipsum[1]
-
-\lipsum[2-3]
+[^intro]: Exemplo de nota de rodapé.
 
 
 # Referencial teórico
 
-\lipsum[4-5]
+Meu referencial teórico.
 
-## Banana
+> Alguém falou algo bem bonito aqui, mas não esquecer que para fazer
+> uma citação desta forma é necessário ter no mínimo três linhas de
+> acordo com a ABNT (Fulano, 2016).
 
-\lipsum[14-16]
+## Sobre bananas
+
+Texto sobre banas
 
 # Resultados
 
-\lipsum[6-7]
+Resultados aqui.
 
 
-\phantompart
 
 # Conclusão
 
-\lipsum[31-33]
+Conclusão do trabalho.
 
 

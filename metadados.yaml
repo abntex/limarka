@@ -29,4 +29,25 @@ colorlinks:
   linkcolor: Maroon
   citecolor: Blue
   urlcolor: Blue
+simbolos:
+  -
+    s: Gamma
+    d: Letra grega Gama
+  -
+    s: zeta
+    d: Letra grega minúscula zeta
+  -
+    s: Lambda
+    d: Lambda
+  -
+    s: in
+    d: Pertence
+siglas:
+  -
+    s: ABNT
+    d: Associação Brasileira de Normas Técnicas
+  -
+    s: abnTeX
+    d: ABsurdas Normas para TeX
+anexos: true
 ---

@@ -265,25 +265,30 @@ contribuirão para a evolução do \abnTeX.
 \cleardoublepage
 % ---
 
+
+$if(siglas)$
 % ---
 % inserir lista de abreviaturas e siglas
 % ---
 \begin{siglas}
-  \item[ABNT] Associação Brasileira de Normas Técnicas
-  \item[abnTeX] ABsurdas Normas para TeX
+$for(siglas)$
+  \item[$siglas.s$] $siglas.d$.
+$endfor$
 \end{siglas}
 % ---
+$endif$
 
+$if(simbolos)$
 % ---
 % inserir lista de símbolos
 % ---
 \begin{simbolos}
-  \item[\$$ \Gamma \$$] Letra grega Gama
-  \item[\$$ \Lambda \$$] Lambda
-  \item[\$$ \zeta \$$] Letra grega minúscula zeta
-  \item[\$$ \in \$$] Pertence
+$for(simbolos)$
+  \item[$$ \$simbolos.s$ $$] $simbolos.d$.
+$endfor$
 \end{simbolos}
 % ---
+$endif$
 
 % ---
 % inserir o sumario
