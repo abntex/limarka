@@ -53,3 +53,12 @@
 % Renomear o título da seção de referências
 \renewcommand{\bibname}{Refer\^encias}
 
+
+% Adapta capa do pandoc para utilizar a capa do abnTeX
+\renewcommand{\maketitle}{\imprimircapa}
+
+% Para incluir a ficha catalografica
+\usepackage[dvipsnames]{xcolor} % http://tex.stackexchange.com/questions/124636/package-xcolor-error-undefined-colors-maroon-royal-blue-when-master-has-pdf
+\usepackage{pdfpages}
+
+\usepackage{longtable} % para as tabelas

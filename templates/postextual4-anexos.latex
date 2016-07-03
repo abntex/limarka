@@ -2,6 +2,7 @@
 % Anexos
 % ----------------------------------------------------------
 
+$if(anexos)$
 % ---
 % Inicia os anexos
 % ---
@@ -13,4 +14,6 @@
 $body$
 
 \end{anexosenv}
-
+$else$
+% Sem anexos
+$endif$

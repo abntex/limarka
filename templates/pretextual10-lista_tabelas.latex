@@ -1,0 +1,10 @@
+% ---
+% Lista de tabelas (opcional)
+% ---
+$if(lista_de_tabelas)$
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+% ---
+$endif$
+

@@ -1,0 +1,45 @@
+% Seleciona o idioma do documento (conforme pacotes do babel)
+%\selectlanguage{english}
+\selectlanguage{brazil}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+
+% ---
+% Capa: será impressa em \maketitle que provém do pandoc,
+% que foi sobrescrito no preambulo.
+% ---
+
+
+
+
+$if(folha_de_rosto)$
+% ---
+% Folha de rosto
+% (o * indica que haverá a ficha bibliográfica)
+% ---
+\imprimirfolhaderosto*
+% ---
+$endif$
+
+
+% ---
+% Inserir a ficha bibliografica
+% ---
+
+$if(ficha_catalografica)$
+% Isto é um exemplo de Ficha Catalográfica, ou ``Dados internacionais de
+% catalogação-na-publicação''. Você pode utilizar este modelo como referência. 
+% Porém, provavelmente a biblioteca da sua universidade lhe fornecerá um PDF
+% com a ficha catalográfica definitiva após a defesa do trabalho. Quando estiver
+% com o documento, salve-o como PDF no diretório do seu projeto e substitua todo
+% o conteúdo de implementação deste arquivo pelo comando abaixo:
+%
+\begin{fichacatalografica}
+    \includepdf{ficha-catalografica.pdf}
+\end{fichacatalografica}
+$endif$

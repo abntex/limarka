@@ -1,0 +1,15 @@
+% ---
+% Inserir errata
+% ---
+
+$if(errata)$
+\begin{errata}
+
+$body$
+
+\end{errata}
+% ---
+$else$
+% Sem errata
+$endif$
+

@@ -1,0 +1,12 @@
+% ---
+% Lista de abreviaturas e siglas (opcional)
+% ---
+$if(siglas)$
+\begin{siglas}
+$for(siglas)$
+  \item[$siglas.s$] $siglas.d$.
+$endfor$
+\end{siglas}
+% ---
+$endif$
+

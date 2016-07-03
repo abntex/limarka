@@ -7,7 +7,8 @@ documentclass: abntex2
 lang: pt-BR
 # Configurações do autor
 title: "Modelo Canônico de Trabalho Acadêmico com abnTeX"
-author: Equipe abnTeX
+#author: Equipe abnTeX
+author: Isa Oliveira Ribeiro Alexandre
 date: 2016
 local: Brasil
 orientador: Lauro César Araujo
@@ -49,7 +50,13 @@ siglas:
   -
     s: abnTeX
     d: ABsurdas Normas para TeX
+ficha_catalografica: false
+folha_de_rosto: false
+lista_de_figuras: false
+lista_de_tabelas: false
+errata: false
 anexos: false
 apendices: false
 indice-remissivo: true
+referencias-manual: true
 ---

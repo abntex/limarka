@@ -1,5 +1,5 @@
 % ----------------------------------------------------------
-% ELEMENTOS PÓS-TEXTUAIS
+% Início dos ELEMENTOS PÓS-TEXTUAIS
 % ----------------------------------------------------------
 \postextual
 % ----------------------------------------------------------
@@ -7,13 +7,20 @@
 % ----------------------------------------------------------
 % Referências bibliográficas
 % ----------------------------------------------------------
-\bibliography{abntex2-modelo-references}
 
-% ----------------------------------------------------------
-% Glossário
-% ----------------------------------------------------------
-%
-% Consulte o manual da classe abntex2 para orientações sobre o glossário.
-%
-%\glossary
+$if(referencias-manual)$
+\renewcommand{\bibname}{Referências} % Atualiza título da seção
+\begin{thebibliography}{50}
 
+% Referências inseridas de forma manual
+
+$body$
+
+\end{thebibliography}
+$else$
+
+% Referências inseridas a partir de referencias.bib
+
+\bibliography{referencias}
+
+$endif$

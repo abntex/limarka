@@ -1,0 +1,11 @@
+$if(simbolos)$
+% ---
+% Lista de símbolos (opcional)
+% ---
+\begin{simbolos}
+$for(simbolos)$
+  \item[$$ \$simbolos.s$ $$] $simbolos.d$.
+$endfor$
+\end{simbolos}
+% ---
+$endif$
