@@ -49,5 +49,7 @@ siglas:
   -
     s: abnTeX
     d: ABsurdas Normas para TeX
-anexos: true
+anexos: false
+apendices: false
+indice-remissivo: true
 ---

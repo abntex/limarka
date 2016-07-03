@@ -50,3 +50,6 @@
    \item\relax}
   {\endlist}
 
+% Renomear o título da seção de referências
+\renewcommand{\bibname}{Refer\^encias}
+
