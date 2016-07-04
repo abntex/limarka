@@ -7,7 +7,12 @@ Dependências:
 
 - abnTeX2
 - pandoc
-- rake (apenas para invocar os comandos)
+
+# Instalação de dependências ruby
+
+        gem install rake
+        gem install colorize
+
 
 # Instruções rápidas
 
@@ -27,12 +32,13 @@ Em vez de criar um template novo, completamente baseado no abnTeX2,
 preferi manter o máximo de compatibilidade possível com o
 [template original do pandoc](https://github.com/jgm/pandoc-templates/blob/master/default.latex),
 dessa forma poderemos nos beneficiar com as alterações realizadas por
-eles também.
+eles.
 
 Inserir personalizações baseadas no abnTex2 para inserir no template
 do pandoc.
 
 # Detalhes de implementação
 
-- Os arquivos no diretório template são utilizados para gerar código
-  Latex para ser inserido no modelo
+- Os arquivos no diretório `templates` são utilizados para gerar código
+  Latex para ser inserido no modelo do pandoc. Tudo isso é automatizado através
+  de tarefas rake.
