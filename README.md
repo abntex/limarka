@@ -64,3 +64,7 @@ do pandoc.
 
 O projeto tem como origem uma pesquisa científica sobre utilização de linguagem
 de marcação de texto para elaboração de monografias (em andamento).
+
+- Busca realizar e publicar experimentos de utilização
+- Experimentar estratégias para facilitar utilização por usuários leigos
+
