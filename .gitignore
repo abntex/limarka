@@ -180,17 +180,9 @@ TSWLatexianTemp*
 *~[0-9]*
 
 *~
-preambulo-customizado.tex
-trabalho-academico.pdf
-trabalho-academico.tex
-pretextual-customizado.tex
-postextual-customizado.tex
-apendices-customizado.tex
-anexos-customizado.tex
-indice-remissivo-customizado.tex
-referencias-customizado.tex
 configuracao.pdf
-postextual.tex
-pretextual.tex
-preambulo.tex
-configuracao.yaml
+templates/postextual.tex
+templates/pretextual.tex
+templates/preambulo.tex
+templates/configuracao.yaml
+xxx-*
