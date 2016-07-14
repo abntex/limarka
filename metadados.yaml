@@ -7,16 +7,22 @@ documentclass: abntex2
 lang: pt-BR
 # Configurações do autor
 title: "Modelo Canônico de Trabalho Acadêmico com abnTeX"
-#author: Equipe abnTeX
-author: Isa Oliveira Ribeiro Alexandre
+author: Equipe abnTeX
 date: 2016
 local: Brasil
-orientador: Lauro César Araujo
-coorientador: Equipe abnTeX
+orientador: Oltrano
+#coorientador: Coltrano
+avaliador1: Beltrano
+avaliador2: Ciltrano
+#avaliador3: Deltrano
 instituicao: Universidade do Brasil -- UBr
-curso: Faculdade de Arquitetura da Informação
-programa: Programa de Pós-Graduação
+monografia: false
+tipo_do_trabalho: Monografia
 tipotrabalho: "Tese (Doutorado)"
+titulacao: "Licenciado em Letras - Inglês"
+curso: Letras
+programa: Programa de Pós-Graduação
+linha_de_pesquisa: Processamento de sinais
 preambulo: "Modelo canônico de trabalho monográfico acadêmico em conformidade com
 as normas ABNT apresentado à comunidade de usuários \LaTeX."
 keywords: 
@@ -50,8 +56,8 @@ siglas:
   -
     s: abnTeX
     d: ABsurdas Normas para TeX
-ficha_catalografica: false
-folha_de_rosto: false
+ficha_catalografica: true
+folha_de_rosto: true
 lista_de_figuras: false
 lista_de_tabelas: false
 errata: false
@@ -59,4 +65,6 @@ anexos: false
 apendices: false
 indice-remissivo: true
 referencias-manual: true
+folha_de_aprovacao_gerar: true
+folha_de_aprovacao_incluir: false
 ---

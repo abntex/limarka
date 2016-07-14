@@ -1,9 +1,8 @@
 require 'colorize'
 require 'open3'
 require 'yaml'
-#require 'io'
-require  'rake/clean'
-
+require 'rake/clean'
+require 'pdf_forms'
 
 def valida_yaml
   metadados = IO.read("metadados.yaml") # Valida o arquivo de metadados
@@ -97,7 +96,68 @@ task :tex => [:preambulo, :pretextual, :postextual] do
   system "pandoc -f markdown -s --normalize --chapter --include-in-header=preambulo.tex --include-before-body=pretextual.tex  --include-after-body=postextual.tex metadados.yaml trabalho-academico.md -o trabalho-academico.tex"
 end
 
-CLEAN.include(["trabalho-academico.aux","trabalho-academico.idx","trabalho-academico.lof", "trabalho-academico.pdf","trabalho-academico.fdb_latexmk","trabalho-academico.ilg","trabalho-academico.log","*.*~","trabalho-academico.tex","trabalho-academico.fls","trabalho-academico.ind","trabalho-academico.lot","trabalho-academico.out","trabalho-academico.toc","trabalho-academico.bbl","trabalho-academico.blg","trabalho-academico.brf","preambulo.tex","pretextual.tex","postextual.tex"])
+file "configuracao.pdf"
+file "configuracao.yaml" => ["configuracao.pdf","Rakefile"] do
+  @pdftk = PdfForms.new 'pdftk'
+  pdf = PdfForms::Pdf.new 'configuracao.pdf', @pdftk, utf8_fields: true
+  h = {} # hash
+
+  ["title", "author", "instituicao", "local", "date", "aprovacao_dia", "aprovacao_mes", "orientador", "coorientador","avaliador1", "avaliador2", "avaliador3", "tipo_do_trabalho", "titulacao","curso","programa", "linha_de_pesquisa","ficha_catalografica"].each do |campo|
+    if not pdf.field(campo) then puts "Campo faltando: #{campo}".red end
+    value = pdf.field(campo).value
+    if value == "Off" then value = false end
+    if value == "" then value = nil end
+    h[campo] = value
+  end
+
+  h[:monografia] = h["tipo_do_trabalho"] == "Monografia"
+  h["ficha_catalografica"] = h["ficha_catalografica"] == "Incluir ficha-catalografica.pdf da pasta imagens"
+
+  # siglas
+  siglas = []
+  siglas_str = pdf.field("siglas").value
+  siglas_str.each_line do |linha|
+    s,d = linha.split(":")
+    siglas << { 's' => s.strip, 'd' => d.strip}
+  end
+  h["siglas"] = siglas
+  
+
+  # shows
+  h["show_errata"] = pdf.field("show_errata").value == "Utilizar Errata"
+  h["folha_de_aprovacao_gerar"] =   pdf.field("folha_de_aprovacao").value == "Gerar folha de aprovação"
+  h["folha_de_aprovacao_incluir"] = pdf.field("folha_de_aprovacao").value == "Utilizar folha de aprovação escaneada"
+  
+  # show_folha_de_aprovacao
+  # tipo_do_trabalho
+
+  # salva o arquivo
+  File.open('configuracao.yaml', 'w') do |f| 
+    f.write h.to_yaml
+    f.write "---\n"
+  end
+
+end
+
+# http://stackoverflow.com/questions/19841865/ruby-gem-to-extract-form-data-from-fillable-pdf
+# https://github.com/jkraemer/pdf-forms/blob/master/test/pdf_test.rb
+
+namespace :pdf do
+  desc "Imprime a configuração em PDF"
+  task :test => ["configuracao.pdf"] do
+    @pdftk = PdfForms.new 'pdftk'
+    pdf = PdfForms::Pdf.new 'configuracao.pdf', @pdftk, utf8_fields: true
+    puts "Fields: #{pdf.fields}"
+    puts "Título do tabalho: #{pdf.field('title').value}"
+    puts "Autor: #{pdf.field('autor').value}"
+    puts "Ano: #{pdf.field('date').value}"
+  end
+  desc "Ler configuração do PDF e salva em configuracao.yaml"
+  task :configuracao => ["configuracao.yaml"]
+
+end
 
 
 task :default => [:tex, :compile]
+
+CLEAN.include(["trabalho-academico.aux","trabalho-academico.idx","trabalho-academico.lof", "trabalho-academico.pdf","trabalho-academico.fdb_latexmk","trabalho-academico.ilg","trabalho-academico.log","*.*~","trabalho-academico.tex","trabalho-academico.fls","trabalho-academico.ind","trabalho-academico.lot","trabalho-academico.out","trabalho-academico.toc","trabalho-academico.bbl","trabalho-academico.blg","trabalho-academico.brf","preambulo.tex","pretextual.tex","postextual.tex","configuracao.yaml"])
