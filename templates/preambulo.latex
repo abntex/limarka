@@ -17,9 +17,9 @@
 \instituicao{%
   $instituicao$
   \par
+$if(monografia)$
   $curso$
-$if(programa)$
-  \par
+$else$
   $programa$
 $endif$
 }

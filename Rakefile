@@ -137,7 +137,7 @@ file "templates/configuracao.yaml" => ["configuracao.pdf","Rakefile"] do |t|
   # salva o arquivo
   File.open(t.name, 'w') do |f| 
     f.write h.to_yaml
-    f.write "---\n"
+    f.write "---\n\n"
   end
   puts "Arquivo criado: #{t.name}".green
 

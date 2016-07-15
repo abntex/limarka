@@ -15,20 +15,19 @@
 % ---
 
 
-
-
-$if(folha_de_rosto)$
 % ---
-% Folha de rosto
-% (o * indica que haverá a ficha bibliográfica)
+% Folha de rosto: sempre será impressa
 % ---
-\imprimirfolhaderosto*
-% ---
+$if(ficha_catalografica)$
+\imprimirfolhaderosto* % (o * indica que haverá a ficha catalográfica)
+$else$
+\imprimirfolhaderosto
 $endif$
+% ---
 
 $if(ficha_catalografica)$
 % ---
-% Inserir a ficha bibliografica
+% Inserir a ficha catalográfica
 % ---
 % Provavelmente a biblioteca da sua universidade lhe fornecerá um PDF
 % com a ficha catalográfica definitiva após a defesa do trabalho. Quando estiver
