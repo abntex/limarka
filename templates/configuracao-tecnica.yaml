@@ -1,0 +1,9 @@
+---
+# Configurações técnicas passadas para o pandoc, serão mescladas com as
+# configurações lidas do PDF.
+fontsize: 12pt
+papersize: a4
+classoption: openright,twoside
+documentclass: abntex2
+lang: pt-BR
+---

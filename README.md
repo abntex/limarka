@@ -20,12 +20,11 @@ Este projeto ainda está em fase embrionária, muito pode ser mudado.
 - pandoc
 - ruby
 - gems: rake, colorize
+- gems: rake, colorize, pdf-forms
 
 # Instalação dos gems
 
-        gem install rake
-        gem install colorize
-
+        gem install rake colorize pdf-forms
 
 # Instruções rápidas
 
@@ -35,6 +34,7 @@ Baixe o repositório, depois execute:
 		
 Após isso, o arquivo `trabalho-academico.pdf` deve ter sido gerado.
 
+OBS: No momento o gem `pdf-forms` apresenta um problema, ver #6.
 
 # Detalhes de implementação
 

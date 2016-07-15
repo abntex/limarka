@@ -17,15 +17,34 @@
 \instituicao{%
   $instituicao$
   \par
+$if(monografia)$
   $curso$
-  \par
-  $programa$}
-\tipotrabalho{$tipotrabalho$}
+$else$
+  $programa$
+$endif$
+}
+\tipotrabalho{$tipo_do_trabalho$}
 
 % O preambulo deve conter o tipo do trabalho, o objetivo, 
-% o nome da instituição e a área de concentração 
-\preambulo{$preambulo$}
+% o nome da instituição e a área de concentração.
+% Esse texto irá compor a Folha de Rosto e Folha de Aprovação.
+\preambulo{$tipo_do_trabalho$ apresentada ao $if(monografia)$Curso de $curso$$else$$programa$$endif$ da $instituicao$, como requisito parcial para obtenção do grau de $titulacao$.
 
+$if(monografia)$
+$else$
+$if(linha_de_pesquisa)$
+    \textbf{Linha de pesquisa}: $linha_de_pesquisa$.
+$endif$
+
+%$if(area_de_concentracao)$ % Ainda não implementado
+    %\textbf{Área de concentração}: $area_de_concentracao$.
+%$endif$
+
+$endif$
+
+
+
+}
 
 % --- 
 % Espaçamentos entre linhas e parágrafos 
@@ -57,7 +76,7 @@
 % Adapta capa do pandoc para utilizar a capa do abnTeX
 \renewcommand{\maketitle}{\imprimircapa}
 
-% Para incluir a ficha catalografica
+% Para incluir páginas PDF (ficha catalografica e folha de aprovação)
 \usepackage[dvipsnames]{xcolor} % http://tex.stackexchange.com/questions/124636/package-xcolor-error-undefined-colors-maroon-royal-blue-when-master-has-pdf
 \usepackage{pdfpages}
 
