@@ -42,7 +42,9 @@ task :pretextual  do
   pretextual = ""
 
   necessita_de_arquivo_de_texto = ["errata"]
-  ["folha_de_rosto", "errata", "folha_de_aprovacao", "dedicatoria", "agradecimentos", "epigrafe", "resumo", "abstract", "lista_ilustracoes", "lista_tabelas", "lista_siglas", "lista_simbolos", "sumario"].each_with_index do |secao,indice|
+  ["folha_de_rosto", "errata", "folha_de_aprovacao", "dedicatoria", "agradecimentos", 
+  "epigrafe", "resumo", "abstract", "lista_ilustracoes", "lista_tabelas", 
+  "lista_siglas", "lista_simbolos", "sumario"].each_with_index do |secao,indice|
     template = "pretextual#{indice+1}-#{secao}"
     arquivo_de_entrada = if necessita_de_arquivo_de_texto.include?(secao) then "#{secao}.md" else "" end
     Open3.popen3("pandoc -f markdown --data-dir=. --template=#{template} -t latex templates/configuracao.yaml #{arquivo_de_entrada}") {|stdin, stdout, stderr, wait_thr|
@@ -105,7 +107,7 @@ file "templates/configuracao.yaml" => ["configuracao.pdf","Rakefile"] do |t|
   pdf = PdfForms::Pdf.new 'configuracao.pdf', @pdftk, utf8_fields: true
   h = {} # hash
 
-  ["title", "author", "instituicao", "local", "date", "aprovacao_dia", "aprovacao_mes", "orientador", "coorientador","avaliador1", "avaliador2", "avaliador3", "tipo_do_trabalho", "titulacao","curso","programa", "linha_de_pesquisa","ficha_catalografica","dedicatoria"].each do |campo|
+  ["title", "author", "instituicao", "local", "date", "aprovacao_dia", "aprovacao_mes", "orientador", "coorientador","avaliador1", "avaliador2", "avaliador3", "tipo_do_trabalho", "titulacao","curso","programa", "linha_de_pesquisa","ficha_catalografica","dedicatoria","agradecimentos"].each do |campo|
     if not pdf.field(campo) then puts "Campo faltando: #{campo}".red end
     value = pdf.field(campo).value
     if value == "Off" then value = false end
