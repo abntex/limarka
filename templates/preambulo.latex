@@ -28,7 +28,23 @@ $endif$
 % O preambulo deve conter o tipo do trabalho, o objetivo, 
 % o nome da instituição e a área de concentração.
 % Esse texto irá compor a Folha de Rosto e Folha de Aprovação.
-\preambulo{$tipo_do_trabalho$ apresentada ao $if(monografia)$Curso de $curso$$else$$programa$$endif$ da $instituicao$, como requisito parcial para obtenção do grau de $titulacao$.}
+\preambulo{$tipo_do_trabalho$ apresentada ao $if(monografia)$Curso de $curso$$else$$programa$$endif$ da $instituicao$, como requisito parcial para obtenção do grau de $titulacao$.
+
+$if(monografia)$
+$else$
+$if(linha_de_pesquisa)$
+    \textbf{Linha de pesquisa}: $linha_de_pesquisa$.
+$endif$
+
+%$if(area_de_concentracao)$ % Ainda não implementado
+    %\textbf{Área de concentração}: $area_de_concentracao$.
+%$endif$
+
+$endif$
+
+
+
+}
 
 % --- 
 % Espaçamentos entre linhas e parágrafos 

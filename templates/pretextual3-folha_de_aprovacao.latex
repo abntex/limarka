@@ -2,13 +2,20 @@
 % Inserir folha de aprovação
 % ---
 
+
 % Isto é um exemplo de Folha de aprovação, elemento obrigatório da NBR
-% 14724/2011 (seção 4.2.1.3). Você pode utilizar este modelo até a aprovação
-% do trabalho. Após isso, substitua todo o conteúdo deste arquivo por uma
-% imagem da página assinada pela banca com o comando abaixo:
-%
-% \includepdf{folhadeaprovacao_final.pdf}
-%
+% 14724/2011 (seção 4.2.1.3). 
+
+$if(folha_de_aprovacao_incluir)$
+% Após após aprovação do trabalho a folha deve ser assinada, escaneada e
+% incluída como abaixo:
+\begin{folhadeaprovacao}
+\includepdf{imagens/folha-de-aprovacao-escaneada.pdf}
+\end{folhadeaprovacao}
+$endif$
+
+$if(folha_de_aprovacao_gerar)$
+% Este modelo será utilizado antes da aprovação do trabalho.
 \begin{folhadeaprovacao}
 
   \begin{center}
@@ -22,18 +29,24 @@
     
     \hspace{.45\textwidth}
     \begin{minipage}{.5\textwidth}
-        \imprimirpreambulo
+
+    \imprimirpreambulo
+
     \end{minipage}%
     \vspace*{\fill}
    \end{center}
         
-   Trabalho aprovado. \imprimirlocal, 24 de novembro de 2012:
+   $tipo_do_trabalho$ aprovada. \imprimirlocal, $aprovacao_dia$ de $aprovacao_mes$ de $date$:
 
-   \assinatura{\textbf{\imprimirorientador} \\ Orientador} 
-   \assinatura{\textbf{Professor} \\ Convidado 1}
-   \assinatura{\textbf{Professor} \\ Convidado 2}
-   %\assinatura{\textbf{Professor} \\ Convidado 3}
-   %\assinatura{\textbf{Professor} \\ Convidado 4}
+   \assinatura{\textbf{\imprimirorientador} \\ Orientador}
+$if(coorientador)$
+   \assinatura{\textbf{$coorientador$} \\ Coorientador}
+$endif$
+   \assinatura{\textbf{$avaliador1$} \\ Convidado}
+   \assinatura{\textbf{$avaliador2$} \\ Convidado}
+$if(avaliador3)$
+   \assinatura{\textbf{$avaliador3$} \\ Convidado}
+$endif$
       
    \begin{center}
     \vspace*{0.5cm}
@@ -44,5 +57,6 @@
   \end{center}
   
 \end{folhadeaprovacao}
+$endif$
 % ---
 
