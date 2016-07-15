@@ -180,10 +180,9 @@ TSWLatexianTemp*
 *~[0-9]*
 
 *~
-configuracao.odt
+configuracao.pdf
 templates/postextual.tex
 templates/pretextual.tex
 templates/preambulo.tex
 templates/configuracao.yaml
 xxx-*
-imagens/configuracao/*
