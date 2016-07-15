@@ -105,7 +105,7 @@ file "templates/configuracao.yaml" => ["configuracao.pdf","Rakefile"] do |t|
   pdf = PdfForms::Pdf.new 'configuracao.pdf', @pdftk, utf8_fields: true
   h = {} # hash
 
-  ["title", "author", "instituicao", "local", "date", "aprovacao_dia", "aprovacao_mes", "orientador", "coorientador","avaliador1", "avaliador2", "avaliador3", "tipo_do_trabalho", "titulacao","curso","programa", "linha_de_pesquisa","ficha_catalografica"].each do |campo|
+  ["title", "author", "instituicao", "local", "date", "aprovacao_dia", "aprovacao_mes", "orientador", "coorientador","avaliador1", "avaliador2", "avaliador3", "tipo_do_trabalho", "titulacao","curso","programa", "linha_de_pesquisa","ficha_catalografica","dedicatoria"].each do |campo|
     if not pdf.field(campo) then puts "Campo faltando: #{campo}".red end
     value = pdf.field(campo).value
     if value == "Off" then value = false end
