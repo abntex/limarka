@@ -4,7 +4,11 @@ require 'yaml'
 require 'rake/clean'
 require 'pdf_forms'
 
+task :default => ['clean','pdf:configuracao', :tex, :compile]
+
 PDF = "configuracao.pdf"
+
+
 
 def tipo_do_trabalho
   tipo="Monografia"
@@ -107,7 +111,7 @@ file "templates/configuracao.yaml" => ["configuracao.pdf","Rakefile"] do |t|
   pdf = PdfForms::Pdf.new 'configuracao.pdf', @pdftk, utf8_fields: true
   h = {} # hash
 
-  ["title", "author", "instituicao", "local", "date", "aprovacao_dia", "aprovacao_mes", "orientador", "coorientador","avaliador1", "avaliador2", "avaliador3", "tipo_do_trabalho", "titulacao","curso","programa", "linha_de_pesquisa","ficha_catalografica","dedicatoria","agradecimentos"].each do |campo|
+  ["title", "author", "instituicao", "local", "date", "aprovacao_dia", "aprovacao_mes", "orientador", "coorientador","avaliador1", "avaliador2", "avaliador3", "tipo_do_trabalho", "titulacao","curso","programa", "linha_de_pesquisa","ficha_catalografica","dedicatoria","agradecimentos","epigrafe"].each do |campo|
     if not pdf.field(campo) then puts "Campo faltando: #{campo}".red end
     value = pdf.field(campo).value
     if value == "Off" then value = false end
@@ -164,6 +168,6 @@ namespace :pdf do
 end
 
 
-task :default => ['pdf:configuracao', :tex, :compile]
+
 
 CLEAN.include(["xxx-*",PREAMBULO,PRETEXTUAL,POSTEXTUAL,"templates/configuracao.yaml"])
