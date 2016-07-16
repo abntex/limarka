@@ -111,12 +111,31 @@ file "templates/configuracao.yaml" => ["configuracao.pdf","Rakefile"] do |t|
   pdf = PdfForms::Pdf.new 'configuracao.pdf', @pdftk, utf8_fields: true
   h = {} # hash
 
-  ["title", "author", "instituicao", "local", "date", "aprovacao_dia", "aprovacao_mes", "orientador", "coorientador","avaliador1", "avaliador2", "avaliador3", "tipo_do_trabalho", "titulacao","curso","programa", "linha_de_pesquisa","ficha_catalografica","dedicatoria","agradecimentos","epigrafe"].each do |campo|
+  # Campos do PDF
+
+=begin
+  ["title", "author", "instituicao", "local", "date", "aprovacao_dia", "aprovacao_mes", "orientador", "coorientador","avaliador1", "avaliador2", "avaliador3", "tipo_do_trabalho", "titulacao","curso","programa", "linha_de_pesquisa","ficha_catalografica","dedicatoria","agradecimentos","epigrafe","resumo","palavras_chave",
+"keywords","abstract_texto","resume", "resumen", "mots_cles"].each do |campo|
+
     if not pdf.field(campo) then puts "Campo faltando: #{campo}".red end
     value = pdf.field(campo).value
     if value == "Off" then value = false end
     if value == "" then value = nil end
     h[campo] = value
+  end
+=end
+
+  # Campos do PDF
+  pdf.fields.each do |f|
+    value = f.value
+    if value == "Off" then value = false end
+    if value == "" then value = nil end
+    h[f.name] = value
+  end
+
+  # Substitui ',' e ';' por '.'
+  ['palavras_chave', 'palabras_clave', 'keywords', 'mots_cles'].each do |p|
+    h[p] = h[p].gsub(/[;,]/, '.')   
   end
 
   h['monografia'] = h["tipo_do_trabalho"] == "Monografia"
