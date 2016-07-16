@@ -142,15 +142,16 @@ file "templates/configuracao.yaml" => ["configuracao.pdf","Rakefile"] do |t|
   h["ficha_catalografica"] = h["ficha_catalografica"] == "Incluir ficha-catalografica.pdf da pasta imagens"
 
 
-  # siglas
-  if (h['siglas']) then
-    siglas = []
-    siglas_str = pdf.field("siglas").value
-    siglas_str.each_line do |linha|
-      s,d = linha.split(":")
-      siglas << { 's' => s.strip, 'd' => d ? d.strip : ""}
+  # siglas e simbolos
+  ['siglas','simbolos'].each do |sigla_ou_simbolo|
+    if (h[sigla_ou_simbolo]) then
+      sa = [] # sa: s-array
+      h[sigla_ou_simbolo].each_line do |linha|
+        s,d = linha.split(":")
+        sa << { 's' => s.strip, 'd' => d ? d.strip : ""}
+      end
+      h[sigla_ou_simbolo] = sa
     end
-    h["siglas"] = siglas
   end
   
 

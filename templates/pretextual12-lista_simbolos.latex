@@ -4,7 +4,7 @@ $if(simbolos)$
 % ---
 \begin{simbolos}
 $for(simbolos)$
-  \item[$$ \$simbolos.s$ $$] $simbolos.d$.
+  \item[$$ \$simbolos.s$ $$] $simbolos.d$
 $endfor$
 \end{simbolos}
 % ---
