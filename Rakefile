@@ -158,6 +158,7 @@ file "templates/configuracao.yaml" => ["configuracao.pdf","Rakefile"] do |t|
   h["folha_de_aprovacao_gerar"] =   pdf.field("folha_de_aprovacao").value == "Gerar folha de aprovação"
   h["folha_de_aprovacao_incluir"] = pdf.field("folha_de_aprovacao").value == "Utilizar folha de aprovação escaneada"
   h["lista_ilustracoes"] = pdf.field("lista_ilustracoes").value == "Gerar lista de ilustrações"
+  h["lista_tabelas"] = pdf.field("lista_tabelas").value == "Gerar lista de tabelas"
 
   
   # show_folha_de_aprovacao

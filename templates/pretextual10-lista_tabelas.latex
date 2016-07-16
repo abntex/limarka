@@ -1,7 +1,7 @@
 % ---
 % Lista de tabelas (opcional)
 % ---
-$if(lista_de_tabelas)$
+$if(lista_tabelas)$
 \pdfbookmark[0]{\listtablename}{lot}
 \listoftables*
 \cleardoublepage
