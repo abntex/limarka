@@ -4,7 +4,7 @@
 $if(siglas)$
 \begin{siglas}
 $for(siglas)$
-  \item[$siglas.s$] $siglas.d$.
+  \item[$siglas.s$] $siglas.d$
 $endfor$
 \end{siglas}
 % ---

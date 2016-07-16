@@ -8,8 +8,6 @@ task :default => ['clean','pdf:configuracao', :tex, :compile]
 
 PDF = "configuracao.pdf"
 
-
-
 def tipo_do_trabalho
   tipo="Monografia"
   if File.exist?(PDF) then
@@ -143,14 +141,17 @@ file "templates/configuracao.yaml" => ["configuracao.pdf","Rakefile"] do |t|
   h['monografia'] = h["tipo_do_trabalho"] == "Monografia"
   h["ficha_catalografica"] = h["ficha_catalografica"] == "Incluir ficha-catalografica.pdf da pasta imagens"
 
+
   # siglas
-  siglas = []
-  siglas_str = pdf.field("siglas").value
-  siglas_str.each_line do |linha|
-    s,d = linha.split(":")
-    siglas << { 's' => s.strip, 'd' => d.strip}
+  if (h['siglas']) then
+    siglas = []
+    siglas_str = pdf.field("siglas").value
+    siglas_str.each_line do |linha|
+      s,d = linha.split(":")
+      siglas << { 's' => s.strip, 'd' => d ? d.strip : ""}
+    end
+    h["siglas"] = siglas
   end
-  h["siglas"] = siglas
   
 
   # shows
@@ -159,10 +160,6 @@ file "templates/configuracao.yaml" => ["configuracao.pdf","Rakefile"] do |t|
   h["folha_de_aprovacao_incluir"] = pdf.field("folha_de_aprovacao").value == "Utilizar folha de aprovação escaneada"
   h["lista_ilustracoes"] = pdf.field("lista_ilustracoes").value == "Gerar lista de ilustrações"
   h["lista_tabelas"] = pdf.field("lista_tabelas").value == "Gerar lista de tabelas"
-
-  
-  # show_folha_de_aprovacao
-  # tipo_do_trabalho
 
   # salva o arquivo
   File.open(t.name, 'w') do |f| 
