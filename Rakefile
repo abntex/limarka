@@ -135,7 +135,9 @@ file "templates/configuracao.yaml" => ["configuracao.pdf","Rakefile"] do |t|
 
   # Substitui ',' e ';' por '.'
   ['palavras_chave', 'palabras_clave', 'keywords', 'mots_cles'].each do |p|
-    h[p] = h[p].gsub(/[;,]/, '.')   
+    if(h[p])
+      h[p] = h[p].gsub(/[;,]/, '.')   
+    end
   end
 
   h['monografia'] = h["tipo_do_trabalho"] == "Monografia"
@@ -155,6 +157,8 @@ file "templates/configuracao.yaml" => ["configuracao.pdf","Rakefile"] do |t|
   h["errata"] = pdf.field("errata").value == "Utilizar Errata"
   h["folha_de_aprovacao_gerar"] =   pdf.field("folha_de_aprovacao").value == "Gerar folha de aprovação"
   h["folha_de_aprovacao_incluir"] = pdf.field("folha_de_aprovacao").value == "Utilizar folha de aprovação escaneada"
+  h["lista_ilustracoes"] = pdf.field("lista_ilustracoes").value == "Gerar lista de ilustrações"
+
   
   # show_folha_de_aprovacao
   # tipo_do_trabalho

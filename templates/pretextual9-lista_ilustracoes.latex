@@ -2,7 +2,7 @@
 % Lista de ilustrações (opcional)
 % ---
 
-$if(lista_de_figuras)$
+$if(lista_ilustracoes)$
 % ---
 % inserir lista de ilustrações
 % ---
