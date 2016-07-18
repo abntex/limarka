@@ -186,3 +186,12 @@ templates/pretextual.tex
 templates/preambulo.tex
 templates/configuracao.yaml
 xxx-*
+/.bundle/
+/.yardoc
+/Gemfile.lock
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/

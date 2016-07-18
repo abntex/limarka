@@ -1,10 +1,16 @@
+require "bundler/gem_tasks"
+require "rspec/core/rake_task"
+
+RSpec::Core::RakeTask.new(:spec)
+
 require 'colorize'
 require 'open3'
 require 'yaml'
 require 'rake/clean'
 require 'pdf_forms'
 
-task :default => ['clean','pdf:configuracao', :tex, :compile]
+#task :default => ['clean','pdf:configuracao', :tex, :compile]
+task :default => :spec
 
 PDF = "configuracao.pdf"
 
