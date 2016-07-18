@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Eduardo de Santana Medeiros Alexandre"]
   spec.email         = ["eduardo.ufpb@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{Ferramenta para compilação de trabalhos acadêmicos com markdown e abnTeX2}
+  spec.description   = %q{Com essa ferramenta você poderá escrever sua monografia, dissertação ou tese utilizando Markdown (linguagem mais simples que Latex).}
+  spec.homepage      = "https://github.com/abntex/trabalho-academico-pandoc-abntex2"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -29,5 +29,15 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.12"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "rspec", "~> 3.5"
+
+
+
+  spec.add_dependency "colorize"
+  spec.add_dependency "pdf-forms"
+  spec.add_dependency "github_changelog_generator"
+  spec.add_dependency "pandoc-ruby"
+  spec.add_dependency "slop", ">= 4.3"
+
 end
+

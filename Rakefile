@@ -1,5 +1,6 @@
 require "bundler/gem_tasks"
 require "rspec/core/rake_task"
+require 'limarka/version'
 
 RSpec::Core::RakeTask.new(:spec)
 
@@ -8,9 +9,14 @@ require 'open3'
 require 'yaml'
 require 'rake/clean'
 require 'pdf_forms'
+require 'github_changelog_generator/task'
 
 #task :default => ['clean','pdf:configuracao', :tex, :compile]
 task :default => :spec
+
+GitHubChangelogGenerator::RakeTask.new :changelog do |config|
+  config.future_release = '0.2.0'
+end
 
 PDF = "configuracao.pdf"
 

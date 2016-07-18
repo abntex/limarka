@@ -1,7 +1,25 @@
 # Change Log
 
+## [0.2.0](https://github.com/abntex/trabalho-academico-pandoc-abntex2/tree/0.2.0) (2016-07-18)
+[Full Changelog](https://github.com/abntex/trabalho-academico-pandoc-abntex2/compare/0.1.0...0.2.0)
+
+**Closed issues:**
+
+- Tornar o projeto administrável com o bundle [\#24](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/24)
+- Sumário [\#19](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/19)
+- Lista de símbolos [\#18](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/18)
+- Lista de abreviaturas e siglas [\#17](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/17)
+- Lista de tabelas [\#16](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/16)
+- Lista de ilustrações [\#15](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/15)
+- Resumos \(obrigatório\) [\#14](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/14)
+- Epígrafe \(opcional\) [\#13](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/13)
+- Agradecimentos \(opcional\) [\#12](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/12)
+- Dedicatória [\#11](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/11)
+- Manter configuração na master [\#10](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/10)
+- Configuração e geração do pre-textual [\#7](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/7)
+
 ## [0.1.0](https://github.com/abntex/trabalho-academico-pandoc-abntex2/tree/0.1.0) (2016-07-15)
-**Issues fechados:**
+**Closed issues:**
 
 - Gerenciar changelog com github\_changelog\_generator [\#9](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/9)
 - Esconder arquivos que usuário não utiliza [\#8](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/8)
