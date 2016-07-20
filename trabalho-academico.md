@@ -27,4 +27,5 @@ Resultados aqui.
 
 Conclusão do trabalho.
 
+Ver \cite{xxx15} para saber mais.
 

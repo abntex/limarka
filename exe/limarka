@@ -1,3 +1,7 @@
 #!/usr/bin/env ruby
 
 require "limarka"
+require "limarka/cli"
+
+Limarka::Cli.start(ARGV)
+

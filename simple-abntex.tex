@@ -1,0 +1,22 @@
+\documentclass{abntex2}
+
+\usepackage{etoolbox}
+\usepackage[numbers,round,comma]{natbib}
+%\usepackage[num]{abntex2cite}
+
+\begin{document}
+
+\AtEndEnvironment{thebibliography}{
+% all your extra bibitems go here
+\bibitem{extra1}SOBRENOME, N. {\emph Titulo}: Subtítulo. 20XX.
+}
+
+
+Cite from above \cite{extra1}.
+
+%\bibliographystyle{plainnat}
+
+\bibliographystyle{plain}
+\bibliography{master.bib} 
+
+\end{document}
