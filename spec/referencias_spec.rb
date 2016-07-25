@@ -25,7 +25,7 @@ t
     let(:configuracao) {configuracao_padrao.merge citacao_numerica}
 
     before do
-      @cv = Limarka::Conversor.new(:texto => texto, :configuracao => configuracao, :test_dir => "tmp/#{test_dir}")
+      @cv = Limarka::Conversor.new(:texto => texto, :configuracao => configuracao, :output_dir => "tmp/#{test_dir}")
       @cv.convert
     end
     
@@ -33,6 +33,10 @@ t
       expect(@cv.preambulo_tex).to include("\\usepackage[numbers,round,comma]{natbib}")
     end
 
+    it "cria arquivo tex para compilação", :tecnico do
+      expect(File).to exist(@cv.texto_tex_file)
+    end
+    
     describe 'no pdf' do
       before do
         Limarka::CompiladorLatex.compila(@cv.texto_tex_file)

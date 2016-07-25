@@ -10,6 +10,7 @@
 *.fot
 *.cb
 *.cb2
+*.out.ps
 
 ## Intermediate documents:
 *.dvi
