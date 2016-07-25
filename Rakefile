@@ -1,3 +1,4 @@
+# coding: utf-8
 require "bundler/gem_tasks"
 require "rspec/core/rake_task"
 require 'limarka/version'
@@ -36,4 +37,4 @@ end
 PREAMBULO="templates/preambulo.tex"
 PRETEXTUAL = "templates/pretextual.tex"
 POSTEXTUAL = "templates/postextual.tex"
-CLEAN.include(["xxx-*",PREAMBULO,PRETEXTUAL,POSTEXTUAL,"templates/configuracao.yaml"])
+CLEAN.include(["xxx-*",PREAMBULO,PRETEXTUAL,POSTEXTUAL,"templates/configuracao.yaml",'tmp'])

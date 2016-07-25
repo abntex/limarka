@@ -1,9 +1,28 @@
 \usepackage{lastpage}			% Usado pela Ficha catalográfica OK
 \usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção. OK
 \usepackage{lipsum}				% para geração de dummy text
+
+$if(citacao-numerica)$
+\usepackage{etoolbox}
+\usepackage[numbers,round,comma]{natbib}
+$else$
 \usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
 \usepackage[alf]{abntex2cite}	  % Citações padrão ABNT
+$endif$
 
+%% ---
+%% Citações personalizadas
+%% ---
+%% Exemplo:
+%% \citarei{chave} SOBRENOME, Nome. {\emph Título}: Subtítulo.
+\newcommand{\citarei}[2]{
+\AtEndEnvironment{thebibliography}{
+  \bibitem{#1} #2
+}
+}
+%% Exemplo: \cita{chave}
+\newcommand{\cita}[1]{\cite{#1}}
+%% ---
 
 % ---
 % Informações de dados para CAPA e FOLHA DE ROSTO
