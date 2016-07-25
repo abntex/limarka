@@ -7,15 +7,19 @@
 \begin{document}
 
 \AtEndEnvironment{thebibliography}{
-% all your extra bibitems go here
-\bibitem{extra1}SOBRENOME, N. {\emph Titulo}: Subtítulo. 20XX.
+  \bibitem{ABNT-citacao} ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. {\emph ABNT NBR 6024:2012}: 
+  Informação e documentaçãao -- Apresentação de citações em documentos. Rio de Janeiro, 2002.
 }
 
+As normas da ABNT especificam que a citação pode ser numérica \cite{ABNT-citacao}.
 
 Cite from above \cite{extra1}.
 
 %\bibliographystyle{plainnat}
 
+\makeatletter
+\renewcommand\@biblabel[1]{#1}
+\makeatother
 \bibliographystyle{plain}
 \bibliography{master.bib} 
 

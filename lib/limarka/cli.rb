@@ -60,6 +60,8 @@ module Limarka
 
     desc "exec", "Executa o sistema para geração do documento latex"
     def exec
+      invoke :pdfconf
+      invoke :preambulo
       invoke :preambulo
       invoke :pretextual
       invoke :postextual
@@ -119,6 +121,10 @@ module Limarka
     desc "pdfconf", "Ler configuração de arquivo pdf"
     def pdfconf
       
+      if not (File.exist?(options[:entrada])) then
+        raise IOError, "Arquivo não existe: #{options[:entrada]}"
+      end
+    
       @pdftk = PdfForms.new 'pdftk'
       pdf = PdfForms::Pdf.new options[:entrada], @pdftk, utf8_fields: true
       h = {} # hash
@@ -154,7 +160,6 @@ module Limarka
         end
       end
       
-
       # shows
       h["errata"] = pdf.field("errata").value == "Utilizar Errata"
       h["folha_de_aprovacao_gerar"] =   pdf.field("folha_de_aprovacao").value == "Gerar folha de aprovação"
@@ -163,8 +168,22 @@ module Limarka
       h["lista_tabelas"] = pdf.field("lista_tabelas").value == "Gerar lista de tabelas"
 
 
-      # pós-textual
+
+      # Referências
+      selecao = 'referencias_origem'
+      {"referencias_bib" => "Banco de referências Bibtex: referencias.bib",
+      'referencias_texto' => "Ao longo do texto",
+      'referencias_md' => 'Separadamente no arquivo referencias.md'}.each do |template_key,valor_para_verdadeiro|
+          h[template_key] = pdf.field(selecao).value == valor_para_verdadeiro
+      end
+
+      #TESTES
       h['referencias-manual'] = false
+      h['citacao-numerica'] = true
+
+
+
+
 
       # Escreve na saída
       s = StringIO.new
@@ -174,7 +193,7 @@ module Limarka
       if (options['saida'] == '-')
         puts s.string
       else
-        File.open(t.name, 'w') { |f| f.write s.string}
+        File.open(options['saida'], 'w') { |f| f.write s.string}
         puts "Arquivo criado: #{options['saida']}".green
       end
     end
