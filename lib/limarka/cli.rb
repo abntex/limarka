@@ -1,3 +1,4 @@
+# coding: utf-8
 require "thor"
 require 'pdf_forms'
 require 'yaml'
@@ -11,21 +12,30 @@ module Limarka
 
     PDF = "configuracao.pdf"
 
-    def tipo_do_trabalho
-      tipo="Monografia"
-      if File.exist?(PDF) then
-        @pdftk = PdfForms.new 'pdftk'
-        pdf = PdfForms::Pdf.new PDF, @pdftk, utf8_fields: true
-        tipo = pdf.field('tipo_do_trabalho').value
-        if tipo == "Dissertação" then tipo = "Dissertacao" end
+    no_commands do
+      def tipo_do_trabalho
+        tipo="Monografia"
+        if File.exist?(PDF) then
+          @pdftk = PdfForms.new 'pdftk'
+          pdf = PdfForms::Pdf.new PDF, @pdftk, utf8_fields: true
+          tipo = pdf.field('tipo_do_trabalho').value
+          if tipo == "Dissertação" then tipo = "Dissertacao" end
+        end
+        puts "Tipo do trabalho: #{tipo}".green
+        tipo
       end
-      puts "Tipo do trabalho: #{tipo}".green
-      tipo
-    end
 
-    def target()
-      "xxx-#{self.tipo_do_trabalho}.tex"
-    end 
+      def target()
+        "xxx-#{self.tipo_do_trabalho}.tex"
+      end 
+
+      def valida_yaml
+        metadados = IO.read("templates/configuracao-tecnica.yaml") # Valida o arquivo de metadados
+        puts ("configuracao-tecnica.yaml: " + YAML.load(metadados).to_s).green
+        metadados = IO.read("templates/configuracao.yaml") # Valida o arquivo de metadados
+        puts ("configuracao.yaml: " + YAML.load(metadados).to_s).green
+      end
+    end
 
 
     PREAMBULO="templates/preambulo.tex"
@@ -97,13 +107,6 @@ module Limarka
     end
 
 
-    def valida_yaml
-      metadados = IO.read("templates/configuracao-tecnica.yaml") # Valida o arquivo de metadados
-      puts ("configuracao-tecnica.yaml: " + YAML.load(metadados).to_s).green
-      metadados = IO.read("templates/configuracao.yaml") # Valida o arquivo de metadados
-      puts ("configuracao.yaml: " + YAML.load(metadados).to_s).green
-    end
-
 
     desc "textual", "Gera xxx-trabalho-academico.tex a partir do arquivo markdown e metadados."
     def textual
@@ -167,23 +170,15 @@ module Limarka
       h["lista_ilustracoes"] = pdf.field("lista_ilustracoes").value == "Gerar lista de ilustrações"
       h["lista_tabelas"] = pdf.field("lista_tabelas").value == "Gerar lista de tabelas"
 
-
-
       # Referências
       selecao = 'referencias_origem'
-      {"referencias_bib" => "Banco de referências Bibtex: referencias.bib",
-      'referencias_texto' => "Ao longo do texto",
-      'referencias_md' => 'Separadamente no arquivo referencias.md'}.each do |template_key,valor_para_verdadeiro|
+      {"referencias_abnt2cite" => "Banco de referências Bibtex (referencias.bib) + \cite",
+      'referencias_numerica_inline' => "Inseridas ao longo do texto \citarei + \cita",
+      'referencias_md' => 'Separadamente, no arquivo referencias.md'}.each do |template_key,valor_para_verdadeiro|
           h[template_key] = pdf.field(selecao).value == valor_para_verdadeiro
       end
 
       #TESTES
-      h['referencias-manual'] = false
-      h['citacao-numerica'] = true
-
-
-
-
 
       # Escreve na saída
       s = StringIO.new

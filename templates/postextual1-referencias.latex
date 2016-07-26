@@ -8,33 +8,35 @@
 % Referências bibliográficas
 % ----------------------------------------------------------
 
+$if(referencias_abnt2cite)$
+% Referências inseridas a partir de referencias.bib
+\renewcommand{\bibname}{Referências} % Atualiza título da seção
+\bibliography{xxx-referencias}
+$endif$
 
-$if(citacao-numerica)$
+
+$if(referencias_numerica_inline)$
 %% http://tex.stackexchange.com/questions/84991/bibliography-numbering-style
 %% Faz numeração sem colchetes ou parenteses na bibliogafia
 %% NBR 6023:2002 9.2
 \makeatletter
-\renewcommand\@biblabel[1]{#1 }
+\renewcommand\@biblabel[1]{#1}
 \makeatother
+\renewcommand{\bibname}{Referências} % Atualiza título da seção
+\renewcommand\refname{Referências}
 \bibliographystyle{plain}
 \bibliography{master.bib}
-$else$ 
+$endif$
 
-$if(referencias-manual)$
-\renewcommand{\bibname}{Referências} % Atualiza título da seção
-\begin{thebibliography}{50}
-% Referências inseridas de forma manual
+$if(referencias_md)$
+
+% Referências inseridas a partir de referencias.md
+
+\begin{thebibliography}{100}
+
 $body$
+
 \end{thebibliography}
-$else$
-
-% Referências inseridas a partir de referencias.bib
-
-\bibliography{referencias}
 
 $endif$
-
-$endif$
-
-
 

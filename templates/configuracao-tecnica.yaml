@@ -3,7 +3,8 @@
 # configurações lidas do PDF.
 fontsize: 12pt
 papersize: a4
-classoption: openright,twoside
+# Opção hyphens passada para quebrar os links longos
+classoption: openright,twoside,hyphens
 documentclass: abntex2
 lang: pt-BR
 ---
