@@ -92,6 +92,66 @@ CITACAO
       end
     end
   end
+
+
+  context 'quando configurada para ler de referencias.md' do
+    before (:context)  do
+      referencias_configuracao = {'referencias_numerica_inline' => false, 'referencias_abnt2cite' => false, 'referencias_md' => true}
+      test_dir = 'referencias_md'
+      @seed  = Random.new_seed 
+      texto = <<-TEXTO
+# Introdução
+
+Citação manual no texto: ABNT (2002).
+
+> No final da citação direta (ABNT, 2011).
+
+TEXTO
+
+      texto = texto + "\nSeed: #{@seed}\n" 
+      @referencias_md = <<-REFERENCIAS
+
+ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. **NBR 10520**: Informação e
+documentação — apresentação de citações em documentos. Rio de Janeiro, 2002.
+Disponível em <https://www.abntcatalogo.com.br/norma.aspx?ID=2074#>.
+
+ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. **NBR 14724**: Informação e
+documentação — Trabalhos acadêmicos — Apresentação. Rio de Janeiro, 2011.
+
+REFERENCIAS
+      configuracao = configuracao_padrao.merge referencias_configuracao
+      FileUtils.rm_rf "tmp/#{test_dir}"
+      @cv = Limarka::Conversor.new(:texto => texto, :referencias_md => @referencias_md, :configuracao => configuracao, :output_dir => "tmp/#{test_dir}")
+      @cv.convert
+    end
+
+    it "cria arquivo tex para compilação", :tecnico do
+      expect(File).to exist(@cv.texto_tex_file)
+    end
+
+    it "referências foram incluídas no arquivo tex", :tecnico do
+      expect(@cv.texto_tex).to include('ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. \textbf{NBR 10520}')
+    end
+
+    context 'no pdf', :pdf do
+      before (:context) do
+        @cpl = Limarka::CompiladorLatex.new()
+        @cpl.compila(@cv.texto_tex_file, :salva_txt => true)
+      end
+      it "não possui erros de compilação" do
+        expect(File).to exist(@cv.pdf_file)
+      end
+      it "a seção referências possui apenas o nome Referências" do
+        expect(@cpl.txt).to include("Referências\n")
+      end
+      it "as referências estão presentes no pdf" do
+        expect(@cpl.txt).to include("ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. NBR 14724: Informação e")
+      end
+
+    end
+  end
+
+
   
   context 'quando configurada com citação numérica (NBR 6023:2002, 9.2)' do
 
