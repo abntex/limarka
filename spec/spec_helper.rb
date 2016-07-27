@@ -2,6 +2,7 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'limarka'
 require 'yaml'
+require 'pry-byebug'
 
 def configuracao_padrao
   config = <<-CONFIG

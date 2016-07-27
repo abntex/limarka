@@ -5,6 +5,9 @@ require 'yaml'
 require 'colorize'
 require 'open3'
 
+require 'limarka/conversor'
+require 'limarka/compilador_latex'
+
 module Limarka
 
   class Cli < Thor
@@ -67,6 +70,24 @@ module Limarka
       File.open(PRETEXTUAL, 'w') { |file| file.write(pretextual) }
       puts "#{PRETEXTUAL} criado".green
     end
+
+    
+    desc "exec2", "Executa o sistema para geração do documento latex (novo)"
+    method_option :configuracao_pdf, :aliases => '-p', :type => :boolean, :default => false, :desc => 'Ler configuração de configuracao.pdf, em vez de arquivo YAML.'
+    method_option :output_dir, :aliases => '-d', :desc => 'Diretório onde serão gerados os arquivos'
+    method_option :configuracao_yaml, :aliases => '-y', :desc => 'Arquivo de configuração YAML', :default => 'templates/configuracao.yaml'
+    method_option :compila_tex, :aliases => '-c', :desc => 'Compila arquivo tex gerando um PDF', :default => true, :type => :boolean
+    def exec2
+      
+      cv = Limarka::Conversor.new(options)
+      cv.convert
+      if (options[:compila_tex]) then
+        cpl = Limarka::CompiladorLatex.new()
+        cpl.compila(cv.texto_tex_file, :salva_txt => true)
+      end
+      
+    end
+    
 
     desc "exec", "Executa o sistema para geração do documento latex"
     def exec

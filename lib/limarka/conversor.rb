@@ -9,18 +9,50 @@ require 'fileutils'
 module Limarka
 
   class Conversor
-    attr_accessor :opcoes
+    attr_accessor :configuracao
+    attr_accessor :options
     attr_accessor :preambulo_tex
     attr_accessor :pretextual_tex
     attr_accessor :postextual_tex
     attr_accessor :texto_tex
-    def initialize(opcoes)
-      self.opcoes = opcoes
-      @configuracao = opcoes[:configuracao]
+    attr_accessor :texto
+    attr_accessor :referencias
+    
+    def initialize(cli_options)
+      self.options = cli_options
     end
 
+    def ler_arquivos
+      @configuracao = ler_configuracao_yaml
+      # transforma os simbolos em string: http://stackoverflow.com/questions/8379596/how-do-i-convert-a-ruby-hash-so-that-all-of-its-keys-are-symbols?noredirect=1&lq=1
+      # @configuracao.inject({}){|h,(k,v)| h[k.intern] = v; h} 
+      @texto = ler_texto
+      @referencias = ler_referencias
+    end
+
+    def ler_referencias
+      return ler_referencias_bib if referencias_bib?
+      return ler_referencias_md if referencias_md?
+    end
+
+    def ler_referencias_bib
+    end
+
+    def ler_referencias_md
+    end
+
+    def referencias_bib?
+      @configuracao['referencias_abnt2cite']
+    end
+
+    def referencias_md?
+      @configuracao['referencias_md']
+    end
+
+    
     def convert
-      FileUtils.mkdir_p(opcoes[:output_dir])
+      FileUtils.mkdir_p(options[:output_dir])
+      
       preambulo
       pretextual
       postextual
@@ -37,7 +69,7 @@ module Limarka
     PREAMBULO="templates/preambulo.tex"
     def preambulo
       Open3.popen3("pandoc -f markdown --data-dir=. --template=preambulo -t latex") do |stdin, stdout, stderr, wait_thr|
-        stdin.write(hash_to_yaml(opcoes[:configuracao]))
+        stdin.write(hash_to_yaml(@configuracao))
         stdin.close
         @preambulo_tex = stdout.read
         exit_status = wait_thr.value # Process::Status object returned.
@@ -56,11 +88,10 @@ module Limarka
       "lista_siglas", "lista_simbolos", "sumario"].each_with_index do |secao,indice|
         template = "pretextual#{indice+1}-#{secao}"
         Open3.popen3("pandoc -f markdown --data-dir=. --template=#{template} -t latex") {|stdin, stdout, stderr, wait_thr|
-          stdin.write(hash_to_yaml(opcoes[:configuracao]))
+          stdin.write(hash_to_yaml(@configuracao))
           stdin.write("\n")
           if necessita_de_arquivo_de_texto.include?(secao) then
             arquivo_de_entrada = "#{secao}.md"
-
             conteudo = File.read(arquivo_de_entrada)
             stdin.write(conteudo)
           end
@@ -89,7 +120,7 @@ module Limarka
       ["referencias", "glossario", "apendices", "anexos", "indice"].each_with_index do |secao,indice|
         template = "postextual#{indice+1}-#{secao}"
         Open3.popen3("pandoc -f markdown --data-dir=. --template=#{template} --chapter -t latex") {|stdin, stdout, stderr, wait_thr|
-          stdin.write(hash_to_yaml(opcoes[:configuracao]))
+          stdin.write(hash_to_yaml(@configuracao))
           stdin.write("\n")
           escreve_arquivo_externo_se_necessario(stdin, secao)
           stdin.close
@@ -100,14 +131,14 @@ module Limarka
       end
       
       # arquivo temporário de referencias
-      if(opcoes[:referencias_bib]) then
-        File.open(referencias_bib_file, 'w') { |file| file.write(opcoes[:referencias_bib]) }
+      if(referencias_bib?) then
+        File.open(referencias_bib_file, 'w') { |file| file.write(@referencias) }
       end
       
       @postextual_tex = s.string
       File.open(postextual_tex_file, 'w') { |file| file.write(postextual_tex) }
     end
-
+    
     def escreve_arquivo_externo_se_necessario(stdin, secao)
 =begin
         necessita_de_arquivo_de_texto = ["referencias", "apendices","anexos"]
@@ -118,10 +149,10 @@ module Limarka
         end
 =end
       if (secao == 'referencias' and @configuracao['referencias_md'])
-        stdin.write(opcoes[:referencias_md])
+        stdin.write(@referencias)
         stdin.write "\n"
       else
-        'ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS'
+        'ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS' ## erro!!
       end
 
     end
@@ -132,9 +163,9 @@ module Limarka
       Open3.popen3("pandoc -f markdown+raw_tex -t latex -s --normalize --chapter --include-in-header=#{preambulo_tex_file} --include-before-body=#{pretextual_tex_file}  --include-after-body=#{postextual_tex_file}") {|stdin, stdout, stderr, wait_thr|
         stdin.write(File.read('templates/configuracao-tecnica.yaml'))
         stdin.write("\n")
-        stdin.write(hash_to_yaml(opcoes[:configuracao]))
+        stdin.write(hash_to_yaml(configuracao))
         stdin.write("\n")
-        stdin.write(opcoes[:texto])
+        stdin.write(@texto)
         stdin.close
         @texto_tex = stdout.read
         exit_status = wait_thr.value # Process::Status object returned.
@@ -145,24 +176,24 @@ module Limarka
 
     
     def preambulo_tex_file
-      "#{opcoes[:output_dir]}/xxx-preambulo.tex"
+      "#{options[:output_dir]}/xxx-preambulo.tex"
     end
     def pretextual_tex_file
-      "#{opcoes[:output_dir]}/xxx-pretextual.tex"
+      "#{options[:output_dir]}/xxx-pretextual.tex"
     end
     def postextual_tex_file
-      "#{opcoes[:output_dir]}/xxx-postextual.tex"
+      "#{options[:output_dir]}/xxx-postextual.tex"
     end
     
     def texto_tex_file
-      "#{opcoes[:output_dir]}/xxx-Monografia.tex"
+      "#{options[:output_dir]}/xxx-Monografia.tex"
     end
     def pdf_file
-      "#{opcoes[:output_dir]}/xxx-Monografia.pdf"
+      "#{options[:output_dir]}/xxx-Monografia.pdf"
     end
 
     def referencias_bib_file
-      "#{opcoes[:output_dir]}/xxx-referencias.bib"
+      "#{options[:output_dir]}/xxx-referencias.bib"
     end
     
     def valida_yaml
