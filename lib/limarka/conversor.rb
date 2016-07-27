@@ -34,15 +34,20 @@ module Limarka
       return ler_referencias_bib if referencias_bib?
       return ler_referencias_md if referencias_md?
     end
+    def ler_configuracao_yaml
+      File.open('templates/configuracao.yaml', 'r') {|f| YAML.load(f.read)}
+    end
 
     def ler_referencias_bib
+      File.open('referencias.bib', 'r') {|f| f.read}
     end
 
     def ler_referencias_md
+      File.open('referencias.md', 'r') {|f| f.read}
     end
 
     def referencias_bib?
-      @configuracao['referencias_abnt2cite']
+      @configuracao['referencias_bib']
     end
 
     def referencias_md?

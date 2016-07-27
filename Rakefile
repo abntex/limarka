@@ -9,9 +9,15 @@ require 'rake/clean'
 require 'pdf_forms'
 require 'github_changelog_generator/task'
 
+
+desc 'Executa os testes rápidos, sem compilação tex'
+RSpec::Core::RakeTask.new('spec:fast') do |t|
+  t.rspec_opts = "--tag ~pdf"
+end
+
 RSpec::Core::RakeTask.new(:spec)
 
-task :default => :spec
+task :default => 'spec:fast'
 
 GitHubChangelogGenerator::RakeTask.new :changelog do |config|
   config.future_release = Limarka::VERSION

@@ -9,8 +9,11 @@ describe 'Referências' do
   let (:seed) {Random.new_seed}
   
   context 'quando configurada para ler de referencias.bib' do
-    let (:configuracao) {configuracao_padrao.merge({'referencias_numerica_inline' => false, 'referencias_abnt2cite' => true, 'referencias_md' => false})}
-    let (:test_dir) {"tmp/referencias_abnt2cite"}
+    let (:configuracao) {configuracao_padrao.merge(
+      {'referencias_numerica_inline' => false,
+       'referencias_bib' => true,
+       'referencias_md' => false})}
+    let (:test_dir) {"tmp/referencias_bib"}
     let (:cli_options) {{:output_dir => test_dir}}
     let (:texto) {texto = <<-TEXTO
 # Introdução
@@ -48,9 +51,10 @@ REFERENCIAS
       allow(@cv).to receive(:ler_configuracao_yaml) {configuracao}
       @cv.ler_arquivos
       @cv.convert
+
     end
 
-    it "utiliza pacote abntex2cite para citação no preambulo", :tecnico do
+    it "utiliza pacote abntex2cite para citação no preambulo", :tecnico, :novo do
       expect(@cv.texto_tex).to include("\\usepackage[alf]{abntex2cite}")
     end
     it "cria arquivo tex para compilação" do
@@ -78,12 +82,12 @@ CITACAO
     end
 
     
-    context 'o pdf', :pdf do
+    describe 'o pdf', :pdf do
       before do
         @cpl = Limarka::CompiladorLatex.new()
         @cpl.compila(@cv.texto_tex_file, :salva_txt => true)
       end
-      it "foi gerado apropriadamente" do
+      it "é gerado apropriadamente" do
         expect(File).to exist(@cv.pdf_file)
         expect(@cpl.txt).to include("Referências\n")
         expect(@cpl.txt).to include("Citação no texto: ABNT (2002).")
@@ -94,7 +98,7 @@ CITACAO
   end
 
   context 'quando configurada para ler de referencias.md' do
-    let (:configuracao) {configuracao_padrao.merge({'referencias_numerica_inline' => false, 'referencias_abnt2cite' => false, 'referencias_md' => true})}
+    let (:configuracao) {configuracao_padrao.merge({'referencias_numerica_inline' => false, 'referencias_bib' => false, 'referencias_md' => true})}
     let (:test_dir) {"tmp/referencias_md"}
     let (:cli_options) {{:output_dir => test_dir}}
     let (:texto) {texto = <<-TEXTO
@@ -136,12 +140,12 @@ REFERENCIAS
       expect(@cv.texto_tex).to include('ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. \textbf{NBR 10520}')
     end
 
-    context 'o pdf', :pdf do
+    describe 'o pdf', :pdf do
       before do
         @cpl = Limarka::CompiladorLatex.new()
         @cpl.compila(@cv.texto_tex_file, :salva_txt => true)
       end
-      it "foi criado apropriadamente" do
+      it "é gerado apropriadamente" do
         expect(File).to exist(@cv.pdf_file)
         expect(@cpl.txt).to include("Referências\n")
         expect(@cpl.txt).to include("ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. NBR 14724: Informação")
@@ -151,8 +155,8 @@ REFERENCIAS
 
 
   
-  context 'quando configurada com citação numérica (NBR 6023:2002, 9.2)', :wip do
-    let (:configuracao) {configuracao_padrao.merge({'referencias_numerica_inline' => true, 'referencias_abnt2cite' => false, 'referencias_md' => false})}
+  context 'quando configurada com citação numérica (NBR 6023:2002, 9.2)' do
+    let (:configuracao) {configuracao_padrao.merge({'referencias_numerica_inline' => true, 'referencias_bib' => false, 'referencias_md' => false})}
     let (:test_dir) {"tmp/referencias_numerica_inline"}
     let (:cli_options) {{:output_dir => test_dir}}
     let (:texto) {texto = <<-TEXTO
@@ -188,12 +192,12 @@ texto = texto + "\nSeed: #{seed}\n"}
       expect(@cv.texto_tex).to include("#{@seed}")
     end
     
-    context 'o pdf', :pdf do
+    describe 'o pdf', :pdf do
       before do
         @cpl = Limarka::CompiladorLatex.new()
         @cpl.compila(@cv.texto_tex_file, :salva_txt => true)
       end
-      it "foi gerado apropriadamente" do
+      it "é gerado apropriadamente" do
         expect(File).to exist(@cv.pdf_file)
         expect(@cpl.txt).to include("Citações podem ser numéricas (1).")
         expect(@cpl.txt).to include("Referências\n")

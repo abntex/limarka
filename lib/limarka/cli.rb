@@ -109,6 +109,7 @@ module Limarka
       # Apêndice (opcional)
       # Anexo (opcional)
       # Índice (opcional)
+      system 'cp referencias.md xxx-referencias.bib'
 
       postextual = ""
 
@@ -193,8 +194,8 @@ module Limarka
 
       # Referências
       selecao = 'referencias_origem'
-      {"referencias_abnt2cite" => "Banco de referências Bibtex (referencias.bib) + \cite",
-      'referencias_numerica_inline' => "Inseridas ao longo do texto \citarei + \cita",
+      {"referencias_bib" => "Banco de referências Bibtex (referencias.bib) + \\cite",
+      'referencias_numerica_inline' => "Inseridas ao longo do texto \\citarei + \\cita",
       'referencias_md' => 'Separadamente, no arquivo referencias.md'}.each do |template_key,valor_para_verdadeiro|
           h[template_key] = pdf.field(selecao).value == valor_para_verdadeiro
       end

@@ -29,7 +29,7 @@ $if(referencias_numerica_inline)$
 %% ---
 $else$
 
-  $if(referencias_abnt2cite)$
+  $if(referencias_bib)$
 %% Utilizando referencias_abnt2cite
 %usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibiografia (necessário???)
 %usepackage[hyphens]{url} % Recomendação da documentação quando utilizando com xelatex

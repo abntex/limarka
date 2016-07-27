@@ -8,10 +8,10 @@ def configuracao_padrao
   config = <<-CONFIG
 ---
 nome_exemplo: Escreva seu primeiro nome aqui
-instituicao: Universidade/Faculdade do Brasil
-author: Nome do autor
+instituicao: Universidade Federal da Paraíba
+author: Eduardo de Santana
 tipo_do_trabalho: Monografia
-title: Título do trabalho
+title: Meu trabalho
 coorientador: 
 orientador: Nome-do-Orientador
 date: '2016'
@@ -20,7 +20,7 @@ titulacao: Minha-titulação
 curso: Meu-curso
 programa: Programa de Pós-Graduação em XXX
 linha_de_pesquisa: minha-linha
-referencias_origem: 'Banco de referências Bibtex: referencias.bib'
+referencias_origem: Banco de referências Bibtex (referencias.bib) + \\cite
 resumo: 
 palavras_chave: 
 abstract_texto: 
@@ -50,10 +50,8 @@ monografia: true
 folha_de_aprovacao_gerar: false
 folha_de_aprovacao_incluir: false
 referencias_bib: true
-referencias_texto: false
+referencias_numerica_inline: false
 referencias_md: false
-referencias-manual: false
-citacao-numerica: true
 ---
 
 CONFIG
