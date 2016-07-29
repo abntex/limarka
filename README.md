@@ -100,6 +100,22 @@ eles.
 Inserir personalizações baseadas no abnTex2 para inserir no template
 do pandoc.
 
+# Testes automatizados
+
+O projeto possui testes automatizados.
+
+Para executar todos os testes, execute:
+
+        bundle exec rspec
+
+Para executar todos os testes mais rápidos:
+
+        bundle exec rspec -t ~pdf
+
+ou
+
+        rake
+
 # Origem do projeto
 
 O projeto tem como origem uma pesquisa científica sobre utilização de linguagem
@@ -107,4 +123,5 @@ de marcação de texto para elaboração de monografias (em andamento).
 
 - Busca realizar e publicar experimentos de utilização
 - Experimentar estratégias para facilitar utilização por usuários leigos
+
 
