@@ -15,5 +15,6 @@ $body$
 
 \end{anexosenv}
 $else$
-% Sem anexos
+% Anexos desativados: 
+% Seção de anexos configurada como desativada
 $endif$

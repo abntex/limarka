@@ -17,15 +17,17 @@ module Limarka
     attr_accessor :texto_tex
     attr_accessor :texto
     attr_accessor :referencias
+    attr_accessor :anexos
     attr_accessor :apendices
     attr_accessor :output_dir
     
-    def initialize(configuracao: nil, texto: nil, referencias:nil, output_dir: '.', apendices:nil)
+    def initialize(configuracao: nil, texto: nil, referencias:nil, output_dir: '.', apendices:nil, anexos: nil)
       self.configuracao = configuracao
       self.texto = texto
       self.referencias = referencias
       self.output_dir = output_dir
       self.apendices = apendices
+      self.anexos = anexos
     end
 
     def ler_arquivos
@@ -218,6 +220,12 @@ module Limarka
         stdin.write(@apendices)
         stdin.write "\n"
       end
+
+      if (secao == 'anexos' and @configuracao['anexos'])
+        stdin.write(@anexos)
+        stdin.write "\n"
+      end
+
       
     end
 
