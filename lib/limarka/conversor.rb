@@ -17,24 +17,41 @@ module Limarka
     attr_accessor :texto_tex
     attr_accessor :texto
     attr_accessor :referencias
+    attr_accessor :apendices
+    attr_accessor :output_dir
     
-    def initialize(cli_options)
-      self.options = cli_options
+    def initialize(configuracao: nil, texto: nil, referencias:nil, output_dir: '.', apendices:nil)
+      self.configuracao = configuracao
+      self.texto = texto
+      self.referencias = referencias
+      self.output_dir = output_dir
+      self.apendices = apendices
     end
 
     def ler_arquivos
-      @configuracao = ler_configuracao_yaml
+      @configuracao = ler_configuracao
       # transforma os simbolos em string: http://stackoverflow.com/questions/8379596/how-do-i-convert-a-ruby-hash-so-that-all-of-its-keys-are-symbols?noredirect=1&lq=1
       # @configuracao.inject({}){|h,(k,v)| h[k.intern] = v; h} 
       @texto = ler_texto
       @referencias = ler_referencias
+      @apendices = ler_apendices
     end
 
+
+    def ler_apendices
+      File.open('apendices.md', 'r') {|f| f.read} if apendices?
+    end
+
+    def ler_texto
+      File.open('trabalho-academico.md', 'r') {|f| f.read}
+    end
+
+    
     def ler_referencias
       return ler_referencias_bib if referencias_bib?
       return ler_referencias_md if referencias_md?
     end
-    def ler_configuracao_yaml
+    def ler_configuracao
       File.open('templates/configuracao.yaml', 'r') {|f| YAML.load(f.read)}
     end
 
@@ -44,6 +61,10 @@ module Limarka
 
     def ler_referencias_md
       File.open('referencias.md', 'r') {|f| f.read}
+    end
+
+    def apendices?
+      @configuracao['apendices']
     end
 
     def referencias_bib?
@@ -56,7 +77,7 @@ module Limarka
 
     
     def convert
-      FileUtils.mkdir_p(options[:output_dir])
+      FileUtils.mkdir_p(output_dir)
       
       preambulo
       pretextual
@@ -121,9 +142,15 @@ module Limarka
 
       s = StringIO.new
 
+      s << secao_referencias
+      s << secao_glossario
+      s << secao_apendices
+      s << secao_anexos
+      s << secao_indice
       
-      ["referencias", "glossario", "apendices", "anexos", "indice"].each_with_index do |secao,indice|
-        template = "postextual#{indice+1}-#{secao}"
+      
+      ["glossario", "apendices", "anexos", "indice"].each_with_index do |secao,indice|
+        template = "postextual#{indice+2}-#{secao}"
         Open3.popen3("pandoc -f markdown --data-dir=. --template=#{template} --chapter -t latex") {|stdin, stdout, stderr, wait_thr|
           stdin.write(hash_to_yaml(@configuracao))
           stdin.write("\n")
@@ -134,7 +161,7 @@ module Limarka
           if(exit_status!=0) then puts ("Erro: " + stderr.read).red end
         }
       end
-      
+
       # arquivo temporário de referencias
       if(referencias_bib?) then
         File.open(referencias_bib_file, 'w') { |file| file.write(@referencias) }
@@ -143,23 +170,55 @@ module Limarka
       @postextual_tex = s.string
       File.open(postextual_tex_file, 'w') { |file| file.write(postextual_tex) }
     end
+
+    def secao_referencias
+      s = StringIO.new
+      
+      template = "postextual1-referencias"
+      Open3.popen3("pandoc -f markdown --data-dir=. --template=#{template} --chapter -t latex") {|stdin, stdout, stderr, wait_thr|
+        stdin.write(hash_to_yaml(@configuracao))
+        stdin.write("\n")
+        if (referencias_md?) then
+          stdin.write(@referencias) 
+          stdin.write "\n"
+        end
+        stdin.close
+        s << stdout.read
+        exit_status = wait_thr.value # Process::Status object returned.
+        if(exit_status!=0) then puts ("Erro: " + stderr.read).red end
+      }
+      s.string
+    end
+    
+    def secao_glossario
+    end
+    
+    def secao_apendices
+    end
+    
+    def secao_anexos
+    end
+    
+    def secao_indice
+    end
+
+    
     
     def escreve_arquivo_externo_se_necessario(stdin, secao)
 =begin
         necessita_de_arquivo_de_texto = ["referencias", "apendices","anexos"]
         if necessita_de_arquivo_de_texto.include?(secao) then
-          arquivo_de_entrada = "#{secao}.md"
+          arquivo_de_entradab = "#{secao}.md"
           conteudo = File.read(arquivo_de_entrada)            
           stdin.write(conteudo_externo_para_secao(secao))
         end
 =end
-      if (secao == 'referencias' and @configuracao['referencias_md'])
-        stdin.write(@referencias)
-        stdin.write "\n"
-      else
-        'ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS' ## erro!!
-      end
 
+      if (secao == 'apendices' and @configuracao['apendices'])
+        stdin.write(@apendices)
+        stdin.write "\n"
+      end
+      
     end
 
     
@@ -178,33 +237,32 @@ module Limarka
       }
       File.open(texto_tex_file, 'w')  { |f| f.write(@texto_tex)}
     end
-
     
     def preambulo_tex_file
-      "#{options[:output_dir]}/xxx-preambulo.tex"
+      "#{output_dir}/xxx-preambulo.tex"
     end
     def pretextual_tex_file
-      "#{options[:output_dir]}/xxx-pretextual.tex"
+      "#{output_dir}/xxx-pretextual.tex"
     end
     def postextual_tex_file
-      "#{options[:output_dir]}/xxx-postextual.tex"
+      "#{output_dir}/xxx-postextual.tex"
     end
     
     def texto_tex_file
-      "#{options[:output_dir]}/xxx-Monografia.tex"
+      "#{output_dir}/xxx-Monografia.tex"
     end
     def pdf_file
-      "#{options[:output_dir]}/xxx-Monografia.pdf"
+      "#{output_dir}/xxx-Monografia.pdf"
     end
 
     def referencias_bib_file
-      "#{options[:output_dir]}/xxx-referencias.bib"
+      "#{output_dir}/xxx-referencias.bib"
     end
     
     def valida_yaml
       # não faz nada por enquanto
     end
-    
+
   end
 end
 

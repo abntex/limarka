@@ -1,8 +1,8 @@
 % ----------------------------------------------------------
 % Apêndices
 % ----------------------------------------------------------
-
 $if(apendices)$
+% 
 % ---
 % Inicia os apêndices
 % ---
@@ -15,6 +15,8 @@ $body$
 
 \end{apendicesenv}
 $else$
-% Sem apêndices
-$endif$
+%% 
+% Seção de apendices configurada como desativada
+%% 
 % ---
+$endif$

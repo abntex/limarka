@@ -4,17 +4,16 @@ require 'spec_helper'
 require 'limarka/conversor'
 require 'limarka/compilador_latex'
 
-describe 'Referências' do
+describe 'Referências', :referencias do
 
   let (:seed) {Random.new_seed}
   
-  context 'quando configurada para ler de referencias.bib' do
+  context 'quando configurada para ler de referencias.bib', :referencias do
     let (:configuracao) {configuracao_padrao.merge(
       {'referencias_numerica_inline' => false,
        'referencias_bib' => true,
        'referencias_md' => false})}
-    let (:test_dir) {"tmp/referencias_bib"}
-    let (:cli_options) {{:output_dir => test_dir}}
+    let (:output_dir) {"tmp/referencias_bib"}
     let (:texto) {texto = <<-TEXTO
 # Introdução
 
@@ -43,18 +42,15 @@ TEXTO
 REFERENCIAS
 }
     before do
-      
-      FileUtils.rm_rf test_dir
-      @cv = Limarka::Conversor.new(cli_options)
+      FileUtils.rm_rf output_dir
+      @cv = Limarka::Conversor.new(output_dir: output_dir, configuracao: configuracao)
       allow(@cv).to receive(:ler_texto) {texto}
       allow(@cv).to receive(:ler_referencias_bib) {referencias_bib}
-      allow(@cv).to receive(:ler_configuracao_yaml) {configuracao}
       @cv.ler_arquivos
       @cv.convert
-
     end
 
-    it "utiliza pacote abntex2cite para citação no preambulo", :tecnico, :novo do
+    it "utiliza pacote abntex2cite para citação no preambulo" do
       expect(@cv.texto_tex).to include("\\usepackage[alf]{abntex2cite}")
     end
     it "cria arquivo tex para compilação" do
@@ -63,7 +59,7 @@ REFERENCIAS
     it "bibliografia copiada para arquivo temporário xxx-referencias.bib" do
       expect(File).to exist(@cv.referencias_bib_file)
     end
-    it "referências será produzida a partir de xxx-referencias.bib", :tecnico do
+    it "referências será produzida a partir de xxx-referencias.bib" do
       expect(@cv.texto_tex).to include('\\bibliography{xxx-referencias}')
     end
     it "podemos utilizar \\cite para citação", :tecnico do
@@ -82,7 +78,7 @@ CITACAO
     end
 
     
-    describe 'o pdf', :pdf do
+    describe 'o pdf', :pdf, :lento do
       before do
         @cpl = Limarka::CompiladorLatex.new()
         @cpl.compila(@cv.texto_tex_file, :salva_txt => true)
@@ -99,8 +95,7 @@ CITACAO
 
   context 'quando configurada para ler de referencias.md' do
     let (:configuracao) {configuracao_padrao.merge({'referencias_numerica_inline' => false, 'referencias_bib' => false, 'referencias_md' => true})}
-    let (:test_dir) {"tmp/referencias_md"}
-    let (:cli_options) {{:output_dir => test_dir}}
+    let (:output_dir) {"tmp/referencias_md"}
     let (:texto) {texto = <<-TEXTO
 # Introdução
 
@@ -112,7 +107,7 @@ TEXTO
 
       texto = texto + "\nSeed: #{@seed}\n" 
     }
-    let (:referencias_md) {<<-REFERENCIAS
+    let (:referencias) {<<-REFERENCIAS
 ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. **NBR 10520**: Informação e
 documentação — apresentação de citações em documentos. Rio de Janeiro, 2002.
 Disponível em <https://www.abntcatalogo.com.br/norma.aspx?ID=2074#>.
@@ -123,12 +118,9 @@ documentação — Trabalhos acadêmicos — Apresentação. Rio de Janeiro, 201
 REFERENCIAS
 }
     before do
-      FileUtils.rm_rf test_dir
-      @cv = Limarka::Conversor.new(cli_options)
-      allow(@cv).to receive(:ler_texto) {texto}
-      allow(@cv).to receive(:ler_referencias_md) {referencias_md}
-      allow(@cv).to receive(:ler_configuracao_yaml) {configuracao}
-      @cv.ler_arquivos
+      FileUtils.rm_rf output_dir
+      @cv = Limarka::Conversor.new(output_dir: output_dir, configuracao: configuracao, texto: texto, referencias: referencias)
+#      byebug
       @cv.convert
     end
 
@@ -136,7 +128,7 @@ REFERENCIAS
       expect(File).to exist(@cv.texto_tex_file)
     end
 
-    it "referências foram incluídas no arquivo tex" do
+    it "referências foram incluídas no arquivo tex", :wipo do
       expect(@cv.texto_tex).to include('ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. \textbf{NBR 10520}')
     end
 
@@ -157,8 +149,7 @@ REFERENCIAS
   
   context 'quando configurada com citação numérica (NBR 6023:2002, 9.2)' do
     let (:configuracao) {configuracao_padrao.merge({'referencias_numerica_inline' => true, 'referencias_bib' => false, 'referencias_md' => false})}
-    let (:test_dir) {"tmp/referencias_numerica_inline"}
-    let (:cli_options) {{:output_dir => test_dir}}
+    let (:output_dir) {"tmp/referencias_numerica_inline"}
     let (:texto) {texto = <<-TEXTO
 # Introdução
 
@@ -172,11 +163,8 @@ TEXTO
 texto = texto + "\nSeed: #{seed}\n"}
     
     before do
-      FileUtils.rm_rf test_dir
-      @cv = Limarka::Conversor.new(cli_options)
-      allow(@cv).to receive(:ler_texto) {texto}
-      allow(@cv).to receive(:ler_configuracao_yaml) {configuracao}
-      @cv.ler_arquivos
+      FileUtils.rm_rf output_dir
+      @cv = Limarka::Conversor.new(output_dir: output_dir, texto: texto, configuracao: configuracao)
       @cv.convert
     end
     
