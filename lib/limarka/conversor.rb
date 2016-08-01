@@ -20,14 +20,18 @@ module Limarka
     attr_accessor :anexos
     attr_accessor :apendices
     attr_accessor :output_dir
+    attr_accessor :configuracao_yaml_file
+    attr_accessor :templates_dir
     
-    def initialize(configuracao: nil, texto: nil, referencias:nil, output_dir: '.', apendices:nil, anexos: nil)
+    def initialize(configuracao: nil, texto: nil, referencias:nil, output_dir: '.', apendices:nil, anexos: nil, configuracao_yaml_file: 'templates/configuracao.yaml', templates_dir: '.')
       self.configuracao = configuracao
       self.texto = texto
       self.referencias = referencias
       self.output_dir = output_dir
       self.apendices = apendices
       self.anexos = anexos
+      self.configuracao_yaml_file = configuracao_yaml_file
+      self.templates_dir = templates_dir
     end
 
     def ler_arquivos
@@ -37,24 +41,28 @@ module Limarka
       @texto = ler_texto
       @referencias = ler_referencias
       @apendices = ler_apendices
+      @anexos = ler_anexos
+      
     end
-
 
     def ler_apendices
       File.open('apendices.md', 'r') {|f| f.read} if apendices?
     end
 
+    def ler_anexos
+      File.open('anexos.md', 'r') {|f| f.read} if anexos?
+    end
+    
     def ler_texto
       File.open('trabalho-academico.md', 'r') {|f| f.read}
     end
-
     
     def ler_referencias
       return ler_referencias_bib if referencias_bib?
       return ler_referencias_md if referencias_md?
     end
     def ler_configuracao
-      File.open('templates/configuracao.yaml', 'r') {|f| YAML.load(f.read)}
+      File.open(@configuracao_yaml_file, 'r') {|f| YAML.load(f.read)}
     end
 
     def ler_referencias_bib
@@ -67,6 +75,10 @@ module Limarka
 
     def apendices?
       @configuracao['apendices']
+    end
+
+    def anexos?
+      @configuracao['anexos']
     end
 
     def referencias_bib?
@@ -96,7 +108,7 @@ module Limarka
     
     PREAMBULO="templates/preambulo.tex"
     def preambulo
-      Open3.popen3("pandoc -f markdown --data-dir=. --template=preambulo -t latex") do |stdin, stdout, stderr, wait_thr|
+      Open3.popen3("pandoc -f markdown --data-dir=#{templates_dir} --template=preambulo -t latex") do |stdin, stdout, stderr, wait_thr|
         stdin.write(hash_to_yaml(@configuracao))
         stdin.close
         @preambulo_tex = stdout.read
@@ -115,10 +127,10 @@ module Limarka
       "epigrafe", "resumo", "abstract", "lista_ilustracoes", "lista_tabelas", 
       "lista_siglas", "lista_simbolos", "sumario"].each_with_index do |secao,indice|
         template = "pretextual#{indice+1}-#{secao}"
-        Open3.popen3("pandoc -f markdown --data-dir=. --template=#{template} -t latex") {|stdin, stdout, stderr, wait_thr|
+        Open3.popen3("pandoc -f markdown --data-dir=#{templates_dir} --template=#{template} -t latex") {|stdin, stdout, stderr, wait_thr|
           stdin.write(hash_to_yaml(@configuracao))
           stdin.write("\n")
-          if necessita_de_arquivo_de_texto.include?(secao) then
+          if @configuracao['errata'] and necessita_de_arquivo_de_texto.include?(secao) then
             arquivo_de_entrada = "#{secao}.md"
             conteudo = File.read(arquivo_de_entrada)
             stdin.write(conteudo)
@@ -153,7 +165,7 @@ module Limarka
       
       ["glossario", "apendices", "anexos", "indice"].each_with_index do |secao,indice|
         template = "postextual#{indice+2}-#{secao}"
-        Open3.popen3("pandoc -f markdown --data-dir=. --template=#{template} --chapter -t latex") {|stdin, stdout, stderr, wait_thr|
+        Open3.popen3("pandoc -f markdown --data-dir=#{templates_dir} --template=#{template} --chapter -t latex") {|stdin, stdout, stderr, wait_thr|
           stdin.write(hash_to_yaml(@configuracao))
           stdin.write("\n")
           escreve_arquivo_externo_se_necessario(stdin, secao)
@@ -177,7 +189,7 @@ module Limarka
       s = StringIO.new
       
       template = "postextual1-referencias"
-      Open3.popen3("pandoc -f markdown --data-dir=. --template=#{template} --chapter -t latex") {|stdin, stdout, stderr, wait_thr|
+      Open3.popen3("pandoc -f markdown --data-dir=#{templates_dir} --template=#{template} --chapter -t latex") {|stdin, stdout, stderr, wait_thr|
         stdin.write(hash_to_yaml(@configuracao))
         stdin.write("\n")
         if (referencias_md?) then
@@ -233,7 +245,7 @@ module Limarka
     def textual
       valida_yaml
       Open3.popen3("pandoc -f markdown+raw_tex -t latex -s --normalize --chapter --include-in-header=#{preambulo_tex_file} --include-before-body=#{pretextual_tex_file}  --include-after-body=#{postextual_tex_file}") {|stdin, stdout, stderr, wait_thr|
-        stdin.write(File.read('templates/configuracao-tecnica.yaml'))
+        stdin.write(File.read(templates_dir + '/templates/configuracao-tecnica.yaml'))
         stdin.write("\n")
         stdin.write(hash_to_yaml(configuracao))
         stdin.write("\n")

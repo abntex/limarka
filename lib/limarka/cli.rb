@@ -74,12 +74,16 @@ module Limarka
     
     desc "exec2", "Executa o sistema para geração do documento latex (novo)"
     method_option :configuracao_pdf, :aliases => '-p', :type => :boolean, :default => false, :desc => 'Ler configuração de configuracao.pdf, em vez de arquivo YAML.'
-    method_option :output_dir, :aliases => '-d', :desc => 'Diretório onde serão gerados os arquivos'
+    method_option :output_dir, :aliases => '-d', :desc => 'Diretório onde serão gerados os arquivos', :default => '.'
     method_option :configuracao_yaml, :aliases => '-y', :desc => 'Arquivo de configuração YAML', :default => 'templates/configuracao.yaml'
     method_option :compila_tex, :aliases => '-c', :desc => 'Compila arquivo tex gerando um PDF', :default => true, :type => :boolean
+    method_option :templates_dir, :aliases => '-t', :desc => 'Diretório que contem a pasta templates', :default => '.'
     def exec2
       
-      cv = Limarka::Conversor.new(options)
+      cv = Limarka::Conversor.new(output_dir: options[:output_dir],
+                                  configuracao_yaml_file: options[:configuracao_yaml],
+                                  templates_dir:  options[:templates_dir])
+      cv.ler_arquivos
       cv.convert
       if (options[:compila_tex]) then
         cpl = Limarka::CompiladorLatex.new()
@@ -180,7 +184,7 @@ module Limarka
           h[sigla_ou_simbolo].each_line do |linha|
             s,d = linha.split(":")
             sa << { 's' => s.strip, 'd' => d ? d.strip : ""}
-          end
+            end
           h[sigla_ou_simbolo] = sa
         end
       end
