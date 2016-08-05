@@ -9,6 +9,7 @@ describe Limarka::Trabalho do
   let (:apendices) {'# Apendice1'}
   let (:referencias_md) {'FULANO. **Título**. Ano.'}
   let (:referencias_bib) {'@book {}'}
+  let (:errata) {'Errata1'}
   let(:test_dir) {'tmp/trabalho'}
   
   describe '#new' do
@@ -63,7 +64,7 @@ describe Limarka::Trabalho do
       expect(t.referencias).to eq(referencias_md)
     end
     it 'atualiza configuracao' do
-      expect(t.configuracao).to include({referencias_md: true, referencias_bib: false, referencias_numerica_inline: false})
+      expect(t.configuracao).to include({'referencias_md' => true, 'referencias_bib' => false, 'referencias_numerica_inline' => false})
     end
   end
 
@@ -73,7 +74,7 @@ describe Limarka::Trabalho do
       expect(t.referencias).to eq(referencias_bib)
     end
     it 'atualiza configuracao' do
-      expect(t.configuracao).to include({referencias_md: false, referencias_bib: true, referencias_numerica_inline: false})
+      expect(t.configuracao).to include({'referencias_md' => false, 'referencias_bib' => true, 'referencias_numerica_inline' => false})
     end
   end
 
@@ -87,7 +88,7 @@ describe Limarka::Trabalho do
       expect(t.referencias).to eq(nil)
     end
     it 'atualiza configuracao' do
-      expect(t.configuracao).to include({referencias_md: false, referencias_bib: false, referencias_numerica_inline: true})
+      expect(t.configuracao).to include({'referencias_md'=> false, 'referencias_bib' => false, 'referencias_numerica_inline' => true})
     end
   end
 
@@ -100,7 +101,7 @@ describe Limarka::Trabalho do
       expect(t.anexos).to eq(anexos)
     end
     it 'habilita anexos na configuração' do
-      expect(t.configuracao).to include(:anexos => true)
+      expect(t.configuracao).to include('anexos' => true)
     end
     context 'quando anexos for nil' do
       before do
@@ -110,7 +111,7 @@ describe Limarka::Trabalho do
         expect(t.anexos).to be nil
       end
       it 'desabilita anexos na configuração' do
-        expect(t.configuracao).to include(:anexos => false)
+        expect(t.configuracao).to include('anexos' => false)
       end
     end
   end
@@ -124,7 +125,7 @@ describe Limarka::Trabalho do
       expect(t.apendices).to eq(apendices)
     end
     it 'habilita apêndices na configuração' do
-      expect(t.configuracao).to include(:apendices => true)
+      expect(t.configuracao).to include('apendices' => true)
     end
     context 'quando apendices for nil' do
       before do
@@ -134,28 +135,24 @@ describe Limarka::Trabalho do
         expect(t.apendices).to be nil
       end
       it 'desabilita apêndices na configuração' do
-        expect(t.configuracao).to include(:apendices => false)
+        expect(t.configuracao).to include('apendices' => false)
       end
     end
   end
 
   describe '#configuracao=' do
     let (:t) {Limarka::Trabalho.new}
-    let (:configuracao) {{:title => 'meu título', 'date' => 'yyyy'}}
+    let (:configuracao) {{'title' => 'meu título', 'date' => 'yyyy'}}
     before do
       t.configuracao = configuracao
     end
     it 'atualiza configuração' do
-      expect(t.configuracao).to include(:title => 'meu título')
-    end
-    it 'convert chaves para simbolos' do
-      expect(t.configuracao).to include(:date => 'yyyy')
-      expect(t.configuracao).not_to include('date' => 'yyyy')
+      expect(t.configuracao).to include('title' => 'meu título')
     end
   end
   
   describe '#save' do
-    let(:t) {Limarka::Trabalho.new(configuracao: {:title => 'meu título'}, texto: texto, anexos: anexos, apendices: apendices)}
+    let(:t) {Limarka::Trabalho.new(configuracao: {'title' => 'meu título'}, texto: texto, anexos: anexos, apendices: apendices)}
     before do
       FileUtils.rm_rf test_dir
       FileUtils.mkdir_p test_dir
@@ -222,19 +219,41 @@ describe Limarka::Trabalho do
         expect(File).to exist(test_dir + '/' + Limarka::Trabalho.default_referencias_md_file)
       end
     end
-    context 'quando há referencias_bib', :erro  do
+    context 'quando há referencias_bib'  do
       let(:t) {Limarka::Trabalho.new(referencias_bib: referencias_bib)}
       it 'salva referencias_bib' do
         t.save test_dir
         expect(File).to exist(test_dir + '/' + Limarka::Trabalho.default_referencias_bib_file)
       end
     end
-    context 'quando as referências são inline', :erro  do
+    context 'quando as referências são inline'  do
       let(:t) {Limarka::Trabalho.new()}
       it 'nenhum arquivo de referências será salvo' do
         t.save test_dir
         expect(File).not_to exist(test_dir + '/' + Limarka::Trabalho.default_referencias_bib_file)
         expect(File).not_to exist(test_dir + '/' + Limarka::Trabalho.default_referencias_md_file)
+      end
+    end
+    context 'quando há errata' do
+      let(:t) {Limarka::Trabalho.new(errata: errata)}
+      let(:arquivo) {test_dir + '/' + Limarka::Trabalho.default_errata_file}
+      let(:conteudo_do_arquivo) {File.open(arquivo, 'r') {|f| f.read}}
+      it 'salva arquivo de errata' do
+        t.save test_dir
+        expect(File).to exist(arquivo)
+      end
+      it 'conteúdo do arquivo correspondeu a @errata' do
+        t.save test_dir
+        expect(conteudo_do_arquivo).to eq(errata)
+      end
+
+    end
+
+    context 'quando não há errata' do
+      let(:t) {Limarka::Trabalho.new(errata: nil)}
+      it 'NÃO salva arquivo de errata' do
+        t.save test_dir
+        expect(File).not_to exist(test_dir + '/' + Limarka::Trabalho.default_errata_file)
       end
     end
         

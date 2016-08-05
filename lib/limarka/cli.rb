@@ -82,10 +82,8 @@ module Limarka
     method_option :templates_dir, :aliases => '-t', :desc => 'Diretório que contem a pasta templates (pandoc --data-dir)', :default => '.'
     def exec2
       t = Limarka::Trabalho.new
-      byebug
       t.atualiza_de_arquivos(options)
       cv = Limarka::Conversor.new(t,options)
-      byebug
       cv.convert
       if (options[:compila_tex]) then
         cpl = Limarka::CompiladorLatex.new()

@@ -19,6 +19,7 @@ module Limarka
       else
         referencias_inline!
       end
+      self.errata = errata
       
     end
 
@@ -43,6 +44,16 @@ module Limarka
     def errata?
       @configuracao['errata']
     end
+
+    def errata=(e)
+      @errata = e
+      if (e) then
+        @configuracao.merge!('errata' => true)
+      else
+        @configuracao.merge!('errata' => false)
+      end
+    end
+
     
     def apendices=(a)
       @apendices = a
@@ -86,6 +97,9 @@ module Limarka
     
     def self.default_texto_file
       "trabalho-academico.md"
+    end
+    def self.default_errata_file
+      "errata.md"
     end
     def self.default_anexos_file
       "anexos.md"
@@ -154,6 +168,7 @@ module Limarka
         File.open(Trabalho.default_apendices_file, 'w'){|f| f.write apendices} if apendices?
         File.open(Trabalho.default_referencias_md_file, 'w'){|f| f.write referencias} if referencias_md?
         File.open(Trabalho.default_referencias_bib_file, 'w'){|f| f.write referencias} if referencias_bib?
+        File.open(Trabalho.default_errata_file, 'w'){|f| f.write errata} if errata?
         File.open(Trabalho.default_configuracao_file, 'w') do |f|
           f.write YAML.dump(configuracao)
           f.write "\n---\n"

@@ -87,9 +87,38 @@ describe 'configuracao.pdf', :integracao do
         end
       end      
     end
-    
   end
 
+  describe 'errata_combo', :anexos, :pdf do
+    let(:campo) {'errata_combo'}
+    let(:tipo) {'Choice'}
+    let(:opcoes) {['Errata Desativada', 'Utilizar errata, escrita no arquivo errata.md']}
+    let(:valor_padrao) {opcoes[0]}
+    let(:field) {pdf.field(campo)}
+
+    it_behaves_like 'um combo desativado por padrão'
+
+    describe 'na exportação para yaml', :pdfconf do
+      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
+      context 'quando desativada (valor padrão)' do
+        let(:configuracao_exportada) {{'errata' => false}}
+        it 'exporta a configuração de desativado' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end
+      context 'quando ativada' do
+        let(:valor_de_ativacao) {opcoes[1]}
+        let(:configuracao_exportada) {{'errata' => true}}
+        before do
+          pdfconf.update(campo, valor_de_ativacao)
+        end
+        it 'exporta a configuração de ativada' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end      
+    end
+  end
+  
   describe 'avaliador1' do
     
   end

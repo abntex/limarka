@@ -22,6 +22,7 @@ module Limarka
       h = {}
       h.merge! apendices
       h.merge! anexos
+      h.merge! errata
       h.merge! caixas_de_texto
       # TODO: converter para chaves?
       h
@@ -35,9 +36,12 @@ module Limarka
       {'anexos' => !desativado?('anexos_combo')}
     end
 
+    def errata
+      {'errata' => !desativado?('errata_combo')}
+    end
     
     def desativado?(campo)
-      pdf.field(campo).value.include?('Desativado')
+      pdf.field(campo).value.include?('Desativad') # a(o)
     end
 
     def caixas_de_texto

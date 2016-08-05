@@ -37,9 +37,18 @@ Texto do apêndice
 END
   }
 
+  let(:errata){<<-END
+A aranha arranha a rã. A rã arranha a aranha. **Nem a aranha arranha a rã**. Nem a rã arranha a aranha.
+
+Folha| Linha| Onde se lê     | Leia-se
+-----|------|----------------|----------------
+10   |12    |aranhaarranha   | aranha arranha
+END
+  }
+  
   
   let!(:templates_dir){Dir.pwd}
-  let(:t){Limarka::Trabalho.new(configuracao: configuracao_padrao, texto: texto, anexos: anexos, referencias_md: referencias_md, apendices: apendices)}
+  let(:t){Limarka::Trabalho.new(configuracao: configuracao_padrao, texto: texto, anexos: anexos, referencias_md: referencias_md, apendices: apendices, errata: errata)}
 
   before do
     FileUtils.rm_rf test_dir
@@ -47,7 +56,7 @@ END
     t.save test_dir # Salva os arquivos que serão lidos
   end
 
-  context "Quando invocado limarka" do
+  context "exec2 -y configuracao.yaml -t templates_dir" do
     before do
       Dir.chdir test_dir do
         Limarka::Cli.start(["exec2","-y","configuracao.yaml", '-t', templates_dir])
@@ -60,6 +69,7 @@ END
       expect(@tex).to include("SILVA, Fulano.")
       expect(@tex).to include("Primeiro anexo")
       expect(@tex).to include("Primeiro apêndice")
+      expect(@tex).to include("A aranha arranha a rã")
     end
   end
 

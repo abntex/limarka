@@ -198,3 +198,4 @@ xxx-*
 /tmp/
 master.bib
 configuracao.yaml
+.emacs.desktop*
