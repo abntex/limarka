@@ -52,8 +52,9 @@
 <hook NAME="AutomaticEdgeColor" COUNTER="11"/>
 <node TEXT="Entrada" POSITION="left" ID="ID_782159025" CREATED="1468697070944" MODIFIED="1468697073104">
 <edge COLOR="#007c7c"/>
-<node TEXT="configuracao.pdf" ID="ID_1830077850" CREATED="1468696591631" MODIFIED="1468697407960">
+<node TEXT="configuracao.pdf" ID="ID_1830077850" CREATED="1468696591631" MODIFIED="1470249678310">
 <font BOLD="true"/>
+<hook NAME="FirstGroupNode"/>
 <node TEXT="Capa" ID="ID_18603044" CREATED="1468696933724" MODIFIED="1468696935691"/>
 <node TEXT="Folha de rosto" ID="ID_5734928" CREATED="1468696936860" MODIFIED="1468696940542"/>
 <node TEXT="Folha de Aprova&#xe7;&#xe3;o" ID="ID_1939326370" CREATED="1468696941141" MODIFIED="1468697167491"/>
@@ -67,22 +68,48 @@
 <node TEXT="Lista de siglas" ID="ID_533213060" CREATED="1468697380446" MODIFIED="1468697384477"/>
 <node TEXT="Lista de s&#xed;mbolos" ID="ID_836966605" CREATED="1468697385019" MODIFIED="1468700383831"/>
 </node>
+<node ID="ID_1777410520" CREATED="1470249678287" MODIFIED="1470251051379"><richcontent TYPE="NODE">
+
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <p style="text-align: center">
+      exportados para
+    </p>
+    <p style="text-align: center">
+      <b>configuracao.yaml</b>
+    </p>
+  </body>
+</html>
+
+</richcontent>
+<hook NAME="SummaryNode"/>
+</node>
 <node TEXT="trabalho-academico.md" ID="ID_1944772862" CREATED="1468696635929" MODIFIED="1468700244324">
 <font BOLD="true"/>
 <cloud COLOR="#f0f0f0" SHAPE="ARC"/>
 <node TEXT="Onde voc&#xea; ir&#xe1; escrever&#xa;o texto do seu trabalho" ID="ID_967917131" CREATED="1468696644477" MODIFIED="1468700347412"/>
 </node>
-<node TEXT="referencias.md" ID="ID_945933372" CREATED="1468696725691" MODIFIED="1468697410450">
+<node TEXT="refer&#xea;ncias" ID="ID_1142036585" CREATED="1470249792151" MODIFIED="1470250127093">
+<font BOLD="false"/>
+<node TEXT="referencias.md" ID="ID_945933372" CREATED="1468696725691" MODIFIED="1470249932644">
 <font BOLD="true"/>
-<node TEXT="As ref&#xea;ncias bibliogr&#xe1;ficas" ID="ID_1676402682" CREATED="1468696735111" MODIFIED="1468697573591"/>
+<hook NAME="FirstGroupNode"/>
+</node>
+<node TEXT="referencias.bib" ID="ID_609030295" CREATED="1470249805293" MODIFIED="1470249812998">
+<font BOLD="true"/>
+</node>
+<node TEXT="Depende da&#xa;sua escolha" ID="ID_644712827" CREATED="1470249932635" MODIFIED="1470250380091">
+<hook NAME="SummaryNode"/>
+</node>
 </node>
 <node TEXT="apendices.md" ID="ID_938379587" CREATED="1468696779549" MODIFIED="1468697411335">
 <font BOLD="true"/>
-<node TEXT="Texto dos ap&#xea;ndices." ID="ID_1228627033" CREATED="1468696792842" MODIFIED="1468696823431"/>
 </node>
 <node TEXT="anexos.md" ID="ID_468154768" CREATED="1468696803730" MODIFIED="1468697412158">
 <font BOLD="true"/>
-<node TEXT="Texto dos anexos." ID="ID_231195194" CREATED="1468696811821" MODIFIED="1468696817357"/>
 </node>
 <node TEXT="imagens/ficha-catalografica.pdf" ID="ID_368082840" CREATED="1468696975067" MODIFIED="1468697414719">
 <font BOLD="true"/>
@@ -92,7 +119,6 @@
 </node>
 <node TEXT="errata.md" ID="ID_185021965" CREATED="1468696618463" MODIFIED="1468697581652">
 <font BOLD="true"/>
-<node TEXT="Errata" ID="ID_227298647" CREATED="1468696711683" MODIFIED="1468696722943"/>
 </node>
 </node>
 <node TEXT="Sa&#xed;da" POSITION="right" ID="ID_1299268828" CREATED="1468697051905" MODIFIED="1468697055298">

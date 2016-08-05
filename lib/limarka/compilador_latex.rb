@@ -10,7 +10,7 @@ module Limarka
 
     attr_accessor :txt
     
-    def compila(tex_file, opcoes)
+    def compila(tex_file, options)
 
       Dir.chdir(File.dirname(tex_file)) do
         basename = File.basename(tex_file, '.tex')

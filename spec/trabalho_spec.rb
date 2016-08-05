@@ -159,38 +159,84 @@ describe Limarka::Trabalho do
     before do
       FileUtils.rm_rf test_dir
       FileUtils.mkdir_p test_dir
-
-      Dir.chdir(test_dir) do
-        t.save
-      end
     end
 
-    context 'com propriedades comuns' do
-      it 'salva configuração' do
-        expect(File).to exist(test_dir + '/' + Limarka::Trabalho.default_configuracao_file)
-      end
-
-      it 'salva texto' do
-        expect(File).to exist(test_dir + '/' + Limarka::Trabalho.default_texto_file)
-      end
-      it 'salva anexos' do
-        expect(File).to exist(test_dir + '/' + Limarka::Trabalho.default_anexos_file)
-      end
-      it 'salva apêndices' do
+    context 'quando há apêndice' do
+      let(:t) {Limarka::Trabalho.new(apendices: apendices)}
+      it 'salva arquivo de apêndices' do
+        t.save test_dir
         expect(File).to exist(test_dir + '/' + Limarka::Trabalho.default_apendices_file)
       end
     end
-    context 'se #referencias_md?' do
+
+    context 'quando não há apêndice' do
+      let(:t) {Limarka::Trabalho.new(apendices: nil)}
+      it 'NÃO salva arquivo de apêndice' do
+        t.save test_dir
+        expect(File).not_to exist(test_dir + '/' + Limarka::Trabalho.default_apendices_file)
+      end
+    end
+
+    context 'quando há anexos' do
+      let(:t) {Limarka::Trabalho.new(anexos: anexos)}
+      it 'salva arquivo de anexos' do
+        t.save test_dir
+        expect(File).to exist(test_dir + '/' + Limarka::Trabalho.default_anexos_file)
+      end
+    end
+
+    context 'quando não há anexos' do
+      let(:t) {Limarka::Trabalho.new(anexos: nil)}
+      it 'NÃO salva arquivo de anexos' do
+        t.save test_dir
+        expect(File).not_to exist(test_dir + '/' + Limarka::Trabalho.default_anexos_file)
+      end
+    end
+
+    context 'quando há texto' do
+      it 'salva arquivo de texto' do
+        t.save test_dir
+        expect(File).to exist(test_dir + '/' + Limarka::Trabalho.default_texto_file)
+      end
+    end
+
+    context 'quando não há texto' do
+      let (:t) {Limarka::Trabalho.new}
+      it 'não salva arquivo de texto' do
+        t.save test_dir
+        expect(File).not_to exist(test_dir + '/' + Limarka::Trabalho.default_texto_file)
+      end
+    end
+    context 'quando há configuração' do
+      before do
+        t.save test_dir
+      end
+      it 'salva arquivo de configuração' do
+        expect(File).to exist(test_dir + '/' + Limarka::Trabalho.default_configuracao_file)
+      end
+    end
+    context 'quando há referencias_md' do
       let(:t) {Limarka::Trabalho.new(referencias_md: referencias_md)}
       it 'salva referencias_md' do
+        t.save test_dir
         expect(File).to exist(test_dir + '/' + Limarka::Trabalho.default_referencias_md_file)
       end
     end
-    context 'se #referencias_bib?', :erro  do
+    context 'quando há referencias_bib', :erro  do
       let(:t) {Limarka::Trabalho.new(referencias_bib: referencias_bib)}
       it 'salva referencias_bib' do
+        t.save test_dir
         expect(File).to exist(test_dir + '/' + Limarka::Trabalho.default_referencias_bib_file)
       end
     end
+    context 'quando as referências são inline', :erro  do
+      let(:t) {Limarka::Trabalho.new()}
+      it 'nenhum arquivo de referências será salvo' do
+        t.save test_dir
+        expect(File).not_to exist(test_dir + '/' + Limarka::Trabalho.default_referencias_bib_file)
+        expect(File).not_to exist(test_dir + '/' + Limarka::Trabalho.default_referencias_md_file)
+      end
+    end
+        
   end
 end

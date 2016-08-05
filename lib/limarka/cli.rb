@@ -74,16 +74,18 @@ module Limarka
     
     desc "exec2", "Executa o sistema para geração do documento latex (novo)"
     method_option :configuracao_pdf, :aliases => '-p', :type => :boolean, :default => false, :desc => 'Ler configuração de configuracao.pdf, em vez de arquivo YAML.'
-    method_option :output_dir, :aliases => '-d', :desc => 'Diretório onde serão gerados os arquivos', :default => '.'
     method_option :configuracao_yaml, :aliases => '-y', :desc => 'Arquivo de configuração YAML', :default => 'templates/configuracao.yaml'
+    method_option :configuracao_tecnica, :aliases => '-A', :desc => 'Arquivo técnica Adiconional de configuração YAML', :default => 'templates/configuracao-tecnica.yaml'
+    method_option :output_dir, :aliases => '-o', :desc => 'Diretório onde serão gerados os arquivos', :default => '.'
+
     method_option :compila_tex, :aliases => '-c', :desc => 'Compila arquivo tex gerando um PDF', :default => true, :type => :boolean
-    method_option :templates_dir, :aliases => '-t', :desc => 'Diretório que contem a pasta templates', :default => '.'
+    method_option :templates_dir, :aliases => '-t', :desc => 'Diretório que contem a pasta templates (pandoc --data-dir)', :default => '.'
     def exec2
-      
-      cv = Limarka::Conversor.new(output_dir: options[:output_dir],
-                                  configuracao_yaml_file: options[:configuracao_yaml],
-                                  templates_dir:  options[:templates_dir])
-      cv.ler_arquivos
+      t = Limarka::Trabalho.new
+      byebug
+      t.atualiza_de_arquivos(options)
+      cv = Limarka::Conversor.new(t,options)
+      byebug
       cv.convert
       if (options[:compila_tex]) then
         cpl = Limarka::CompiladorLatex.new()
