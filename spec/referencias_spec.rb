@@ -6,15 +6,15 @@ require 'limarka/compilador_latex'
 
 describe 'Referências', :referencias do
 
+
   let (:seed) {Random.new_seed}
+  let!(:options) {{output_dir: output_dir, templates_dir: Dir.pwd}}
   
   context 'quando configurada para ler de referencias.bib', :referencias do
-    let (:configuracao) {configuracao_padrao.merge(
-      {'referencias_numerica_inline' => false,
-       'referencias_bib' => true,
-       'referencias_md' => false})}
+    let (:configuracao) {configuracao_padrao}
     let (:output_dir) {"tmp/referencias_bib"}
-    let (:texto) {texto = <<-TEXTO
+
+    let (:texto) {s = <<-TEXTO
 # Introdução
 
 Citação no texto: \\citeonline{ABNT-citacao}.
@@ -24,7 +24,7 @@ Citação no texto: \\citeonline{ABNT-citacao}.
 Citando o ano: \\citeyear{ABNT-citacao}.
 
 TEXTO
-      texto = texto + "\nSeed: #{@seed}\n"}
+      s + "\nSeed: #{@seed}\n"}
     
     let (:referencias_bib) {<<-REFERENCIAS
 @manual{ABNT-citacao,
@@ -40,13 +40,12 @@ TEXTO
 	Year = 2002}
 
 REFERENCIAS
-}
+    }
+    let (:trabalho) {Limarka::Trabalho.new(texto: texto, referencias_bib: referencias_bib, configuracao: configuracao)}
     before do
       FileUtils.rm_rf output_dir
-      @cv = Limarka::Conversor.new(output_dir: output_dir, configuracao: configuracao)
-      allow(@cv).to receive(:ler_texto) {texto}
-      allow(@cv).to receive(:ler_referencias_bib) {referencias_bib}
-      @cv.ler_arquivos
+      
+      @cv = Limarka::Conversor.new(trabalho, options)
       @cv.convert
     end
 
@@ -62,7 +61,7 @@ REFERENCIAS
     it "referências será produzida a partir de xxx-referencias.bib" do
       expect(@cv.texto_tex).to include('\\bibliography{xxx-referencias}')
     end
-    it "podemos utilizar \\cite para citação", :tecnico do
+    it "podemos utilizar \\cite para citação", :tecnico , :e1 do
       citacao = <<-CITACAO
 \\begin{quote}
 No final da citação direta \\cite{ABNT-citacao}.
@@ -94,7 +93,7 @@ CITACAO
   end
 
   context 'quando configurada para ler de referencias.md' do
-    let (:configuracao) {configuracao_padrao.merge({'referencias_numerica_inline' => false, 'referencias_bib' => false, 'referencias_md' => true})}
+    let (:configuracao) {configuracao_padrao}
     let (:output_dir) {"tmp/referencias_md"}
     let (:texto) {texto = <<-TEXTO
 # Introdução
@@ -116,11 +115,11 @@ ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. **NBR 14724**: Informação e
 documentação — Trabalhos acadêmicos — Apresentação. Rio de Janeiro, 2011.
 
 REFERENCIAS
-}
+    }
+    let(:trabalho) {Limarka::Trabalho.new(texto: texto, referencias_md: referencias)}
     before do
       FileUtils.rm_rf output_dir
-      @cv = Limarka::Conversor.new(output_dir: output_dir, configuracao: configuracao, texto: texto, referencias: referencias)
-#      byebug
+      @cv = Limarka::Conversor.new(trabalho, options)
       @cv.convert
     end
 
@@ -148,9 +147,8 @@ REFERENCIAS
 
   
   context 'quando configurada com citação numérica (NBR 6023:2002, 9.2)' do
-    let (:configuracao) {configuracao_padrao.merge({'referencias_numerica_inline' => true, 'referencias_bib' => false, 'referencias_md' => false})}
     let (:output_dir) {"tmp/referencias_numerica_inline"}
-    let (:texto) {texto = <<-TEXTO
+    let (:texto) {s = <<-TEXTO
 # Introdução
 
 \\citarei{ABNT-citacao}{ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. {\\emph ABNT NBR 6024:2012}: 
@@ -160,11 +158,11 @@ REFERENCIAS
 
 TEXTO
 
-texto = texto + "\nSeed: #{seed}\n"}
-    
+s + "\nSeed: #{seed}\n"}
+    let (:trabalho) {Limarka::Trabalho.new(texto: texto,  configuracao: configuracao_padrao)}    
     before do
       FileUtils.rm_rf output_dir
-      @cv = Limarka::Conversor.new(output_dir: output_dir, texto: texto, configuracao: configuracao)
+      @cv = Limarka::Conversor.new(trabalho, options)
       @cv.convert
     end
     

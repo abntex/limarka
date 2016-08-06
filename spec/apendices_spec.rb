@@ -5,20 +5,19 @@ require 'limarka/conversor'
 require 'limarka/compilador_latex'
 
 describe 'Apendices', :apendices do
-  
 
-  let (:texto) {""}
-
+  let!(:options) {{output_dir: output_dir, templates_dir: Dir.pwd}}  
+  let (:configuracao) {configuracao_padrao}
   before do
     FileUtils.rm_rf output_dir
   end
 
   context 'quando configurado como oculto' do
     let (:output_dir) {"tmp/apendices/desativado"}
-    let (:configuracao) {configuracao_padrao.merge({'apendices' => false})}
+    let (:t) {Limarka::Trabalho.new(configuracao: configuracao_padrao, anexos: nil)}
 
     before do
-      @cv = Limarka::Conversor.new(output_dir: output_dir, configuracao: configuracao, texto: texto)
+      @cv = Limarka::Conversor.new(t, options)
       @cv.convert
     end
 
@@ -35,7 +34,6 @@ describe 'Apendices', :apendices do
 
   context 'quando configurado para serem gerados' do
     let (:output_dir) {"tmp/apendices/ativado"}
-    let (:configuracao) {configuracao_padrao.merge({'apendices' => true})}
     let (:apendice_texto) {<<-APENDICE
 # Primeiro apêndice
 
@@ -47,12 +45,13 @@ Texto do segundo apêndice
 
 APENDICE
     }
+    let (:t) {Limarka::Trabalho.new(apendices: apendice_texto)}
 
     before do
-      @cv = Limarka::Conversor.new(output_dir: output_dir, configuracao: configuracao, texto: texto, apendices: apendice_texto)
+      @cv = Limarka::Conversor.new(t, options)
       @cv.convert
     end
-    
+
     it 'a seção de apêndices foi criada' do
       expect(@cv.texto_tex).to include("\\begin{apendicesenv}")
       expect(@cv.texto_tex).to include("\\partapendices")
@@ -63,12 +62,12 @@ APENDICE
       expect(@cv.texto_tex).to include("\\chapter{Segundo apêndice}")
     end
 
-    describe 'o pdf', :pdf do
+    describe 'no pdf', :pdf do
       before do
         @cpl = Limarka::CompiladorLatex.new()
         @cpl.compila(@cv.texto_tex_file, :salva_txt => true)
       end
-      it "é gerado apropriadamente" do
+      it "é gerado segundo as Normas da ABNT" do
         expect(File).to exist(@cv.pdf_file)
         expect(@cpl.txt).to include("Apêndices\n")
         expect(@cpl.txt).to include("APÊNDICE A – Primeiro apêndice\nTexto do apêndice.")

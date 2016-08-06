@@ -21,7 +21,6 @@ module Limarka
       self.t = trabalho
       self.options = options
     end
-
     
     def convert()
       FileUtils.mkdir_p(options[:output_dir])
@@ -113,7 +112,7 @@ module Limarka
       
       # arquivo temporário de referencias
       if(t.referencias_bib?) then
-        File.open(referencias_bib_file, 'w') { |file| file.write(@referencias) }
+        File.open(referencias_bib_file, 'w') { |file| file.write(t.referencias) }
       end
       
       @postextual_tex = s.string
@@ -164,7 +163,7 @@ module Limarka
         stdin.write("\n")
         stdin.write(hash_to_yaml(t.configuracao))
         stdin.write("\n")
-        stdin.write(@texto)
+        stdin.write(t.texto)
         stdin.close
         @texto_tex = stdout.read
         exit_status = wait_thr.value # Process::Status object returned.

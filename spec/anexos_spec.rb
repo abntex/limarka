@@ -6,7 +6,18 @@ require 'limarka/compilador_latex'
 
 describe 'Anexos', :anexos do
   
-  let (:texto) {""}
+  let!(:options) {{output_dir: output_dir, templates_dir: Dir.pwd}}
+  let (:anexos) {<<-ANEXO
+# Primeiro anexo
+
+Texto do anexo.
+
+# Segundo anexo
+
+Texto do segundo anexo.
+
+ANEXO
+    }
 
   before do
     FileUtils.rm_rf output_dir
@@ -14,10 +25,10 @@ describe 'Anexos', :anexos do
 
   context 'quando configurado como desativado' do
     let (:output_dir) {"tmp/anexos/desativado"}
-    let (:configuracao) {configuracao_padrao.merge({'anexos' => false})}
+    let (:t) {Limarka::Trabalho.new(configuracao: configuracao_padrao, anexos: nil)}
 
     before do
-      @cv = Limarka::Conversor.new(output_dir: output_dir, configuracao: configuracao)
+      @cv = Limarka::Conversor.new(t, options)
       @cv.convert
     end
 
@@ -35,21 +46,10 @@ describe 'Anexos', :anexos do
 
   context 'quando configurado para serem gerados' do
     let (:output_dir) {"tmp/anexos/ativado"}
-    let (:configuracao) {configuracao_padrao.merge({'anexos' => true})}
-    let (:anexos) {<<-ANEXO
-# Primeiro anexo
-
-Texto do anexo.
-
-# Segundo anexo
-
-Texto do segundo anexo.
-
-ANEXO
-    }
+    let (:t) {Limarka::Trabalho.new(configuracao: configuracao_padrao, anexos: anexos)}
 
     before do
-      @cv = Limarka::Conversor.new(output_dir: output_dir, configuracao: configuracao, texto: texto, anexos: anexos)
+      @cv = Limarka::Conversor.new(t, options)
       @cv.convert
     end
     
@@ -63,12 +63,12 @@ ANEXO
       expect(@cv.texto_tex).to include("\\chapter{Segundo anexo}")
     end
 
-    describe 'o pdf', :pdf do
+    describe 'no pdf', :pdf do
       before do
         @cpl = Limarka::CompiladorLatex.new()
         @cpl.compila(@cv.texto_tex_file, :salva_txt => true)
       end
-      it "é gerado apropriadamente" do
+      it "é gerado segundo as Normas da ABNT" do
         expect(File).to exist(@cv.pdf_file)
         expect(@cpl.txt).to include("Anexos\n")
         expect(@cpl.txt).to include("ANEXO A – Primeiro anexo")
