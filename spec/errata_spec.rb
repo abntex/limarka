@@ -63,7 +63,7 @@ TEXTO
         @cpl = Limarka::CompiladorLatex.new()
         @cpl.compila(@cv.texto_tex_file, :salva_txt => true)
       end
-      it "é gerado segundo as Normas da ABNT" do
+      it "é gerada segundo as Normas da ABNT" do
         expect(File).to exist(@cv.pdf_file)
         expect(@cpl.txt).to include("Errata\n")
         expect(@cpl.txt).to include("A aranha arranha a rã.")

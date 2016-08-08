@@ -258,4 +258,75 @@ describe Limarka::Trabalho do
     end
         
   end
+
+  describe '#ler_configuracao' do
+    let (:arquivo_de_configuracao) {'configuracao.yaml'}
+    let (:options) {{configuracao_yaml: arquivo_de_configuracao}}
+    let (:configuracao_yaml) {<<-CONF
+---
+qualquer-chave: valor da chave
+---
+CONF
+}
+    let (:t) {Limarka::Trabalho.new}
+    context 'quando arquivo de configuração especificado existe' do
+      before do
+        expect(File).to receive(:open).with(arquivo_de_configuracao,'r').and_yield(
+                          StringIO.new(configuracao_yaml))
+      end
+      it 'ler configuracao do arquivo especificado em options[:configuracao_yaml]' do
+        expect(t.ler_configuracao(options)).to include('qualquer-chave' => 'valor da chave')
+      end
+    end
+    context 'quando arquivo de configuração especificado NÃO existe' do
+      before do
+        expect(File).to receive(:open).with(arquivo_de_configuracao,'r').and_raise(Errno::ENOENT)
+      end
+      it 'erro não tratado será lançado' do
+        expect { t.ler_configuracao(options) }.to raise_error(Errno::ENOENT)
+      end
+    end
+    context 'quando não especificado arquivo de configuração' do
+      let (:options) {Hash.new}
+      it 'emite ArgumentError informando o ocorrido' do
+        expect { t.ler_configuracao(options) }.to raise_error(ArgumentError, 'Faltou especificar o arquivo de configuração em options[configuracao_yaml]')
+      end
+    end
+  end
+
+  describe '#ler_referencias' do
+    let (:t) {Limarka::Trabalho.new}
+    context 'quando configurado para ler do arquivo referencias.md', :referencias do
+      let (:configuracao) {{'referencias_md' => true}}
+      it 'ler o arquivo e retorna seu conteúdo' do
+        expect(t).to receive(:ler_referencias_md)
+        t.ler_referencias(configuracao)
+      end
+    end
+    context 'quando configurado para ler do arquivo referencias.bib', :referencias do
+      let (:configuracao) {{'referencias_bib' => true}}
+      it 'ler o arquivo e retorna seu conteúdo' do
+        expect(t).to receive(:ler_referencias_bib)
+        t.ler_referencias(configuracao)
+      end
+    end
+  end
+
+  describe '#ler_apendices' do
+    let (:arquivo) {'apendices.md'}
+    context 'quando EXISTE apendices.md', :apendices do
+      let (:configuracao) {{'apendices' => true}}
+      let (:t) {Limarka::Trabalho.new}
+      let (:conteudo) {apendices}
+      before do
+        expect(File).to receive(:open).with(arquivo,'r').and_yield(
+                         StringIO.new(conteudo))
+      end
+      it 'ler o arquivo e retorna seu conteúdo' do
+        t.configuracao = configuracao
+        expect(t.ler_apendices).to eq(conteudo)
+      end
+    end
+  end
+
 end

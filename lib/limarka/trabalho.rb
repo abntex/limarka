@@ -132,6 +132,9 @@ module Limarka
     end
 
     def ler_configuracao(options)
+      if not options or not options[:configuracao_yaml] then
+        raise ArgumentError, 'Faltou especificar o arquivo de configuração em options[configuracao_yaml]'
+      end
       File.open(options[:configuracao_yaml], 'r') {|f| YAML.load(f.read)}
     end
 
