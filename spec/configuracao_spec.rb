@@ -102,7 +102,7 @@ describe 'configuracao.pdf', :integracao do
       let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
       context 'quando desativada (valor padrão)' do
         let(:configuracao_exportada) {{'errata' => false}}
-        it 'exporta a configuração de desativado' do
+        it 'exporta a configuração de desativada' do
           expect(pdfconf.exporta).to include(configuracao_exportada)
         end
       end
@@ -117,10 +117,6 @@ describe 'configuracao.pdf', :integracao do
         end
       end      
     end
-  end
-  
-  describe 'avaliador1' do
-    
   end
   
   describe 'Os parâmetros de texto' do
