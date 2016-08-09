@@ -5,7 +5,7 @@ require 'limarka'
 describe Limarka::Trabalho do
   let (:texto) {'# Texto'}
   let (:anexos) {'# Anexo1\nTexto'}
-  let (:configuracao) { {title: 'algo'} }
+  let (:configuracao) { {'title' => 'algo'} }
   let (:apendices) {'# Apendice1'}
   let (:referencias_md) {'FULANO. **Título**. Ano.'}
   let (:referencias_bib) {'@book {}'}
@@ -269,7 +269,7 @@ qualquer-chave: valor da chave
 CONF
 }
     let (:t) {Limarka::Trabalho.new}
-    context 'quando arquivo de configuração especificado existe' do
+    context 'quando arquivo de configuração yaml especificado existe' do
       before do
         expect(File).to receive(:open).with(arquivo_de_configuracao,'r').and_yield(
                           StringIO.new(configuracao_yaml))
@@ -278,7 +278,7 @@ CONF
         expect(t.ler_configuracao(options)).to include('qualquer-chave' => 'valor da chave')
       end
     end
-    context 'quando arquivo de configuração especificado NÃO existe' do
+    context 'quando arquivo de configuração YAML especificado NÃO existe'  do
       before do
         expect(File).to receive(:open).with(arquivo_de_configuracao,'r').and_raise(Errno::ENOENT)
       end
@@ -286,10 +286,34 @@ CONF
         expect { t.ler_configuracao(options) }.to raise_error(Errno::ENOENT)
       end
     end
+    
+    context 'quando optado por ler configuração de PDF existente', :lento, :libreoffice, :configuracao do
+      let (:arquivo_de_configuracao) {'configuracao.pdf'}
+      let (:options) {{configuracao_pdf: arquivo_de_configuracao}}
+      let (:configuracao_esperada) {{"title" => "Título do trabalho"}}
+      before do
+        # Precisa do libreoffice e ele precisa está fechado!
+        system "libreoffice --headless --convert-to pdf configuracao.odt", :out=>"/dev/null"
+        # expect(t).to receive(:ler_configuracao_pdf) {configuracao}
+      end
+      it 'ler configuracao do arquivo especificado em options[:configuracao_pdf]' do
+        expect(t.ler_configuracao(options)).to include(configuracao_esperada)
+      end
+    end
+
+    context 'quando optado por ler configuração de PDF inexistente', :lento, :libreoffice, :configuracao do
+      let (:arquivo_de_configuracao) {'ARQUIVO_NAO_EXISTENTE.pdf'}
+      let (:options) {{configuracao_pdf: arquivo_de_configuracao}}
+      it 'emite error informando que não encontrou o arquivo' do
+        expect {t.ler_configuracao(options)}.to raise_error(IOError, "Arquivo não encontrado: #{arquivo_de_configuracao}")
+      end
+    end
+
+    
     context 'quando não especificado arquivo de configuração' do
       let (:options) {Hash.new}
       it 'emite ArgumentError informando o ocorrido' do
-        expect { t.ler_configuracao(options) }.to raise_error(ArgumentError, 'Faltou especificar o arquivo de configuração em options[configuracao_yaml]')
+        expect { t.ler_configuracao(options) }.to raise_error(ArgumentError, 'Faltou especificar o arquivo de configuração em options[configuracao_yaml] ou options[configuracao_pdf]')
       end
     end
   end

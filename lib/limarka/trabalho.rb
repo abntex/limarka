@@ -132,10 +132,20 @@ module Limarka
     end
 
     def ler_configuracao(options)
-      if not options or not options[:configuracao_yaml] then
-        raise ArgumentError, 'Faltou especificar o arquivo de configuração em options[configuracao_yaml]'
+      if options and options[:configuracao_yaml] then
+        File.open(options[:configuracao_yaml], 'r') {|f| YAML.load(f.read)}
+      elsif options and options[:configuracao_pdf] then
+        ler_configuracao_pdf options[:configuracao_pdf]
+      else
+        raise ArgumentError, 'Faltou especificar o arquivo de configuração em options[configuracao_yaml] ou options[configuracao_pdf]'
       end
-      File.open(options[:configuracao_yaml], 'r') {|f| YAML.load(f.read)}
+    end
+
+    def ler_configuracao_pdf(file)
+      raise IOError, 'Arquivo não encontrado: ' + file unless File.exist? (file)
+      pdf = PdfForms::Pdf.new file, (PdfForms.new 'pdftk'), utf8_fields: true
+      pdfconf = Limarka::Pdfconf.new(pdf: pdf)
+      pdfconf.exporta
     end
 
     def ler_apendices
