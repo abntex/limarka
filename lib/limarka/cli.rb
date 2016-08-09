@@ -11,7 +11,7 @@ require 'limarka/compilador_latex'
 module Limarka
 
   class Cli < Thor
-    default_command :exec
+    default_command :exec2
 
     PDF = "configuracao.pdf"
 
