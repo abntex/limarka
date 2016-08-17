@@ -1,33 +1,40 @@
 # Change Log
 
-## [0.2.0](https://github.com/abntex/trabalho-academico-pandoc-abntex2/tree/0.2.0) (2016-07-18)
-[Full Changelog](https://github.com/abntex/trabalho-academico-pandoc-abntex2/compare/0.1.0...0.2.0)
+## [0.2.0](https://github.com/abntex/limarka/tree/0.2.0) (2016-08-17)
+[Full Changelog](https://github.com/abntex/limarka/compare/0.1.0...0.2.0)
 
 **Closed issues:**
 
-- Tornar o projeto administrável com o bundle [\#24](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/24)
-- Sumário [\#19](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/19)
-- Lista de símbolos [\#18](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/18)
-- Lista de abreviaturas e siglas [\#17](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/17)
-- Lista de tabelas [\#16](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/16)
-- Lista de ilustrações [\#15](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/15)
-- Resumos \(obrigatório\) [\#14](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/14)
-- Epígrafe \(opcional\) [\#13](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/13)
-- Agradecimentos \(opcional\) [\#12](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/12)
-- Dedicatória [\#11](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/11)
-- Manter configuração na master [\#10](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/10)
-- Configuração e geração do pre-textual [\#7](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/7)
+- Configuração e geração da Errata [\#32](https://github.com/abntex/limarka/issues/32)
+- TDD: tornar o projeto testável [\#30](https://github.com/abntex/limarka/issues/30)
+- Criar executável do sistema [\#29](https://github.com/abntex/limarka/issues/29)
+- Apêndices [\#28](https://github.com/abntex/limarka/issues/28)
+- Anexos [\#27](https://github.com/abntex/limarka/issues/27)
+- Referências [\#26](https://github.com/abntex/limarka/issues/26)
+- Tornar o projeto administrável com o bundle [\#24](https://github.com/abntex/limarka/issues/24)
+- Renomear o repositório para limarka [\#23](https://github.com/abntex/limarka/issues/23)
+- Sumário [\#19](https://github.com/abntex/limarka/issues/19)
+- Lista de símbolos [\#18](https://github.com/abntex/limarka/issues/18)
+- Lista de abreviaturas e siglas [\#17](https://github.com/abntex/limarka/issues/17)
+- Lista de tabelas [\#16](https://github.com/abntex/limarka/issues/16)
+- Lista de ilustrações [\#15](https://github.com/abntex/limarka/issues/15)
+- Resumos \(obrigatório\) [\#14](https://github.com/abntex/limarka/issues/14)
+- Epígrafe \(opcional\) [\#13](https://github.com/abntex/limarka/issues/13)
+- Agradecimentos \(opcional\) [\#12](https://github.com/abntex/limarka/issues/12)
+- Dedicatória [\#11](https://github.com/abntex/limarka/issues/11)
+- Manter configuração na master [\#10](https://github.com/abntex/limarka/issues/10)
+- Configuração e geração do pre-textual [\#7](https://github.com/abntex/limarka/issues/7)
 
-## [0.1.0](https://github.com/abntex/trabalho-academico-pandoc-abntex2/tree/0.1.0) (2016-07-15)
+## [0.1.0](https://github.com/abntex/limarka/tree/0.1.0) (2016-07-15)
 **Closed issues:**
 
-- Gerenciar changelog com github\_changelog\_generator [\#9](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/9)
-- Esconder arquivos que usuário não utiliza [\#8](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/8)
-- Corrigir dependência do pdf-forms [\#6](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/6)
-- Elaboração do formulário PDF em branch separada [\#5](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/5)
-- Implementação da ficha catalográfica e folha de aprovação [\#3](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/3)
-- Configurações serão realizadas em arquivo PDF [\#2](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/2)
-- Fornecer informações básicas sobre o projeto [\#1](https://github.com/abntex/trabalho-academico-pandoc-abntex2/issues/1)
+- Gerenciar changelog com github\_changelog\_generator [\#9](https://github.com/abntex/limarka/issues/9)
+- Esconder arquivos que usuário não utiliza [\#8](https://github.com/abntex/limarka/issues/8)
+- Corrigir dependência do pdf-forms [\#6](https://github.com/abntex/limarka/issues/6)
+- Elaboração do formulário PDF em branch separada [\#5](https://github.com/abntex/limarka/issues/5)
+- Implementação da ficha catalográfica e folha de aprovação [\#3](https://github.com/abntex/limarka/issues/3)
+- Configurações serão realizadas em arquivo PDF [\#2](https://github.com/abntex/limarka/issues/2)
+- Fornecer informações básicas sobre o projeto [\#1](https://github.com/abntex/limarka/issues/1)
 
 
 

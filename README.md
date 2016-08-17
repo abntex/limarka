@@ -3,6 +3,8 @@
 Gere o PDF do seu trabalho de conclusão de curso (monografia, dissertação ou teste),
 formatado automaticamente com as normas da ABNT, escrevendo-o de forma bem simples.
 
+**NOTE**: Atualmente a documentação do projeto está desatualizada.
+
 
 ## Installation
 
