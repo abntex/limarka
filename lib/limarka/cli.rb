@@ -73,8 +73,7 @@ module Limarka
 
     
     desc "exec2", "Executa o sistema para geração do documento latex (novo)"
-    method_option :configuracao_pdf, :aliases => '-p', :type => :boolean, :default => false, :desc => 'Ler configuração de configuracao.pdf, em vez de arquivo YAML.'
-    method_option :configuracao_yaml, :aliases => '-y', :desc => 'Arquivo de configuração YAML', :default => 'templates/configuracao.yaml'
+    method_option :configuracao_yaml, :aliases => '-y', :type => :boolean, :desc => 'Ler configuração de configuracao.yaml em vez de configuracao.pdf', :default => false
     method_option :configuracao_tecnica, :aliases => '-A', :desc => 'Arquivo técnica Adiconional de configuração YAML', :default => 'templates/configuracao-tecnica.yaml'
     method_option :output_dir, :aliases => '-o', :desc => 'Diretório onde serão gerados os arquivos', :default => '.'
 

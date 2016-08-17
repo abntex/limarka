@@ -56,10 +56,23 @@ END
     t.save test_dir # Salva os arquivos que serão lidos
   end
 
+  context "exec2 -y configuracao.yaml -t templates_dir (invocação)" do
+    before do
+      expect_any_instance_of(Limarka::Cli).to receive(:exec2)
+    end
+    it "invoca Limarka::Cli#exec2" do
+      Dir.chdir test_dir do
+        Limarka::Cli.start(["exec2","-y","configuracao.yaml", '-t', templates_dir])
+      end
+    end
+    
+  end
+
   context "exec2 -y configuracao.yaml -t templates_dir" do
     before do
       Dir.chdir test_dir do
-        Limarka::Cli.start(["exec2","-y","configuracao.yaml", '-t', templates_dir])
+        byebug
+        Limarka::Cli.start(["exec2","-y", '-t', templates_dir])
       end
       @tex = File.open(tex_file, 'r'){|f| f.read}
     end
