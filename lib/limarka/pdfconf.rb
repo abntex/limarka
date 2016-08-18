@@ -23,6 +23,7 @@ module Limarka
       h.merge! apendices
       h.merge! anexos
       h.merge! errata
+      h.merge! referencias
       h.merge! caixas_de_texto
       # TODO: converter para chaves?
       h
@@ -38,6 +39,17 @@ module Limarka
 
     def errata
       {'errata' => !desativado?('errata_combo')}
+    end
+
+    def referencias
+      value = pdf.field('referencias_combo').value
+      if value.include?('referencias.bib')  then
+        {'referencias_bib' => true, 'referencias_md' => false, 'referencias_numerica_inline' => false}
+      elsif value.include?('referencias.md')  then
+        {'referencias_bib' => false, 'referencias_md' => true, 'referencias_numerica_inline' => false}
+      else
+        {'referencias_bib' => false, 'referencias_md' => false, 'referencias_numerica_inline' => true}
+      end
     end
     
     def desativado?(campo)

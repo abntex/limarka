@@ -118,6 +118,49 @@ describe 'configuracao.pdf', :integracao do
       end      
     end
   end
+
+  describe 'referencias_combo', :referencias, :pdf do
+    let(:campo) {'referencias_combo'}
+    let(:tipo) {'Choice'}
+    let(:opcoes) {['Banco de referências Bibtex (referencias.bib) + \\cite', 'Inseridas ao longo do texto \\citarei + \\cita', 'Separadamente, no arquivo referencias.md']}
+    let(:valor_padrao) {opcoes[0]}
+    let(:field) {pdf.field(campo)}
+
+#    it_behaves_like 'um combo desativado por padrão'
+
+    describe 'na exportação para yaml', :pdfconf do
+      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
+      context 'quando referencias.bib (valor padrão)' do
+        let(:configuracao_exportada) {{'referencias_bib' => true, 'referencias_md' => false, 'referencias_numerica_inline' => false}}
+        it 'exporta a configuração de referencias.bib' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end
+      context 'quando referencias.md' do
+        let(:valor_de_ativacao) {opcoes[2]}
+        let(:configuracao_exportada) {{'referencias_bib' => false, 'referencias_md' => true, 'referencias_numerica_inline' => false}}
+        before do
+          pdfconf.update(campo, valor_de_ativacao)
+        end
+        it 'exporta a configuração de ativada' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end
+      context 'quando referencias inline' do
+        let(:valor_de_ativacao) {opcoes[1]}
+        let(:configuracao_exportada) {{'referencias_bib' => false, 'referencias_md' => false, 'referencias_numerica_inline' => true}}
+        before do
+          pdfconf.update(campo, valor_de_ativacao)
+        end
+        it 'exporta a configuração de ativada' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end      
+
+    end
+  end
+
+
   
   describe 'Os parâmetros de texto' do
     let(:parametros){['avaliador1', 'avaliador2', 'avaliador3']}

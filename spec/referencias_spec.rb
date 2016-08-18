@@ -10,8 +10,8 @@ describe 'Referências', :referencias do
   let (:seed) {Random.new_seed}
   let!(:options) {{output_dir: output_dir, templates_dir: Dir.pwd}}
   
-  context 'quando configurada para ler de referencias.bib', :referencias do
-    let (:configuracao) {configuracao_padrao}
+  context 'quando configurada para ler de referencias.bib', :referencias, :referencias_bib do
+    let (:configuracao) {{}}
     let (:output_dir) {"tmp/referencias_bib"}
 
     let (:texto) {s = <<-TEXTO
