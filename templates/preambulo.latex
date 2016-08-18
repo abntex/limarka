@@ -2,8 +2,11 @@
 \usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção. OK
 \usepackage{lipsum}				% para geração de dummy text
 
-%% As citações podem ser de três tipos: referencias_abnt2cite, referencias_numerica_inline ou referencias_md
+% Configurando títulos das imagens na parte superior, de acordo com abntnbr-14724-2011-trabalhos-academicos
+\usepackage{floatrow}
+\floatsetup[figure]{capposition=top}
 
+%% As citações podem ser de três tipos: referencias_abnt2cite, referencias_numerica_inline ou referencias_md
 
 $if(referencias_numerica_inline)$
 %% Utilizando referencias_numerica_inline
