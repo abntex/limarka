@@ -12,7 +12,6 @@ module Limarka
     # trabalho
     attr_accessor :t
     attr_accessor :options
-    attr_accessor :preambulo_tex
     attr_accessor :pretextual_tex
     attr_accessor :postextual_tex
     attr_accessor :texto_tex
@@ -28,18 +27,14 @@ module Limarka
       # A invocação de pandoc passando parâmetro como --before-body necessita
       # de ser realizado através de arquivos, portanto, serão criados arquivos
       # temporários para sua execução
-      preambulo_tempfile =  Tempfile.new('preambulo')
       pretextual_tempfile = Tempfile.new('pretextual')
       postextual_tempfile = Tempfile.new('postextual')
       begin
-        preambulo(preambulo_tempfile)
         pretextual(pretextual_tempfile)
         postextual(postextual_tempfile)
-        textual(preambulo_tempfile, pretextual_tempfile,postextual_tempfile)
+        textual(pretextual_tempfile,postextual_tempfile)
         
         ensure
-          preambulo_tempfile.close
-          preambulo_tempfile.unlink
           pretextual_tempfile.close
           pretextual_tempfile.unlink
           postextual_tempfile.close
@@ -54,17 +49,7 @@ module Limarka
       s.string
     end
     
-    PREAMBULO="templates/preambulo.tex"
-    def preambulo(tempfile)
-      Open3.popen3("pandoc -f markdown --data-dir=#{options[:templates_dir]} --template=preambulo -t latex") do |stdin, stdout, stderr, wait_thr|
-        stdin.write(hash_to_yaml(t.configuracao))
-        stdin.close
-        @preambulo_tex = stdout.read
-        exit_status = wait_thr.value # Process::Status object returned.
-        if(exit_status!=0) then puts ("Erro: " + stderr.read).red end
-      end
-      File.open(tempfile, 'w') { |file| file.write(@preambulo_tex) }
-    end
+
 
     PRETEXTUAL = "templates/pretextual.tex"
 
@@ -156,9 +141,9 @@ module Limarka
     def secao_indice
     end
     
-    def textual(preambulo_tempfile, pretextual_tempfile, postextual_tempfile)
+    def textual(pretextual_tempfile, postextual_tempfile)
       valida_yaml
-      Open3.popen3("pandoc -f markdown+raw_tex -t latex -s --normalize --chapter --include-in-header=#{preambulo_tempfile.path} --include-before-body=#{pretextual_tempfile.path}  --include-after-body=#{postextual_tempfile.path}") {|stdin, stdout, stderr, wait_thr|
+      Open3.popen3("pandoc -f markdown+raw_tex -t latex -s --data-dir=#{options[:templates_dir]} --template=trabalho-academico --normalize --chapter --include-before-body=#{pretextual_tempfile.path}  --include-after-body=#{postextual_tempfile.path}") {|stdin, stdout, stderr, wait_thr|
         stdin.write(File.read(options[:templates_dir] + '/templates/configuracao-tecnica.yaml'))
         stdin.write("\n")
         stdin.write(hash_to_yaml(t.configuracao))
@@ -172,9 +157,6 @@ module Limarka
       File.open(texto_tex_file, 'w')  { |f| f.write(@texto_tex)}
     end
     
-    def preambulo_tex_file
-      "#{options[:output_dir]}/xxx-preambulo.tex"
-    end
     def pretextual_tex_file
       "#{options[:output_dir]}/xxx-pretextual.tex"
     end

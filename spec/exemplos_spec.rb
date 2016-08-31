@@ -7,21 +7,31 @@ require 'yaml'
 
 describe 'Exemplo1', :exemplos do
   
-  let(:test_dir){'tmp/exemplos/exemplo1'}
+
   let(:tex_file){test_dir+'/xxx-Monografia.tex'}
   let(:texto) {<<-END
 # Introdução
 
-Texto da introdução
+Texto da introdução \\cite{ABNT-citacao}.
 
 END
 }
 
-  let(:referencias_md) {<<-END
-SILVA, Fulano. **Título**. Data.
+    let (:referencias_bib) {<<-REFERENCIAS
+@manual{ABNT-citacao,
+	Address = {Rio de Janeiro},
+	Date-Added = {2012-12-15 21:43:38 +0000},
+	Date-Modified = {2013-01-12 22:17:20 +0000},
+	Month = {ago.},
+	Org-Short = {ABNT},
+	Organization = {Associa{\\c c}\\~ao Brasileira de Normas T\\'ecnicas},
+	Pages = 7,
+	Subtitle = {Informa{\\c c}\\~ao e documenta{\\c c}\\~ao --- Apresenta{\\c c}\\~ao de cita{\\c c}\\~oes em documentos},
+	Title = {{NBR} 10520},
+	Year = 2002}
 
-END
-  }
+REFERENCIAS
+    }
 
   let(:anexos){<<-END
 # Primeiro anexo
@@ -48,7 +58,7 @@ END
   
   
   let!(:templates_dir){Dir.pwd}
-  let(:t){Limarka::Trabalho.new(configuracao: configuracao_padrao, texto: texto, anexos: anexos, referencias_md: referencias_md, apendices: apendices, errata: errata)}
+  let(:t){Limarka::Trabalho.new(configuracao: configuracao_padrao, texto: texto, anexos: anexos, referencias_bib: referencias_bib, apendices: apendices, errata: errata)}
 
   before do
     FileUtils.rm_rf test_dir
@@ -56,34 +66,49 @@ END
     t.save test_dir # Salva os arquivos que serão lidos
   end
 
-  context "exec2 -y configuracao.yaml -t templates_dir (invocação)" do
+  context "exec -y configuracao.yaml -t templates_dir (invocação)" do
+    let(:test_dir){'tmp/exemplos/exemplo1'}
     before do
-      expect_any_instance_of(Limarka::Cli).to receive(:exec2)
+      expect_any_instance_of(Limarka::Cli).to receive(:exec)
     end
-    it "invoca Limarka::Cli#exec2" do
+    it "invoca Limarka::Cli#exec" do
       Dir.chdir test_dir do
-        Limarka::Cli.start(["exec2","-y","configuracao.yaml", '-t', templates_dir])
+        Limarka::Cli.start(["exec","-y","configuracao.yaml", '-t', templates_dir])
       end
     end
     
   end
 
-  context "exec2 -y configuracao.yaml -t templates_dir" do
+  context "exec -y configuracao.yaml -t templates_dir" do
+    let(:test_dir){'tmp/exemplos/exemplo2'}
     before do
       Dir.chdir test_dir do
-        byebug
-        Limarka::Cli.start(["exec2","-y", '-t', templates_dir])
+        Limarka::Cli.start(["exec","-y", '-t', templates_dir])
       end
       @tex = File.open(tex_file, 'r'){|f| f.read}
     end
 
     it "gera arquivo latex" do
       expect(File).to exist(tex_file)
-      expect(@tex).to include("SILVA, Fulano.")
+      expect(@tex).to include("\\cite{ABNT-citacao}") # Citação
       expect(@tex).to include("Primeiro anexo")
       expect(@tex).to include("Primeiro apêndice")
       expect(@tex).to include("A aranha arranha a rã")
     end
   end
 
+  context "pdfupdate (invocação)" do
+    let(:test_dir){'tmp/exemplos/exemplo3'}
+    before do
+      expect_any_instance_of(Limarka::Cli).to receive(:pdfupdate)
+    end
+    it "invoca Limarka::Cli#pdfupdate" do
+      Dir.chdir test_dir do
+        Limarka::Cli.start(["pdfupdate"])
+      end
+    end
+    
+  end
+
+  
 end

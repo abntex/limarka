@@ -72,14 +72,15 @@ module Limarka
     end
 
     
-    desc "exec2", "Executa o sistema para geração do documento latex (novo)"
+
     method_option :configuracao_yaml, :aliases => '-y', :type => :boolean, :desc => 'Ler configuração de configuracao.yaml em vez de configuracao.pdf', :default => false
     method_option :configuracao_tecnica, :aliases => '-A', :desc => 'Arquivo técnica Adiconional de configuração YAML', :default => 'templates/configuracao-tecnica.yaml'
     method_option :output_dir, :aliases => '-o', :desc => 'Diretório onde serão gerados os arquivos', :default => '.'
 
     method_option :compila_tex, :aliases => '-c', :desc => 'Compila arquivo tex gerando um PDF', :default => true, :type => :boolean
     method_option :templates_dir, :aliases => '-t', :desc => 'Diretório que contem a pasta templates (pandoc --data-dir)', :default => '.'
-    def exec2
+    desc "exec", "Executa o sistema para geração do documento latex (novo)"
+    def exec
       t = Limarka::Trabalho.new
       t.atualiza_de_arquivos(options)
       cv = Limarka::Conversor.new(t,options)
@@ -90,8 +91,14 @@ module Limarka
       end
       
     end
-    
 
+    desc "pdfupdate", "Ler configuracao.yaml e atualiza configuracao.pdf"
+    def pdfupdate
+      t = Limarka::Trabalho.new
+      configuracao = t.ler_configuracao(:configuracao_yaml => true)
+    end
+
+=begin
     desc "exec", "Executa o sistema para geração do documento latex"
     def exec
       invoke :pdfconf
@@ -102,7 +109,7 @@ module Limarka
       invoke :textual
       invoke :compile
     end
-
+=end
 
     POSTEXTUAL = "templates/postextual.tex"
     desc "postextual","Gera conteúdo do pós-textual"
@@ -196,7 +203,7 @@ module Limarka
       h["lista_tabelas"] = pdf.field("lista_tabelas").value == "Gerar lista de tabelas"
 
       # Referências
-      selecao = 'referencias_origem'
+      selecao = 'referencias_combo'
       {"referencias_bib" => "Banco de referências Bibtex (referencias.bib) + \\cite",
       'referencias_numerica_inline' => "Inseridas ao longo do texto \\citarei + \\cita",
       'referencias_md' => 'Separadamente, no arquivo referencias.md'}.each do |template_key,valor_para_verdadeiro|
