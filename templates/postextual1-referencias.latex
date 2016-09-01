@@ -7,42 +7,4 @@
 % ----------------------------------------------------------
 % Referências bibliográficas
 % ----------------------------------------------------------
-
-$if(referencias_bib)$
-% Referências inseridas a partir de referencias.bib
-\renewcommand{\bibname}{Referências} % Atualiza título da seção
 \bibliography{xxx-referencias}
-$endif$
-
-
-$if(referencias_numerica_inline)$
-%% http://tex.stackexchange.com/questions/84991/bibliography-numbering-style
-%% Faz numeração sem colchetes ou parenteses na bibliogafia
-%% NBR 6023:2002 9.2
-\makeatletter
-\renewcommand\@biblabel[1]{#1}
-\makeatother
-\renewcommand{\bibname}{Referências} % Atualiza título da seção
-\renewcommand\refname{Referências}
-\bibliographystyle{plain}
-\bibliography{master.bib}
-$endif$
-
-$if(referencias_md)$
-\chapter*{Referências}\label{referencias}
-\addcontentsline{toc}{section}{REFERÊNCIAS}
-
-% Configura o espaçamento das referências
-\setlength\parindent{0em} 
-\setlength{\parskip}{1em}
-
-% Referências inseridas a partir de referencias.md
-
-$body$
-
-% Restaura espaçamento do texto
-\setlength\parindent{3em} 
-\setlength{\parskip}{0em}
-
-$endif$
-

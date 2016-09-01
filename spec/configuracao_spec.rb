@@ -120,46 +120,74 @@ describe 'configuracao.pdf', :integracao do
   end
 
   describe 'referencias_combo', :referencias, :pdf do
-    let(:campo) {'referencias_combo'}
+    let(:campo) {'referencias_sistema_combo'}
     let(:tipo) {'Choice'}
-    let(:opcoes) {['Banco de referências Bibtex (referencias.bib) + \\cite', 'Inseridas ao longo do texto \\citarei + \\cita', 'Separadamente, no arquivo referencias.md']}
+    let(:opcoes) {['Referências Alfabética (padrão)', 'Referências Numérica']}
     let(:valor_padrao) {opcoes[0]}
     let(:field) {pdf.field(campo)}
 
-#    it_behaves_like 'um combo desativado por padrão'
-
     describe 'na exportação para yaml', :pdfconf do
       let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
-      context 'quando referencias.bib (valor padrão)' do
-        let(:configuracao_exportada) {{'referencias_bib' => true, 'referencias_md' => false, 'referencias_numerica_inline' => false}}
-        it 'exporta a configuração de referencias.bib' do
+      context 'quando Referências Alfabética (valor padrão)' do
+        let(:configuracao_exportada) {{'referencias_sistema' => 'alf'}}
+        it 'exporta referencias_sistema=>alf' do
           expect(pdfconf.exporta).to include(configuracao_exportada)
         end
       end
-      context 'quando referencias.md' do
-        let(:valor_de_ativacao) {opcoes[2]}
-        let(:configuracao_exportada) {{'referencias_bib' => false, 'referencias_md' => true, 'referencias_numerica_inline' => false}}
+      context 'quando Referências Numérica' do
+        let(:sistema_numerico) {opcoes[1]}
+        let(:configuracao_exportada) {{'referencias_sistema' => 'num'}}
         before do
-          pdfconf.update(campo, valor_de_ativacao)
+          pdfconf.update(campo, sistema_numerico)
         end
-        it 'exporta a configuração de ativada' do
+        it 'exporta referencias_sistema=>num' do
           expect(pdfconf.exporta).to include(configuracao_exportada)
         end
       end
-      context 'quando referencias inline' do
-        let(:valor_de_ativacao) {opcoes[1]}
-        let(:configuracao_exportada) {{'referencias_bib' => false, 'referencias_md' => false, 'referencias_numerica_inline' => true}}
-        before do
-          pdfconf.update(campo, valor_de_ativacao)
-        end
-        it 'exporta a configuração de ativada' do
-          expect(pdfconf.exporta).to include(configuracao_exportada)
-        end
-      end      
-
     end
   end
 
+  describe 'referencias_caminho', :referencias, :pdf do
+    let(:campo) {'referencias_caminho'}
+    let(:tipo) {'Text'}
+    let(:opcoes) {['Referências Alfabética (padrão)', 'Referências Numérica']}
+    let(:valor_padrao) {opcoes[0]}
+    let(:field) {pdf.field(campo)}
+
+    it 'é um campo do tipo texto' do
+      expect(field).not_to be nil
+      expect(field.type).to eq(tipo)
+    end
+
+    describe 'seu valor padrão' do
+      it "é 'referencias.bib'" do
+        expect(field.value).to eq('referencias.bib')
+      end
+    end
+
+
+    describe 'na exportação para yaml', :pdfconf do
+      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
+      context 'quando o arquivo de referências NÃO existe' do
+        let(:arquivo_nao_existente) {"ARQUIVO_NAO_EXISTENTE.bib"}
+        before do
+          pdfconf.update(campo, arquivo_nao_existente)
+        end
+        it 'emite erro durante a exportação' do
+          expect {pdfconf.exporta}.to raise_error ArgumentError, "Arquivo de referências configurado não foi encontrado: #{arquivo_nao_existente}"
+        end
+      end
+      context 'quando o arquivo de referências EXISTE' do
+        let(:configuracao_exportada) {{'referencias_caminho' => 'referencias.bib'}}
+        before do
+          allow(File).to receive('exist?').with('referencias.bib') {true}
+        end
+        it 'exportação contém o valor do campo' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end
+    end
+  end
 
   
   describe 'Os parâmetros de texto' do

@@ -1,3 +1,4 @@
+# coding: utf-8
 require "thor"
 require 'pdf_forms'
 require 'yaml'
@@ -26,10 +27,18 @@ module Limarka
       h.merge! referencias
       h.merge! caixas_de_texto
       # TODO: converter para chaves?
+      valida_campos(h)
       h
     end
 
-    private 
+    private
+
+    def valida_campos(h)
+      arquivo_de_referencias = h['referencias_caminho']
+      raise ArgumentError, "Arquivo de referências configurado não foi encontrado: #{arquivo_de_referencias}" unless File.exist?(arquivo_de_referencias)
+      
+    end
+    
     def apendices
       {'apendices' => !desativado?('apendices_combo')}
     end
@@ -42,16 +51,16 @@ module Limarka
     end
 
     def referencias
-      value = pdf.field('referencias_combo').value
-      if value.include?('referencias.bib')  then
-        {'referencias_bib' => true, 'referencias_md' => false, 'referencias_numerica_inline' => false}
-      elsif value.include?('referencias.md')  then
-        {'referencias_bib' => false, 'referencias_md' => true, 'referencias_numerica_inline' => false}
+      value = pdf.field('referencias_sistema_combo').value
+      if value.include?('Numérica')  then
+        {'referencias_sistema' => 'num'}
+      elsif value.include?('Alfabética')  then
+        {'referencias_sistema' => 'alf'}
       else
-        {'referencias_bib' => false, 'referencias_md' => false, 'referencias_numerica_inline' => true}
+        raise ArgumentError, "Caixa referencias_sistema_combo com valor inválido"
       end
     end
-    
+
     def desativado?(campo)
       pdf.field(campo).value.include?('Desativad') # a(o)
     end
