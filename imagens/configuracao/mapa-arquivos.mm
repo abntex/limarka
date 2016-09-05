@@ -67,6 +67,7 @@
 <node TEXT="Lista de tabelas" ID="ID_1717697796" CREATED="1468697374828" MODIFIED="1468697379709"/>
 <node TEXT="Lista de siglas" ID="ID_533213060" CREATED="1468697380446" MODIFIED="1468697384477"/>
 <node TEXT="Lista de s&#xed;mbolos" ID="ID_836966605" CREATED="1468697385019" MODIFIED="1468700383831"/>
+<node TEXT="Refer&#xea;ncias" ID="ID_1598024113" CREATED="1473101107014" MODIFIED="1473101353560"/>
 </node>
 <node ID="ID_1777410520" CREATED="1470249678287" MODIFIED="1470251051379"><richcontent TYPE="NODE">
 
@@ -83,7 +84,6 @@
     </p>
   </body>
 </html>
-
 </richcontent>
 <hook NAME="SummaryNode"/>
 </node>
@@ -92,18 +92,9 @@
 <cloud COLOR="#f0f0f0" SHAPE="ARC"/>
 <node TEXT="Onde voc&#xea; ir&#xe1; escrever&#xa;o texto do seu trabalho" ID="ID_967917131" CREATED="1468696644477" MODIFIED="1468700347412"/>
 </node>
-<node TEXT="refer&#xea;ncias" ID="ID_1142036585" CREATED="1470249792151" MODIFIED="1470250127093">
-<font BOLD="false"/>
-<node TEXT="referencias.md" ID="ID_945933372" CREATED="1468696725691" MODIFIED="1470249932644">
+<node TEXT="referencias.bib" ID="ID_1681306330" CREATED="1473101084534" MODIFIED="1473101091053">
 <font BOLD="true"/>
-<hook NAME="FirstGroupNode"/>
-</node>
-<node TEXT="referencias.bib" ID="ID_609030295" CREATED="1470249805293" MODIFIED="1470249812998">
-<font BOLD="true"/>
-</node>
-<node TEXT="Depende da&#xa;sua escolha" ID="ID_644712827" CREATED="1470249932635" MODIFIED="1470250380091">
-<hook NAME="SummaryNode"/>
-</node>
+<node TEXT="configurado no pdf" ID="ID_1698885218" CREATED="1473101116391" MODIFIED="1473101210667"/>
 </node>
 <node TEXT="apendices.md" ID="ID_938379587" CREATED="1468696779549" MODIFIED="1468697411335">
 <font BOLD="true"/>
