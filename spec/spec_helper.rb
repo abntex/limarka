@@ -49,9 +49,7 @@ errata: false
 monografia: true
 folha_de_aprovacao_gerar: false
 folha_de_aprovacao_incluir: false
-referencias_bib: true
-referencias_numerica_inline: false
-referencias_md: false
+referencias_caminho: referencias.bib
 ---
 
 CONFIG
