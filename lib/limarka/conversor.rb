@@ -5,6 +5,8 @@ require 'yaml'
 require 'colorize'
 require 'open3'
 require 'fileutils'
+require 'bibtex'
+
 
 module Limarka
 
@@ -94,16 +96,29 @@ module Limarka
       s << secao_apendices
       s << secao_anexos
       s << secao_indice
-      
-      # arquivo temporário de referencias
-      if(t.referencias_bib?) then
-        File.open(referencias_bib_file, 'w') { |file| file.write(t.referencias) }
-      end
+
+      cria_xxx_referencias
       
       @postextual_tex = s.string
       File.open(tempfile, 'w') { |file| file.write(postextual_tex) }
     end
 
+    ## arquivo temporário de referencias
+    def cria_xxx_referencias
+      referencias_tempfile = Tempfile.new('referencias')
+      File.open(referencias_tempfile, 'w') {|file| file.write(t.referencias)}
+      b = BibTeX.open(referencias_tempfile.path)
+      b.each do |entry|
+        if entry.title.include?(':') then
+          s = entry.title.split(':')
+          entry['title'] = s[0].strip
+          entry['subtitle'] = s[1].strip
+        end
+      end
+      
+      b.save_to referencias_bib_file
+    end
+    
     def secao(template, condicao_para_conteudo, conteudo_externo)
       s = StringIO.new
       
@@ -124,7 +139,7 @@ module Limarka
 
     
     def secao_referencias
-      secao("postextual1-referencias", t.referencias_md?, t.referencias)
+      secao("postextual1-referencias", false, t.referencias)
     end
 
     def secao_apendices

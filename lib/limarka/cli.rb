@@ -5,13 +5,14 @@ require 'yaml'
 require 'colorize'
 require 'open3'
 
+require 'limarka/configuracao'
 require 'limarka/conversor'
 require 'limarka/compilador_latex'
 
 module Limarka
 
   class Cli < Thor
-    default_command :exec2
+    default_command :exec
 
     PDF = "configuracao.pdf"
 
@@ -79,7 +80,7 @@ module Limarka
 
     method_option :compila_tex, :aliases => '-c', :desc => 'Compila arquivo tex gerando um PDF', :default => true, :type => :boolean
     method_option :templates_dir, :aliases => '-t', :desc => 'Diretório que contem a pasta templates (pandoc --data-dir)', :default => '.'
-    desc "exec", "Executa o sistema para geração do documento latex (novo)"
+    desc "exec", "Executa o sistema para geração do documento latex e compilação"
     def exec
       t = Limarka::Trabalho.new
       t.atualiza_de_arquivos(options)
@@ -230,6 +231,8 @@ module Limarka
       system "latexmk --xelatex #{target()}"
     end
 
+    desc "configuracao help", "Exporta e atualiza configurações"
+    subcommand "configuracao", Limarka::Configuracao
 
   end
 end

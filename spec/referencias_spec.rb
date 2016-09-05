@@ -4,6 +4,7 @@ require 'spec_helper'
 require 'limarka/conversor'
 require 'limarka/compilador_latex'
 
+
 describe 'Referências', :referencias do
 
 
@@ -11,7 +12,7 @@ describe 'Referências', :referencias do
   let!(:options) {{output_dir: output_dir, templates_dir: Dir.pwd}}
   
   context 'quando configurada para ler de referencias.bib', :referencias, :referencias_bib do
-    let (:configuracao) {{}}
+    let (:configuracao) {{'referencias_caminho' => 'referencias.bib'}}
     let (:output_dir) {"tmp/referencias_bib"}
 
     let (:texto) {s = <<-TEXTO
@@ -35,8 +36,7 @@ TEXTO
 	Org-Short = {ABNT},
 	Organization = {Associa{\\c c}\\~ao Brasileira de Normas T\\'ecnicas},
 	Pages = 7,
-	Subtitle = {Informa{\\c c}\\~ao e documenta{\\c c}\\~ao --- Apresenta{\\c c}\\~ao de cita{\\c c}\\~oes em documentos},
-	Title = {{NBR} 10520},
+	Title = {{NBR} 10520: meu subtitulo},
 	Year = 2002}
 
 REFERENCIAS
@@ -55,9 +55,15 @@ REFERENCIAS
     it "cria arquivo tex para compilação" do
       expect(File).to exist(@cv.texto_tex_file)
     end
-    it "bibliografia copiada para arquivo temporário xxx-referencias.bib" do
+    it "bibliografia é criada em xxx-referencias.bib", :xxx_referencias do
       expect(File).to exist(@cv.referencias_bib_file)
     end
+    it "title é dividido em title e subtitle se tittle contém :" , :titulo, :subtitulo do
+      expect(File).to exist(@cv.referencias_bib_file)
+      expect(File.open(@cv.referencias_bib_file, 'r'){|f| f.read}).to include("title = {{NBR} 10520}")
+      expect(File.open(@cv.referencias_bib_file, 'r'){|f| f.read}).to include("subtitle = {meu subtitulo}")
+    end
+
     it "referências será produzida a partir de xxx-referencias.bib" do
       expect(@cv.texto_tex).to include('\\bibliography{xxx-referencias}')
     end
@@ -75,7 +81,6 @@ CITACAO
     it "podemos utilizar \\citeyear para citação", :tecnico do
       expect(@cv.texto_tex).to include("Citando o ano: \\citeyear{ABNT-citacao}.")
     end
-
     
     describe 'o pdf', :pdf, :lento do
       before do
