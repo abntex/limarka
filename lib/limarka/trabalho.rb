@@ -106,8 +106,10 @@ module Limarka
 
     def ler_configuracao(options)
       if options and options[:configuracao_yaml] then
+        raise IOError, "Arquivo configuracao.yaml não foi encontrado, talvez esteja executando dentro de um diretório que não contém um projeto válido?" unless File.exist?('configuracao.yaml')
         File.open('configuracao.yaml', 'r') {|f| YAML.load(f.read)}
       else
+        raise IOError, "Arquivo configuracao.pdf não foi encontrado, talvez esteja executando dentro de um diretório que não contém um projeto válido?" unless File.exist?('configuracao.pdf')
         ler_configuracao_pdf 'configuracao.pdf'
       end
     end

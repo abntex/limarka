@@ -260,7 +260,7 @@ CONF
         allow(File).to receive(:exist?).with(arquivo_de_configuracao).and_return(false)
       end
       it 'emite error informando que não encontrou o arquivo' do
-        expect {t.ler_configuracao(options)}.to raise_error(IOError, "Arquivo não encontrado: #{arquivo_de_configuracao}")
+        expect {t.ler_configuracao(options)}.to raise_error(IOError, "Arquivo configuracao.pdf não foi encontrado, talvez esteja executando dentro de um diretório que não contém um projeto válido?")
       end
     end
   end
