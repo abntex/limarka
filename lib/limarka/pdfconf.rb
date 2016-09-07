@@ -19,15 +19,17 @@ module Limarka
       pdf.field(field).instance_variable_set(:@value, value)
     end
 
-    def exporta
+    def exporta(valida=true)
       h = {}
+      h.merge! nivel_educacao
+      h.merge! projeto
       h.merge! apendices
       h.merge! anexos
       h.merge! errata
       h.merge! referencias
       h.merge! caixas_de_texto
       # TODO: converter para chaves?
-      valida_campos(h)
+      valida_campos(h) if valida
       h
     end
 
@@ -61,6 +63,38 @@ module Limarka
       end
     end
 
+    def projeto
+      campo = 'projeto_combo'
+      value = pdf.field(campo).value
+
+      if value.include?('Projeto')  then
+        {'projeto' => true}
+      elsif value.include?('final')  then
+        {'projeto' => false}
+      else
+        raise ArgumentError, "Caixa #{campo} com valor inválido"
+      end
+    end
+
+    
+    def nivel_educacao
+      campo = 'nivel_educacao_combo'
+      value = pdf.field(campo).value
+
+      if value.include?('Graduação')  then
+        {'graduacao' => true, 'especializacao' => false, 'mestrado' => false, 'doutorado' => false}
+      elsif value.include?('Especialização')  then
+        {'graduacao' => false, 'especializacao' => true, 'mestrado' => false, 'doutorado' => false}
+      elsif value.include?('Mestrado')  then
+        {'graduacao' => false, 'especializacao' => false, 'mestrado' => true, 'doutorado' => false}
+      elsif value.include?('Doutorado')  then
+        {'graduacao' => false, 'especializacao' => false, 'mestrado' => false, 'doutorado' => true}
+      else
+        raise ArgumentError, "Caixa #{campo} com valor inválido"
+      end
+    end
+
+    
     def desativado?(campo)
       pdf.field(campo).value.include?('Desativad') # a(o)
     end

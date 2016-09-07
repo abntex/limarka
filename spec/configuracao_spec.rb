@@ -25,9 +25,7 @@ describe 'configuracao.pdf', :integracao do
     it 'é Desativado por padrão' do
       expect(field.value_default).to eq(valor_padrao)
     end
-
   end
-
   
   describe 'apendices_combo', :apendices, :pdf do
     let(:campo) {'apendices_combo'}
@@ -119,6 +117,108 @@ describe 'configuracao.pdf', :integracao do
     end
   end
 
+  describe 'nivel_educacao_combo', :anexos, :pdf do
+    let(:campo) {'nivel_educacao_combo'}
+    let(:tipo) {'Choice'}
+    let(:opcoes) {['Graduação', 'Especialização', 'Mestrado', 'Doutorado']}
+    let(:valor_padrao) {opcoes[0]}
+    let(:field) {pdf.field(campo)}
+
+    it 'é um campo do tipo combo' do
+      expect(field).not_to be nil
+      expect(field.type).to eq(tipo)
+    end
+    it 'possui 4 opções de configuração' do
+      expect(field.options).to eq(opcoes)
+    end
+    
+    it 'seu valor padrão é Graduação' do
+      expect(field.value_default).to eq(valor_padrao)
+    end
+
+    describe 'na exportação para yaml', :pdfconf, :nivel_educacao do
+      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
+      context 'quando Graduação (valor padrão)' do
+        let(:configuracao_exportada) {{'graduacao' => true, 'especializacao' => false, 'mestrado' => false, 'doutorado' => false}}
+        it 'exporta graduacao => true' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end
+      context 'quando Especialização' do
+        let(:valor_configurado) {opcoes[1]}
+        let(:configuracao_exportada) {{'graduacao' => false, 'especializacao' => true, 'mestrado' => false, 'doutorado' => false}}
+        before do
+          pdfconf.update(campo, valor_configurado)
+        end
+        it 'exporta especializacao => true' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end
+      context 'quando Mestrado' do
+        let(:valor_configurado) {opcoes[2]}
+        let(:configuracao_exportada) {{'graduacao' => false, 'especializacao' => false, 'mestrado' => true, 'doutorado' => false}}
+        before do
+          pdfconf.update(campo, valor_configurado)
+        end
+        it 'exporta mestrado => true' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end      
+      context 'quando Doutorado' do
+        let(:valor_configurado) {opcoes[3]}
+        let(:configuracao_exportada) {{'graduacao' => false, 'especializacao' => false, 'mestrado' => false, 'doutorado' => true}}
+        before do
+          pdfconf.update(campo, valor_configurado)
+        end
+        it 'exporta doutorado => true' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end      
+
+    end
+  end
+
+    describe 'projeto_combo', :projeto, :pdf do
+    let(:campo) {'projeto_combo'}
+    let(:tipo) {'Choice'}
+    let(:opcoes) {['Projeto ou Proposta para Qualificação/Avaliação', 'Trabalho final (em produção ou finalizado)']}
+    let(:valor_padrao) {opcoes[0]}
+    let(:field) {pdf.field(campo)}
+
+    it 'é um campo do tipo combo' do
+      expect(field).not_to be nil
+      expect(field.type).to eq(tipo)
+    end
+    it 'possui 2 opções de configuração' do
+      expect(field.options).to eq(opcoes)
+    end
+    
+    it 'seu valor padrão é Proposta ou Projeto' do
+      expect(field.value_default).to eq(valor_padrao)
+    end
+
+    describe 'na exportação para yaml', :pdfconf, :nivel_educacao do
+      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
+      context 'quando Proposta ou Projeto (valor padrão)' do
+        let(:configuracao_exportada) {{'projeto' => true}}
+        it 'exporta projeto => true' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end
+      context 'quando Trabalho Final ou Completo' do
+        let(:valor_configurado) {opcoes[1]}
+        let(:configuracao_exportada) {{'projeto' => false}}
+        before do
+          pdfconf.update(campo, valor_configurado)
+        end
+        it 'exporta projeto => false' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end
+    end
+  end
+
+  
   describe 'referencias_combo', :referencias, :pdf do
     let(:campo) {'referencias_sistema_combo'}
     let(:tipo) {'Choice'}
@@ -188,10 +288,9 @@ describe 'configuracao.pdf', :integracao do
       end
     end
   end
-
   
-  describe 'Os parâmetros de texto' do
-    let(:parametros){['avaliador1', 'avaliador2', 'avaliador3']}
+  describe 'Os parâmetros de texto', :campo_texto, :proposito do
+    let(:parametros){['avaliador1', 'avaliador2', 'avaliador3', 'linha_de_pesquisa', 'area_de_concentracao', 'proposito']}
     it 'são configurados através de caixas de texto' do
       parametros.each do |campo|
         expect(pdf.field(campo)).not_to be nil
