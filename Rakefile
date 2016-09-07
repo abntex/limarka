@@ -10,9 +10,9 @@ require 'pdf_forms'
 require 'github_changelog_generator/task'
 
 
-desc 'Executa os testes rápidos, sem compilação tex'
+desc 'Executa os testes rápidos, que não possuem a tag :lento'
 RSpec::Core::RakeTask.new('spec:fast') do |t|
-  t.rspec_opts = "--tag ~pdf"
+  t.rspec_opts = "--tag ~lento"
 end
 
 RSpec::Core::RakeTask.new(:spec)
