@@ -63,7 +63,7 @@ ANEXO
       expect(@cv.texto_tex).to include("\\chapter{Segundo anexo}")
     end
 
-    describe 'no pdf', :pdf do
+    describe 'no pdf', :pdf, :lento do
       before do
         @cpl = Limarka::CompiladorLatex.new()
         @cpl.compila(@cv.texto_tex_file, :salva_txt => true)
