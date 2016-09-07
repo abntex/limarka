@@ -10,7 +10,8 @@ module Limarka
 
   class Configuracao < Thor
 
-    desc "exporta", "Exporta configuração para YAML. Ler configuracao.pdf e salva em configuracao.yaml"
+    method_option :output_dir, :aliases => '-o', :desc => 'Diretório onde será salvo a exportação', :default => '.'
+    desc "exporta", "Exporta configuração para YAML. Ler configuracao.pdf e salva em configuracao.yaml no diretório indicado"
     def exporta
       configuracao_pdf  = "configuracao.pdf"
       configuracao_yaml = "configuracao.yaml"
@@ -18,7 +19,11 @@ module Limarka
       raise IOError, 'Arquivo não encontrado: ' + configuracao_pdf unless File.exist? (configuracao_pdf)
       pdf = PdfForms::Pdf.new configuracao_pdf, (PdfForms.new 'pdftk'), utf8_fields: true
       pdfconf = Limarka::Pdfconf.new(pdf: pdf)
-      puts pdfconf.exporta
+
+      # exporta sem validação
+      h = pdfconf.exporta(false)
+
+      Limarka::Trabalho.save_yaml(h, options[:output_dir]+'/'+configuracao_yaml)
     end
 
 
