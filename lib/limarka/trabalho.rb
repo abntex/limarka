@@ -136,6 +136,13 @@ module Limarka
     def ler_referencias(configuracao)
       File.open(configuracao['referencias_caminho'], 'r') {|f| f.read}
     end
+
+    def self.save_yaml(hash, caminho)
+      File.open(caminho, 'w') do |f|
+        f.write YAML.dump(hash)
+        f.write "\n---\n"
+      end
+    end
     
     def save(dir)
       Dir.chdir(dir) do
@@ -144,11 +151,9 @@ module Limarka
         File.open(Trabalho.default_anexos_file, 'w'){|f| f.write anexos} if anexos?
         File.open(Trabalho.default_apendices_file, 'w'){|f| f.write apendices} if apendices?
         File.open(Trabalho.default_errata_file, 'w'){|f| f.write errata} if errata?
-        File.open(Trabalho.default_configuracao_file, 'w') do |f|
-          f.write YAML.dump(configuracao)
-          f.write "\n---\n"
-        end
+        Limarka::Trabalho.save_yaml(configuracao, Trabalho.default_configuracao_file)
       end
+
     end
   end
 end
