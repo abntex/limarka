@@ -23,7 +23,9 @@ module Limarka
       # exporta sem validação
       h = pdfconf.exporta(false)
 
-      Limarka::Trabalho.save_yaml(h, options[:output_dir]+'/'+configuracao_yaml)
+      target_file = options[:output_dir]+'/'+configuracao_yaml
+      puts "Sobrescrevendo #{target_file}".green if File.exist?(target_file)
+      Limarka::Trabalho.save_yaml(h, target_file)
     end
 
 

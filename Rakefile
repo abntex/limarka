@@ -17,7 +17,7 @@ end
 
 RSpec::Core::RakeTask.new(:spec)
 
-task :default => 'spec:fast'
+task :default => [:configuracao_padrao, 'spec:fast']
 
 GitHubChangelogGenerator::RakeTask.new :changelog do |config|
   config.future_release = Limarka::VERSION
@@ -28,7 +28,7 @@ end
 # https://github.com/jkraemer/pdf-forms/blob/master/test/pdf_test.rb
 
 namespace :pdf do
-  desc "Imprime a configuração em PDF"
+  ## "Imprime a configuração em PDF"
   task :test => ["configuracao.pdf"] do
     @pdftk = PdfForms.new 'pdftk'
     pdf = PdfForms::Pdf.new 'configuracao.pdf', @pdftk, utf8_fields: true
@@ -39,6 +39,11 @@ namespace :pdf do
   end
 end
 
+desc 'Cria configuração padrão para execução dos testes, o libreoffice precisa está fechado!'
+task :configuracao_padrao do
+  system "libreoffice --headless --convert-to pdf configuracao.odt"
+  system 'bundle', 'exec', 'limarka', 'configuracao', 'exporta', '-o', 'spec/configuracao_padrao'
+end
 
 PREAMBULO="templates/preambulo.tex"
 PRETEXTUAL = "templates/pretextual.tex"
