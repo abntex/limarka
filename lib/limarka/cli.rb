@@ -76,21 +76,23 @@ module Limarka
 
     method_option :configuracao_yaml, :aliases => '-y', :type => :boolean, :desc => 'Ler configuração de configuracao.yaml em vez de configuracao.pdf', :default => false
     method_option :configuracao_tecnica, :aliases => '-A', :desc => 'Arquivo técnica Adiconional de configuração YAML', :default => 'templates/configuracao-tecnica.yaml'
+    method_option :input_dir, :aliases => '-i', :desc => 'Diretório onde será executado a ferramenta', :default => '.'
     method_option :output_dir, :aliases => '-o', :desc => 'Diretório onde serão gerados os arquivos', :default => '.'
 
     method_option :compila_tex, :aliases => '-c', :desc => 'Compila arquivo tex gerando um PDF', :default => true, :type => :boolean
     method_option :templates_dir, :aliases => '-t', :desc => 'Diretório que contem a pasta templates (pandoc --data-dir)', :default => '.'
     desc "exec", "Executa o sistema para geração do documento latex e compilação"
     def exec
-      t = Limarka::Trabalho.new
-      t.atualiza_de_arquivos(options)
-      cv = Limarka::Conversor.new(t,options)
-      cv.convert
-      if (options[:compila_tex]) then
-        cpl = Limarka::CompiladorLatex.new()
-        cpl.compila(cv.texto_tex_file, :salva_txt => true)
+      Dir.chdir(options[:input_dir]) do
+        t = Limarka::Trabalho.new
+        t.atualiza_de_arquivos(options)
+        cv = Limarka::Conversor.new(t,options)
+        cv.convert
+        if (options[:compila_tex]) then
+          cpl = Limarka::CompiladorLatex.new()
+          cpl.compila(cv.texto_tex_file, :salva_txt => true)
+        end
       end
-      
     end
 
     desc "pdfupdate", "Ler configuracao.yaml e atualiza configuracao.pdf"
@@ -138,7 +140,13 @@ module Limarka
       File.open(POSTEXTUAL, 'w') { |file| file.write(postextual) }
       puts "#{POSTEXTUAL} criado".green
     end
-
+    
+    desc "importa ARQUIVO", "Cria um arquivo trabalho-academico.md com o conteúdo convertido de ARQUIVO"
+    long_desc "Converte documento do Word (ou similar) para trabalho-academico.md. O arquivo será criado no mesmo diretório que contém ARQUIVO. Útil quando possuímos um arquivo já digitado no word e desejamos utilizar o limarka. Mantém, por exemplo, as marcações de itálico, negrito e notas de rodapé."
+    def importa(arquivo)
+      diretorio = File.dirname(arquivo)
+      system "pandoc", "-t", "markdown", "-o", "#{diretorio}/trabalho-academico.md", arquivo
+    end
 
 
     desc "textual", "Gera xxx-trabalho-academico.tex a partir do arquivo markdown e metadados."
