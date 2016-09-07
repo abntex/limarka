@@ -117,7 +117,7 @@ describe 'configuracao.pdf', :integracao do
     end
   end
 
-  describe 'nivel_educacao_combo', :anexos, :pdf do
+  describe 'nivel_educacao_combo', :nivel_educacao do
     let(:campo) {'nivel_educacao_combo'}
     let(:tipo) {'Choice'}
     let(:opcoes) {['Graduação', 'Especialização', 'Mestrado', 'Doutorado']}
@@ -129,7 +129,10 @@ describe 'configuracao.pdf', :integracao do
       expect(field.type).to eq(tipo)
     end
     it 'possui 4 opções de configuração' do
-      expect(field.options).to eq(opcoes)
+      expect(field.options).to include(opcoes[0])
+      expect(field.options).to include(opcoes[1])
+      expect(field.options).to include(opcoes[2])
+      expect(field.options).to include(opcoes[3])
     end
     
     it 'seu valor padrão é Graduação' do
