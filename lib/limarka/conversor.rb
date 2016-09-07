@@ -180,7 +180,7 @@ module Limarka
     end
     
     def texto_tex_file
-      "#{options[:output_dir]}/xxx-Monografia.tex"
+      Conversor.tex_file(t.configuracao)
     end
     def pdf_file
       "#{options[:output_dir]}/xxx-Monografia.pdf"
@@ -192,6 +192,29 @@ module Limarka
     
     def valida_yaml
       # não faz nada por enquanto
+    end
+
+    def self.tex_file(configuracao)
+      if (configuracao['graduacao'] and configuracao['projeto']) then
+        'xxx-Monografia-projeto.tex'
+      elsif (configuracao['graduacao'] and not configuracao['projeto']) then
+        'xxx-Monografia.tex'
+      elsif (configuracao['especializacao'] and configuracao['projeto']) then
+        'xxx-TFC-projeto.tex'
+      elsif (configuracao['especializacao'] and not configuracao['projeto']) then
+        'xxx-TFC.tex'
+      elsif (configuracao['mestrado'] and configuracao['projeto']) then
+        'xxx-Dissertacao-projeto.tex'
+      elsif (configuracao['mestrado'] and not configuracao['projeto']) then
+        'xxx-Dissertacao.tex'
+      elsif (configuracao['doutorado'] and configuracao['projeto']) then
+        'xxx-Tese-projeto.tex'
+      elsif (configuracao['doutorado'] and not configuracao['projeto']) then
+        'xxx-Tese.tex'
+      else
+        "xxx.tex"
+      end
+
     end
 
   end

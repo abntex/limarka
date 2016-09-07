@@ -22,6 +22,7 @@ module Limarka
     def exporta(valida=true)
       h = {}
       h.merge! nivel_educacao
+      h.merge! folha_de_aprovacao
       h.merge! projeto
       h.merge! apendices
       h.merge! anexos
@@ -82,13 +83,28 @@ module Limarka
       value = pdf.field(campo).value
 
       if value.include?('Graduação')  then
-        {'graduacao' => true, 'especializacao' => false, 'mestrado' => false, 'doutorado' => false}
+        {'graduacao' => true, 'especializacao' => false, 'mestrado' => false, 'doutorado' => false, 'tipo_do_trabalho'=>'Monografia'}
       elsif value.include?('Especialização')  then
-        {'graduacao' => false, 'especializacao' => true, 'mestrado' => false, 'doutorado' => false}
+        {'graduacao' => false, 'especializacao' => true, 'mestrado' => false, 'doutorado' => false, 'tipo_do_trabalho'=>'Trabalho de final de curso'}
       elsif value.include?('Mestrado')  then
-        {'graduacao' => false, 'especializacao' => false, 'mestrado' => true, 'doutorado' => false}
+        {'graduacao' => false, 'especializacao' => false, 'mestrado' => true, 'doutorado' => false, 'tipo_do_trabalho'=>'Dissertação'}
       elsif value.include?('Doutorado')  then
-        {'graduacao' => false, 'especializacao' => false, 'mestrado' => false, 'doutorado' => true}
+        {'graduacao' => false, 'especializacao' => false, 'mestrado' => false, 'doutorado' => true, 'tipo_do_trabalho'=>'Tese'}
+      else
+        raise ArgumentError, "Caixa #{campo} com valor inválido"
+      end
+    end
+
+    def folha_de_aprovacao
+      campo = 'folha_de_aprovacao_combo'
+      value = pdf.field(campo).value
+
+      if value.include?('Não gerar')  then
+        {'folha_de_aprovacao' => false}
+      elsif value.include?('Gerar folha')  then
+        {'folha_de_aprovacao' => true}
+      elsif value.include?('escaneada')  then
+        {'incluir_folha_de_aprovacao' => true}
       else
         raise ArgumentError, "Caixa #{campo} com valor inválido"
       end
