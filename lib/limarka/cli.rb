@@ -74,13 +74,13 @@ module Limarka
 
     
 
-    method_option :configuracao_yaml, :aliases => '-y', :type => :boolean, :desc => 'Ler configuração de configuracao.yaml em vez de configuracao.pdf', :default => false
+    method_option :configuracao_yaml, :aliases => '-y', :type => :boolean, :desc => 'Ler configuração exportada (configuracao.yaml) em vez de configuracao.pdf', :default => false
     method_option :configuracao_tecnica, :aliases => '-A', :desc => 'Arquivo técnica Adiconional de configuração YAML', :default => 'templates/configuracao-tecnica.yaml'
     method_option :input_dir, :aliases => '-i', :desc => 'Diretório onde será executado a ferramenta', :default => '.'
     method_option :output_dir, :aliases => '-o', :desc => 'Diretório onde serão gerados os arquivos', :default => '.'
-
     method_option :compila_tex, :aliases => '-c', :desc => 'Compila arquivo tex gerando um PDF', :default => true, :type => :boolean
-    method_option :templates_dir, :aliases => '-t', :desc => 'Diretório que contem a pasta templates (pandoc --data-dir)', :default => '.'
+    method_option :templates_dir, :aliases => '-t', :desc => 'Diretório que contem a pasta templates (pandoc --data-dir)', :default => Dir.pwd
+    method_option :verbose, :aliases => '-v', :desc => 'Imprime mais detalhes da execução', :default => false, :type => :boolean
     desc "exec", "Executa o sistema para geração do documento latex e compilação"
     def exec
       Dir.chdir(options[:input_dir]) do
@@ -101,18 +101,6 @@ module Limarka
       configuracao = t.ler_configuracao(:configuracao_yaml => true)
     end
 
-=begin
-    desc "exec", "Executa o sistema para geração do documento latex"
-    def exec
-      invoke :pdfconf
-      invoke :preambulo
-      invoke :preambulo
-      invoke :pretextual
-      invoke :postextual
-      invoke :textual
-      invoke :compile
-    end
-=end
 
     POSTEXTUAL = "templates/postextual.tex"
     desc "postextual","Gera conteúdo do pós-textual"
