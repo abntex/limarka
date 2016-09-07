@@ -96,8 +96,9 @@ module Limarka
 
     def atualiza_de_arquivos(options)
       self.configuracao = ler_configuracao(options)
+      puts "Configuração lida: #{configuracao}" if options[:verbose]
       # transforma os simbolos em string: http://stackoverflow.com/questions/8379596/how-do-i-convert-a-ruby-hash-so-that-all-of-its-keys-are-symbols?noredirect=1&lq=1
-      # @configuracao.inject({}){|h,(k,v)| h[k.intern] = v; h} 
+      # @configuracao.inject({}){|h,(k,v)| h[k.intern] = v; h}
       self.texto = ler_texto
       self.referencias_bib = ler_referencias(self.configuracao)
       self.apendices = ler_apendices if apendices?
@@ -134,7 +135,8 @@ module Limarka
     end
     
     def ler_referencias(configuracao)
-      File.open(configuracao['referencias_caminho'], 'r') {|f| f.read}
+      arquivo_de_referencias = configuracao['referencias_caminho']
+      File.open(arquivo_de_referencias, 'r') {|f| f.read}
     end
 
     def self.save_yaml(hash, caminho)
