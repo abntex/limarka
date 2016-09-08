@@ -4,56 +4,12 @@ require 'limarka'
 require 'yaml'
 require 'pry-byebug'
 
-def configuracao_padrao
-  config = <<-CONFIG
----
-nome_exemplo: Escreva seu primeiro nome aqui
-instituicao: Universidade Federal da Paraíba
-author: Eduardo de Santana
-tipo_do_trabalho: Monografia
-title: Meu trabalho
-coorientador: 
-orientador: Nome-do-Orientador
-date: '2016'
-local: Cidade - UF
-titulacao: Minha-titulação
-curso: Meu-curso
-programa: Programa de Pós-Graduação em XXX
-linha_de_pesquisa: minha-linha
-referencias_origem: Banco de referências Bibtex (referencias.bib) + \\cite
-resumo: 
-palavras_chave: 
-abstract_texto: 
-keywords: 
-resumen: 
-palabras_clave: 
-resume: 
-mots_cles: 
-siglas:
-- s: ABNT
-  d: Associação Brasileira de Normas Técnicas
-simbolos: 
-lista_ilustracoes: false
-lista_tabelas: false
-ficha_catalografica: false
-dedicatoria: 
-agradecimentos: 
-epigrafe: 
-folha_de_aprovacao: Não gerar folha de aprovação
-aprovacao_dia: '1'
-aprovacao_mes: Agosto
-avaliador1: Nome-do-Prof-Convidado1
-avaliador2: Nome-do-Prof-Convidado2
-avaliador3: 
-errata: false
-monografia: true
-folha_de_aprovacao_gerar: false
-folha_de_aprovacao_incluir: false
-referencias_caminho: referencias.bib
----
 
-CONFIG
-  YAML.load(config)
+
+@configuracao_padrao = nil
+## Para regerar o arquivo de configuração invoke rake configuracao_padrao
+def configuracao_padrao
+  @configuracao_padrao = @configuracao_padrao or YAML.load_file('spec/configuracao_padrao/configuracao.yaml')
 end
 
 # Retorna o texto do pdf

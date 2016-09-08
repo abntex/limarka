@@ -32,7 +32,7 @@
 \documentclass[
 	% -- opções da classe memoir --
 	12pt,				% tamanho da fonte
-	openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
+  openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
 	twoside,			% para impressão em recto e verso. Oposto a oneside
 	a4paper,			% tamanho do papel. 
 	% -- opções da classe abntex2 --
@@ -96,40 +96,68 @@
 % ---
 % Informações de dados para CAPA e FOLHA DE ROSTO
 % ---
-\titulo{$titulo$}
-\autor{$autor$}
+\titulo{$title$}
+\autor{$author$}
+\data{$date$}
 \local{$local$}
-\data{$ano$}
 \orientador{$orientador$}
 \coorientador{$coorientador$}
 \instituicao{%
   $instituicao$
   \par
-$if(monografia)$
+$if(graduacao)$
   $curso$
-$else$
+$endif$
+$if(especializacao)$
+  $curso$
+$endif$
+$if(mestrado)$
+  $programa$
+$endif$
+$if(doutorado)$
   $programa$
 $endif$
 }
 \tipotrabalho{$tipo_do_trabalho$}
 
-
-% O preambulo deve conter o tipo do trabalho, o objetivo, 
+% O preambulo deve conter o tipo do trabalho, o objetivo (propósito), 
 % o nome da instituição e a área de concentração.
 % Esse texto irá compor a Folha de Rosto e Folha de Aprovação.
-\preambulo{$tipo_do_trabalho$ apresentada ao $if(monografia)$Curso de $curso$$else$$programa$$endif$ da $instituicao$, como requisito parcial para obtenção do grau de $titulacao$.}
+\preambulo{
 
-$if(monografia)$
+$if(proposito)$
+% Propósito personalizado:
+$proposito$
+
 $else$
+% Propósito gerado automaticamente.
+$if(graduacao)$
+$if(projeto)$Projeto de Monografia apresentado$else$Monografia apresentada$endif$ ao Curso de $curso$ da $instituicao$, como requisito parcial para obtenção do grau de $titulacao$.
+$endif$
+
+$if(especializacao)$
+$if(projeto)$Projeto de Trabalho de Final de Curso apresentado$else$Trabalho de Final de Curso apresentado$endif$ ao Curso de $curso$ da $instituicao$, como requisito parcial para obtenção do grau de $titulacao$.
+$endif$
+
+$if(mestrado)$
+$if(projeto)$Projeto de Dissertação apresentado $else$Dissertação apresentada$endif$ ao $programa$ da $instituicao$, como requisito parcial para obtenção do grau de $titulacao$.
+$endif$
+
+$if(doutorado)$
+$if(projeto)$Projeto de Tese apresentado $else$Tese apresentada$endif$ ao $programa$ da $instituicao$, como requisito parcial para obtenção do grau de $titulacao$.
+$endif$
+$endif$
+
+$if(area_de_concentracao)$
+    \textbf{Área de concentração}: $area_de_concentracao$.
+$endif$
+
 $if(linha_de_pesquisa)$
     \textbf{Linha de pesquisa}: $linha_de_pesquisa$.
 $endif$
+}%% fim do preambulo
 
-%$if(area_de_concentracao)$ % Ainda não implementado
-    %\textbf{Área de concentração}: $area_de_concentracao$.
-%$endif$
 
-$endif$
 
 
 % ---

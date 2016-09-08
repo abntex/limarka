@@ -17,11 +17,12 @@ describe 'Monografias', :monografia do
     let(:orientador){'Meu-orientador'}
     let(:resumo){'Resumo do meu trabalho aqui.'}
     let(:folha_de_aprovacao){'% Sem Folha de aprovação'}
+    let(:area_de_concentracao){'Minha área de concentração'}
     let(:configuracao) {
       configuracao_padrao.merge({'title' => title, 'author' => author, 'date'=> date,
                                  'instituicao' => 'InstituiçãoZ',
                                  'curso'=>'XY', 'titulacao'=>'Bacharel em algo',
-                                 'orientador'=>orientador, 'resumo' => resumo, 'folha_de_aprovacao'=> false})
+                                 'orientador'=>orientador, 'resumo' => resumo, 'folha_de_aprovacao'=> false, 'area_de_concentracao'=>area_de_concentracao})
     }
     let(:tex_file) {test_dir + '/xxx-Monografia-projeto.tex'}
     let(:tex) {File.open(tex_file, 'r'){|f| f.read}}
@@ -42,6 +43,8 @@ describe 'Monografias', :monografia do
       expect(tex).to include(orientador)
       expect(tex).to include(resumo)
       expect(tex).to include(folha_de_aprovacao)
+      expect(tex).to include(area_de_concentracao)
+      
     end    
   end
   
