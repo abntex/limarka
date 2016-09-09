@@ -189,6 +189,7 @@ describe 'configuracao.pdf', :integracao do
         it 'exporta a configuração de desativado' do
           expect(pdfconf.exporta).to include(configuracao)
         end
+
       end
       context 'quando ativada' do
         let(:valor_de_ativacao) {opcoes[1]}
@@ -209,7 +210,9 @@ describe 'configuracao.pdf', :integracao do
     let(:opcoes) {['Anexos Desativado', 'Utilizar anexos, escrito no arquivo anexos.md']}
     let(:valor_padrao) {opcoes[0]}
     let(:field) {pdf.field(campo)}
-
+    let(:template) {'postextual4-anexos'}
+    let(:codigo_latex){'\\begin{anexosenv}'}
+    
     it_behaves_like 'um combo desativado por padrão'
 
     describe 'na exportação para yaml', :pdfconf do
@@ -218,6 +221,9 @@ describe 'configuracao.pdf', :integracao do
         let(:configuracao) {{'anexos' => false}}
         it 'exporta a configuração de desativado' do
           expect(pdfconf.exporta).to include(configuracao)
+        end
+        it 'o template não inclui o anexo', :template, :template_anexo do
+          expect(template_mesclado(template, pdfconf.exporta)).not_to include(codigo_latex)
         end
       end
       context 'quando ativado' do
@@ -229,6 +235,9 @@ describe 'configuracao.pdf', :integracao do
         it 'exporta a configuração de ativado' do
           expect(pdfconf.exporta).to include(configuracao)
         end
+        it 'o template inclui o anexo', :template, :template_anexo do
+          expect(template_mesclado(template, pdfconf.exporta)).to include(codigo_latex)
+        end
       end      
     end
   end
@@ -239,7 +248,9 @@ describe 'configuracao.pdf', :integracao do
     let(:opcoes) {['Errata Desativada', 'Utilizar errata, escrita no arquivo errata.md']}
     let(:valor_padrao) {opcoes[0]}
     let(:field) {pdf.field(campo)}
-
+    let(:template) {'pretextual2-errata'}
+    let(:codigo_latex){'\\begin{errata}'}
+    
     it_behaves_like 'um combo desativado por padrão'
 
     describe 'na exportação para yaml', :pdfconf do
@@ -249,6 +260,10 @@ describe 'configuracao.pdf', :integracao do
         it 'exporta a configuração de desativada' do
           expect(pdfconf.exporta).to include(configuracao_exportada)
         end
+        it 'o template não inclui a errata', :template, :template_errata do
+          expect(template_mesclado(template, pdfconf.exporta)).not_to include(codigo_latex)
+        end
+
       end
       context 'quando ativada' do
         let(:valor_de_ativacao) {opcoes[1]}
@@ -259,6 +274,10 @@ describe 'configuracao.pdf', :integracao do
         it 'exporta a configuração de ativada' do
           expect(pdfconf.exporta).to include(configuracao_exportada)
         end
+        it 'o template inclui a errata', :template, :template_errata do
+          expect(template_mesclado(template, pdfconf.exporta)).to include(codigo_latex)
+        end
+
       end      
     end
   end
@@ -269,6 +288,7 @@ describe 'configuracao.pdf', :integracao do
     let(:opcoes) {['Não gerar folha de aprovação', 'Gerar folha de aprovação', 'Utilizar folha de aprovação escaneada']}
     let(:valor_padrao) {opcoes[0]}
     let(:field) {pdf.field(campo)}
+    let(:template) {'pretextual3-folha_de_aprovacao'}
 
     it 'é um campo do tipo combo' do
       expect(field).not_to be nil
@@ -284,32 +304,66 @@ describe 'configuracao.pdf', :integracao do
       expect(field.value_default).to eq(valor_padrao)
     end
 
-    describe 'na exportação para yaml', :pdfconf, :nivel_educacao do
+    describe 'na exportação para yaml', :pdfconf, :folha_de_aprovacao do
       let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
       context 'quando Não gerar (valor padrão)' do
         let(:configuracao_exportada) {{'folha_de_aprovacao' => false}}
+        let(:codigo_latex){<<-CODIGO
+% ---
+% Sem Folha de aprovação
+% ---
+CODIGO
+        }
         it 'exporta folha_de_aprovacao => true' do
           expect(pdfconf.exporta).to include(configuracao_exportada)
         end
+        it 'o template não inclui ou gera a folha de aprovação escaneada', :template, :template_folha_de_aprovacao do
+          expect(template_mesclado(template, pdfconf.exporta)).to include(codigo_latex)
+        end
+
       end
       context 'quando Gerar folha de aprovação' do
         let(:valor_configurado) {opcoes[1]}
         let(:configuracao_exportada) {{'folha_de_aprovacao' => true}}
+        let(:codigo_latex){<<-CODIGO
+% ---
+% Folha de aprovação gerada
+% ---
+
+% Isto é um exemplo de Folha de aprovação, elemento obrigatório da NBR
+% 14724/2011 (seção 4.2.1.3). 
+% Este modelo será utilizado antes da aprovação do trabalho.
+\\begin{folhadeaprovacao}
+CODIGO
+        }
+
         before do
           pdfconf.update(campo, valor_configurado)
         end
         it 'exporta folha_de_aprovacao => false' do
           expect(pdfconf.exporta).to include(configuracao_exportada)
         end
+        it 'o template gera uma folha de aprovação', :template, :template_folha_de_aprovacao do
+          expect(template_mesclado(template, pdfconf.exporta)).to include(codigo_latex)
+        end
       end
       context 'quando Incluir folha de aprovação' do
         let(:valor_configurado) {opcoes[2]}
         let(:configuracao_exportada) {{'incluir_folha_de_aprovacao' => true}}
+        let(:codigo_latex){<<-CODIGO
+\\begin{folhadeaprovacao}
+\\includepdf{imagens/folha-de-aprovacao-escaneada.pdf}
+\\end{folhadeaprovacao}
+CODIGO
+        }
         before do
           pdfconf.update(campo, valor_configurado)
         end
         it 'exporta incluir_folha_de_aprovacao => true' do
           expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+        it 'o template inclui a folha de aprovação escaneada', :template, :template_folha_de_aprovacao do
+          expect(template_mesclado(template, pdfconf.exporta)).to include(codigo_latex)
         end
       end
     end
@@ -321,24 +375,34 @@ describe 'configuracao.pdf', :integracao do
     let(:opcoes) {['Referências Alfabética (padrão)', 'Referências Numérica']}
     let(:valor_padrao) {opcoes[0]}
     let(:field) {pdf.field(campo)}
+    let(:template) {'trabalho-academico'}
 
     describe 'na exportação para yaml', :pdfconf do
       let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
       context 'quando Referências Alfabética (valor padrão)' do
         let(:configuracao_exportada) {{'referencias_sistema' => 'alf'}}
+        let(:codigo_latex){'\\usepackage[alf]{abntex2cite}'}
         it 'exporta referencias_sistema=>alf' do
           expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+        it 'o template configura referências com sistema alfabético', :template, :template_referencias do
+          expect(template_mesclado(template, pdfconf.exporta)).to include(codigo_latex)
         end
       end
       context 'quando Referências Numérica' do
         let(:sistema_numerico) {opcoes[1]}
         let(:configuracao_exportada) {{'referencias_sistema' => 'num'}}
+        let(:codigo_latex){'\\usepackage[num]{abntex2cite}'}
         before do
           pdfconf.update(campo, sistema_numerico)
         end
         it 'exporta referencias_sistema=>num' do
           expect(pdfconf.exporta).to include(configuracao_exportada)
         end
+        it 'o template configura referências com sistema numérico', :template, :template_referencias do
+          expect(template_mesclado(template, pdfconf.exporta)).to include(codigo_latex)
+        end
+
       end
     end
   end
