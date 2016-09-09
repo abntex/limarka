@@ -22,6 +22,7 @@ module Limarka
     def exporta(valida=true)
       h = {}
       h.merge! nivel_educacao
+      h.merge! ficha_catalografica
       h.merge! folha_de_aprovacao
       h.merge! projeto
       h.merge! apendices
@@ -72,6 +73,19 @@ module Limarka
         {'projeto' => true}
       elsif value.include?('final')  then
         {'projeto' => false}
+      else
+        raise ArgumentError, "Caixa #{campo} com valor inválido"
+      end
+    end
+
+    def ficha_catalografica
+      campo = 'ficha_catalografica_combo'
+      value = pdf.field(campo).value
+
+      if value.include?('Sem ficha')  then
+        {'incluir_ficha_catalografica' => false}
+      elsif value.include?('Incluir ficha')  then
+        {'incluir_ficha_catalografica' => true}
       else
         raise ArgumentError, "Caixa #{campo} com valor inválido"
       end

@@ -1,24 +1,8 @@
-
-
-% ---
-% Folha de rosto
-% (o * indica que haverá a ficha bibliográfica)
-% ---
-\imprimirfolhaderosto*
-% ---
-
-
 % ---
 % Folha de rosto: sempre será impressa
 % ---
-$if(ficha_catalografica)$
+$if(incluir_ficha_catalografica)$
 \imprimirfolhaderosto* % (o * indica que haverá a ficha catalográfica)
-$else$
-\imprimirfolhaderosto
-$endif$
-% ---
-
-$if(ficha_catalografica)$
 % ---
 % Inserir a ficha catalográfica
 % ---
@@ -30,6 +14,11 @@ $if(ficha_catalografica)$
 \begin{fichacatalografica}
     \includepdf{imagens/ficha-catalografica.pdf}
 \end{fichacatalografica}
+$else$
+\imprimirfolhaderosto
+% ---
+% Sem ficha catalográfica
+% ---
 $endif$
-
+% ---
 

@@ -26,156 +26,6 @@ describe 'configuracao.pdf', :integracao do
       expect(field.value_default).to eq(valor_padrao)
     end
   end
-  
-  describe 'apendices_combo', :apendices, :pdf do
-    let(:campo) {'apendices_combo'}
-    let(:tipo) {'Choice'}
-    let(:opcoes) {['Apêndices Desativado', 'Utilizar apêndices escrito no arquivo apendices.md']}
-    let(:valor_padrao) {opcoes[0]}
-    let(:field) {pdf.field(campo)}
-
-    it_behaves_like 'um combo desativado por padrão'
-    
-    describe 'na exportação para yaml', :pdfconf do
-      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
-      context 'quando desativada (valor padrão)' do
-        let(:configuracao) {{'apendices' => false}}
-        it 'exporta a configuração de desativado' do
-          expect(pdfconf.exporta).to include(configuracao)
-        end
-      end
-      context 'quando ativada' do
-        let(:valor_de_ativacao) {opcoes[1]}
-        let(:configuracao) {{'apendices' => true}}
-        before do
-          pdfconf.update(campo, valor_de_ativacao)
-        end
-        it 'exporta a configuração de ativada' do
-          expect(pdfconf.exporta).to include(configuracao)
-        end
-      end      
-    end
-  end
-
-  describe 'anexos_combo', :anexos, :pdf do
-    let(:campo) {'anexos_combo'}
-    let(:tipo) {'Choice'}
-    let(:opcoes) {['Anexos Desativado', 'Utilizar anexos, escrito no arquivo anexos.md']}
-    let(:valor_padrao) {opcoes[0]}
-    let(:field) {pdf.field(campo)}
-
-    it_behaves_like 'um combo desativado por padrão'
-
-    describe 'na exportação para yaml', :pdfconf do
-      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
-      context 'quando desativada (valor padrão)' do
-        let(:configuracao) {{'anexos' => false}}
-        it 'exporta a configuração de desativado' do
-          expect(pdfconf.exporta).to include(configuracao)
-        end
-      end
-      context 'quando ativado' do
-        let(:valor_de_ativacao) {opcoes[1]}
-        let(:configuracao) {{'anexos' => true}}
-        before do
-          pdfconf.update(campo, valor_de_ativacao)
-        end
-        it 'exporta a configuração de ativado' do
-          expect(pdfconf.exporta).to include(configuracao)
-        end
-      end      
-    end
-  end
-
-  describe 'errata_combo', :anexos, :pdf do
-    let(:campo) {'errata_combo'}
-    let(:tipo) {'Choice'}
-    let(:opcoes) {['Errata Desativada', 'Utilizar errata, escrita no arquivo errata.md']}
-    let(:valor_padrao) {opcoes[0]}
-    let(:field) {pdf.field(campo)}
-
-    it_behaves_like 'um combo desativado por padrão'
-
-    describe 'na exportação para yaml', :pdfconf do
-      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
-      context 'quando desativada (valor padrão)' do
-        let(:configuracao_exportada) {{'errata' => false}}
-        it 'exporta a configuração de desativada' do
-          expect(pdfconf.exporta).to include(configuracao_exportada)
-        end
-      end
-      context 'quando ativada' do
-        let(:valor_de_ativacao) {opcoes[1]}
-        let(:configuracao_exportada) {{'errata' => true}}
-        before do
-          pdfconf.update(campo, valor_de_ativacao)
-        end
-        it 'exporta a configuração de ativada' do
-          expect(pdfconf.exporta).to include(configuracao_exportada)
-        end
-      end      
-    end
-  end
-
-
-
-
-
-
-  describe 'folha_de_aprovacao_combo', :folha_de_aprovacao do
-    let(:campo) {'folha_de_aprovacao_combo'}
-    let(:tipo) {'Choice'}
-    let(:opcoes) {['Não gerar folha de aprovação', 'Gerar folha de aprovação', 'Utilizar folha de aprovação escaneada']}
-    let(:valor_padrao) {opcoes[0]}
-    let(:field) {pdf.field(campo)}
-
-    it 'é um campo do tipo combo' do
-      expect(field).not_to be nil
-      expect(field.type).to eq(tipo)
-    end
-    it 'possui 3 opções de configuração' do
-      expect(field.options).to include(opcoes[0])
-      expect(field.options).to include(opcoes[1])
-      expect(field.options).to include(opcoes[2])
-    end
-    
-    it 'seu valor padrão é Não Gerar' do
-      expect(field.value_default).to eq(valor_padrao)
-    end
-
-    describe 'na exportação para yaml', :pdfconf, :nivel_educacao do
-      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
-      context 'quando Não gerar (valor padrão)' do
-        let(:configuracao_exportada) {{'folha_de_aprovacao' => false}}
-        it 'exporta folha_de_aprovacao => true' do
-          expect(pdfconf.exporta).to include(configuracao_exportada)
-        end
-      end
-      context 'quando Gerar folha de aprovação' do
-        let(:valor_configurado) {opcoes[1]}
-        let(:configuracao_exportada) {{'folha_de_aprovacao' => true}}
-        before do
-          pdfconf.update(campo, valor_configurado)
-        end
-        it 'exporta folha_de_aprovacao => false' do
-          expect(pdfconf.exporta).to include(configuracao_exportada)
-        end
-      end
-      context 'quando Incluir folha de aprovação' do
-        let(:valor_configurado) {opcoes[2]}
-        let(:configuracao_exportada) {{'incluir_folha_de_aprovacao' => true}}
-        before do
-          pdfconf.update(campo, valor_configurado)
-        end
-        it 'exporta incluir_folha_de_aprovacao => true' do
-          expect(pdfconf.exporta).to include(configuracao_exportada)
-        end
-      end
-
-    end
-  end
-
-
 
   describe 'nivel_educacao_combo', :nivel_educacao do
     let(:campo) {'nivel_educacao_combo'}
@@ -280,7 +130,148 @@ describe 'configuracao.pdf', :integracao do
       end
     end
   end
+  
+  describe 'apendices_combo', :apendices, :pdf do
+    let(:campo) {'apendices_combo'}
+    let(:tipo) {'Choice'}
+    let(:opcoes) {['Apêndices Desativado', 'Utilizar apêndices escrito no arquivo apendices.md']}
+    let(:valor_padrao) {opcoes[0]}
+    let(:field) {pdf.field(campo)}
 
+    it_behaves_like 'um combo desativado por padrão'
+    
+    describe 'na exportação para yaml', :pdfconf do
+      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
+      context 'quando desativada (valor padrão)' do
+        let(:configuracao) {{'apendices' => false}}
+        it 'exporta a configuração de desativado' do
+          expect(pdfconf.exporta).to include(configuracao)
+        end
+      end
+      context 'quando ativada' do
+        let(:valor_de_ativacao) {opcoes[1]}
+        let(:configuracao) {{'apendices' => true}}
+        before do
+          pdfconf.update(campo, valor_de_ativacao)
+        end
+        it 'exporta a configuração de ativada' do
+          expect(pdfconf.exporta).to include(configuracao)
+        end
+      end      
+    end
+  end
+
+  describe 'anexos_combo', :anexos, :pdf do
+    let(:campo) {'anexos_combo'}
+    let(:tipo) {'Choice'}
+    let(:opcoes) {['Anexos Desativado', 'Utilizar anexos, escrito no arquivo anexos.md']}
+    let(:valor_padrao) {opcoes[0]}
+    let(:field) {pdf.field(campo)}
+
+    it_behaves_like 'um combo desativado por padrão'
+
+    describe 'na exportação para yaml', :pdfconf do
+      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
+      context 'quando desativada (valor padrão)' do
+        let(:configuracao) {{'anexos' => false}}
+        it 'exporta a configuração de desativado' do
+          expect(pdfconf.exporta).to include(configuracao)
+        end
+      end
+      context 'quando ativado' do
+        let(:valor_de_ativacao) {opcoes[1]}
+        let(:configuracao) {{'anexos' => true}}
+        before do
+          pdfconf.update(campo, valor_de_ativacao)
+        end
+        it 'exporta a configuração de ativado' do
+          expect(pdfconf.exporta).to include(configuracao)
+        end
+      end      
+    end
+  end
+
+  describe 'errata_combo', :anexos, :pdf do
+    let(:campo) {'errata_combo'}
+    let(:tipo) {'Choice'}
+    let(:opcoes) {['Errata Desativada', 'Utilizar errata, escrita no arquivo errata.md']}
+    let(:valor_padrao) {opcoes[0]}
+    let(:field) {pdf.field(campo)}
+
+    it_behaves_like 'um combo desativado por padrão'
+
+    describe 'na exportação para yaml', :pdfconf do
+      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
+      context 'quando desativada (valor padrão)' do
+        let(:configuracao_exportada) {{'errata' => false}}
+        it 'exporta a configuração de desativada' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end
+      context 'quando ativada' do
+        let(:valor_de_ativacao) {opcoes[1]}
+        let(:configuracao_exportada) {{'errata' => true}}
+        before do
+          pdfconf.update(campo, valor_de_ativacao)
+        end
+        it 'exporta a configuração de ativada' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end      
+    end
+  end
+
+  describe 'folha_de_aprovacao_combo', :folha_de_aprovacao do
+    let(:campo) {'folha_de_aprovacao_combo'}
+    let(:tipo) {'Choice'}
+    let(:opcoes) {['Não gerar folha de aprovação', 'Gerar folha de aprovação', 'Utilizar folha de aprovação escaneada']}
+    let(:valor_padrao) {opcoes[0]}
+    let(:field) {pdf.field(campo)}
+
+    it 'é um campo do tipo combo' do
+      expect(field).not_to be nil
+      expect(field.type).to eq(tipo)
+    end
+    it 'possui 3 opções de configuração' do
+      expect(field.options).to include(opcoes[0])
+      expect(field.options).to include(opcoes[1])
+      expect(field.options).to include(opcoes[2])
+    end
+    
+    it 'seu valor padrão é Não Gerar' do
+      expect(field.value_default).to eq(valor_padrao)
+    end
+
+    describe 'na exportação para yaml', :pdfconf, :nivel_educacao do
+      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
+      context 'quando Não gerar (valor padrão)' do
+        let(:configuracao_exportada) {{'folha_de_aprovacao' => false}}
+        it 'exporta folha_de_aprovacao => true' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end
+      context 'quando Gerar folha de aprovação' do
+        let(:valor_configurado) {opcoes[1]}
+        let(:configuracao_exportada) {{'folha_de_aprovacao' => true}}
+        before do
+          pdfconf.update(campo, valor_configurado)
+        end
+        it 'exporta folha_de_aprovacao => false' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end
+      context 'quando Incluir folha de aprovação' do
+        let(:valor_configurado) {opcoes[2]}
+        let(:configuracao_exportada) {{'incluir_folha_de_aprovacao' => true}}
+        before do
+          pdfconf.update(campo, valor_configurado)
+        end
+        it 'exporta incluir_folha_de_aprovacao => true' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end
+    end
+  end
   
   describe 'referencias_combo', :referencias, :pdf do
     let(:campo) {'referencias_sistema_combo'}
@@ -310,6 +301,50 @@ describe 'configuracao.pdf', :integracao do
     end
   end
 
+  describe 'ficha_catalografica_combo', :ficha_catalografica do
+    let(:campo) {'ficha_catalografica_combo'}
+    let(:tipo) {'Choice'}
+    let(:opcoes) {['Sem ficha catalográfica','Incluir ficha-catalografica.pdf da pasta imagens']}
+    let(:valor_padrao) {opcoes[0]}
+    let(:field) {pdf.field(campo)}
+
+    it 'é um campo do tipo combo' do
+      expect(field).not_to be nil
+      expect(field.type).to eq(tipo)
+    end
+    it 'possui 2 opções de configuração' do
+      expect(field.options).to include(opcoes[0])
+      expect(field.options).to include(opcoes[1])
+    end
+    
+    it 'seu valor padrão é Sem ficha' do
+      expect(field.value_default).to eq(valor_padrao)
+    end
+    
+    describe 'na exportação para yaml', :pdfconf do
+      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
+      context 'quando Sem ficha catalográfica (valor padrão)' do
+        let(:configuracao_exportada) {{'incluir_ficha_catalografica' => false}}
+        it 'exporta incluir_ficha_catalografica => false' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end
+      context 'quando Incluir ficha catalográfica' do
+        let(:sistema_numerico) {opcoes[1]}
+        let(:configuracao_exportada) {{'incluir_ficha_catalografica' => true}}
+        before do
+          pdfconf.update(campo, sistema_numerico)
+        end
+        it 'exporta incluir_ficha_catalografica => true' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end
+    end
+  end
+  
+
+
+  
   describe 'referencias_caminho', :referencias, :pdf do
     let(:campo) {'referencias_caminho'}
     let(:tipo) {'Text'}
@@ -351,6 +386,8 @@ describe 'configuracao.pdf', :integracao do
       end
     end
   end
+
+
   
   describe 'Os parâmetros de texto', :campo_texto, :proposito do
     let(:parametros){['avaliador1', 'avaliador2', 'avaliador3', 'linha_de_pesquisa', 'area_de_concentracao', 'proposito']}
