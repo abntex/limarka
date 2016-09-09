@@ -1,8 +1,8 @@
-% ---
-% Inserir errata
-% ---
 
 $if(errata)$
+% ---
+% ERRATA
+% ---
 \begin{errata}
 
 $body$
@@ -10,6 +10,8 @@ $body$
 \end{errata}
 % ---
 $else$
-% Sem errata
+% ---
+% ERRATA: Sem errata
+% ---
 $endif$
 

@@ -1,20 +1,16 @@
+
+$if(anexos)$
 % ----------------------------------------------------------
 % Anexos
 % ----------------------------------------------------------
-
-$if(anexos)$
-% ---
-% Inicia os anexos
-% ---
 \begin{anexosenv}
-
 % Imprime uma página indicando o início dos anexos
 \partanexos
-
 $body$
-
 \end{anexosenv}
 $else$
+% ----------------------------------------------------------
 % Anexos desativados: 
 % Seção de anexos configurada como desativada
+% ----------------------------------------------------------
 $endif$
