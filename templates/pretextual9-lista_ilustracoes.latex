@@ -1,12 +1,12 @@
-% ---
-% Lista de ilustrações (opcional)
-% ---
-
 $if(lista_ilustracoes)$
 % ---
-% inserir lista de ilustrações
+% Lista de ilustrações (opcional)
 % ---
 \pdfbookmark[0]{\listfigurename}{lof}
 \listoffigures*
 \cleardoublepage
+$else$
+% ---
+% Lista de ilustrações (opcional): não utilizando.
+% ---
 $endif$

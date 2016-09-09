@@ -413,6 +413,13 @@ CODIGO
     let(:opcoes) {['Sem ficha catalográfica','Incluir ficha-catalografica.pdf da pasta imagens']}
     let(:valor_padrao) {opcoes[0]}
     let(:field) {pdf.field(campo)}
+    let(:template){'pretextual1-folha_de_rosto'}
+    let(:codigo_latex){<<-CODIGO
+\\begin{fichacatalografica}
+    \\includepdf{imagens/ficha-catalografica.pdf}
+\\end{fichacatalografica}
+CODIGO
+    }
 
     it 'é um campo do tipo combo' do
       expect(field).not_to be nil
@@ -434,6 +441,9 @@ CODIGO
         it 'exporta incluir_ficha_catalografica => false' do
           expect(pdfconf.exporta).to include(configuracao_exportada)
         end
+        it 'o template não inclui uma ficha catalográfica', :template, :template_ficha_catalografica do
+          expect(template_mesclado(template, pdfconf.exporta)).not_to include(codigo_latex)
+        end
       end
       context 'quando Incluir ficha catalográfica' do
         let(:sistema_numerico) {opcoes[1]}
@@ -443,6 +453,9 @@ CODIGO
         end
         it 'exporta incluir_ficha_catalografica => true' do
           expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+        it 'o template inclui imagens/ficha-catalografica.pdf', :template, :template_ficha_catalografica do
+          expect(template_mesclado(template, pdfconf.exporta)).to include(codigo_latex)
         end
       end
     end
@@ -454,6 +467,13 @@ CODIGO
     let(:opcoes) {['Dispensar uso de lista de ilustrações','Gerar lista de ilustrações']}
     let(:valor_padrao) {opcoes[0]}
     let(:field) {pdf.field(campo)}
+    let(:template){'pretextual9-lista_ilustracoes'}
+    let(:codigo_latex){<<-CODIGO
+\\pdfbookmark[0]{\\listfigurename}{lof}
+\\listoffigures*
+\\cleardoublepage
+CODIGO
+    }
 
     it 'é um campo do tipo combo' do
       expect(field).not_to be nil
@@ -475,6 +495,9 @@ CODIGO
         it 'exporta lista_ilustracoes => false' do
           expect(pdfconf.exporta).to include(configuracao_exportada)
         end
+        it 'o template não inclui a lista de ilustrações', :template, :template_lista_ilustracoes do
+          expect(template_mesclado(template, pdfconf.exporta)).not_to include(codigo_latex)
+        end
       end
       context 'quando Gerar lista de ilustrações' do
         let(:sistema_numerico) {opcoes[1]}
@@ -484,6 +507,9 @@ CODIGO
         end
         it 'exporta lista_ilustracoes => true' do
           expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+        it 'o template inclui a lista de ilustrações', :template, :template_lista_ilustracoes do
+          expect(template_mesclado(template, pdfconf.exporta)).to include(codigo_latex)
         end
       end
     end
