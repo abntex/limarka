@@ -13,8 +13,29 @@ describe 'configuracao.pdf', :integracao do
 
   let (:pdf){PdfForms::Pdf.new 'configuracao.pdf', (PdfForms.new 'pdftk'), utf8_fields: true}
 
+  describe 'Os parâmetros de texto', :campo_texto, :proposito do
+    let(:parametros){['avaliador1', 'avaliador2', 'avaliador3', 'linha_de_pesquisa', 'area_de_concentracao', 'proposito']}
+    it 'são configurados através de caixas de texto' do
+      parametros.each do |campo|
+        expect(pdf.field(campo)).not_to be nil
+        expect(pdf.field(campo).type).to eq('Text')
+      end
+    end
+    describe 'na exportação para yaml', :pdfconf do
+      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
+      it 'seus valores serão exportados integralmente' do
+        configuracao = {}
+        parametros.each do |campo|
+          expect(pdf.field(campo)).not_to be nil
+          configuracao.merge!({"#{campo}" => pdf.field(campo).value})
+        end
+        expect(pdfconf.exporta).to include(configuracao)
+      end
+    end
+  end
+
+  
   shared_examples 'um combo desativado por padrão' do
-        
     it 'é um campo do tipo combo' do
       expect(field).not_to be nil
       expect(field.type).to eq(tipo)
@@ -191,7 +212,7 @@ describe 'configuracao.pdf', :integracao do
     end
   end
 
-  describe 'errata_combo', :anexos, :pdf do
+  describe 'errata_combo', :errata, :pdf do
     let(:campo) {'errata_combo'}
     let(:tipo) {'Choice'}
     let(:opcoes) {['Errata Desativada', 'Utilizar errata, escrita no arquivo errata.md']}
@@ -341,8 +362,47 @@ describe 'configuracao.pdf', :integracao do
       end
     end
   end
-  
 
+  describe 'lista_ilustracoes_combo', :lista_ilustracoes do
+    let(:campo) {'lista_ilustracoes_combo'}
+    let(:tipo) {'Choice'}
+    let(:opcoes) {['Dispensar uso de lista de ilustrações','Gerar lista de ilustrações']}
+    let(:valor_padrao) {opcoes[0]}
+    let(:field) {pdf.field(campo)}
+
+    it 'é um campo do tipo combo' do
+      expect(field).not_to be nil
+      expect(field.type).to eq(tipo)
+    end
+    it 'possui 2 opções de configuração' do
+      expect(field.options).to include(opcoes[0])
+      expect(field.options).to include(opcoes[1])
+    end
+    
+    it 'seu valor padrão é Sem Lista' do
+      expect(field.value_default).to eq(valor_padrao)
+    end
+    
+    describe 'na exportação para yaml', :pdfconf do
+      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
+      context 'quando Sem Lista (valor padrão)' do
+        let(:configuracao_exportada) {{'lista_ilustracoes' => false}}
+        it 'exporta lista_ilustracoes => false' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end
+      context 'quando Incluir lista de ilustrações' do
+        let(:sistema_numerico) {opcoes[1]}
+        let(:configuracao_exportada) {{'lista_ilustracoes' => true}}
+        before do
+          pdfconf.update(campo, sistema_numerico)
+        end
+        it 'exporta lista_ilustracoes => true' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end
+    end
+  end
 
   
   describe 'referencias_caminho', :referencias, :pdf do
@@ -389,25 +449,4 @@ describe 'configuracao.pdf', :integracao do
 
 
   
-  describe 'Os parâmetros de texto', :campo_texto, :proposito do
-    let(:parametros){['avaliador1', 'avaliador2', 'avaliador3', 'linha_de_pesquisa', 'area_de_concentracao', 'proposito']}
-    it 'são configurados através de caixas de texto' do
-      parametros.each do |campo|
-        expect(pdf.field(campo)).not_to be nil
-        expect(pdf.field(campo).type).to eq('Text')
-      end
-    end
-    describe 'na exportação para yaml', :pdfconf do
-      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
-      it 'seus valores serão exportados integralmente' do
-        configuracao = {}
-        parametros.each do |campo|
-          expect(pdf.field(campo)).not_to be nil
-          configuracao.merge!({"#{campo}" => pdf.field(campo).value})
-        end
-        expect(pdfconf.exporta).to include(configuracao)
-      end
-    end
-    
-  end
 end

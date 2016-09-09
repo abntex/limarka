@@ -29,7 +29,9 @@ module Limarka
       h.merge! anexos
       h.merge! errata
       h.merge! referencias
+      h.merge! lista_ilustracoes
       h.merge! caixas_de_texto
+      
       # TODO: converter para chaves?
       valida_campos(h) if valida
       h
@@ -54,6 +56,12 @@ module Limarka
       {'errata' => !desativado?('errata_combo')}
     end
 
+    def lista_ilustracoes
+      campo = 'lista_ilustracoes_combo'
+      {'lista_ilustracoes' => pdf.field(campo).value.include?('Gerar')}
+    end
+
+    
     def referencias
       value = pdf.field('referencias_sistema_combo').value
       if value.include?('Numérica')  then
