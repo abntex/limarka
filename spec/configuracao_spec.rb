@@ -391,7 +391,7 @@ describe 'configuracao.pdf', :integracao do
           expect(pdfconf.exporta).to include(configuracao_exportada)
         end
       end
-      context 'quando Incluir lista de ilustrações' do
+      context 'quando Gerar lista de ilustrações' do
         let(:sistema_numerico) {opcoes[1]}
         let(:configuracao_exportada) {{'lista_ilustracoes' => true}}
         before do
@@ -404,6 +404,49 @@ describe 'configuracao.pdf', :integracao do
     end
   end
 
+
+  
+
+  describe 'lista_tabelas_combo', :lista_tabelas do
+    let(:campo) {'lista_tabelas_combo'}
+    let(:tipo) {'Choice'}
+    let(:opcoes) {['Dispensar uso de lista de tabelas','Gerar lista de tabelas']}
+    let(:valor_padrao) {opcoes[0]}
+    let(:field) {pdf.field(campo)}
+
+    it 'é um campo do tipo combo' do
+      expect(field).not_to be nil
+      expect(field.type).to eq(tipo)
+    end
+    it 'possui 2 opções de configuração' do
+      expect(field.options).to include(opcoes[0])
+      expect(field.options).to include(opcoes[1])
+    end
+    
+    it 'seu valor padrão é Sem Lista' do
+      expect(field.value_default).to eq(valor_padrao)
+    end
+    
+    describe 'na exportação para yaml', :pdfconf do
+      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
+      context 'quando Sem Lista (valor padrão)' do
+        let(:configuracao_exportada) {{'lista_tabelas' => false}}
+        it 'exporta lista_tabelas => false' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end
+      context 'quando Gerar lista de tabelas' do
+        let(:sistema_numerico) {opcoes[1]}
+        let(:configuracao_exportada) {{'lista_tabelas' => true}}
+        before do
+          pdfconf.update(campo, sistema_numerico)
+        end
+        it 'exporta lista_tabelas => true' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end
+    end
+  end
   
   describe 'referencias_caminho', :referencias, :pdf do
     let(:campo) {'referencias_caminho'}

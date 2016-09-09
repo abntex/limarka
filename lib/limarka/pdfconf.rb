@@ -30,6 +30,7 @@ module Limarka
       h.merge! errata
       h.merge! referencias
       h.merge! lista_ilustracoes
+      h.merge! lista_tabelas
       h.merge! caixas_de_texto
       
       # TODO: converter para chaves?
@@ -59,6 +60,11 @@ module Limarka
     def lista_ilustracoes
       campo = 'lista_ilustracoes_combo'
       {'lista_ilustracoes' => pdf.field(campo).value.include?('Gerar')}
+    end
+
+    def lista_tabelas
+      campo = 'lista_tabelas_combo'
+      {'lista_tabelas' => pdf.field(campo).value.include?('Gerar')}
     end
 
     
