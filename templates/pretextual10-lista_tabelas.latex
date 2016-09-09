@@ -1,10 +1,14 @@
+$if(lista_tabelas)$
 % ---
 % Lista de tabelas (opcional)
 % ---
-$if(lista_tabelas)$
 \pdfbookmark[0]{\listtablename}{lot}
 \listoftables*
 \cleardoublepage
+% ---
+$else$
+% ---
+% Lista de tabelas (opcional): não utilizando
 % ---
 $endif$
 

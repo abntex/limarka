@@ -3,9 +3,30 @@
 require 'spec_helper'
 require 'limarka/conversor'
 require 'limarka/pdfconf'
+require 'open3'
 
 describe 'configuracao.pdf', :integracao do
 
+  def template_mesclado(template, yaml_hash)
+    yaml_tempfile = Tempfile.new('yaml')
+    result = ''
+    begin
+      Open3.popen3("pandoc -f markdown --data-dir=. --template=#{template} -t latex") {|stdin, stdout, stderr, wait_thr|
+        stdin.write(hash_to_yaml(yaml_hash))
+        stdin.close
+        result << stdout.read
+        exit_status = wait_thr.value # Process::Status object returned.
+        if(exit_status!=0) then puts ("Erro: " + s).red end
+      }
+      
+    ensure
+      yaml_tempfile.close
+      yaml_tempfile.unlink
+    end
+
+    result
+  end
+  
   before (:all) do
     # Precisa do libreoffice e ele precisa está fechado!
     system "libreoffice --headless --convert-to pdf configuracao.odt", :out=>"/dev/null"
@@ -429,20 +450,29 @@ describe 'configuracao.pdf', :integracao do
     
     describe 'na exportação para yaml', :pdfconf do
       let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
+      let(:template){'pretextual10-lista_tabelas'}
       context 'quando Sem Lista (valor padrão)' do
         let(:configuracao_exportada) {{'lista_tabelas' => false}}
+        let(:latex_esperado){'% Lista de tabelas (opcional): não utilizando'}
         it 'exporta lista_tabelas => false' do
           expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+        it 'o template não inclui a lista de tabelas', :template, :template_lista_tabelas do
+          expect(template_mesclado(template, pdfconf.exporta)).to include(latex_esperado)
         end
       end
       context 'quando Gerar lista de tabelas' do
         let(:sistema_numerico) {opcoes[1]}
         let(:configuracao_exportada) {{'lista_tabelas' => true}}
+        let(:latex_esperado){'\\listoftables*'}
         before do
           pdfconf.update(campo, sistema_numerico)
         end
         it 'exporta lista_tabelas => true' do
           expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+        it 'o template inclui a lista de tabelas', :template, :template_lista_tabelas do
+          expect(template_mesclado(template, pdfconf.exporta)).to include(latex_esperado)
         end
       end
     end

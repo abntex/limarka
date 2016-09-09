@@ -22,3 +22,11 @@ Referências
 1 ASSOCIAÇÃO BRASILEIRA"
 PDF
 end
+
+
+def hash_to_yaml(h)
+  s = StringIO.new
+  s << h.to_yaml
+  s << "---\n\n"
+  s.string
+end
