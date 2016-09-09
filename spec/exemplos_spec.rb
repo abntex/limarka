@@ -8,7 +8,7 @@ require 'yaml'
 describe 'Exemplo1', :exemplos do
   
 
-  let(:tex_file){test_dir+'/xxx-Monografia.tex'}
+  let(:tex_file){test_dir+'/xxx-Monografia-projeto.tex'}
   let(:texto) {<<-END
 # Introdução
 
