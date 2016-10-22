@@ -2,7 +2,6 @@
 
 require 'spec_helper'
 require 'limarka/conversor'
-require 'limarka/compilador_latex'
 
 describe 'Apendices', :apendices do
 
@@ -64,14 +63,13 @@ APENDICE
 
     describe 'no pdf', :pdf, :lento do
       before do
-        @cpl = Limarka::CompiladorLatex.new()
-        @cpl.compila(@cv.texto_tex_file, :salva_txt => true)
+        @cv.compila
       end
       it "é gerado segundo as Normas da ABNT" do
         expect(File).to exist(@cv.pdf_file)
-        expect(@cpl.txt).to include("Apêndices\n")
-        expect(@cpl.txt).to include("APÊNDICE A – Primeiro apêndice\nTexto do apêndice.")
-        expect(@cpl.txt).to include("APÊNDICE B – Segundo apêndice\nTexto do segundo apêndice")
+        expect(@cv.txt).to include("Apêndices\n")
+        expect(@cv.txt).to include("APÊNDICE A – Primeiro apêndice\nTexto do apêndice.")
+        expect(@cv.txt).to include("APÊNDICE B – Segundo apêndice\nTexto do segundo apêndice")
       end
     end
 

@@ -136,7 +136,6 @@ END
         Limarka::Cli.start(["pdfupdate"])
       end
     end
-    
   end
 
   

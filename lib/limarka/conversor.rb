@@ -17,12 +17,15 @@ module Limarka
     attr_accessor :pretextual_tex
     attr_accessor :postextual_tex
     attr_accessor :texto_tex
+    attr_accessor :txt
     
     def initialize(trabalho, options)
       self.t = trabalho
       self.options = options
     end
-    
+
+
+    ## Cria o arquivo 
     def convert()
       FileUtils.mkdir_p(options[:output_dir])
 
@@ -41,6 +44,17 @@ module Limarka
           pretextual_tempfile.unlink
           postextual_tempfile.close
           postextual_tempfile.unlink
+      end
+    end
+
+
+    ## Compila tex_file no diretorio atual, retorna o conteudo somente texto do PDF
+    def compila
+      Dir.chdir(options[:output_dir]) do
+        basename = File.basename(texto_tex_file, '.tex')
+        system "latexmk --quiet --xelatex -f #{basename}", :out=>"/dev/null", :err=>"/dev/null"
+        system "pdftotext -enc UTF-8 #{basename}.pdf"
+        File.open("#{basename}.txt", 'r') {|f| @txt = f.read}
       end
     end
 
@@ -180,10 +194,10 @@ module Limarka
     end
     
     def texto_tex_file
-      Conversor.tex_file(t.configuracao)
+      "#{options[:output_dir]}/#{Conversor.tex_file(t.configuracao)}"
     end
     def pdf_file
-      "#{options[:output_dir]}/xxx-Monografia.pdf"
+      texto_tex_file.sub('.tex','.pdf')
     end
 
     def referencias_bib_file
@@ -212,7 +226,8 @@ module Limarka
       elsif (configuracao['doutorado'] and not configuracao['projeto']) then
         'xxx-Tese.tex'
       else
-        "xxx.tex"
+        # valor padrão, caso não configurado.
+        'xxx-Monografia-projeto.tex'
       end
 
     end

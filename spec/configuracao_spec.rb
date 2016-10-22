@@ -586,7 +586,6 @@ CODIGO
       end
     end
 
-
     describe 'na exportação para yaml', :pdfconf do
       let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
       context 'quando o arquivo de referências NÃO existe' do

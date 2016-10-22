@@ -2,8 +2,6 @@
 
 require 'spec_helper'
 require 'limarka/conversor'
-require 'limarka/compilador_latex'
-
 
 describe 'Referências', :referencias do
 
@@ -12,7 +10,7 @@ describe 'Referências', :referencias do
   let!(:options) {{output_dir: output_dir, templates_dir: Dir.pwd}}
   
   context 'quando configurada para ler de referencias.bib', :referencias, :referencias_bib do
-    let (:configuracao) {{'referencias_caminho' => 'referencias.bib'}}
+    let (:configuracao) {configuracao_padrao.merge({'referencias_caminho' => 'referencias.bib', 'referencias_sistema'=>'alf'})}
     let (:output_dir) {"tmp/referencias_bib"}
 
     let (:texto) {s = <<-TEXTO
@@ -84,15 +82,14 @@ CITACAO
     
     describe 'o pdf', :pdf, :lento do
       before do
-        @cpl = Limarka::CompiladorLatex.new()
-        @cpl.compila(@cv.texto_tex_file, :salva_txt => true)
+        @cv.compila
       end
       it "é gerado apropriadamente" do
         expect(File).to exist(@cv.pdf_file)
-        expect(@cpl.txt).to include("Referências\n")
-        expect(@cpl.txt).to include("Citação no texto: ABNT (2002).")
-        expect(@cpl.txt).to include("No final da citação direta (ABNT, 2002).")
-        expect(@cpl.txt).to include("Citando o ano: 2002.")
+        expect(@cv.txt).to include("Referências\n")
+        expect(@cv.txt).to include("Citação no texto: ABNT (2002).")
+        expect(@cv.txt).to include("No final da citação direta (ABNT, 2002).")
+        expect(@cv.txt).to include("Citando o ano: 2002.")
       end
     end
   end

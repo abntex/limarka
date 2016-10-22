@@ -2,11 +2,11 @@
 
 require 'spec_helper'
 require 'limarka/conversor'
-require 'limarka/compilador_latex'
 
 describe 'Anexos', :anexos do
   
   let!(:options) {{output_dir: output_dir, templates_dir: Dir.pwd}}
+  let(:tex_file) {Limarka::Conversor.tex_file(t.configuracao)}
   let (:anexos) {<<-ANEXO
 # Primeiro anexo
 
@@ -21,6 +21,7 @@ ANEXO
 
   before do
     FileUtils.rm_rf output_dir
+    FileUtils.mkdir_p output_dir
   end
 
   context 'quando configurado como desativado' do
@@ -31,7 +32,7 @@ ANEXO
       @cv = Limarka::Conversor.new(t, options)
       @cv.convert
     end
-
+    
     it 'não serao gerados', :wip do
       expect(@cv.texto_tex).to include("% Anexos desativados")
       expect(@cv.texto_tex).not_to include("\\begin{anexosenv}")
@@ -52,6 +53,10 @@ ANEXO
       @cv = Limarka::Conversor.new(t, options)
       @cv.convert
     end
+
+    it  'cria o arquivo latex' do
+      expect(File).to exist(@cv.texto_tex_file)
+    end
     
     it 'a seção de anexos foi criada', :wip do
       expect(@cv.texto_tex).to include("\\begin{anexosenv}")
@@ -65,14 +70,13 @@ ANEXO
 
     describe 'no pdf', :pdf, :lento do
       before do
-        @cpl = Limarka::CompiladorLatex.new()
-        @cpl.compila(@cv.texto_tex_file, :salva_txt => true)
+        @cv.compila
       end
       it "é gerado segundo as Normas da ABNT" do
         expect(File).to exist(@cv.pdf_file)
-        expect(@cpl.txt).to include("Anexos\n")
-        expect(@cpl.txt).to include("ANEXO A – Primeiro anexo")
-        expect(@cpl.txt).to include("ANEXO B – Segundo anexo")
+        expect(@cv.txt).to include("Anexos\n")
+        expect(@cv.txt).to include("ANEXO A – Primeiro anexo")
+        expect(@cv.txt).to include("ANEXO B – Segundo anexo")
       end
     end
 

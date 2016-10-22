@@ -7,7 +7,6 @@ require 'open3'
 
 require 'limarka/configuracao'
 require 'limarka/conversor'
-require 'limarka/compilador_latex'
 
 module Limarka
 
@@ -88,10 +87,7 @@ module Limarka
         t.atualiza_de_arquivos(options)
         cv = Limarka::Conversor.new(t,options)
         cv.convert
-        if (options[:compila_tex]) then
-          cpl = Limarka::CompiladorLatex.new()
-          cpl.compila(cv.texto_tex_file, :salva_txt => true)
-        end
+        cv.compila if options[:compila_tex]
       end
     end
 

@@ -2,7 +2,6 @@
 
 require 'spec_helper'
 require 'limarka/conversor'
-require 'limarka/compilador_latex'
 
 describe 'Errata', :anexos do
   
@@ -60,13 +59,12 @@ TEXTO
 
     describe 'no pdf', :pdf, :lento do
       before do
-        @cpl = Limarka::CompiladorLatex.new()
-        @cpl.compila(@cv.texto_tex_file, :salva_txt => true)
+        @cv.compila
       end
       it "é gerada segundo as Normas da ABNT" do
         expect(File).to exist(@cv.pdf_file)
-        expect(@cpl.txt).to include("Errata\n")
-        expect(@cpl.txt).to include("A aranha arranha a rã.")
+        expect(@cv.txt).to include("Errata\n")
+        expect(@cv.txt).to include("A aranha arranha a rã.")
       end
     end
 
