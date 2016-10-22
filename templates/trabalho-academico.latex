@@ -124,38 +124,29 @@ $endif$
 % o nome da instituição e a área de concentração.
 % Esse texto irá compor a Folha de Rosto e Folha de Aprovação.
 \preambulo{
-
 $if(proposito)$
-% Propósito personalizado:
 $proposito$
-
 $else$
 % Propósito gerado automaticamente.
 $if(graduacao)$
 $if(projeto)$Projeto de Monografia apresentado$else$Monografia apresentada$endif$ ao Curso de $curso$ da $instituicao$, como requisito parcial para obtenção do grau de $titulacao$.
 $endif$
-
 $if(especializacao)$
 $if(projeto)$Projeto de Trabalho de Final de Curso apresentado$else$Trabalho de Final de Curso apresentado$endif$ ao Curso de $curso$ da $instituicao$, como requisito parcial para obtenção do grau de $titulacao$.
 $endif$
-
 $if(mestrado)$
 $if(projeto)$Projeto de Dissertação apresentado $else$Dissertação apresentada$endif$ ao $programa$ da $instituicao$, como requisito parcial para obtenção do grau de $titulacao$.
 $endif$
-
 $if(doutorado)$
 $if(projeto)$Projeto de Tese apresentado $else$Tese apresentada$endif$ ao $programa$ da $instituicao$, como requisito parcial para obtenção do grau de $titulacao$.
 $endif$
 $endif$
-
 $if(area_de_concentracao)$
-    \textbf{Área de concentração}: $area_de_concentracao$.
+\newline\textbf{Área de concentração}: $area_de_concentracao$.
 $endif$
-
 $if(linha_de_pesquisa)$
-    \textbf{Linha de pesquisa}: $linha_de_pesquisa$.
-$endif$
-}%% fim do preambulo
+\newline\textbf{Linha de pesquisa}: $linha_de_pesquisa$.
+$endif$}%% fim do preambulo
 
 
 
