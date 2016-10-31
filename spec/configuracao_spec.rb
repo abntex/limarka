@@ -508,9 +508,6 @@ CODIGO
     end
   end
 
-
-  
-
   describe 'lista_tabelas_combo', :lista_tabelas do
     let(:campo) {'lista_tabelas_combo'}
     let(:tipo) {'Choice'}
@@ -541,20 +538,24 @@ CODIGO
         end
         it 'o template não inclui a lista de tabelas', :template, :template_lista_tabelas do
           expect(template_mesclado(template, pdfconf.exporta)).to include(latex_esperado)
+          expect(template_output).not_to include('\\listoftables*')
         end
       end
       context 'quando Gerar lista de tabelas' do
         let(:sistema_numerico) {opcoes[1]}
         let(:configuracao_exportada) {{'lista_tabelas' => true}}
-        let(:latex_esperado){'\\listoftables*'}
         before do
           pdfconf.update(campo, sistema_numerico)
         end
         it 'exporta lista_tabelas => true' do
-          expect(pdfconf.exporta).to include(configuracao_exportada)
+          expect(exportacao).to include(configuracao_exportada)
         end
         it 'o template inclui a lista de tabelas', :template, :template_lista_tabelas do
-          expect(template_mesclado(template, pdfconf.exporta)).to include(latex_esperado)
+          expect(template_output).to include(<<-TEX)
+\\pdfbookmark[0]{\\listtablename}{lot}
+\\listoftables*
+\\cleardoublepage
+TEX
         end
       end
     end
