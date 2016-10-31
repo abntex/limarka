@@ -1,5 +1,5 @@
 % ---
-% inserir o sumario
+% Sumário
 % ---
 \pdfbookmark[0]{\contentsname}{toc}
 \tableofcontents*
