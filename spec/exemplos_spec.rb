@@ -124,19 +124,5 @@ END
       end      
     end
   end
-
-  
-  context "pdfupdate (invocação)" do
-    let(:test_dir){'tmp/exemplos/exemplo3'}
-    before do
-      expect_any_instance_of(Limarka::Cli).to receive(:pdfupdate)
-    end
-    it "invoca Limarka::Cli#pdfupdate" do
-      Dir.chdir test_dir do
-        Limarka::Cli.start(["pdfupdate"])
-      end
-    end
-  end
-
   
 end

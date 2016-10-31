@@ -11,67 +11,7 @@ require 'limarka/conversor'
 module Limarka
 
   class Cli < Thor
-    default_command :exec
-
-    PDF = "configuracao.pdf"
-
-    no_commands do
-      def tipo_do_trabalho
-        tipo="Monografia"
-        if File.exist?(PDF) then
-          @pdftk = PdfForms.new 'pdftk'
-          pdf = PdfForms::Pdf.new PDF, @pdftk, utf8_fields: true
-          tipo = pdf.field('tipo_do_trabalho').value
-          if tipo == "Dissertação" then tipo = "Dissertacao" end
-        end
-        puts "Tipo do trabalho: #{tipo}".green
-        tipo
-      end
-
-      def target()
-        "xxx-#{self.tipo_do_trabalho}.tex"
-      end 
-
-      def valida_yaml
-        metadados = IO.read("templates/configuracao-tecnica.yaml") # Valida o arquivo de metadados
-        puts ("configuracao-tecnica.yaml: " + YAML.load(metadados).to_s).green
-        metadados = IO.read("templates/configuracao.yaml") # Valida o arquivo de metadados
-        puts ("configuracao.yaml: " + YAML.load(metadados).to_s).green
-      end
-    end
-
-
-    PREAMBULO="templates/preambulo.tex"
-    desc "preambulo", "Cria arquivo do preambulo"
-    def preambulo
-      system "pandoc -f markdown --data-dir=. --template=preambulo templates/configuracao.yaml -o #{PREAMBULO}"
-      puts "#{PREAMBULO} criado".green
-    end
-
-    PRETEXTUAL = "templates/pretextual.tex"
-
-    desc "pretextual", "Gera conteúdo do pré-textual"
-    def pretextual
-      pretextual = ""
-
-      necessita_de_arquivo_de_texto = ["errata"]
-      ["folha_de_rosto", "errata", "folha_de_aprovacao", "dedicatoria", "agradecimentos", 
-      "epigrafe", "resumo", "abstract", "lista_ilustracoes", "lista_tabelas", 
-      "lista_siglas", "lista_simbolos", "sumario"].each_with_index do |secao,indice|
-        template = "pretextual#{indice+1}-#{secao}"
-        arquivo_de_entrada = if necessita_de_arquivo_de_texto.include?(secao) then "#{secao}.md" else "" end
-        Open3.popen3("pandoc -f markdown --data-dir=. --template=#{template} -t latex templates/configuracao.yaml #{arquivo_de_entrada}") {|stdin, stdout, stderr, wait_thr|
-          pretextual = pretextual + stdout.read
-          exit_status = wait_thr.value # Process::Status object returned.
-          if(exit_status!=0) then puts ("Erro: " + stderr.read).red end
-        }
-      end
-
-      File.open(PRETEXTUAL, 'w') { |file| file.write(pretextual) }
-      puts "#{PRETEXTUAL} criado".green
-    end
-
-    
+    default_command :exec  
 
     method_option :configuracao_yaml, :aliases => '-y', :type => :boolean, :desc => 'Ler configuração exportada (configuracao.yaml) em vez de configuracao.pdf', :default => false
     method_option :input_dir, :aliases => '-i', :desc => 'Diretório onde será executado a ferramenta', :default => '.'
@@ -91,39 +31,6 @@ module Limarka
       end
     end
 
-    desc "pdfupdate", "Ler configuracao.yaml e atualiza configuracao.pdf"
-    def pdfupdate
-      t = Limarka::Trabalho.new
-      configuracao = t.ler_configuracao(:configuracao_yaml => true)
-    end
-
-
-    POSTEXTUAL = "templates/postextual.tex"
-    desc "postextual","Gera conteúdo do pós-textual"
-    def postextual
-      # Referências (obrigatório)
-      # Glossário (opcional)
-      # Apêndice (opcional)
-      # Anexo (opcional)
-      # Índice (opcional)
-      system 'cp referencias.md xxx-referencias.bib'
-
-      postextual = ""
-
-      necessita_de_arquivo_de_texto = ["referencias", "apendices","anexos"]
-      ["referencias", "glossario", "apendices", "anexos", "indice"].each_with_index do |secao,indice|
-        template = "postextual#{indice+1}-#{secao}"
-        arquivo_de_entrada = if necessita_de_arquivo_de_texto.include?(secao) then "#{secao}.md" else "" end
-        Open3.popen3("pandoc -f markdown --data-dir=. --template=#{template} --chapter -t latex templates/configuracao.yaml #{arquivo_de_entrada}") {|stdin, stdout, stderr, wait_thr|
-          postextual = postextual + stdout.read
-          exit_status = wait_thr.value # Process::Status object returned.
-          if(exit_status!=0) then puts ("Erro: " + stderr.read).red end
-        }
-      end
-
-      File.open(POSTEXTUAL, 'w') { |file| file.write(postextual) }
-      puts "#{POSTEXTUAL} criado".green
-    end
     
     desc "importa ARQUIVO", "Cria um arquivo trabalho-academico.md com o conteúdo convertido de ARQUIVO"
     long_desc "Converte documento do Word (ou similar) para trabalho-academico.md. O arquivo será criado no mesmo diretório que contém ARQUIVO. Útil quando possuímos um arquivo já digitado no word e desejamos utilizar o limarka. Mantém, por exemplo, as marcações de itálico, negrito e notas de rodapé."
@@ -132,18 +39,7 @@ module Limarka
       system "pandoc", "-t", "markdown", "-o", "#{diretorio}/trabalho-academico.md", arquivo
     end
 
-
-    desc "textual", "Gera xxx-trabalho-academico.tex a partir do arquivo markdown e metadados."
-    def textual
-      valida_yaml
-      #system "pandoc --smart --standalone --wrap=none --data-dir=. -f markdown -t latex trabalho-academico.md metadados/matedados.yaml -o xxx-trabalho-academico.tex"
-    # --template=templates/default.latex 
-    # --filter=pandoc-citeproc 
-    # --template=abntex2-trabalho-academico
-      system "pandoc -f markdown -s --normalize --chapter --include-in-header=#{PREAMBULO} --include-before-body=#{PRETEXTUAL}  --include-after-body=#{POSTEXTUAL} templates/configuracao-tecnica.yaml templates/configuracao.yaml trabalho-academico.md -o #{target()}"
-    end
-
-
+=begin
     method_option :entrada, :default => "configuracao.pdf", :aliases => "-i", :banner => "FILE"
     method_option :saida, :default => "templates/configuracao.yaml", :aliases => "-o", :banner => "FILE"
     desc "pdfconf", "Ler configuração de arquivo pdf"
@@ -217,11 +113,7 @@ module Limarka
         puts "Arquivo criado: #{options['saida']}".green
       end
     end
-
-    desc "compile", "Compila arquivo tex em PDF"
-    def compile
-      system "latexmk --xelatex #{target()}"
-    end
+=end
 
     desc "configuracao help", "Exporta e atualiza configurações"
     subcommand "configuracao", Limarka::Configuracao
