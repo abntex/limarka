@@ -21,6 +21,15 @@ module Limarka
 #      @configuracao = c.inject({}){|h,(k,v)| h[k.to_s] = v; h} # convert to strings
 #    end
 
+    def configuracao=(configuracao)
+      @configuracao = configuracao or {}
+      siglas = @configuracao['siglas']
+      if siglas and siglas.empty? then
+        @configuracao['siglas'] = nil
+      end
+    end
+
+
     def anexos=(a)
       @anexos = a
       if (a) then

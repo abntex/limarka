@@ -33,6 +33,9 @@ describe 'configuracao.pdf', :integracao do
   end
 
   let (:pdf){PdfForms::Pdf.new 'configuracao.pdf', (PdfForms.new 'pdftk'), utf8_fields: true}
+  let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
+  let(:exportacao){pdfconf.exporta}
+  let(:template_output) {template_mesclado(template, exportacao)}
 
   describe 'Os parâmetros de texto', :campo_texto, :proposito do
     let(:parametros){['avaliador1', 'avaliador2', 'avaliador3', 'linha_de_pesquisa', 'area_de_concentracao', 'proposito']}
@@ -43,7 +46,6 @@ describe 'configuracao.pdf', :integracao do
       end
     end
     describe 'na exportação para yaml', :pdfconf do
-      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
       it 'seus valores serão exportados integralmente' do
         configuracao = {}
         parametros.each do |campo|
@@ -92,7 +94,6 @@ describe 'configuracao.pdf', :integracao do
     end
 
     describe 'na exportação para yaml', :pdfconf, :nivel_educacao, :tipo_do_trabalho do
-      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
       context 'quando Graduação (valor padrão)' do
         let(:configuracao_exportada) {{'graduacao' => true, 'especializacao' => false, 'mestrado' => false, 'doutorado' => false, 'tipo_do_trabalho'=>'Monografia'}}
         it 'exporta graduacao => true' do
@@ -153,7 +154,6 @@ describe 'configuracao.pdf', :integracao do
     end
 
     describe 'na exportação para yaml', :pdfconf, :nivel_educacao do
-      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
       context 'quando Proposta ou Projeto (valor padrão)' do
         let(:configuracao_exportada) {{'projeto' => true}}
         it 'exporta projeto => true' do
@@ -183,7 +183,6 @@ describe 'configuracao.pdf', :integracao do
     it_behaves_like 'um combo desativado por padrão'
     
     describe 'na exportação para yaml', :pdfconf do
-      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
       context 'quando desativada (valor padrão)' do
         let(:configuracao) {{'apendices' => false}}
         it 'exporta a configuração de desativado' do
@@ -216,7 +215,6 @@ describe 'configuracao.pdf', :integracao do
     it_behaves_like 'um combo desativado por padrão'
 
     describe 'na exportação para yaml', :pdfconf do
-      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
       context 'quando desativada (valor padrão)' do
         let(:configuracao) {{'anexos' => false}}
         it 'exporta a configuração de desativado' do
@@ -254,7 +252,6 @@ describe 'configuracao.pdf', :integracao do
     it_behaves_like 'um combo desativado por padrão'
 
     describe 'na exportação para yaml', :pdfconf do
-      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
       context 'quando desativada (valor padrão)' do
         let(:configuracao_exportada) {{'errata' => false}}
         it 'exporta a configuração de desativada' do
@@ -305,7 +302,6 @@ describe 'configuracao.pdf', :integracao do
     end
 
     describe 'na exportação para yaml', :pdfconf, :folha_de_aprovacao do
-      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
       context 'quando Não gerar (valor padrão)' do
         let(:configuracao_exportada) {{'folha_de_aprovacao' => false}}
         let(:codigo_latex){<<-CODIGO
@@ -378,7 +374,6 @@ CODIGO
     let(:template) {'trabalho-academico'}
 
     describe 'na exportação para yaml', :pdfconf do
-      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
       context 'quando Referências Alfabética (valor padrão)' do
         let(:configuracao_exportada) {{'referencias_sistema' => 'alf'}}
         let(:codigo_latex){'\\usepackage[alf]{abntex2cite}'}
@@ -435,7 +430,6 @@ CODIGO
     end
     
     describe 'na exportação para yaml', :pdfconf do
-      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
       context 'quando Sem ficha catalográfica (valor padrão)' do
         let(:configuracao_exportada) {{'incluir_ficha_catalografica' => false}}
         it 'exporta incluir_ficha_catalografica => false' do
@@ -489,7 +483,6 @@ CODIGO
     end
     
     describe 'na exportação para yaml', :pdfconf do
-      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
       context 'quando Sem Lista (valor padrão)' do
         let(:configuracao_exportada) {{'lista_ilustracoes' => false}}
         it 'exporta lista_ilustracoes => false' do
@@ -539,7 +532,6 @@ CODIGO
     end
     
     describe 'na exportação para yaml', :pdfconf do
-      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
       let(:template){'pretextual10-lista_tabelas'}
       context 'quando Sem Lista (valor padrão)' do
         let(:configuracao_exportada) {{'lista_tabelas' => false}}
@@ -567,6 +559,72 @@ CODIGO
       end
     end
   end
+
+
+  describe 'siglas', :siglas do
+    let(:campo) {'siglas'}
+    let(:tipo) {'Text'}
+    let(:opcoes) {['ABNT: Associação Brasileira de Normas Técnicas']}
+    let(:valor_padrao) {opcoes[0]}
+    let(:field) {pdf.field(campo)}
+    let(:template){'pretextual11-lista_siglas'}
+
+    it 'é um campo do tipo texto' do
+      expect(field).not_to be nil
+      expect(field.type).to eq(tipo)
+    end
+
+    describe 'seu valor padrão' do
+      it "possui duas siglas" do
+        expect(field.value).to eq(valor_padrao)
+      end
+    end
+
+    context 'quando vazia' do
+      
+      before do
+        pdfconf.update(campo, '')
+      end
+
+      describe 'na exportação para yaml', :pdfconf do
+        let(:configuracao_exportada) {{'siglas' => nil}}
+        it 'exporta siglas => nil' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end
+      describe 'na exportação do template', :template => 'lista_siglas' do
+        let(:latex_esperado){'% SEM LISTA DE SIGLAS'}
+        it 'não inclui a lista de siglas', :template, :template_lista_tabelas do
+          expect(template_mesclado(template, pdfconf.exporta)).to include(latex_esperado)
+        end
+      end
+    end
+
+    context 'quando preenchida' do
+      before do
+        pdfconf.update(campo, "s1: d1\ns2: d2")
+      end
+
+      describe 'na exportação para yaml', :pdfconf do
+        let(:configuracao_exportada) {{'siglas' => [{'s'=>'s1','d'=>'d1'},{'s'=>'s2','d'=>'d2'}]}}
+        it 'exporta siglas como lista de hash: [{"s"=>"s1", "d"=>"d1"},...]' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end
+      describe 'na exportação do template', :template => 'lista_siglas' do
+        let(:latex_esperado){<<-TEX}
+\\begin{siglas}
+  \\item[s1] d1
+  \\item[s2] d2
+\\end{siglas}
+TEX
+        it 'inclui a lista de siglas', :template, :template_lista_tabelas do
+          expect(template_mesclado(template, pdfconf.exporta)).to include(latex_esperado)
+        end
+      end
+    end
+    
+  end
   
   describe 'referencias_caminho', :referencias, :pdf do
     let(:campo) {'referencias_caminho'}
@@ -587,7 +645,6 @@ CODIGO
     end
 
     describe 'na exportação para yaml', :pdfconf do
-      let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
       context 'quando o arquivo de referências NÃO existe' do
         let(:arquivo_nao_existente) {"ARQUIVO_NAO_EXISTENTE.bib"}
         before do

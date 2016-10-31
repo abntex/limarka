@@ -21,6 +21,7 @@ module Limarka
 
     def exporta(valida=true)
       h = {}
+      h.merge! caixas_de_texto
       h.merge! nivel_educacao
       h.merge! ficha_catalografica
       h.merge! folha_de_aprovacao
@@ -31,7 +32,8 @@ module Limarka
       h.merge! referencias
       h.merge! lista_ilustracoes
       h.merge! lista_tabelas
-      h.merge! caixas_de_texto
+      h.merge! lista_siglas
+
       
       # TODO: converter para chaves?
       valida_campos(h) if valida
@@ -67,6 +69,21 @@ module Limarka
       {'lista_tabelas' => pdf.field(campo).value.include?('Gerar')}
     end
 
+    def lista_siglas
+      h = {}
+      ['siglas','simbolos'].each do |campo|
+        str = pdf.field(campo).value
+        if (str) then
+          sa = [] # sa: s-array
+          str.each_line do |linha|
+            s,d = linha.split(":")
+            sa << { 's' => s.strip, 'd' => d ? d.strip : ""} if s
+          end
+          h[campo] = sa.empty? ? nil : sa
+        end
+      end
+      h
+    end
     
     def referencias
       value = pdf.field('referencias_sistema_combo').value
@@ -143,6 +160,15 @@ module Limarka
       pdf.field(campo).value.include?('Desativad') # a(o)
     end
 
+    # Substitui ',' e ';' por '.'  
+    def atualiza_palavras_chave(h)    
+      ['palavras_chave', 'palabras_clave', 'keywords', 'mots_cles'].each do |p|
+        if(h[p])
+          h[p] = h[p].gsub(/[;,]/, '.')
+        end
+      end
+    end
+
     def caixas_de_texto
       h = {}
       pdf.fields.each do |f|
@@ -150,9 +176,11 @@ module Limarka
           h[f.name] = f.value
         end
       end
+      atualiza_palavras_chave(h)
       h
-    end
+    end    
   end
+
 end
 
 

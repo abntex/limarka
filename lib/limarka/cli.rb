@@ -81,6 +81,7 @@ module Limarka
     method_option :verbose, :aliases => '-v', :desc => 'Imprime mais detalhes da execução', :default => false, :type => :boolean
     desc "exec", "Executa o sistema para geração do documento latex e compilação"
     def exec
+      #options[:output_dir] = File.absolute_path(options[:output_dir]) 
       Dir.chdir(options[:input_dir]) do
         t = Limarka::Trabalho.new
         t.atualiza_de_arquivos(options)
@@ -181,14 +182,14 @@ module Limarka
           sa = [] # sa: s-array
           h[sigla_ou_simbolo].each_line do |linha|
             s,d = linha.split(":")
-            sa << { 's' => s.strip, 'd' => d ? d.strip : ""}
+            sa << { 's' => s.strip, 'd' => d ? d.strip : ""} if s
             end
           h[sigla_ou_simbolo] = sa
         end
       end
       
       # shows
-      h["errata"] = pdf.field("errata").value == "Utilizar Errata"
+      h["errata"] = pdf.field("errata_combo").value == "Utilizar Errata"
       h["folha_de_aprovacao_gerar"] =   pdf.field("folha_de_aprovacao").value == "Gerar folha de aprovação"
       h["folha_de_aprovacao_incluir"] = pdf.field("folha_de_aprovacao").value == "Utilizar folha de aprovação escaneada"
       h["lista_ilustracoes"] = pdf.field("lista_ilustracoes").value == "Gerar lista de ilustrações"

@@ -8,5 +8,7 @@ $for(siglas)$
 $endfor$
 \end{siglas}
 % ---
+$else$
+% SEM LISTA DE SIGLAS
 $endif$
 
