@@ -45,6 +45,13 @@ task :configuracao_padrao do
   system 'bundle', 'exec', 'limarka', 'configuracao', 'exporta', '-o', 'spec/configuracao_padrao'
 end
 
+directory 'dissertacao-limarka/output'
+
+desc 'Compila dissertação'
+task :dissertacao => 'dissertacao-limarka/output' do
+  system 'bundle', 'exec', 'limarka', 'exec', '-i', 'dissertacao-limarka', '-o', 'dissertacao-limarka/output'
+end
+
 PREAMBULO="templates/preambulo.tex"
 PRETEXTUAL = "templates/pretextual.tex"
 POSTEXTUAL = "templates/postextual.tex"
