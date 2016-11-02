@@ -16,12 +16,46 @@ TEXTO
     }
 
 
-
   before do
     FileUtils.rm_rf output_dir
     FileUtils.mkdir_p output_dir
   end
 
+  context 'em sua configuração padrão', :siglas => "padrao" do
+    let (:output_dir) {"tmp/siglas/padrao"}
+    let (:t) {Limarka::Trabalho.new(configuracao: configuracao_padrao, texto: texto)}
+
+    before do
+      @cv = Limarka::Conversor.new(t, options)
+      @cv.convert
+    end
+    
+    it 'imprime a lista de siglas com uma única sigla' do
+      expect(@cv.texto_tex).to include("\\begin{siglas}")
+      expect(@cv.texto_tex).to include("ABNT")
+      expect(@cv.texto_tex).to include("Associação Brasileira de Normas Técnicas")
+      expect(@cv.texto_tex).to include("\\end{siglas}")
+    end
+
+    describe "no pdf" do
+      
+      before do
+        @cv.compila
+      end
+
+      it "a página com lista de siglas é apresentada conforme a ABNT" do
+        expect(@cv.txt).to include(<<-TXT)
+Lista de abreviaturas e siglas
+ABNT
+
+Associação Brasileira de Normas Técnicas
+TXT
+      end
+    end
+
+    
+  end
+  
   context 'quando siglas forem especificadas' do
     let (:output_dir) {"tmp/siglas/especificadas"}
     let (:siglas){{'siglas' => [{'s'=>"SQN",'d'=>'Só que não.'}, {'s'=>'OMG', 'd'=>'Oh My God!'}]}}
@@ -88,7 +122,7 @@ TXT
     end
 
     it 'nenhuma sigla é incluída' do
-      expect(@cv.texto_tex).not_to include("\\begin{siglas}")        
+      expect(@cv.texto_tex).not_to include("\\begin{siglas}")
       expect(@cv.texto_tex).not_to include("\\end{siglas}")
     end
   end
