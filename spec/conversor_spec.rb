@@ -7,7 +7,7 @@ describe Limarka::Conversor do
 
 
   describe ".tex_file", :tipo_trabalho do
-    context "Quando configudo como Projeto de Graduação", :projeto, :graduacao, :monografia do
+    context "Quando configurado como Projeto de Graduação", :projeto, :graduacao, :monografia do
       let (:configuracao_exportada) {{'graduacao' => true, 'projeto' => true}}
       it "retorna xxx-Monografia-projeto.tex" do
         expect(Limarka::Conversor.tex_file(configuracao_exportada)).to eq('xxx-Monografia-projeto.tex')
