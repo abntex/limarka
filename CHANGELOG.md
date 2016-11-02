@@ -1,13 +1,49 @@
 # Change Log
 
+## [0.3.0](https://github.com/abntex/limarka/tree/0.3.0) (2016-11-02)
+[Full Changelog](https://github.com/abntex/limarka/compare/0.2.0...0.3.0)
+
+**Fixed bugs:**
+
+- Correção do Sumário quando a lista de siglas está vazia [\#20](https://github.com/abntex/limarka/issues/20)
+
+**Closed issues:**
+
+- Inclusão de simbolos [\#62](https://github.com/abntex/limarka/issues/62)
+- Emite mensagem de erro se não encontrar arquivo configuracao.yaml [\#61](https://github.com/abntex/limarka/issues/61)
+- Remoção de comandos antigos [\#60](https://github.com/abntex/limarka/issues/60)
+- Remoção do parâmetro de configuração técnica [\#59](https://github.com/abntex/limarka/issues/59)
+- Seleção do sistema de referências: Numérico vs Alfabético [\#57](https://github.com/abntex/limarka/issues/57)
+- Testes automatizados do template [\#56](https://github.com/abntex/limarka/issues/56)
+- Seleção da Lista de tabelas [\#55](https://github.com/abntex/limarka/issues/55)
+- Seleção da Lista de ilustrações [\#54](https://github.com/abntex/limarka/issues/54)
+- Operação exec permite verbosidade [\#53](https://github.com/abntex/limarka/issues/53)
+- Seleção da Folha de aprovação [\#52](https://github.com/abntex/limarka/issues/52)
+- Permite exportar configuração para YAML [\#51](https://github.com/abntex/limarka/issues/51)
+- Permite importar texto do word [\#50](https://github.com/abntex/limarka/issues/50)
+- Arquivo de saída depende do nível de educação configurado [\#49](https://github.com/abntex/limarka/issues/49)
+- Texto do propóstio do trabalho personalizável [\#48](https://github.com/abntex/limarka/issues/48)
+- Adição dos campos Área de concentração e Linha de pesquisa [\#47](https://github.com/abntex/limarka/issues/47)
+- Templates baseados exclusivamente no abnTeX2 [\#46](https://github.com/abntex/limarka/issues/46)
+- Referências só serão possíveis com arquivo bibtex [\#43](https://github.com/abntex/limarka/issues/43)
+- Atualização de dependência pdf-forms [\#42](https://github.com/abntex/limarka/issues/42)
+- Se title de referência possui ":" cria um subtitle [\#41](https://github.com/abntex/limarka/issues/41)
+- Possibilitar configurar o caminho do arquivo de referências biblatex [\#40](https://github.com/abntex/limarka/issues/40)
+- Apresentar mensagem de erro amigável quando executada fora do diretório do projeto [\#38](https://github.com/abntex/limarka/issues/38)
+- Seleção do tipo de Referências abortado [\#36](https://github.com/abntex/limarka/issues/36)
+- Título das figuras na parte superior [\#35](https://github.com/abntex/limarka/issues/35)
+- Configuração de proposta ou projeto [\#33](https://github.com/abntex/limarka/issues/33)
+- Tornar o projeto atrativo a desenvolvedores [\#31](https://github.com/abntex/limarka/issues/31)
+- Organizar documentação do projeto [\#21](https://github.com/abntex/limarka/issues/21)
+
 ## [0.2.0](https://github.com/abntex/limarka/tree/0.2.0) (2016-08-17)
 [Full Changelog](https://github.com/abntex/limarka/compare/0.1.0...0.2.0)
 
 **Closed issues:**
 
-- Configuração e geração da Errata [\#32](https://github.com/abntex/limarka/issues/32)
 - TDD: tornar o projeto testável [\#30](https://github.com/abntex/limarka/issues/30)
 - Criar executável do sistema [\#29](https://github.com/abntex/limarka/issues/29)
+- Configuração e geração da Errata [\#32](https://github.com/abntex/limarka/issues/32)
 - Apêndices [\#28](https://github.com/abntex/limarka/issues/28)
 - Anexos [\#27](https://github.com/abntex/limarka/issues/27)
 - Referências [\#26](https://github.com/abntex/limarka/issues/26)
