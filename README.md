@@ -22,6 +22,16 @@ Or install it yourself as:
 
     $ gem install limarka
 
+### Dependências
+
+- pdftotext
+- pdftk
+- latexmk
+
+#### Dependências de desenvolvimento
+
+- libreoffice (para execução de alguns testes)
+
 ## Usage
 
 TODO: Write usage instructions here
