@@ -562,6 +562,83 @@ TEX
   end
 
 
+  describe 'simbolos', :simbolos do
+    let(:campo) {'simbolos'}
+    let(:tipo) {'Text'}
+    let(:valor_padrao) {""}
+    let(:field) {pdf.field(campo)}
+    let(:template){'pretextual12-lista_simbolos'}
+
+    it 'é um campo do tipo texto' do
+      expect(field).not_to be nil
+      expect(field.type).to eq(tipo)
+    end
+
+    describe 'seu valor padrão' do
+      it "é vazio" do
+        expect(field.value).to eq(valor_padrao)
+      end
+    end
+
+    context 'quando vazio' do
+      
+      before do
+        pdfconf.update(campo, '')
+      end
+
+      describe 'na exportação para yaml', :pdfconf do
+        let(:configuracao_exportada) {{'simbolos' => nil}}
+        it 'exporta simbolos => nil' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end
+      describe 'na exportação do template', :template => 'lista_siglas' do
+
+        it 'não inclui a lista de siglas', :template, :template_lista_tabelas do
+          expect(template_output).not_to include("\\begin{simbolos}")
+          expect(template_output).to include(<<-TEX)
+% ---
+% Lista de símbolos (opcional): AUSENTE
+% ---
+TEX
+        end
+      end
+    end
+
+    context 'quando preenchido' do
+      let (:s1) {"Gamma"}
+      let (:s2) {"in"}
+      let (:d1) {"Letra grega Gama"}
+      let (:d2) {"Pertence"}
+      before do
+        pdfconf.update(campo, "#{s1}: #{d1}\n#{s2}: #{d2}")
+      end
+
+      describe 'na exportação para yaml', :pdfconf do
+        let(:configuracao_exportada) {{'simbolos' => [{'s'=> s1,'d'=> d1},{'s'=> s2,'d'=> d2}]}}
+        it 'exporta simbolos como lista de hash: [{"s"=>"Gamma", "d"=>"Letra grega Gama"},...]' do
+          expect(pdfconf.exporta).to include(configuracao_exportada)
+        end
+      end
+      describe 'na exportação do template', :template => 'simbolos'  do
+        it 'inclui o bloco de simbolos', :template, :template_lista_tabelas do
+          expect(template_output).to include(<<-TEX)
+% ---
+% Lista de símbolos (opcional): PRESENTE
+% ---
+\\begin{simbolos}
+  \\item[$ \\Gamma $] Letra grega Gama
+  \\item[$ \\in $] Pertence
+\\end{simbolos}
+TEX
+        end
+      end
+    end
+
+    
+  end
+
+  
   describe 'siglas', :siglas do
     let(:campo) {'siglas'}
     let(:tipo) {'Text'}
@@ -619,8 +696,8 @@ TEX
   \\item[s2] d2
 \\end{siglas}
 TEX
-        it 'inclui a lista de siglas', :template, :template_lista_tabelas do
-          expect(template_mesclado(template, pdfconf.exporta)).to include(latex_esperado)
+        it 'inclui o bloco de siglas', :template, :template_lista_tabelas do
+          expect(template_output).to include(latex_esperado)
         end
       end
     end
