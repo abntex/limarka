@@ -24,7 +24,7 @@ TEXTO
     FileUtils.mkdir_p output_dir
   end
 
-  context 'quando geração ativada',  :pdf, :lento, :area_de_concentracao, :linha_de_pesquisa, :folha_aprovacao => 'ativada'  do
+  context 'quando geração ativada',  :pdf, :lento,  :folha_aprovacao => 'ativada'  do
     let (:output_dir) {"tmp/folha_aprovacao/geracao"}
     let (:avalidor1) {"Nome-do-Avaliador1"}
     let (:area_de_concentracao) {"MinhaÁreaDeConcentração"}
@@ -38,15 +38,28 @@ TEXTO
       @cv.compila
     end
     
-    it "é gerada segundo as Normas da ABNT no PDF" do
+    it "é gerada segundo as Normas da ABNT no PDF", :area_de_concentracao, :linha_de_pesquisa do
         expect(File).to exist(@cv.pdf_file)
         expect(@cv.txt).to include("Monografia aprovada.")
         expect(@cv.txt).to include("#{avalidor1}\nConvidado")
         expect(@cv.txt).to include("Área de concentração: #{area_de_concentracao}")
         expect(@cv.txt).to include("Linha de pesquisa: #{linha_de_pesquisa}")
     end
+
+    context "e propósito personalizado", :proposito do
+      let (:output_dir) {"tmp/folha_aprovacao/geracao-proposito-personalizado"}
+      let (:proposito) {"Propósito personalizado"}
+      let (:configuracao_especifica) {{"folha_de_aprovacao" => true, "proposito" => proposito}}
+
+      it "é gerada com propósito personalizado" do
+        expect(File).to exist(@cv.pdf_file)
+        expect(@cv.txt).to include(proposito)
+      end
+    end
   end
 
+
+  
   context 'quando geração desativada',  :pdf, :lento, :folha_aprovacao => 'desativada' do
     let (:output_dir) {"tmp/folha_aprovacao/desativada"}
     let (:avalidor1) {"Nome-do-Avaliador1"}
