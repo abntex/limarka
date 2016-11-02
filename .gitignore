@@ -197,5 +197,5 @@ xxx-*
 /spec/reports/
 /tmp/
 master.bib
-configuracao.yaml
+./configuracao.yaml
 .emacs.desktop*

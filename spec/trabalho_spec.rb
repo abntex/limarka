@@ -211,7 +211,7 @@ describe Limarka::Trabalho do
         
   end
 
-  describe '#ler_configuracao' do
+  describe '#ler_configuracao', :ler_configuracao do
     let (:arquivo_de_configuracao) {'configuracao.yaml'}
     let (:options) {{configuracao_yaml: true}}
     let (:configuracao_yaml) {<<-CONF
@@ -223,6 +223,7 @@ CONF
     let (:t) {Limarka::Trabalho.new}
     context 'quando solicitado ler de configuracao.yaml e arquivo existe' do
       before do
+        expect(File).to receive('exist?').with('configuracao.yaml') {true}
         expect(File).to receive(:open).with(arquivo_de_configuracao,'r').and_yield(
                           StringIO.new(configuracao_yaml))
       end
@@ -232,10 +233,10 @@ CONF
     end
     context 'quando arquivo de configuração YAML especificado NÃO existe'  do
       before do
-        expect(File).to receive(:open).with(arquivo_de_configuracao,'r').and_raise(Errno::ENOENT)
+        expect(File).to receive('exist?').with('configuracao.yaml') {false}
       end
-      it 'erro não tratado será lançado' do
-        expect { t.ler_configuracao(options) }.to raise_error(Errno::ENOENT)
+      it 'erro com mensagem apropriada será lançado' do
+        expect { t.ler_configuracao(options) }.to raise_error(IOError, "Arquivo configuracao.yaml não foi encontrado, talvez esteja executando dentro de um diretório que não contém um projeto válido?")
       end
     end
     
