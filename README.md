@@ -6,7 +6,8 @@ Gere o PDF do seu trabalho de conclusão de curso (monografia, dissertação ou 
 
 - Escreva o texto utilizando a linguagem Markdown
 - O texto será convertido em Latex, através da ferramenta [pandoc](http://pandoc.org) e templates baseados no [abntex2](http://www.abntex.net.br)
-- O código Latex é compilado e gerado o PDF em conformidade com as normas mais recentes da ABNT.
+- Configure diversos aspectos através de um formulário pdf
+- O código Latex é compilado e gerado o PDF em conformidade com as normas mais recentes da ABNT e a configuração realizada.
 
 
 # Documentação
