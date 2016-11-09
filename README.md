@@ -12,20 +12,27 @@ O limarka converte os textos produzidos em Markdown para LaTeX, utilizando os mo
 
 O LaTeX é ótimo e bastante útil para quem deseja percorrer uma carreira de Pesquisador. Muitos *journals* disponibilizam modelos somente em LaTeX para produção de artigos, aprender LaTeX irá ser útil nessa carreira.
 
-Mas se você não pretende utilizar LaTeX após a conclusão do seu curso, por que investir na longa curva de aprendizado do LaTeX se não pretende utilizar depois? (Uma reposta seria: *Com o Latex e abnTeX eu serei capaz de produzir um trabalho em conformidade com as normas da ABNT, isso por si só já compensaria o investimento*.)
+Mas se você não pretende utilizar LaTeX após a conclusão do seu curso, por que investir na longa curva de aprendizado do LaTeX se não pretende utilizar depois? 
 
-O [Markdown](https://pt.wikipedia.org/wiki/Markdown) é uma linguagem simples de marcação. Os princípios das linguagem simples de marcação estão sendo popularizados em diversas ferramentas de interação social, veja alguns exemplos: [Github](https://help.github.com/articles/basic-writing-and-formatting-syntax/), [Moodle](https://docs.moodle.org/23/en/Markdown), [WhatsApp](https://www.whatsapp.com/faq/en/general/26000002), [Facebook](http://wersm.com/facebook-is-testing-rich-text-formatting-with-markdown/) [Jekyll](http://jekyllrb.com), etc.
+> Uma reposta seria: *Com o Latex e abnTeX eu serei capaz de produzir um trabalho em conformidade com as normas da ABNT, isso por si só já compensaria o investimento*.
 
-Após a conclusão do seu curso, você pretende:
+
+## Markdown como alternativa de aprendizado
+
+Com o limarka você agora possui outra escolha de investimento para elaborar um trabalho de conclusão do curso em conformidade com as Normas da ABNT: Aprender Markdown.
+
+O [Markdown](https://pt.wikipedia.org/wiki/Markdown) é uma linguagem simples de marcação. Os princípios das linguagem simples de marcação estão sendo popularizados em diversas ferramentas de interação social, veja alguns exemplos: [Github](https://help.github.com/articles/basic-writing-and-formatting-syntax/), [Moodle](https://docs.moodle.org/23/en/Markdown), [WhatsApp](https://www.whatsapp.com/faq/en/general/26000002), [Facebook](http://wersm.com/facebook-is-testing-rich-text-formatting-with-markdown/) [Google Plus](https://plus.google.com/+SarahHill/posts/TWYwPctEpJp), [Jekyll](http://jekyllrb.com), etc.
+
+Após ou durante conclusão do seu curso, você pretende:
 
 - Interagir através da escrita em redes sociais ou fóruns de discussão?
 - Editar Wikis ou formatar mensagens?
 - Participar em projetos no Github?
 - Escrever documentações de softwares?
+- Gerar código HTML a partir de texto?
+- Elaborar *ebooks*?
 
-Se você respondeu afirmativamente a algumas dessas perguntas, aprender uma linguagem simples de marcação (como o Markdown) é um investimento que agilizará as realizações destas ações.
-
-Com o limarka você agora possui outra escolha de investimento para elaborar um trabalho de conclusão do curso em conformidade com as Normas da ABNT: Aprender Latex ou Markdown.
+Se você respondeu afirmativamente a algumas dessas perguntas, aprender uma linguagem simples de marcação (como o Markdown) é um investimento que provavelmente agilizará as realizações destas ações.
 
 **OBS:** A implementação atual do limarka ainda exige conhecimentos mínimos do Latex.
 
