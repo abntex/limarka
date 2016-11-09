@@ -2,12 +2,6 @@
 
 O limarka é uma ferramenta que possibilita o usuário escrever o seu trabalho de conclusão de curso (monografia, dissertação ou teste) em Markdown e produzir PDFs em conformidade com as normas da ABNT.
 
-# Qual a relação do limarka com o abnTeX?
-
-O [abnTeX](https://github.com/abntex) provém  uma suíte para LaTeX que atende os requisitos das normas da ABNT (Associação Brasileira de Normas Técnicas) para elaboração de trabalhos acadêmicos como teses, dissertações, projetos de pesquisa e outros documentos do gênero.
-
-O limarka converte os textos produzidos em Markdown para LaTeX, utilizando os modelos do abnTeX2 que são extensivamente testados e incrementados pela comunidade nacional. O limarka é um projeto pertencente ao grupo do [abnTeX](https://github.com/abntex).
- 
 # Por que escrever em Markdown ao invés de Latex?
 
 O LaTeX é ótimo e bastante útil para quem deseja percorrer uma carreira de Pesquisador. Muitos *journals* disponibilizam modelos somente em LaTeX para produção de artigos, aprender LaTeX irá ser útil nessa carreira.
@@ -35,6 +29,13 @@ Após ou durante conclusão do seu curso, você pretende:
 Se você respondeu afirmativamente a algumas dessas perguntas, aprender uma linguagem simples de marcação (como o Markdown) é um investimento que provavelmente agilizará as realizações destas ações.
 
 **OBS:** A implementação atual do limarka ainda exige conhecimentos mínimos do Latex.
+
+
+# Qual a relação do limarka com o abnTeX?
+
+O [abnTeX](https://github.com/abntex) provém  uma suíte para LaTeX que atende os requisitos das normas da ABNT (Associação Brasileira de Normas Técnicas) para elaboração de trabalhos acadêmicos como teses, dissertações, projetos de pesquisa e outros documentos do gênero.
+
+O limarka converte os textos produzidos em Markdown para LaTeX, utilizando os modelos do abnTeX2 que são extensivamente testados e incrementados pela comunidade nacional. O limarka é um projeto pertencente ao grupo do [abnTeX](https://github.com/abntex).
 
 
 # Informações técnicas
