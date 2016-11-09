@@ -4,24 +4,24 @@ O limarka é uma ferramenta que possibilita o usuário escrever o seu trabalho d
 
 # Qual a relação do limarka com o abnTeX?
 
-O limarka é um projeto pertencente ao grupo do [abnTeX](https://github.com/abntex), que provém  uma suíte para LaTeX que atende os requisitos das normas da ABNT (Associação Brasileira de Normas Técnicas) para elaboração de trabalhos acadêmicos como teses, dissertações, projetos de pesquisa e outros documentos do gênero.
+O [abnTeX](https://github.com/abntex) provém  uma suíte para LaTeX que atende os requisitos das normas da ABNT (Associação Brasileira de Normas Técnicas) para elaboração de trabalhos acadêmicos como teses, dissertações, projetos de pesquisa e outros documentos do gênero.
 
-O limarka converte os textos produzidos em Markdown para LaTeX, utilizando os modelos do abnTeX2 que são extensivamente utilizados, testados e incrementados pela comunidade nacional.
+O limarka converte os textos produzidos em Markdown para LaTeX, utilizando os modelos do abnTeX2 que são extensivamente testados e incrementados pela comunidade nacional. O limarka é um projeto pertencente ao grupo do [abnTeX](https://github.com/abntex).
  
 # Por que escrever em Markdown ao invés de Latex?
 
 O LaTeX é ótimo e bastante útil para quem deseja percorrer uma carreira de Pesquisador. Muitos *journals* disponibilizam modelos somente em LaTeX para produção de artigos, aprender LaTeX irá ser útil nessa carreira.
 
-Mas se você não pretende utilizar LaTeX após a conclusão do seu curso, por que investir na longa curva de aprendizado do LaTeX se não pretende utilizar depois? 
+Mas se você não pretende utilizar LaTeX após a conclusão do seu curso, por que investir na longa curva de aprendizado do LaTeX? 
 
 > Uma reposta seria: *Com o Latex e abnTeX eu serei capaz de produzir um trabalho em conformidade com as normas da ABNT, isso por si só já compensaria o investimento*.
 
 
 ## Markdown como alternativa de aprendizado
 
-Com o limarka você agora possui outra escolha de investimento para elaborar um trabalho de conclusão do curso em conformidade com as Normas da ABNT: Aprender Markdown.
+Com o limarka você agora possui outra escolha de investimento para elaborar um trabalho de conclusão do curso em conformidade com as Normas da ABNT: *aprender Markdown*.
 
-O [Markdown](https://pt.wikipedia.org/wiki/Markdown) é uma linguagem simples de marcação. Os princípios das linguagem simples de marcação estão sendo popularizados em diversas ferramentas de interação social, veja alguns exemplos: [Github](https://help.github.com/articles/basic-writing-and-formatting-syntax/), [Moodle](https://docs.moodle.org/23/en/Markdown), [WhatsApp](https://www.whatsapp.com/faq/en/general/26000002), [Facebook](http://wersm.com/facebook-is-testing-rich-text-formatting-with-markdown/) [Google Plus](https://plus.google.com/+SarahHill/posts/TWYwPctEpJp), [Jekyll](http://jekyllrb.com), etc.
+O [Markdown](https://pt.wikipedia.org/wiki/Markdown) é uma [linguagem simples de marcação](https://en.wikipedia.org/wiki/Lightweight_markup_language). Os princípios das linguagem simples de marcação estão sendo popularizados em diversas ferramentas de interação social, veja alguns exemplos: [Github](https://help.github.com/articles/basic-writing-and-formatting-syntax/), [Moodle](https://docs.moodle.org/23/en/Markdown), [WhatsApp](https://www.whatsapp.com/faq/en/general/26000002), [Facebook](http://wersm.com/facebook-is-testing-rich-text-formatting-with-markdown/) [Google Plus](https://plus.google.com/+SarahHill/posts/TWYwPctEpJp), [Jekyll](http://jekyllrb.com), etc.
 
 Após ou durante conclusão do seu curso, você pretende:
 
