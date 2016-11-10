@@ -7,10 +7,13 @@ require 'open3'
 
 require 'limarka/configuracao'
 require 'limarka/conversor'
+require 'clipboard'
 
 module Limarka
 
   class Cli < Thor
+    include Thor::Actions
+    
     default_command :exec  
 
     method_option :configuracao_yaml, :aliases => '-y', :type => :boolean, :desc => 'Ler configuração exportada (configuracao.yaml) em vez de configuracao.pdf', :default => false
@@ -39,6 +42,78 @@ module Limarka
       system "pandoc", "-t", "markdown", "-o", "#{diretorio}/trabalho-academico.md", arquivo
     end
 
+
+    method_option :arquivo, :aliases => '-a', :desc => 'Nome do arquivo da figura, "-" para ler de stdin. Ex: casa.png'
+    method_option :legenda, :aliases => '-l', :desc => 'Legenda da figura', :default => "Legenda da figura."
+    method_option :fonte, :aliases => '-f', :desc => 'Fonte da imagem.', :default => "Autor."
+    method_option :rotulo, :aliases => '-r', :desc => 'Rótulo para ser utilizado na referenciação da figura. Ex: fig:casa'
+    method_option :dimensoes, :aliases => '-d', :desc => 'Dimensões percentuais para redimencionar a figura. Ex: 80 90 100', :default => ["100"], :type => :array
+    desc "fig", "Imprime códigos para inclusão de imagens em conformidade com ABNT (em LaTeX)"
+    def fig
+
+      imagem = options[:arquivo]
+      legenda = options[:legenda]
+
+
+      if imagem.nil? then
+        # Tenta ler do clipboard
+        possivel_arquivo = Clipboard.paste
+        
+        if File.exist?(possivel_arquivo) then
+          nome_do_arquivo = possivel_arquivo.split("imagens/")[1]
+          imagem = nome_do_arquivo # if yes?("Deseja utilizar o seguinte arquivo para a figura: '#{nome_do_arquivo}' ? [y/n]")
+        elsif File.exist?("imagens/#{possivel_arquivo}") then
+          imagem = possivel_arquivo
+        end
+      end
+      
+      if imagem.nil? then
+        say("Você não especificou o arquivo da figura.")
+
+        arquivos = Dir["./imagens/*"].select{ |f| File.file? f }.map{ |f| File.basename f }
+        print_table arquivos.map.with_index{ |a, i| [i+1, *a]}
+        selecao = ask("Escolha um:").to_i
+
+        imagem=arquivos[selecao-1]
+      end
+
+      if imagem == "-" then
+        imagem = ask
+      end
+
+      
+      raise RuntimeError, "Imagem especificada não existe: imagens/#{imagem}." unless File.exist?("./imagens/"+imagem)
+      
+      rotulo = options[:rotulo]
+      rotulo = "fig:"+(File.basename imagem, ".*").gsub(" ","_") if rotulo.nil?
+
+      if (rotulo.index( /[^[:alnum:]]:/)) then
+        raise RuntimeError, "O rótulo não deve conter caracteres especiais. Forneça um rótulo ou remova os caracteres especiais do nome do arquivo. Rótulo atual: #{rotulo}."
+      end
+
+      say("<!--\n\t (ver Figura \\ref\{#{rotulo}})\n-->")
+      
+      options[:dimensoes].each do |dim|
+
+        legenda = options[:legenda]
+        escala = (dim.to_f)/100
+        
+        figura_tex = <<TEX
+
+\\begin{figure}[htb]
+\\caption{\\label{#{rotulo}}#{legenda}}
+\\begin{center}
+\\includegraphics[width=#{escala}\\textwidth]{imagens/#{imagem}}
+\\end{center}
+\\legend{Fonte: #{options[:fonte]}}
+\\end{figure}
+
+TEX
+
+        say figura_tex
+      end
+    end
+    
 =begin
     method_option :entrada, :default => "configuracao.pdf", :aliases => "-i", :banner => "FILE"
     method_option :saida, :default => "templates/configuracao.yaml", :aliases => "-o", :banner => "FILE"

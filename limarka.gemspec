@@ -22,8 +22,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 11.0"
   spec.add_development_dependency "rspec", "~> 3.5"
   spec.add_development_dependency "pry-byebug"
-  spec.add_dependency "github_changelog_generator"
+  spec.add_development_dependency "github_changelog_generator"
   
+  spec.add_dependency "clipboard"
   spec.add_dependency "colorize"
   spec.add_dependency "pdf-forms", "~> 1.1.1"
   spec.add_dependency "pandoc-ruby"
