@@ -42,70 +42,65 @@ module Limarka
       system "pandoc", "-t", "markdown", "-o", "#{diretorio}/trabalho-academico.md", arquivo
     end
 
+    method_option :interativo, :aliases => '-i', :desc => 'Solicita os parâmetros de forma interativa.', :type => :boolean, :default => false
+    method_option :clipboard, :aliases => '-c', :desc => 'Utiliza o conteúdo da área de transferência como o nome do arquivo.', :type => :boolean, :default => false
 
-    method_option :arquivo, :aliases => '-a', :desc => 'Nome do arquivo da figura, "-" para ler de stdin. Ex: casa.png'
-    method_option :legenda, :aliases => '-l', :desc => 'Legenda da figura', :default => "Legenda da figura."
+#     method_option :arquivo, :aliases => '-a', :desc => 'Caminho completo ou apenas o nome do arquivo na pasta imagens. Somente arquivos existêntes são válidos. Se não for especificado e o nome do arquivo esteja copiado (na área de transferência), e o arquivo existir, ele será utilizado.'  
+    method_option :legenda, :aliases => '-l', :desc => 'Legenda da figura.', :default => "Legenda da figura."
     method_option :fonte, :aliases => '-f', :desc => 'Fonte da imagem.', :default => "Autor."
-    method_option :rotulo, :aliases => '-r', :desc => 'Rótulo para ser utilizado na referenciação da figura. Ex: fig:casa'
-    method_option :dimensoes, :aliases => '-d', :desc => 'Dimensões percentuais para redimencionar a figura. Ex: 80 90 100', :default => ["100"], :type => :array
-    desc "fig", "Imprime códigos para inclusão de imagens em conformidade com ABNT (em LaTeX)"
-    def fig
+    method_option :rotulo, :aliases => '-r', :desc => 'Rótulo para ser utilizado na referenciação da figura, caso não especificado um será proposto.'
+    method_option :dimensoes, :aliases => '-d', :desc => 'Dimensões percentuais para redimencionar a figura. Se mais de uma dimensão for especificada será apresentado um código para inclusão da imagem para cada dimensão. Útil quando deseja experimentar diversas dimensões para a Figura. Ex: 80 90 100', :default => [100], :type => :array
 
-      imagem = options[:arquivo]
-      legenda = options[:legenda]
+    long_desc <<-DESC
+Esse comando imprime (1) o código para inclusão de uma figura (2) e como referenciá-la no texto. Para as figuras serem apresentadas, em conformidade com as Normas da ABNT, elas precisam serem incluídas como código Latex (abnTeX2).
+DESC
+    desc "fig ARQUIVO", "Imprime códigos para inclusão de imagens em conformidade com ABNT (em LaTeX)"
+    def fig(arquivo=nil)
+      
+      if (options[:clipboard]) then
+        arquivo = Clipboard.paste         # Ler do clipboard, requer xclip: sudo apt-get install xclip
+      end
 
-
-      if imagem.nil? then
-        # Tenta ler do clipboard
-        possivel_arquivo = Clipboard.paste
-        
-        if File.exist?(possivel_arquivo) then
-          nome_do_arquivo = possivel_arquivo.split("imagens/")[1]
-          imagem = nome_do_arquivo # if yes?("Deseja utilizar o seguinte arquivo para a figura: '#{nome_do_arquivo}' ? [y/n]")
-        elsif File.exist?("imagens/#{possivel_arquivo}") then
-          imagem = possivel_arquivo
+      if (arquivo) then
+        if arquivo.start_with?("file://") then
+          arquivo = arquivo[7,-1]
         end
-      end
-      
-      if imagem.nil? then
-        say("Você não especificou o arquivo da figura.")
-
-        arquivos = Dir["./imagens/*"].select{ |f| File.file? f }.map{ |f| File.basename f }
-        print_table arquivos.map.with_index{ |a, i| [i+1, *a]}
-        selecao = ask("Escolha um:").to_i
-
-        imagem=arquivos[selecao-1]
-      end
-
-      if imagem == "-" then
-        imagem = ask
-      end
+      end       
 
       
-      raise RuntimeError, "Imagem especificada não existe: imagens/#{imagem}." unless File.exist?("./imagens/"+imagem)
-      
-      rotulo = options[:rotulo]
-      rotulo = "fig:"+(File.basename imagem, ".*").gsub(" ","_") if rotulo.nil?
-
-      if (rotulo.index( /[^[:alnum:]]:/)) then
-        raise RuntimeError, "O rótulo não deve conter caracteres especiais. Forneça um rótulo ou remova os caracteres especiais do nome do arquivo. Rótulo atual: #{rotulo}."
+      if (options[:interativo]) then
+        arquivo =   ask_figura_arquivo(arquivo)
+        legenda =   ask_figura_legenda
+        fonte =     ask_figura_fonte
+        rotulo =    ask_figura_rotulo(rotulo, arquivo)
+        dimensoes = ask_figura_dimensoes
+      else
+        legenda = options[:legenda]
+        fonte = options[:fonte]
+        rotulo = options[:rotulo]
+        if (not arquivo) then
+          arquivo = ask_figura_arquivo(nil)
+        end       
+        rotulo = "fig:" + propoe_rotulo(File.basename arquivo, ".*") if rotulo.nil?
+        dimensoes = options[:dimensoes]
       end
-
-      say("<!--\n\t (ver Figura \\ref\{#{rotulo}})\n-->")
       
-      options[:dimensoes].each do |dim|
+      valida_figura_arquivo(arquivo)
+      valida_figura_rotulo(rotulo)
+      
+      say "\n<!--\nPara referenciar essa figura no texto utilize: Figura \\ref\{#{rotulo}} \n-->\n"
+      dimensoes.each do |dim|
 
         legenda = options[:legenda]
         escala = (dim.to_f)/100
         
         figura_tex = <<TEX
-
-\\begin{figure}[htb]
+\\begin{figure}[htbp]
 \\caption{\\label{#{rotulo}}#{legenda}}
 \\begin{center}
-\\includegraphics[width=#{escala}\\textwidth]{imagens/#{imagem}}
+\\includegraphics[width=#{escala}\\textwidth]{#{arquivo}}
 \\end{center}
-\\legend{Fonte: #{options[:fonte]}}
+\\legend{Fonte: #{fonte}}
 \\end{figure}
 
 TEX
@@ -113,6 +108,83 @@ TEX
         say figura_tex
       end
     end
+
+    no_commands do
+      def valida_figura_rotulo (rotulo)
+        if (not rotulo =~ (/^[a-zA-Z][\w\-:]*$/)) then
+          raise RuntimeError, "O rótulo não deve conter caracteres especiais. Forneça um rótulo ou remova os caracteres especiais do nome do arquivo. Rótulo atual: #{rotulo}"
+        end
+      end
+
+      def valida_figura_arquivo(arquivo)
+        raise RuntimeError, "Arquivo especificado para a figura não existe: '#{arquivo}'." unless File.file?(arquivo)
+      end
+    
+      def ask_figura_arquivo(arquivo = nil)        
+        if arquivo.nil? then
+          arquivos = Dir["imagens/*"].select{ |f| File.file? f }.sort
+          print_table arquivos.map.with_index{ |a, i| [i+1, *a]}
+          selecao = ask("Escolha um arquivo para a Figura:").to_i
+          arquivo=arquivos[selecao-1]
+        end
+
+        arquivo
+      end
+      def ask_figura_legenda
+        legenda_padrao = "Legenda da figura."
+        legenda_lida = ask("Insira o texto da legenda [#{legenda_padrao}]):")
+        if legenda_lida == "" then
+          legenda = legenda_padrao
+        else
+          legenda = legenda_lida
+        end 
+      end
+      
+      def ask_figura_fonte
+        fonte_padrao = "Autor."
+        fonte_lida = ask("Insira o texto da fonte [#{fonte_padrao}]):")
+        if fonte_lida == "" then
+          fonte = fonte_padrao
+        else
+          fonte = fonte_lida
+        end 
+      end
+      def ask_figura_rotulo(rotulo, arquivo)
+        # http://stackoverflow.com/questions/1268289/how-to-get-rid-of-non-ascii-characters-in-ruby
+        
+        if (not rotulo) then
+          rotulo_proposto = "fig:" + propoe_rotulo(File.basename arquivo, ".*")
+          rotulo_lido = ask("Rótulo para referenciar a figura [#{rotulo_proposto}]. fig:" )
+          if rotulo_lido.empty? then
+            rotulo = rotulo_proposto
+          else
+            rotulo = "fig:"+rotulo_lido
+          end
+        end      
+        rotulo
+      end
+
+      def propoe_rotulo(string_base)
+        encoding_options = {
+          :invalid           => :replace,  # Replace invalid byte sequences
+          :undef             => :replace,  # Replace anything not defined in ASCII
+          :replace           => '-',        # Use a blank for those replacements
+        }
+
+        rotulo_proposto = string_base.gsub(/\s+/, '-').encode(Encoding.find('ASCII'), encoding_options)
+      end
+
+      def ask_figura_dimensoes
+        dimensoes = ask("Forneça as dimensões separadas por espaço [100]:")
+        if dimensoes.empty? then
+          [100]
+        else
+          dimensoes.split(" ")
+        end
+      end
+    end
+
+
     
 =begin
     method_option :entrada, :default => "configuracao.pdf", :aliases => "-i", :banner => "FILE"
