@@ -1,7 +1,15 @@
 # Change Log
 
-## [0.3.0](https://github.com/abntex/limarka/tree/0.3.0) (2016-11-02)
-[Full Changelog](https://github.com/abntex/limarka/compare/0.2.0...0.3.0)
+## [0.4.0](https://github.com/abntex/limarka/tree/0.4.0) (2016-11-16)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.3.0...0.4.0)
+
+**Implemented enhancements:**
+
+- Indicar a versão de utilização do limarka [\#64](https://github.com/abntex/limarka/issues/64)
+- Aumentar o provisionamento de inclusão de Figura [\#39](https://github.com/abntex/limarka/issues/39)
+
+## [v0.3.0](https://github.com/abntex/limarka/tree/v0.3.0) (2016-11-02)
+[Full Changelog](https://github.com/abntex/limarka/compare/0.2.0...v0.3.0)
 
 **Fixed bugs:**
 
