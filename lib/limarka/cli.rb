@@ -22,8 +22,16 @@ module Limarka
     method_option :compila_tex, :aliases => '-c', :desc => 'Compila arquivo tex gerando um PDF', :default => true, :type => :boolean
     method_option :templates_dir, :aliases => '-t', :desc => 'Diretório que contem a pasta templates (pandoc --data-dir)', :default => Dir.pwd
     method_option :verbose, :aliases => '-v', :desc => 'Imprime mais detalhes da execução', :default => false, :type => :boolean
+    method_option :version, :desc => 'Imprime a versão do limarka', :default => false, :type => :boolean
+    
     desc "exec", "Executa o sistema para geração do documento latex e compilação"
     def exec
+
+      if (options[:version]) then
+        puts "limarka "+Limarka::VERSION
+        return
+      end
+      
       #options[:output_dir] = File.absolute_path(options[:output_dir]) 
       Dir.chdir(options[:input_dir]) do
         t = Limarka::Trabalho.new
