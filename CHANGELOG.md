@@ -1,7 +1,14 @@
 # Change Log
 
-## [0.4.0](https://github.com/abntex/limarka/tree/0.4.0) (2016-11-16)
-[Full Changelog](https://github.com/abntex/limarka/compare/v0.3.0...0.4.0)
+## [0.4.1](https://github.com/abntex/limarka/tree/0.4.1) (2016-11-17)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.4.0...0.4.1)
+
+**Closed issues:**
+
+- Possibilitar incluir referência bibtex da área de transferência [\#69](https://github.com/abntex/limarka/issues/69)
+
+## [v0.4.0](https://github.com/abntex/limarka/tree/v0.4.0) (2016-11-16)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.3.0...v0.4.0)
 
 **Implemented enhancements:**
 
