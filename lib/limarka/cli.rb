@@ -6,6 +6,7 @@ require 'colorize'
 require 'open3'
 
 require 'limarka/configuracao'
+require 'limarka/ref'
 require 'limarka/conversor'
 require 'clipboard'
 
@@ -272,6 +273,9 @@ TEX
 
     desc "configuracao help", "Exporta e atualiza configurações"
     subcommand "configuracao", Limarka::Configuracao
+
+    desc "ref", "Adiciona ou referencia bibliografia"
+    subcommand "ref", Limarka::Ref
 
   end
 end
