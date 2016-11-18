@@ -103,6 +103,7 @@ DESC
         escala = (dim.to_f)/100
         
         figura_tex = <<TEX
+
 \\begin{figure}[htbp]
 \\caption{\\label{#{rotulo}}#{legenda}}
 \\begin{center}
@@ -110,12 +111,11 @@ DESC
 \\end{center}
 \\legend{Fonte: #{fonte}}
 \\end{figure}
-
 TEX
 
         say figura_tex
-        say "\n<!--Para referenciar essa figura acima no texto utilize: Figura \\ref\{#{rotulo}} \n-->\n"
       end
+      say "\n<!--Para referenciar a figura acima no texto utilize: Figura \\ref\{#{rotulo}} \n-->\n"
     end
 
     method_option :legenda, :aliases => '-l', :desc => 'Legenda da tabela.', :default => "Legenda da tabela."
@@ -147,6 +147,7 @@ DESC
       valida_tabela_rotulo(rotulo)
 
       say <<TEX
+
 \\begin{table}[htb]
 \\ABNTEXfontereduzida
 \\caption[#{legenda}]{#{legenda}}
@@ -166,7 +167,6 @@ DESC
 \\end{tabular}
 \\legend{Fonte: #{fonte}}
 \\end{table}
-
 
 \\begin{table}[htb]
 \\IBGEtab{%
