@@ -20,7 +20,7 @@ RSpec::Core::RakeTask.new(:spec)
 task :default => [:configuracao_padrao, 'spec:fast']
 
 GitHubChangelogGenerator::RakeTask.new :changelog do |config|
-  config.future_release = Limarka::VERSION
+  config.future_release = "v"+Limarka::VERSION
 end
 
 

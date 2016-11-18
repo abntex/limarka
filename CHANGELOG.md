@@ -1,7 +1,14 @@
 # Change Log
 
-## [0.4.1](https://github.com/abntex/limarka/tree/0.4.1) (2016-11-17)
-[Full Changelog](https://github.com/abntex/limarka/compare/v0.4.0...0.4.1)
+## [v0.4.2](https://github.com/abntex/limarka/tree/v0.4.2) (2016-11-18)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.4.1...v0.4.2)
+
+**Closed issues:**
+
+- Opção de criar tabelas [\#37](https://github.com/abntex/limarka/issues/37)
+
+## [v0.4.1](https://github.com/abntex/limarka/tree/v0.4.1) (2016-11-17)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.4.0...v0.4.1)
 
 **Closed issues:**
 
