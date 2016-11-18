@@ -118,10 +118,95 @@ TEX
       end
     end
 
+    method_option :legenda, :aliases => '-l', :desc => 'Legenda da tabela.', :default => "Legenda da tabela."
+    method_option :fonte, :aliases => '-f', :desc => 'Fonte da tabela.', :default => "Autor."
+    method_option :rotulo, :aliases => '-r', :desc => 'Rótulo para ser utilizado na referenciação da tabela, caso não especificado um será proposto.'
+    method_option :nota, :aliases => '-n', :desc => 'Texto de nota adicional. (opcional)'
+
+    long_desc <<-DESC
+Esse comando imprime duas tabela para faciliar a criação de tabelas.
+DESC
+    desc "tab", "Imprime códigos para inclusão de tabelas em conformidade com ABNT (em LaTeX)"
+    def tab
+      legenda = options[:legenda]
+      fonte = options[:fonte]
+      rotulo_lido = options[:rotulo]
+      if rotulo_lido then
+        rotulo = rotulo_lido
+      else
+        rotulo = "tab:"+(Time.now.to_i % 100000).to_s
+      end
+      
+      nota = options[:nota]
+      if nota then
+        nota_linha = "  \\nota{#{nota}}%\n"
+      else
+        nota_linha = ""
+      end
+      
+      valida_tabela_rotulo(rotulo)
+
+      say <<TEX
+\n<!--\nPara referenciar essa tabela no texto utilize: Tabela \\ref\{#{rotulo}} \n-->\n
+
+\\begin{table}[htb]
+\\ABNTEXfontereduzida
+\\caption[#{legenda}]{#{legenda}}
+\\label{#{rotulo}}
+\\begin{tabular}{p{2.6cm}|p{6.0cm}|p{2.25cm}|p{3.40cm}}
+  %\\hline
+   \\textbf{Nível de Investigação} & \\textbf{Insumos}  & \\textbf{Sistemas de Investigação}  & \\textbf{Produtos}  \\\\
+    \\hline
+    Meta-nível & Filosofia\\index{filosofia} da Ciência  & Epistemologia &
+    Paradigma  \\\\
+    \\hline
+    Nível do objeto & Paradigmas do metanível e evidências do nível inferior &
+    Ciência  & Teorias e modelos \\\\
+    \\hline
+    Nível inferior & Modelos e métodos do nível do objeto e problemas do nível inferior & Prática & Solução de problemas  \\\\
+   % \\hline
+\\end{tabular}
+\\legend{Fonte: #{fonte}}
+\\end{table}
+
+
+\\begin{table}[htb]
+\\IBGEtab{%
+  \\caption{#{legenda}}%
+  \\label{#{rotulo}}
+}{%
+  \\begin{tabular}{ccc}
+  \\toprule
+   Nome & Nascimento & Documento \\\\
+  \\midrule \\midrule
+   Maria da Silva & 11/11/1111 & 111.111.111-11 \\\\
+  \\midrule 
+   João Souza & 11/11/2111 & 211.111.111-11 \\\\
+  \\midrule 
+   Laura Vicuña & 05/04/1891 & 3111.111.111-11 \\\\
+  \\bottomrule
+\\end{tabular}%
+}{%
+  \\fonte{#{fonte}}%
+#{nota_linha}}
+\\end{table}
+
+TEX
+
+#        say tabela_tex
+
+
+    end
+
     no_commands do
       def valida_figura_rotulo (rotulo)
         if (not rotulo =~ (/^[a-zA-Z][\w\-:]*$/)) then
-          raise RuntimeError, "O rótulo não deve conter caracteres especiais. Forneça um rótulo ou remova os caracteres especiais do nome do arquivo. Rótulo atual: #{rotulo}"
+          raise RuntimeError, "O rótulo não deve conter caracteres especiais. Forneça um rótulo ou remova os caracteres especiais do nome do arquivo. Rótulo atual: '#{rotulo}'"
+        end
+      end
+      def valida_tabela_rotulo (rotulo)
+        if (not rotulo =~ (/^[a-zA-Z][\w\-:]*$/)) then
+          raise RuntimeError, "O rótulo não deve conter caracteres especiais, rótulo atual: #{rotulo}"
         end
       end
 
@@ -195,81 +280,6 @@ TEX
 
 
     
-=begin
-    method_option :entrada, :default => "configuracao.pdf", :aliases => "-i", :banner => "FILE"
-    method_option :saida, :default => "templates/configuracao.yaml", :aliases => "-o", :banner => "FILE"
-    desc "pdfconf", "Ler configuração de arquivo pdf"
-    def pdfconf
-      
-      if not (File.exist?(options[:entrada])) then
-        raise IOError, "Arquivo não existe: #{options[:entrada]}"
-      end
-    
-      @pdftk = PdfForms.new 'pdftk'
-      pdf = PdfForms::Pdf.new options[:entrada], @pdftk, utf8_fields: true
-      h = {} # hash
-
-      # Campos do PDF
-      pdf.fields.each do |f|
-        value = f.value
-        if value == "Off" then value = false end
-        if value == "" then value = nil end
-        h[f.name] = value
-      end
-
-      # Substitui ',' e ';' por '.'
-      ['palavras_chave', 'palabras_clave', 'keywords', 'mots_cles'].each do |p|
-        if(h[p])
-          h[p] = h[p].gsub(/[;,]/, '.')   
-        end
-      end
-
-      h['monografia'] = h["tipo_do_trabalho"] == "Monografia"
-      h["ficha_catalografica"] = h["ficha_catalografica"] == "Incluir ficha-catalografica.pdf da pasta imagens"
-
-
-      # siglas e simbolos
-      ['siglas','simbolos'].each do |sigla_ou_simbolo|
-        if (h[sigla_ou_simbolo]) then
-          sa = [] # sa: s-array
-          h[sigla_ou_simbolo].each_line do |linha|
-            s,d = linha.split(":")
-            sa << { 's' => s.strip, 'd' => d ? d.strip : ""} if s
-            end
-          h[sigla_ou_simbolo] = sa
-        end
-      end
-      
-      # shows
-      h["errata"] = pdf.field("errata_combo").value == "Utilizar Errata"
-      h["folha_de_aprovacao_gerar"] =   pdf.field("folha_de_aprovacao").value == "Gerar folha de aprovação"
-      h["folha_de_aprovacao_incluir"] = pdf.field("folha_de_aprovacao").value == "Utilizar folha de aprovação escaneada"
-      h["lista_ilustracoes"] = pdf.field("lista_ilustracoes").value == "Gerar lista de ilustrações"
-      h["lista_tabelas"] = pdf.field("lista_tabelas").value == "Gerar lista de tabelas"
-
-      # Referências
-      selecao = 'referencias_combo'
-      {"referencias_bib" => "Banco de referências Bibtex (referencias.bib) + \\cite",
-      'referencias_numerica_inline' => "Inseridas ao longo do texto \\citarei + \\cita",
-      'referencias_md' => 'Separadamente, no arquivo referencias.md'}.each do |template_key,valor_para_verdadeiro|
-          h[template_key] = pdf.field(selecao).value == valor_para_verdadeiro
-      end
-
-      #TESTES
-
-      # Escreve na saída
-      s = StringIO.new
-      s << h.to_yaml
-      s << "---\n\n"
-      
-      if (options['saida'] == '-')
-        puts s.string
-      else
-        File.open(options['saida'], 'w') { |f| f.write s.string}
-        puts "Arquivo criado: #{options['saida']}".green
-      end
-    end
-=end
 
     desc "configuracao help", "Exporta e atualiza configurações"
     subcommand "configuracao", Limarka::Configuracao
