@@ -1,5 +1,12 @@
 # Change Log
 
+## [v0.4.4](https://github.com/abntex/limarka/tree/v0.4.4) (2016-11-18)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.4.3...v0.4.4)
+
+**Fixed bugs:**
+
+- Correção no comentário de inserir figura [\#73](https://github.com/abntex/limarka/issues/73)
+
 ## [v0.4.3](https://github.com/abntex/limarka/tree/v0.4.3) (2016-11-18)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.4.2...v0.4.3)
 
