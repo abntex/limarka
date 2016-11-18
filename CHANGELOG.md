@@ -1,5 +1,18 @@
 # Change Log
 
+## [v0.4.3](https://github.com/abntex/limarka/tree/v0.4.3) (2016-11-18)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.4.2...v0.4.3)
+
+**Implemented enhancements:**
+
+- Sugere número de página para citações diretas [\#72](https://github.com/abntex/limarka/issues/72)
+
+**Closed issues:**
+
+- Atualizando documentação no Wiki [\#65](https://github.com/abntex/limarka/issues/65)
+- Implementar mecanismo de ajuda [\#25](https://github.com/abntex/limarka/issues/25)
+- Tarefa rake para geração de releases [\#22](https://github.com/abntex/limarka/issues/22)
+
 ## [v0.4.2](https://github.com/abntex/limarka/tree/v0.4.2) (2016-11-18)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.4.1...v0.4.2)
 
