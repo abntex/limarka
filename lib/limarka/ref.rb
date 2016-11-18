@@ -36,7 +36,8 @@ DESC
 
 #{entry[0]}
 
-Para referenciar utilize: \\cite{#{entry[0].key}}  ou  \\citeonline{#{entry[0].key}}
+Para citar utilize: \\cite{#{entry[0].key}}  ou  \\citeonline{#{entry[0].key}}
+As citações diretas devem indicar a página (NBR 10520:2002, item 5.1): \\cite[p. XXX]{#{entry[0].key}}
 
 MSG
       end

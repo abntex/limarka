@@ -58,7 +58,7 @@ module Limarka
     method_option :legenda, :aliases => '-l', :desc => 'Legenda da figura.', :default => "Legenda da figura."
     method_option :fonte, :aliases => '-f', :desc => 'Fonte da imagem.', :default => "Autor."
     method_option :rotulo, :aliases => '-r', :desc => 'Rótulo para ser utilizado na referenciação da figura, caso não especificado um será proposto.'
-    method_option :dimensoes, :aliases => '-d', :desc => 'Dimensões percentuais para redimencionar a figura. Se mais de uma dimensão for especificada será apresentado um código para inclusão da imagem para cada dimensão. Útil quando deseja experimentar diversas dimensões para a Figura. Ex: 80 90 100', :default => [100], :type => :array
+    method_option :dimensoes, :aliases => '-d', :desc => 'Dimensões percentuais para redimensionar a figura. Se mais de uma dimensão for especificada será apresentado um código para inclusão da imagem para cada dimensão. Útil quando deseja experimentar diversas dimensões para a Figura. Ex: 80 90 100', :default => [100], :type => :array
 
     long_desc <<-DESC
 Esse comando imprime (1) o código para inclusão de uma figura (2) e como referenciá-la no texto. Para as figuras serem apresentadas, em conformidade com as Normas da ABNT, elas precisam serem incluídas como código Latex (abnTeX2).
@@ -97,7 +97,6 @@ DESC
       valida_figura_arquivo(arquivo)
       valida_figura_rotulo(rotulo)
       
-      say "\n<!--\nPara referenciar essa figura no texto utilize: Figura \\ref\{#{rotulo}} \n-->\n"
       dimensoes.each do |dim|
 
         legenda = options[:legenda]
@@ -115,6 +114,7 @@ DESC
 TEX
 
         say figura_tex
+        say "\n<!--Para referenciar essa figura acima no texto utilize: Figura \\ref\{#{rotulo}} \n-->\n"
       end
     end
 
@@ -124,7 +124,7 @@ TEX
     method_option :nota, :aliases => '-n', :desc => 'Texto de nota adicional. (opcional)'
 
     long_desc <<-DESC
-Esse comando imprime duas tabela para faciliar a criação de tabelas.
+Esse comando imprime duas tabela para facilitar a criação de tabelas.
 DESC
     desc "tab", "Imprime códigos para inclusão de tabelas em conformidade com ABNT (em LaTeX)"
     def tab
@@ -147,8 +147,6 @@ DESC
       valida_tabela_rotulo(rotulo)
 
       say <<TEX
-\n<!--\nPara referenciar essa tabela no texto utilize: Tabela \\ref\{#{rotulo}} \n-->\n
-
 \\begin{table}[htb]
 \\ABNTEXfontereduzida
 \\caption[#{legenda}]{#{legenda}}
@@ -191,6 +189,9 @@ DESC
 #{nota_linha}}
 \\end{table}
 
+<!--
+Para referenciar a tabela acima no texto utilize: Tabela \\ref\{#{rotulo}}
+-->
 TEX
 
 #        say tabela_tex
