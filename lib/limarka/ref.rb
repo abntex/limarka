@@ -7,7 +7,8 @@ require 'clipboard'
 module Limarka
 
   class Ref < Thor
-
+    include Thor::Actions
+    
     method_option :clipboard, :aliases => '-c', :desc => 'Incluir referência bibtex do clipboard (área de transferência)', :default => false, :type => :boolean
     method_option :bibfile, :aliases => '-f', :desc => 'Arquivo de referências bibtex onde será incluído a referência', :default => "referencias.bib", :type => :string
     desc "add", "Adiciona referência ao arquivo de bibliografia."
@@ -20,26 +21,25 @@ DESC
       else 
         referencia = $stdin.read
       end
-      entry = BibTeX.parse(referencia)
-      if (entry.length.zero?) then
-        puts "Entrada não apresenta uma referência válida: #{referencia}"
-        return
-      else
-        referencias = BibTeX.open(options[:bibfile], :include => [:meta_content])
-        referencias << entry.entries
-        if (referencias.duplicates?) then
-          puts "Referência duplicada. Nada foi feito."
-        else
-          referencias.save
-        end
-        puts <<MSG
-
-#{entry[0]}
-
-Para citar utilize: \\cite{#{entry[0].key}}  ou  \\citeonline{#{entry[0].key}}
-As citações diretas devem indicar a página (NBR 10520:2002, item 5.1): \\cite[p. XXX]{#{entry[0].key}}
-
+      begin
+        entry = BibTeX.parse(referencia)
+        error = entry.length.zero?
+        if not error then
+          append_to_file options[:bibfile], referencia
+          
+          puts <<MSG
+A seguinte referência foi adicionado ao arquivo '#{options[:bibfile]}':
+#{referencia}
+ABNT NBR 10520:2002(5.1): As citações diretas devem indicar a página.
+Como citar no texto: \\cite{#{entry[0].key}}    \\cite[p. XXX]{#{entry[0].key}}    \\citeonline{#{entry[0].key}}
 MSG
+        end
+      rescue BibTeX::ParseError
+        error = true
+      end
+      if (error) then
+        puts "Entrada não apresenta uma referência válida:\n#{referencia}"
+        return 1
       end
     end
   end
