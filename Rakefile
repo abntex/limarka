@@ -19,11 +19,12 @@ RSpec::Core::RakeTask.new(:spec)
 
 task :default => [:configuracao_padrao, 'spec:fast']
 
-GitHubChangelogGenerator::RakeTask.new :changelog do |config|
-  config.future_release = "v"+Limarka::VERSION
-  config.bug_prefix="**Bugs corrigidos:**"
-  config.issue_prefix = "**Issues fechados:**"
-  config.enhancement_prefix="**Melhorias implementadas:**"
+GitHubChangelogGenerator::RakeTask.new :changelog do |c|
+  c.future_release = "v"+Limarka::VERSION
+  c.bug_prefix="**Bugs corrigidos:**"
+  c.issue_prefix = "**Issues fechados:**"
+  c.enhancement_prefix="**Melhorias implementadas:**"
+  c.since_tag="0.2.0"
 end
 
 
