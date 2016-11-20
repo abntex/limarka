@@ -21,6 +21,9 @@ task :default => [:configuracao_padrao, 'spec:fast']
 
 GitHubChangelogGenerator::RakeTask.new :changelog do |config|
   config.future_release = "v"+Limarka::VERSION
+  config.bug_prefix="**Bugs corrigidos:**"
+  config.issue_prefix = "**Issues fechados:**"
+  config.enhancement_prefix="**Melhorias implementadas:**"
 end
 
 
