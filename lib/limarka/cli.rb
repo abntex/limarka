@@ -99,7 +99,6 @@ DESC
       
       dimensoes.each do |dim|
 
-        legenda = options[:legenda]
         escala = (dim.to_f)/100
         
         figura_tex = <<TEX
