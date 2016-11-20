@@ -1,20 +1,36 @@
 # Change Log
 
+## [v0.4.5](https://github.com/abntex/limarka/tree/v0.4.5) (2016-11-20)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.4.4...v0.4.5)
+
+**Melhorias implementadas:**
+
+- Geração do CHANGELOG com termos em português [\#77](https://github.com/abntex/limarka/issues/77)
+
+**Bugs corrigidos:**
+
+- Inconsistência ao adicionar referencia do clipboard [\#76](https://github.com/abntex/limarka/issues/76)
+- Comando fig não apresenta a legenda apropriada no modo interativo [\#74](https://github.com/abntex/limarka/issues/74)
+
+**Issues fechados:**
+
+- Apresentação de funcionalidades no README [\#75](https://github.com/abntex/limarka/issues/75)
+
 ## [v0.4.4](https://github.com/abntex/limarka/tree/v0.4.4) (2016-11-18)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.4.3...v0.4.4)
 
-**Fixed bugs:**
+**Bugs corrigidos:**
 
 - Correção no comentário de inserir figura [\#73](https://github.com/abntex/limarka/issues/73)
 
 ## [v0.4.3](https://github.com/abntex/limarka/tree/v0.4.3) (2016-11-18)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.4.2...v0.4.3)
 
-**Implemented enhancements:**
+**Melhorias implementadas:**
 
 - Sugere número de página para citações diretas [\#72](https://github.com/abntex/limarka/issues/72)
 
-**Closed issues:**
+**Issues fechados:**
 
 - Atualizando documentação no Wiki [\#65](https://github.com/abntex/limarka/issues/65)
 - Implementar mecanismo de ajuda [\#25](https://github.com/abntex/limarka/issues/25)
@@ -23,21 +39,21 @@
 ## [v0.4.2](https://github.com/abntex/limarka/tree/v0.4.2) (2016-11-18)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.4.1...v0.4.2)
 
-**Closed issues:**
+**Issues fechados:**
 
 - Opção de criar tabelas [\#37](https://github.com/abntex/limarka/issues/37)
 
 ## [v0.4.1](https://github.com/abntex/limarka/tree/v0.4.1) (2016-11-17)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.4.0...v0.4.1)
 
-**Closed issues:**
+**Issues fechados:**
 
 - Possibilitar incluir referência bibtex da área de transferência [\#69](https://github.com/abntex/limarka/issues/69)
 
 ## [v0.4.0](https://github.com/abntex/limarka/tree/v0.4.0) (2016-11-16)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.3.0...v0.4.0)
 
-**Implemented enhancements:**
+**Melhorias implementadas:**
 
 - Indicar a versão de utilização do limarka [\#64](https://github.com/abntex/limarka/issues/64)
 - Aumentar o provisionamento de inclusão de Figura [\#39](https://github.com/abntex/limarka/issues/39)
@@ -45,11 +61,11 @@
 ## [v0.3.0](https://github.com/abntex/limarka/tree/v0.3.0) (2016-11-02)
 [Full Changelog](https://github.com/abntex/limarka/compare/0.2.0...v0.3.0)
 
-**Fixed bugs:**
+**Bugs corrigidos:**
 
 - Correção do Sumário quando a lista de siglas está vazia [\#20](https://github.com/abntex/limarka/issues/20)
 
-**Closed issues:**
+**Issues fechados:**
 
 - Inclusão de simbolos [\#62](https://github.com/abntex/limarka/issues/62)
 - Emite mensagem de erro se não encontrar arquivo configuracao.yaml [\#61](https://github.com/abntex/limarka/issues/61)
@@ -77,42 +93,6 @@
 - Configuração de proposta ou projeto [\#33](https://github.com/abntex/limarka/issues/33)
 - Tornar o projeto atrativo a desenvolvedores [\#31](https://github.com/abntex/limarka/issues/31)
 - Organizar documentação do projeto [\#21](https://github.com/abntex/limarka/issues/21)
-
-## [0.2.0](https://github.com/abntex/limarka/tree/0.2.0) (2016-08-17)
-[Full Changelog](https://github.com/abntex/limarka/compare/0.1.0...0.2.0)
-
-**Closed issues:**
-
-- TDD: tornar o projeto testável [\#30](https://github.com/abntex/limarka/issues/30)
-- Criar executável do sistema [\#29](https://github.com/abntex/limarka/issues/29)
-- Configuração e geração da Errata [\#32](https://github.com/abntex/limarka/issues/32)
-- Apêndices [\#28](https://github.com/abntex/limarka/issues/28)
-- Anexos [\#27](https://github.com/abntex/limarka/issues/27)
-- Referências [\#26](https://github.com/abntex/limarka/issues/26)
-- Tornar o projeto administrável com o bundle [\#24](https://github.com/abntex/limarka/issues/24)
-- Renomear o repositório para limarka [\#23](https://github.com/abntex/limarka/issues/23)
-- Sumário [\#19](https://github.com/abntex/limarka/issues/19)
-- Lista de símbolos [\#18](https://github.com/abntex/limarka/issues/18)
-- Lista de abreviaturas e siglas [\#17](https://github.com/abntex/limarka/issues/17)
-- Lista de tabelas [\#16](https://github.com/abntex/limarka/issues/16)
-- Lista de ilustrações [\#15](https://github.com/abntex/limarka/issues/15)
-- Resumos \(obrigatório\) [\#14](https://github.com/abntex/limarka/issues/14)
-- Epígrafe \(opcional\) [\#13](https://github.com/abntex/limarka/issues/13)
-- Agradecimentos \(opcional\) [\#12](https://github.com/abntex/limarka/issues/12)
-- Dedicatória [\#11](https://github.com/abntex/limarka/issues/11)
-- Manter configuração na master [\#10](https://github.com/abntex/limarka/issues/10)
-- Configuração e geração do pre-textual [\#7](https://github.com/abntex/limarka/issues/7)
-
-## [0.1.0](https://github.com/abntex/limarka/tree/0.1.0) (2016-07-15)
-**Closed issues:**
-
-- Gerenciar changelog com github\_changelog\_generator [\#9](https://github.com/abntex/limarka/issues/9)
-- Esconder arquivos que usuário não utiliza [\#8](https://github.com/abntex/limarka/issues/8)
-- Corrigir dependência do pdf-forms [\#6](https://github.com/abntex/limarka/issues/6)
-- Elaboração do formulário PDF em branch separada [\#5](https://github.com/abntex/limarka/issues/5)
-- Implementação da ficha catalográfica e folha de aprovação [\#3](https://github.com/abntex/limarka/issues/3)
-- Configurações serão realizadas em arquivo PDF [\#2](https://github.com/abntex/limarka/issues/2)
-- Fornecer informações básicas sobre o projeto [\#1](https://github.com/abntex/limarka/issues/1)
 
 
 
