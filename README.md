@@ -48,11 +48,11 @@ A documentação do limarka será mantida no [wiki do projeto](https://github.co
 
 - [Vídeos](https://www.youtube.com/playlist?list=PLTnAY6TvPRKK6OgGYy3UA0oFdfCfRZesY)
 
-# Origem do projeto
+# Contribua participando da pesquisa sobre o limarka
 
-O projeto tem como origem uma pesquisa científica sobre utilização de linguagem de marcação de texto para elaboração de monografias (em andamento).
+O projeto tem como origem uma pesquisa científica (em andamento) sobre utilização de linguagem de marcação de texto para elaboração de monografias.
 
-- Deseja participar da pesquisa científica do projeto?
+- [Deseja participar da pesquisa científica do projeto](https://docs.google.com/forms/d/e/1FAIpQLSeNjcfJx0HQuR1p4d7moeJSL0gg25dGw0gepIBtyf6XdV9Zxw/viewform)?
 - [Deseja contribuir com o desenvolvimento?](https://github.com/abntex/limarka/wiki/Desenvolvimento)
 
 # Contributing
