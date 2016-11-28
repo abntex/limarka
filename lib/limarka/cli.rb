@@ -79,9 +79,11 @@ DESC
       
       if (options[:interativo]) then
         arquivo =   ask_figura_arquivo(arquivo)
+        valida_figura_arquivo(arquivo) # antecipando validação issue #78
         legenda =   ask_figura_legenda
         fonte =     ask_figura_fonte
         rotulo =    ask_figura_rotulo(rotulo, arquivo)
+        valida_figura_rotulo(rotulo)   # antecipando validação issue #78
         dimensoes = ask_figura_dimensoes
       else
         legenda = options[:legenda]
@@ -90,12 +92,14 @@ DESC
         if (not arquivo) then
           arquivo = ask_figura_arquivo(nil)
         end       
+        valida_figura_arquivo(arquivo) # antecipando validação issue #78
         rotulo = "fig:" + propoe_rotulo(File.basename arquivo, ".*") if rotulo.nil?
+        valida_figura_rotulo(rotulo)   # antecipando validação issue #78
         dimensoes = options[:dimensoes]
       end
       
-      valida_figura_arquivo(arquivo)
-      valida_figura_rotulo(rotulo)
+      
+      
       
       dimensoes.each do |dim|
 
