@@ -1,5 +1,16 @@
 # Change Log
 
+## [v0.4.6](https://github.com/abntex/limarka/tree/v0.4.6) (2016-11-28)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.4.5...v0.4.6)
+
+**Melhorias implementadas:**
+
+- Antecipar validação de dados quando inserido figuras [\#78](https://github.com/abntex/limarka/issues/78)
+
+**Bugs corrigidos:**
+
+- Apresentação do número da página [\#71](https://github.com/abntex/limarka/issues/71)
+
 ## [v0.4.5](https://github.com/abntex/limarka/tree/v0.4.5) (2016-11-20)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.4.4...v0.4.5)
 
