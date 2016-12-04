@@ -46,13 +46,17 @@ O limarka converte os textos produzidos em Markdown para LaTeX, utilizando os mo
 
 A documentação do limarka será mantida no [wiki do projeto](https://github.com/abntex/limarka/wiki).
 
-- [Vídeos](https://www.youtube.com/playlist?list=PLTnAY6TvPRKK6OgGYy3UA0oFdfCfRZesY)
+- [Vídeos](https://www.youtube.com/playlist?list=PLTnAY6TvPRKK6OgGYy3UA0oFdfCfRZesY) -- recomendo assistir em velocidade rápida
+
+# Fórum de usuários
+
+Um [fórum no google groups](https://groups.google.com/forum/#!forum/limarka) foi criado para auxiliar os usuários discutirem sobre o uso da ferramenta.
 
 # Contribua participando da pesquisa sobre o limarka
 
 O projeto tem como origem uma pesquisa científica (em andamento) sobre utilização de linguagem de marcação de texto para elaboração de monografias.
 
-- [Deseja participar da pesquisa científica do projeto](https://docs.google.com/forms/d/e/1FAIpQLSeNjcfJx0HQuR1p4d7moeJSL0gg25dGw0gepIBtyf6XdV9Zxw/viewform)?
+- [Realize o experimento de utilização](https://github.com/abntex/limarka/wiki/Experimentos)
 - [Deseja contribuir com o desenvolvimento?](https://github.com/abntex/limarka/wiki/Desenvolvimento)
 
 # Contributing
