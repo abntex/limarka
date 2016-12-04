@@ -202,6 +202,49 @@ TEX
 
     end
 
+    desc "cronograma", "Imprime código para facilitar elaboração de Cronograma"
+    def cronograma
+    # https://github.com/abntex/limarka/issues/90
+    tex = <<TEX
+\\begin{table}[htbp]
+  \\centering
+  \\caption{Cronograma de atividades}
+  \\label{tab:cronograma}
+  \\begin{tabular}{|c|c|c|c|c|c|}
+    \\hline
+    Fase & Março & Abril & Maio & Junho & Julho \\\\
+    \\hline
+    1 & \\textbullet & & & & \\\\
+    2 & & \\textbullet & & & \\\\
+    3 & & & \\textbullet & & \\\\
+    4 & & & & \\textbullet & \\\\
+    5 & & & & & \\textbullet \\\\
+    \\hline
+  \\end{tabular}
+  \\legend{Fonte: Autor.}
+\\end{table}
+
+\\begin{table}[htbp]
+  \\centering
+  \\caption{Cronograma de atividades}
+  \\label{tab:cronograma}
+  \\begin{tabular}{|l|c|c|c|c|c|}
+    \\hline
+    Atividade & Março & Abril & Maio & Junho & Julho \\\\
+    \\hline
+    XXXXXXXXXXXXXXXX & \\textbullet & & & & \\\\
+    XXXXXXXXXXXXXXXX & & \\textbullet & & & \\\\
+    XXXXXXXX & & & \\textbullet & & \\\\
+    XXXXXXXX & & & & \\textbullet & \\\\
+    XXXXXXXX & & & & & \\textbullet \\\\
+    \\hline
+  \\end{tabular}
+  \\legend{Fonte: Autor.}
+\\end{table}
+TEX
+      puts tex
+    end
+
     no_commands do
       def valida_figura_rotulo (rotulo)
         if (not rotulo =~ (/^[a-zA-Z][\w\-:]*$/)) then
