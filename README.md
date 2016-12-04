@@ -2,6 +2,9 @@
 
 O limarka é uma ferramenta que possibilita o usuário escrever o seu trabalho de conclusão de curso (monografia, dissertação ou teste) em Markdown e produzir PDFs em conformidade com as normas da ABNT.
 
+- [Convite para realização de experimento de utilização](https://github.com/abntex/limarka/wiki/Experimentos)
+- [Fórum de usuários no google groups](https://groups.google.com/forum/#!forum/limarka)
+
 # Por que escrever em Markdown ao invés de Latex?
 
 O LaTeX é ótimo e bastante útil para quem deseja percorrer uma carreira de Pesquisador. Muitos *journals* disponibilizam modelos somente em LaTeX para produção de artigos, aprender LaTeX irá ser útil nessa carreira.
@@ -48,9 +51,6 @@ A documentação do limarka será mantida no [wiki do projeto](https://github.co
 
 - [Vídeos](https://www.youtube.com/playlist?list=PLTnAY6TvPRKK6OgGYy3UA0oFdfCfRZesY) -- recomendo assistir em velocidade rápida
 
-# Fórum de usuários
-
-Um [fórum no google groups](https://groups.google.com/forum/#!forum/limarka) foi criado para auxiliar os usuários discutirem sobre o uso da ferramenta.
 
 # Contribua participando da pesquisa sobre o limarka
 
