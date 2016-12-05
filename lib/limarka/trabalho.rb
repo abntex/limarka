@@ -108,7 +108,7 @@ module Limarka
       puts "Configuração lida: #{configuracao}" if options[:verbose]
       # transforma os simbolos em string: http://stackoverflow.com/questions/8379596/how-do-i-convert-a-ruby-hash-so-that-all-of-its-keys-are-symbols?noredirect=1&lq=1
       # @configuracao.inject({}){|h,(k,v)| h[k.intern] = v; h}
-      self.texto = ler_texto
+      self.texto = ler_texto(options[:rascunho_file])
       self.referencias_bib = ler_referencias(self.configuracao)
       self.apendices = ler_apendices if apendices?
       self.anexos = ler_anexos if anexos?
@@ -139,8 +139,12 @@ module Limarka
       File.open('anexos.md', 'r') {|f| f.read} if anexos?
     end
     
-    def ler_texto
-      File.open('trabalho-academico.md', 'r') {|f| f.read}
+    def ler_texto(rascunho_file)
+      if (rascunho_file) then
+        File.open(rascunho_file, 'r') {|f| f.read}
+      else  
+        File.open('trabalho-academico.md', 'r') {|f| f.read}
+      end
     end
     
     def ler_referencias(configuracao)
