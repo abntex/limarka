@@ -1,11 +1,19 @@
 # Change Log
 
+## [v0.5.0](https://github.com/abntex/limarka/tree/v0.5.0) (2016-12-04)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.4.6...v0.5.0)
+
+**Melhorias implementadas:**
+
+- Comando para auxiliar elaboração de cronogramas [\#90](https://github.com/abntex/limarka/issues/90)
+- Possibilita utilizações de arquivos de rascunho [\#82](https://github.com/abntex/limarka/issues/82)
+
 ## [v0.4.6](https://github.com/abntex/limarka/tree/v0.4.6) (2016-11-28)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.4.5...v0.4.6)
 
 **Melhorias implementadas:**
 
-- Antecipar validação de dados quando inserido figuras [\#78](https://github.com/abntex/limarka/issues/78)
+- Antecipar validação de dados quando inserindo figuras [\#78](https://github.com/abntex/limarka/issues/78)
 
 **Bugs corrigidos:**
 
@@ -50,7 +58,7 @@
 ## [v0.4.2](https://github.com/abntex/limarka/tree/v0.4.2) (2016-11-18)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.4.1...v0.4.2)
 
-**Issues fechados:**
+**Melhorias implementadas:**
 
 - Opção de criar tabelas [\#37](https://github.com/abntex/limarka/issues/37)
 
