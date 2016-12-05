@@ -1,6 +1,13 @@
 # Change Log
 
-## [v0.5.0](https://github.com/abntex/limarka/tree/v0.5.0) (2016-12-04)
+## [v0.5.1](https://github.com/abntex/limarka/tree/v0.5.1) (2016-12-04)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.5.0...v0.5.1)
+
+**Issues fechados:**
+
+- Correção da legenda da tabela [\#91](https://github.com/abntex/limarka/issues/91)
+
+## [v0.5.0](https://github.com/abntex/limarka/tree/v0.5.0) (2016-12-05)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.4.6...v0.5.0)
 
 **Melhorias implementadas:**
