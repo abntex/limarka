@@ -154,7 +154,7 @@ DESC
 
 \\begin{table}[htb]
 \\ABNTEXfontereduzida
-\\caption[#{legenda}]{#{legenda}}
+\\caption{#{legenda}}
 \\label{#{rotulo}}
 \\begin{tabular}{p{2.6cm}|p{6.0cm}|p{2.25cm}|p{3.40cm}}
   %\\hline
