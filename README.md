@@ -5,6 +5,8 @@ O limarka é uma ferramenta que possibilita o usuário escrever o seu trabalho d
 - [Convite para realização de experimento de utilização](https://github.com/abntex/limarka/wiki/Experimentos)
 - [Fórum de usuários no google groups](https://groups.google.com/forum/#!forum/limarka)
 
+[![Gem Version](https://badge.fury.io/rb/limarka.svg)](https://badge.fury.io/rb/limarka)
+
 # Por que escrever em Markdown ao invés de Latex?
 
 O LaTeX é ótimo e bastante útil para quem deseja percorrer uma carreira de Pesquisador. Muitos *journals* disponibilizam modelos somente em LaTeX para produção de artigos, aprender LaTeX irá ser útil nessa carreira.
