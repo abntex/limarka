@@ -35,34 +35,36 @@
 
 <!--  -->
 
-- Escrita e formatação do documento fácil utilizando Markdown
+- O documento é escrito e formatado facilmente utilizando marcações no texto
 - Não exige conhecimentos técnicos para configuração, que é realizada através do preenchimento de um formulário PDF
 - Ótimo visual do documento de apresentação, pois é baseado no modelo Latex de trabalhos acadêmicos mantido pela comunidade abnTeX.
-- Gratuito, baseados em software livres.
+- Solução Gratuita, software livre.
 
 # User profiles
 
 <!--  -->
 <!-- target audience and early adopters -->
 
-- Alunos de computação/informática que precisam escrever relatórios ou trabalhos de conclusão.
+- Alunos com conhecimentos técnicos de informática que precisam escrever relatórios ou trabalhos de conclusão.
 - Mestrandos em computação/informática que precisam escrever a dissertação. (*early adopters*)
 
 # User channels
 
 <!--  -->
 
-- Instruções das coordenações/instituições para produção dos trabalhos acadêmicos.
-- Descrição/instruções de tarefas submetidas aos alunos/aprendentes.
-- Páginas pessoais/institucionais de professores
-- Listas de discussões em cursos universitários
-- Notícias nas impressas universitárias
+- Instruções das coordenações/instituições para produção dos trabalhos acadêmicos sugerindo utilização do limarka.
+- Instruções de tarefas submetidas aos alunos/aprendentes sugerindo utilização do limarka.
+- Páginas pessoais/institucionais de professores.
+- Listas de discussões de alunos universitários.
+- Publicidade nas agências de noticias universitárias.
 
 # Resources required
 
 <!--  -->
-
-- Hardware: um computador pessoal.
+- Sistema para conversão de Markdown para Latex;
+- Templates Latex para produção de trabalhos de conclusão em conformidade com as Normas da ABNT;
+- Desenvolvedor ruby;
+- Estrutural inicial de trabalho de conclusão de curso;
 - Câmera e Microfone: gravação de vídeos para o canal.
 
 # Contributor Profiles
@@ -74,16 +76,11 @@
 - Estudantes de informática que desejam produzir os trabalhos com agilidade
 - Usuários Latex que desejam elaborar novos templates
 - Desenvolvedores Ruby que desejam implementar novas funcionalidades
-- Empresas de consultoria acadêmicas
 
 # Contributor Channels
 
 <!--  -->
 
-- [Github issues](https://github.com/abntex/limarka/issues)
-- [Wiki](https://github.com/abntex/limarka/issues)
-
-- [Grupo de usuários no Google](https://groups.google.com/forum/#!forum/limarka)
-- [Canal no Google plus](https://plus.google.com/communities/115727084274718748185)
-- [Canal no Youtube](https://www.youtube.com/channel/UC4kERewtyT_nw__YHbKMdBA)
-
+- [Publicidade nas agências de noticias universitárias](https://github.com/abntex/limarka/wiki/Imprensa)
+- [CONTRIBUTING.md no repositório do projeto](https://github.com/abntex/limarka/blob/master/CONTRIBUTING.md)
+- [Canal do limarka Youtube](https://www.youtube.com/channel/UC4kERewtyT_nw__YHbKMdBA)
