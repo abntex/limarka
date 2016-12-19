@@ -40,6 +40,7 @@ module Limarka
         t.atualiza_de_arquivos(options)
         cv = Limarka::Conversor.new(t,options)
         cv.convert
+        cv.usa_pdftotext = false
         cv.compila if options[:compila_tex]
       end
     end
