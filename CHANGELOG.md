@@ -1,5 +1,16 @@
 # Change Log
 
+## [v0.5.3](https://github.com/abntex/limarka/tree/v0.5.3) (2016-12-19)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.5.2...v0.5.3)
+
+**Bugs corrigidos:**
+
+- Corrigir saída dev/nul para funcionar no Windows [\#96](https://github.com/abntex/limarka/issues/96)
+
+**Issues fechados:**
+
+- Creating an Open Canvas for limarka [\#95](https://github.com/abntex/limarka/issues/95)
+
 ## [v0.5.2](https://github.com/abntex/limarka/tree/v0.5.2) (2016-12-09)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.5.1...v0.5.2)
 
