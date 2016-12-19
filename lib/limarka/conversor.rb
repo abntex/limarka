@@ -18,10 +18,12 @@ module Limarka
     attr_accessor :postextual_tex
     attr_accessor :texto_tex
     attr_accessor :txt
+    attr_accessor :usa_pdftotext
     
     def initialize(trabalho, options)
       self.t = trabalho
       self.options = options
+      self.usa_pdftotext = true
     end
 
 
@@ -52,9 +54,11 @@ module Limarka
     def compila
       Dir.chdir(options[:output_dir]) do
         basename = File.basename(texto_tex_file, '.tex')
-        system "latexmk --quiet --xelatex -f #{basename}", :out=>"/dev/null", :err=>"/dev/null"
-        system "pdftotext -enc UTF-8 #{basename}.pdf"
-        File.open("#{basename}.txt", 'r') {|f| @txt = f.read}
+        system "latexmk --quiet --xelatex -f #{basename}",  :out=>File::NULL, :err=>File::NULL
+        if (usa_pdftotext) then
+          system "pdftotext -enc UTF-8 #{basename}.pdf"
+          File.open("#{basename}.txt", 'r') {|f| @txt = f.read}
+        end
       end
     end
 

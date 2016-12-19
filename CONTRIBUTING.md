@@ -37,4 +37,5 @@ Se existir um Issue referente a funcionalidade implementada:
 
 Faça um Push para o seu fork e [submeta um pull request][pr].
 
+Você também pode participar do [fórum de discussão do limarka](https://groups.google.com/forum/#!forum/limarka).
 [pr]: https://github.com/abntex/limarka/compare/
