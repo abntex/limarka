@@ -18,10 +18,12 @@ module Limarka
     attr_accessor :postextual_tex
     attr_accessor :texto_tex
     attr_accessor :txt
+    attr_accessor :usa_pdftotext
     
     def initialize(trabalho, options)
       self.t = trabalho
       self.options = options
+      self.usa_pdftotext = true
     end
 
 
