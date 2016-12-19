@@ -1,5 +1,16 @@
 # Change Log
 
+## [v0.5.4](https://github.com/abntex/limarka/tree/v0.5.4) (2016-12-19)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.5.3...v0.5.4)
+
+**Melhorias implementadas:**
+
+- Remover dependência de execução pdftotext [\#97](https://github.com/abntex/limarka/issues/97)
+
+**Bugs corrigidos:**
+
+- Problemas de codificação no Windows [\#98](https://github.com/abntex/limarka/issues/98)
+
 ## [v0.5.3](https://github.com/abntex/limarka/tree/v0.5.3) (2016-12-19)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.5.2...v0.5.3)
 
