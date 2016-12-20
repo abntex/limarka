@@ -1,19 +1,78 @@
-# O que é o limarka?
+Olá! Bem vindo ao limarka!
 
-O limarka é uma ferramenta que possibilita o usuário escrever o seu trabalho de conclusão de curso (monografia, dissertação ou teste) em Markdown e produzir PDFs em conformidade com as normas da ABNT.
+<!-- Show what you're doing, for who, and why.  -->
 
-- [Convite para realização de experimento de utilização](https://github.com/abntex/limarka/wiki/Experimentos)
-- [Fórum de usuários no google groups](https://groups.google.com/forum/#!forum/limarka)
+O limarka é uma ferramenta que possibilita seus usuários escreverem o trabalho de conclusão de curso (Monografia, TCC, Dissertação ou Tese) em arquivos somente texto e produzir PDFs em conformidades com as Normas da ABNT. A produção desse tipo de trabalho é um momento sensível na vida dos estudantes, que pode contribuir para evasão no ensino superior. O objetivo do limarka é liberar dos estudantes os esforços de formatação e adequação às Normas da ABNT, deixando-os concentrar-se no planejamento, execução e escrita de seus trabalhos.
 
 [![Gem Version](https://badge.fury.io/rb/limarka.svg)](https://badge.fury.io/rb/limarka)
 
-# Por que escrever em Markdown ao invés de Latex?
+# Especificidades do limarka
 
-O LaTeX é ótimo e bastante útil para quem deseja percorrer uma carreira de Pesquisador. Muitos *journals* disponibilizam modelos somente em LaTeX para produção de artigos, aprender LaTeX irá ser útil nessa carreira.
+<!-- Explain what makes your project special, useful, exciting! -->
 
-Mas se você não pretende utilizar LaTeX após a conclusão do seu curso, por que investir na longa curva de aprendizado do LaTeX?
+* Exige conhecimentos mínimos sobre as Normas da ABNT
+* Utiliza modelo com estilos pré-configurados com as normas e de fácil utilização
+* Utiliza sistema para gerenciamento de citações e elaboração das referências automaticamente
+* Gera o sumário automaticamente, sem esforço adicional
+* Permite a escrita do trabalho em arquivos somente texto, utilizando Markdown
+* As configurações são realizadas em um arquivo de formulário em PDF
 
-## Markdown como alternativa de aprendizado
+# Como iniciar utilização
+
+<!-- Show how to get started using or contribution to the project -->
+
+- [Veja se o visual do PDF gerado com a ferramenta lhe satisfaz](https://github.com/abntex/trabalho-academico-limarka/releases/download/v0.2.0/xxx-Monografia-projeto.pdf)
+- [Para começar a utilizar a ferramenta siga as instruções no wiki do projeto](https://github.com/abntex/limarka/wiki)
+
+# Contribuindo com o projeto
+
+<!-- State what resources and contributions you're looking for -->
+
+Veja como é fácil contribuir! 
+
+## Professor
+
+- Atualize sua página pessoal/institucional adicionando uma matéria ou link sobre o limarka
+- Solicite incluir o limarka como uma alternativa nos materiais de instruções de produção de trabalhos de conclusão, ou nas disciplinas de Metodologia.
+- Ao solicitar relatórios de atividades aos alunos, sugira a utilização do limarka.
+- Divulgue um notícia sobre o limarka nas listas de professores ou alunos.
+- Recomende a veiculação de uma matéria sobre o limarka na agência de noticias de sua instituição.
+- Sugira seus orientandos experimentarem o limarka.
+- Clique na estrela no repositório do projeto (equivale a um *like*)
+
+## Estudante
+
+- Utilize o limarka para elaboração de relatórios
+- Participe do experimente de uso da ferramenta (contribua com a pesquisa!)
+- Compartilhe alguma notícia do limarka em suas redes sociais ou lista de alunos
+- Escreva seu trabalho de conclusão com o limarka e compartilhe sua experiência
+- Clique na estrela no repositório do projeto (equivale a um *like*)
+
+## Usuário Latex
+
+- Auxilie na criação de templates latex customizados para as instituições
+
+## Desenvolvedor Ruby 
+
+- [Escolha uma das funcionalidades para implementar](https://github.com/abntex/limarka/issues)
+- Notifique ou corrija um Bug
+
+## Todas as formas de contribuição
+
+Consulte o arquivo [CONTRIBUTING.md](CONTRIBUTING.md) para verificar todas as formas de contribuições.
+
+<!-- Point to other key resources, such as a contributing.md file and a roadmap. -->
+
+# Links
+
+- A documentação do limarka será mantida no [wiki do projeto](https://github.com/abntex/limarka/wiki).
+- [Vídeos](https://www.youtube.com/playlist?list=PLTnAY6TvPRKK6OgGYy3UA0oFdfCfRZesY) -- recomendo assistir em velocidade rápida
+- [Convite para realização de experimento de utilização](https://github.com/abntex/limarka/wiki/Experimentos)
+- [Fórum de usuários no google groups](https://groups.google.com/forum/#!forum/limarka)
+
+# Por que escrever em Markdown em vez de Latex?
+
+O LaTeX é ótimo e bastante útil para quem deseja percorrer uma carreira de Pesquisador. Muitos *journals* disponibilizam modelos somente em LaTeX para produção de artigos, aprender LaTeX irá ser útil nessa carreira. Mas se você não pretende utilizar LaTeX após a conclusão do seu curso, por que investir na longa curva de aprendizado do LaTeX?
 
 Com o limarka você agora possui outra alternativa de investimento: *aprender Markdown* (que é bastante simples).
 
@@ -47,24 +106,6 @@ O limarka converte os textos produzidos em Markdown para LaTeX, utilizando os mo
 - Facilidade em edição ou personalização de templates;
 - Facilidade de obter suporte ao código Latex gerado (compatível com o estilo do abnTeX2);
 
-# Documentação
-
-A documentação do limarka será mantida no [wiki do projeto](https://github.com/abntex/limarka/wiki).
-
-- [Vídeos](https://www.youtube.com/playlist?list=PLTnAY6TvPRKK6OgGYy3UA0oFdfCfRZesY) -- recomendo assistir em velocidade rápida
-
-
-# Contribua participando da pesquisa sobre o limarka
-
-O projeto tem como origem uma pesquisa científica (em andamento) sobre utilização de linguagem de marcação de texto para elaboração de monografias.
-
-- [Realize o experimento de utilização](https://github.com/abntex/limarka/wiki/Experimentos)
-- [Deseja contribuir com o desenvolvimento?](https://github.com/abntex/limarka/wiki/Desenvolvimento)
-
-# Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/abntex/limarka. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
 # License
 
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+Esse gem é disponibilizado como software livre através da [Licença MIT](http://opensource.org/licenses/MIT).
