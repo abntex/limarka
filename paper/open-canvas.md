@@ -9,7 +9,7 @@
 <!-- The Top 1-3 problems you want to solve -->
 
 1. Saber as Normas da ABNT atuais
-2. Saber como implementar as normas da ABNT atuais no editor (Configuração de Páginas, seções, estilos, fomatação, sumário, apêndices, anexos, etc.)
+2. Saber como implementar as normas da ABNT atuais no editor (Configuração de Páginas, seções, estilos, formatação, sumário, apêndices, anexos, etc.)
 3. Manter consistente as citações e referências no documento.
 
 
