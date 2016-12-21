@@ -2,7 +2,7 @@ Olá! Bem vindo ao limarka!
 
 <!-- Show what you're doing, for who, and why.  -->
 
-O limarka é uma ferramenta que possibilita seus usuários escreverem o trabalho de conclusão de curso (Monografia, TCC, Dissertação ou Tese) em arquivos somente texto e produzir PDFs em conformidades com as Normas da ABNT. A produção desse tipo de trabalho é um momento sensível na vida dos estudantes, que pode contribuir para evasão no ensino superior. O objetivo do limarka é liberar dos estudantes os esforços de formatação e adequação às Normas da ABNT, deixando-os concentrar-se no planejamento, execução e escrita de seus trabalhos.
+O limarka é uma ferramenta que possibilita seus usuários escreverem o trabalho de conclusão de curso (Monografia, TCC, Dissertação ou Tese) em arquivos somente texto e produzir PDFs em conformidades com as Normas da ABNT. A produção desse tipo de trabalho é um momento sensível na vida dos estudantes, que pode contribuir para evasão no ensino superior. O objetivo do limarka é liberar dos estudantes os esforços de formatação e adequação às Normas da ABNT, deixando-os concentrar-se no planejamento, execução e escrita de seus trabalhos. A ferramenta também pode ser utilizada para escrever relatórios
 
 [![Gem Version](https://badge.fury.io/rb/limarka.svg)](https://badge.fury.io/rb/limarka)
 
@@ -32,7 +32,7 @@ Veja como é fácil contribuir!
 
 ## Professor
 
-- Atualize sua página pessoal/institucional adicionando uma matéria ou link sobre o limarka
+- Atualize sua página pessoal/institucional adicionando uma [matéria ou link sobre o limarka](https://github.com/abntex/limarka/wiki/Imprensa)
 - Solicite incluir o limarka como uma alternativa nos materiais de instruções de produção de trabalhos de conclusão, ou nas disciplinas de Metodologia.
 - Ao solicitar relatórios de atividades aos alunos, sugira a utilização do limarka.
 - Divulgue um notícia sobre o limarka nas listas de professores ou alunos.
@@ -43,7 +43,7 @@ Veja como é fácil contribuir!
 ## Estudante
 
 - Utilize o limarka para elaboração de relatórios
-- Participe do experimente de uso da ferramenta (contribua com a pesquisa!)
+- Participe do [experimente de uso da ferramenta](https://github.com/abntex/limarka/wiki/Experimentos) - NECESSITA-SE URGENTEMENTE!
 - Compartilhe alguma notícia do limarka em suas redes sociais ou lista de alunos
 - Escreva seu trabalho de conclusão com o limarka e compartilhe sua experiência
 - Clique na estrela no repositório do projeto (equivale a um *like*)

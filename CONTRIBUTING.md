@@ -1,10 +1,21 @@
-# Contribuindo com o projeto
-
+# Experimento
 
 No momento, as maiores contribuições são: utilizar a ferramenta, [realizar o experimento]
 e [divulgá-la](https://github.com/abntex/limarka/wiki/Imprensa).
 
 [realizar o experimento]: https://github.com/abntex/limarka/wiki/Experimentos
+
+O projeto tem como origem uma pesquisa científica (em andamento) sobre utilização de linguagem de marcação de texto para elaboração de monografias.
+
+- [Realize o experimento de utilização](https://github.com/abntex/limarka/wiki/Experimentos)
+
+# Professor
+
+# Estudante
+
+# Designer
+
+# Desenvolvedor Ruby
 
 Pull requests são sempre bem vindos. Ao participar desse projeto você está de 
 acordo com o [código de conduda].
@@ -38,15 +49,17 @@ Se existir um Issue referente a funcionalidade implementada:
 
 Faça um Push para o seu fork e [submeta um pull request][pr].
 
+
+# Usuário Latex
+
+TODO.
+
+
+# Contribuindo com o projeto
+
+
 Você também pode participar do [fórum de discussão do limarka](https://groups.google.com/forum/#!forum/limarka).
 [pr]: https://github.com/abntex/limarka/compare/
-
-# Experimento de Utilização
-
-O projeto tem como origem uma pesquisa científica (em andamento) sobre utilização de linguagem de marcação de texto para elaboração de monografias.
-
-- [Realize o experimento de utilização](https://github.com/abntex/limarka/wiki/Experimentos)
-
 
 # Desenvolvimento
 
