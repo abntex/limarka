@@ -1,8 +1,8 @@
-Olá! Bem vindo ao limarka!
-
 ![logo](https://raw.githubusercontent.com/wiki/abntex/limarka/imagens/limarka-logo.png)
 
 [![Gem Version](https://badge.fury.io/rb/limarka.svg)](https://badge.fury.io/rb/limarka)
+
+Olá! Bem vindo ao limarka!
 
 <!-- Show what you're doing, for who, and why.  -->
 
