@@ -37,7 +37,7 @@ Como professor você pode contribuir com o limarka divulgando-o e ofertando o li
 
 # Designer
 
-- [Precisamos de ajuda para fazer um logotipo para o projeto](https://github.com/abntex/limarka/issues/102).
+- [Precisamos de ajuda para criar um logotipo para o projeto](https://github.com/abntex/limarka/issues/102).
 
 # Usuário Latex
 
