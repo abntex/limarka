@@ -1,11 +1,20 @@
 # Change Log
 
+## [v0.6.0](https://github.com/abntex/limarka/tree/v0.6.0) (2016-12-27)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.5.5...v0.6.0)
+
+**Melhorias implementadas:**
+
+- Criação de um logo para o projeto [\#102](https://github.com/abntex/limarka/issues/102)
+- Inclusão de menu interativo [\#100](https://github.com/abntex/limarka/issues/100)
+
 ## [v0.5.5](https://github.com/abntex/limarka/tree/v0.5.5) (2016-12-19)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.5.4...v0.5.5)
 
 **Melhorias implementadas:**
 
 - Remover dependência de execução pdftotext [\#97](https://github.com/abntex/limarka/issues/97)
+- Tornar compatível com o Windows [\#87](https://github.com/abntex/limarka/issues/87)
 
 ## [v0.5.4](https://github.com/abntex/limarka/tree/v0.5.4) (2016-12-19)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.5.3...v0.5.4)
