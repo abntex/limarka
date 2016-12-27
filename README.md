@@ -6,7 +6,7 @@ Olá! Bem vindo ao limarka!
 
 <!-- Show what you're doing, for who, and why.  -->
 
-O limarka é uma ferramenta que possibilita seus usuários escreverem relatórios ou trabalhos de conclusão de curso (Monografia, TCC, Dissertação ou Tese) em arquivos somente texto e **produzir PDFs em conformidades com as Normas da ABNT**. A produção desse tipo de trabalho é um momento sensível na vida dos estudantes, que pode contribuir para evasão no ensino superior. O objetivo do limarka é liberar dos estudantes os esforços de formatação e adequação às Normas da ABNT, deixando-os concentrar-se no planejamento, execução e escrita de seus trabalhos. A ferramenta também pode ser utilizada para escrever relatórios
+O limarka é uma ferramenta que possibilita seus usuários escreverem relatórios ou trabalhos de conclusão de curso (Monografia, TCC, Dissertação ou Tese) em arquivos somente texto e **produzir PDFs em conformidades com as Normas da ABNT**. A produção desse tipo de trabalho é um momento sensível na vida dos estudantes, que pode contribuir para evasão no ensino superior. O objetivo do limarka é liberar dos estudantes os esforços de formatação e adequação às Normas da ABNT, deixando-os concentrar-se no planejamento, execução e escrita de seus trabalhos.
 
 
 
