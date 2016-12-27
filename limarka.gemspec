@@ -30,7 +30,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "pandoc-ruby"
   spec.add_dependency "thor"
   spec.add_dependency 'bibtex-ruby'
-
-  
+  spec.add_dependency 'terminal-table'
 end
 

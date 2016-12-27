@@ -9,6 +9,7 @@ require 'limarka/configuracao'
 require 'limarka/ref'
 require 'limarka/conversor'
 require 'clipboard'
+require 'terminal-table'
 
 module Limarka
 
@@ -246,6 +247,49 @@ TEX
 TEX
       puts tex
     end
+
+    desc "menu", "Inicia um menu interativo, aceita TAB para autocompletar."
+    def menu
+      table = Terminal::Table.new :title => "Menu interativo - limarka v#{Limarka::VERSION}\n#{Dir.pwd}", :headings => ['Comando', 'Descrição'] do |t|
+        t << ["exec", "Executa o limarka."]
+        t << ["figura","Imprime código para adição de Figura."]
+        t << ["tabela","Imprime código para adição de Tabela."]
+        t << ["cronograma","Imprime código para inclusão de Cronograma."]
+        t << ["rascunho","Executa o limarka lendo de rascunho.md"]
+        t << ["web","Imprime o endereço da documentação online."]
+        t << ["menu","Imprime esse menu."]
+        t << ["sair","Termina o menu interativo."]
+      end
+      puts table
+      sair = false
+      until sair do
+        cmd = ask("?", :limited_to => ["exec", "figura", "tabela", "cronograma","rascunho","web","menu","sair"])
+        case cmd
+        when "sair"
+          sair = true
+        when "menu"
+          puts table
+        when "exec"
+          system "limarka","exec"
+        when "web"
+          puts "https://github.com/abntex/limarka/wiki"
+          puts "" 
+        when "figura"
+          system "limarka", "fig","-i"
+        when "tabela"
+          system "limarka", "tab"
+        when "cronograma"
+          system "limarka", "cronograma"
+        when "rascunho"
+          system "limarka", "exec", "--rascunho=rascunho.md"
+        else
+          "You gave me #{cmd} -- I have no idea what to do with that."
+        end
+      end
+
+      
+    end
+
 
     no_commands do
       def valida_figura_rotulo (rotulo)
