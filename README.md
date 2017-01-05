@@ -1,6 +1,6 @@
 ![logo](https://raw.githubusercontent.com/wiki/abntex/limarka/imagens/limarka-logo.png)
 
-[![Gem Version](https://badge.fury.io/rb/limarka.svg)](https://badge.fury.io/rb/limarka) [![Gitter](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/limarka) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/abntex/limarka/master/LICENSE)
+[![Join the chat at https://gitter.im/abntex/limarka](https://badges.gitter.im/abntex/limarka.svg)](https://gitter.im/abntex/limarka?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Gem Version](https://badge.fury.io/rb/limarka.svg)](https://badge.fury.io/rb/limarka) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/abntex/limarka/master/LICENSE) [![GitHub stars](https://img.shields.io/github/stars/abntex/limarka.svg)](https://github.com/abntex/limarka/stargazers)
 
 Olá! Bem vindo ao limarka!
 
@@ -42,7 +42,7 @@ Veja como é fácil contribuir!
 - Divulgue um notícia sobre o limarka nas listas de professores ou alunos.
 - Recomende a veiculação de uma matéria sobre o limarka na agência de noticias de sua instituição.
 - Sugira seus orientandos experimentarem o limarka.
-- Clique na estrela no repositório do projeto (equivale a um *like*) [![GitHub stars](https://img.shields.io/github/stars/abntex/limarka.svg)](https://github.com/abntex/limarka/stargazers)
+- Clique na estrela no repositório do projeto (equivale a um *like*)
 
 ## Estudante
 
@@ -50,7 +50,7 @@ Veja como é fácil contribuir!
 - Participe do [experimente de uso da ferramenta](https://github.com/abntex/limarka/wiki/Experimentos) - NECESSITA-SE URGENTEMENTE!
 - Compartilhe alguma notícia do limarka em suas redes sociais ou lista de alunos
 - Escreva seu trabalho de conclusão com o limarka e compartilhe sua experiência
-- Clique na estrela no repositório do projeto (equivale a um *like*) [![GitHub stars](https://img.shields.io/github/stars/abntex/limarka.svg)](https://github.com/abntex/limarka/stargazers)
+- Clique na estrela no repositório do projeto (equivale a um *like*)
 
 ## Usuário Latex
 
