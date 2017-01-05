@@ -1,6 +1,6 @@
 ![logo](https://raw.githubusercontent.com/wiki/abntex/limarka/imagens/limarka-logo.png)
 
-[![Join the chat at https://gitter.im/abntex/limarka](https://badges.gitter.im/abntex/limarka.svg)](https://gitter.im/abntex/limarka?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Gem Version](https://badge.fury.io/rb/limarka.svg)](https://badge.fury.io/rb/limarka) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/abntex/limarka/master/LICENSE) [![GitHub stars](https://img.shields.io/github/stars/abntex/limarka.svg)](https://github.com/abntex/limarka/stargazers)
+[![Gem Version](https://badge.fury.io/rb/limarka.svg)](https://badge.fury.io/rb/limarka) [![Join the chat at https://gitter.im/abntex/limarka](https://badges.gitter.im/abntex/limarka.svg)](https://gitter.im/abntex/limarka?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/abntex/limarka/master/LICENSE) [![GitHub stars](https://img.shields.io/github/stars/abntex/limarka.svg)](https://github.com/abntex/limarka/stargazers)
 
 Olá! Bem vindo ao limarka!
 
