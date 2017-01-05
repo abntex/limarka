@@ -1,6 +1,6 @@
 ![logo](https://raw.githubusercontent.com/wiki/abntex/limarka/imagens/limarka-logo.png)
 
-[![Gem Version](https://badge.fury.io/rb/limarka.svg)](https://badge.fury.io/rb/limarka)
+[![Gitter](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/limarka)[![Gem Version](https://badge.fury.io/rb/limarka.svg)](https://badge.fury.io/rb/limarka)
 
 Olá! Bem vindo ao limarka!
 
