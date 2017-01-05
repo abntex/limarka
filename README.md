@@ -1,6 +1,6 @@
 ![logo](https://raw.githubusercontent.com/wiki/abntex/limarka/imagens/limarka-logo.png)
 
-[![Gitter](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/limarka)[![Gem Version](https://badge.fury.io/rb/limarka.svg)](https://badge.fury.io/rb/limarka)
+[![Gem Version](https://badge.fury.io/rb/limarka.svg)](https://badge.fury.io/rb/limarka) [![Gitter](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/limarka) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/abntex/limarka/master/LICENSE)
 
 Olá! Bem vindo ao limarka!
 
@@ -42,7 +42,7 @@ Veja como é fácil contribuir!
 - Divulgue um notícia sobre o limarka nas listas de professores ou alunos.
 - Recomende a veiculação de uma matéria sobre o limarka na agência de noticias de sua instituição.
 - Sugira seus orientandos experimentarem o limarka.
-- Clique na estrela no repositório do projeto (equivale a um *like*)
+- Clique na estrela no repositório do projeto (equivale a um *like*) [![GitHub stars](https://img.shields.io/github/stars/abntex/limarka.svg)](https://github.com/abntex/limarka/stargazers)
 
 ## Estudante
 
@@ -50,13 +50,15 @@ Veja como é fácil contribuir!
 - Participe do [experimente de uso da ferramenta](https://github.com/abntex/limarka/wiki/Experimentos) - NECESSITA-SE URGENTEMENTE!
 - Compartilhe alguma notícia do limarka em suas redes sociais ou lista de alunos
 - Escreva seu trabalho de conclusão com o limarka e compartilhe sua experiência
-- Clique na estrela no repositório do projeto (equivale a um *like*)
+- Clique na estrela no repositório do projeto (equivale a um *like*) [![GitHub stars](https://img.shields.io/github/stars/abntex/limarka.svg)](https://github.com/abntex/limarka/stargazers)
 
 ## Usuário Latex
 
 - Auxilie na criação de templates latex customizados para as instituições
 
 ## Desenvolvedor Ruby 
+
+[![GitHub issues](https://img.shields.io/github/issues/abntex/limarka.svg)](https://github.com/abntex/limarka/issues)
 
 - [Escolha uma das funcionalidades para implementar](https://github.com/abntex/limarka/issues)
 - Notifique ou corrija um Bug
