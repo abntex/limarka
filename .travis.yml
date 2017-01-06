@@ -1,5 +1,11 @@
-sudo: false
+sudo: true
 language: ruby
 rvm:
   - 2.3.1
-before_install: gem install bundler -v 1.12.5
+before_install: 
+- sudo apt-get update -qq
+- sudo apt-get install -qq ruby-full pdftk poppler-utils xclip texlive-full
+- wget https://github.com/jgm/pandoc/releases/download/1.19.1/pandoc-1.19.1-1-amd64.deb
+- sudo dpkg -i pandoc-1.19.1-1-amd64.deb
+- sudo apt-get install libreoffice
+script: bundle exec rake spec
