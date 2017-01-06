@@ -261,9 +261,10 @@ TEX
         t << ["sair","Termina o menu interativo."]
       end
       puts table
+      puts "Pressione TAB para completar o comando ao digitar: 'sa'+TAB completa para 'sair'"      
       sair = false
       until sair do
-        cmd = ask("?", :limited_to => ["exec", "figura", "tabela", "cronograma","rascunho","web","menu","sair"])
+        cmd = ask("Qual comando deseja executar?", :limited_to => ["exec", "figura", "tabela", "cronograma","rascunho","web","menu","sair"])
         case cmd
         when "sair"
           sair = true
