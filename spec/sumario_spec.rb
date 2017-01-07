@@ -64,7 +64,7 @@ TEXTO
       expect(@cv.texto_tex).not_to include("\\end{siglas}")
     end
 
-    describe 'o sumário no pdf', :pdf, :lento do
+    describe 'o sumário no pdf', :compilacao, :lento do
       before do
         @cv.compila
       end
@@ -93,7 +93,7 @@ TEXTO
     end
 
 
-    describe 'o sumário no pdf', :pdf, :lento do
+    describe 'o sumário no pdf', :compilacao, :lento do
       before do
         @cv.compila
       end

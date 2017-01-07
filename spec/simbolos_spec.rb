@@ -21,7 +21,7 @@ TEXTO
     FileUtils.mkdir_p output_dir
   end
   
-  context 'quando simbolos forem especificados', :pdf, :lento, :simbolos => 'especificado' do
+  context 'quando simbolos forem especificados', :compilacao, :lento, :simbolos => 'especificado' do
     let (:output_dir) {"tmp/simbolos/especificados"}
     let (:simbolos){{'simbolos' => [{'s'=>"in",'d'=>'Pertence'}, {'s'=>'zeta', 'd'=>'Letra Zeta'}]}}
     let (:t) {Limarka::Trabalho.new(configuracao: configuracao_padrao.merge(simbolos), texto: texto)}

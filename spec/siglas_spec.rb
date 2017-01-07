@@ -37,7 +37,7 @@ TEXTO
       expect(@cv.texto_tex).to include("\\end{siglas}")
     end
 
-    describe "no pdf" do
+    describe "no pdf", :compilacao do
       
       before do
         @cv.compila
@@ -73,7 +73,7 @@ TXT
       expect(@cv.texto_tex).to include("\\item[SQN] Só que não.")
     end
 
-    describe 'no pdf', :pdf, :lento do
+    describe 'no pdf', :compilacao, :lento do
       before do
         @cv.compila
       end

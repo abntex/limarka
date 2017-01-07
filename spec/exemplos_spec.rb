@@ -66,7 +66,7 @@ END
     t.save test_dir # Salva os arquivos que serão lidos
   end
 
-  context "exec -y configuracao.yaml -t templates_dir (invocação)" do
+  context "exec -y configuracao.yaml -t templates_dir (invocação)", :compilacao do
     let(:test_dir){'tmp/exemplos/exemplo1'}
     before do
       expect_any_instance_of(Limarka::Cli).to receive(:exec)
@@ -79,7 +79,7 @@ END
     
   end
 
-  context "exec -y configuracao.yaml -t templates_dir" do
+  context "exec -y configuracao.yaml -t templates_dir", :compilacao do
     let(:test_dir){'tmp/exemplos/exemplo2'}
     before do
       Dir.chdir test_dir do
@@ -107,20 +107,6 @@ END
     it "lança erro indicando mensagem sugestiva" do
       Dir.chdir test_dir do
         expect{Limarka::Cli.start(["exec","-y", '-t', templates_dir])}.to raise_error(IOError, "Arquivo configuracao.yaml não foi encontrado, talvez esteja executando dentro de um diretório que não contém um projeto válido?")
-      end      
-    end
-  end
-
-  context "Quando solicita ler de configuracao.pdf e o arquivo não existe", :diretorio_invalido, :configuracao_pdf do
-    let(:test_dir){'tmp/exemplos/sem-configuracao-pdf'}
-    before do
-      FileUtils.rm_rf test_dir
-      FileUtils.mkdir_p test_dir
-    end
-
-    it "lança erro indicando mensagem sugestiva" do
-      Dir.chdir test_dir do
-        expect{Limarka::Cli.start(["exec", '-t', templates_dir])}.to raise_error(IOError, "Arquivo configuracao.pdf não foi encontrado, talvez esteja executando dentro de um diretório que não contém um projeto válido?")
       end      
     end
   end

@@ -57,7 +57,7 @@ TEXTO
       expect(@cv.texto_tex).to include("aranhaarranha")
     end
 
-    describe 'no pdf', :pdf, :lento do
+    describe 'no pdf', :compilacao, :lento do
       before do
         @cv.compila
       end

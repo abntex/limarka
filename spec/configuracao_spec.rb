@@ -581,10 +581,11 @@ TEX
     end
 
     context 'quando vazio' do
-      
+      let(:valor_do_campo){""}
+    
       before do
-        pdfconf.update(campo, '')
-      end
+        pdfconf.update(campo, valor_do_campo)
+      end 
 
       describe 'na exportação para yaml', :pdfconf do
         let(:configuracao_exportada) {{'simbolos' => nil}}
@@ -606,13 +607,15 @@ TEX
     end
 
     context 'quando preenchido' do
-      let (:s1) {"Gamma"}
-      let (:s2) {"in"}
-      let (:d1) {"Letra grega Gama"}
-      let (:d2) {"Pertence"}
+      let(:s1) {"Gamma"}
+      let(:s2) {"in"}
+      let(:d1) {"Letra grega Gama"}
+      let(:d2) {"Pertence"}
+      let(:valor_do_campo){"#{s1}: #{d1}\n#{s2}: #{d2}"}
+    
       before do
-        pdfconf.update(campo, "#{s1}: #{d1}\n#{s2}: #{d2}")
-      end
+        pdfconf.update(campo, valor_do_campo)
+      end 
 
       describe 'na exportação para yaml', :pdfconf do
         let(:configuracao_exportada) {{'simbolos' => [{'s'=> s1,'d'=> d1},{'s'=> s2,'d'=> d2}]}}
@@ -633,9 +636,7 @@ TEX
 TEX
         end
       end
-    end
-
-    
+    end    
   end
 
   
