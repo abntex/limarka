@@ -12,7 +12,6 @@ before_install:
 - wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 - tar -xf install-tl-unx.tar.gz && cd install-tl-*
 - echo 'selected_scheme scheme-small' > temp.profile && sudo ./install-tl -no-gui -profile temp.profile && cd ..
-- sudo tlmgr install abntex2
 script: 
-- bundle exec rake
+- bundle exec rspec latex_minimo
 
