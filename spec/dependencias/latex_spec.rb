@@ -5,7 +5,7 @@ require 'limarka/conversor'
 
 describe 'Compilação Latex', :dependencias, :dependencias_latex do
 
-  let(:output_dir) {input_dir.gsub("spec","test")}
+
   let(:tex_file) {"xxx-Monografia.tex"}
   
   before do
@@ -16,6 +16,7 @@ describe 'Compilação Latex', :dependencias, :dependencias_latex do
 
   context 'de arquivo abntex2 mínimo com latexmk', :latex_minimo do
     let(:input_dir) {"spec/latex/exemplo-minimo"}
+    let(:output_dir) {input_dir.gsub("spec","test")}
     
     before do
       Dir.chdir(output_dir) do
@@ -38,6 +39,7 @@ describe 'Compilação Latex', :dependencias, :dependencias_latex do
 
   context 'de arquivo abntex2 mínimo com títulos com acentos e latexmk', :latex_minimo do
     let(:input_dir) {"spec/latex/exemplo-minimo-com-acentos"}
+    let(:output_dir) {input_dir.gsub("spec","test")}
     
     before do
       Dir.chdir(output_dir) do
@@ -60,6 +62,7 @@ describe 'Compilação Latex', :dependencias, :dependencias_latex do
 
   context 'compilando um arquivo tex pequeno com latexmk' do
     let(:input_dir) {"spec/latex/exemplo-pequeno-latex"}
+    let(:output_dir) {input_dir.gsub("spec","test")}
    
     it 'gera o PDF' do
       Dir.chdir(output_dir) do
@@ -69,7 +72,9 @@ describe 'Compilação Latex', :dependencias, :dependencias_latex do
     end
   end
 
-  context 'compilando um arquivo tex pequeno com xelatex' do
+  context 'compilando um arquivo tex pequeno com xelatex', :xelatex do
+    let(:input_dir) {"spec/latex/exemplo-pequeno-latex"}
+    let(:output_dir) {input_dir.gsub("spec","test")}
    
     it 'gera o PDF' do
       Dir.chdir(output_dir) do
