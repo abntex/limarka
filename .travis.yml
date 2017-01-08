@@ -2,11 +2,18 @@ dist: trusty
 sudo: required
 language: ruby
 rvm:
-  - 2.3.1
-before_install: 
+- 2.3.1
+before_install:
 - sudo apt-get update -qq
 - sudo apt-get install -qq ruby-full pdftk xclip
 - wget https://github.com/jgm/pandoc/releases/download/1.19.1/pandoc-1.19.1-1-amd64.deb
 - sudo dpkg -i pandoc-1.19.1-1-amd64.deb
 - sudo apt-get install libreoffice
-# Utilizando o script default do travis
+deploy:
+  provider: rubygems
+  api_key:
+    secure: GorPgbfIdindE+uPZw0V3jJ8d1+bil0V4ac1Z5K+TPVd85oI2dynEbZa5hpMTVp8g+a3TztyfJucTv6aV8dUJ8ZcnkoAuyqrA7/618YWNt/x5ytUIbkH8g9hWlrLeG55DBwTMNSnZJeVDvMqTMm2rblU29+fo0+K9enjlPhWv+vV7sRuBGUKJ//uVOANo1gsrbOKKtf/mreZzToHaSNy1bbNe7GvvM9+N0Z/+BSh5wDs2Q5etPTai9GVbHf2yyzFrdQrW9D72i5tRWowi0O2DCqUxR+M3p1HUIB9ringNjrcY4PCHIt6TlzHVsTrcubFDIhEEu1Km+m+ZKbaGInjiwXR2392UQrOnhZGElFjNrXTRs+jdA4MH50jywsw7Ha+JhNirtTfTyuWcHkHbRVG4oG5dNgPzBCdeVy/mwLUOycSBlXJiXzL1fJASc4+H6ASTPzksf4I/yFAo+7KtIbwN2vfhCALEOy3iI5oZzY00DmQmHI/jhXGDWvr4MLH1p4HvyCx4JpdOZegoCaPp7wJGYbQk9c54Qdcvb80M/t88io5NYPVg5LLHqfJiOkZR5PJTWNq/mIlmGuHHuCFqpGYPbDorzFASptiirUe26smlD9v/izhjb68Cgg1BJi2InbSNVmowSIaQhUEFQO2WMhjq18J0bv/rpyE988dHp6hzpE=
+  gem: limarka
+  on:
+    tags: true
+    repo: abntex/limarka
