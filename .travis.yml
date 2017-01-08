@@ -2,11 +2,12 @@ dist: trusty
 sudo: required
 language: ruby
 rvm:
-  - 2.3.1
-before_install: 
+- 2.3.1
+before_install:
 - sudo apt-get update -qq
-- sudo apt-get install -qq ruby-full pdftk xclip latexmk texlive texlive-publishers texlive-lang-portuguese texlive-latex-extra texlive-fonts-recommended texlive-xetex
+- sudo apt-get install -qq ruby-full pdftk poppler-utils xclip latexmk texlive texlive-publishers texlive-lang-portuguese texlive-latex-extra texlive-fonts-recommended texlive-xetex
 - wget https://github.com/jgm/pandoc/releases/download/1.19.1/pandoc-1.19.1-1-amd64.deb
 - sudo dpkg -i pandoc-1.19.1-1-amd64.deb
-- sudo apt-get install libreoffice
-script: bundle exec rake configuracao_padrao spec
+#- sudo apt-get install libreoffice
+script: 
+- bundle exec rspec -t latex_minimo

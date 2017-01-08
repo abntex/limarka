@@ -1,6 +1,6 @@
 ![logo](https://raw.githubusercontent.com/wiki/abntex/limarka/imagens/limarka-logo.png)
 
-[![Build Status](https://travis-ci.org/abntex/limarka.svg?branch=master)](https://travis-ci.org/abntex/limarka) [![Join the chat at https://gitter.im/abntex/limarka](https://badges.gitter.im/abntex/limarka.svg)](https://gitter.im/abntex/limarka?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Gem Version](https://badge.fury.io/rb/limarka.svg)](https://badge.fury.io/rb/limarka)
+[![Build Status](https://travis-ci.org/abntex/limarka.svg?branch=master)](https://travis-ci.org/abntex/limarka) [![Gem Version](https://badge.fury.io/rb/limarka.svg)](https://badge.fury.io/rb/limarka) [![Join the chat at https://gitter.im/abntex/limarka](https://badges.gitter.im/abntex/limarka.svg)](https://gitter.im/abntex/limarka?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ![Normas da ABNT em 2017: Atualizadas](https://img.shields.io/badge/Normas da ABNT em 2017-Atualizadas-brightgreen.svg) ![NBR 14724:2011 100%](https://img.shields.io/badge/NBR 2014724%3A2011-100%25-brightgreen.svg)
 
@@ -9,7 +9,6 @@ Olá! Bem vindo ao limarka!
 <!-- Show what you're doing, for who, and why.  -->
 
 O limarka é uma ferramenta que possibilita seus usuários escreverem relatórios ou trabalhos de conclusão de curso (Monografia, TCC, Dissertação ou Tese) em arquivos somente texto e **produzir PDFs em conformidades com as Normas da ABNT**. A produção desse tipo de trabalho é um momento sensível na vida dos estudantes, que pode contribuir para evasão no ensino superior. O objetivo do limarka é liberar dos estudantes os esforços de formatação e adequação às Normas da ABNT, deixando-os concentrar-se no planejamento, execução e escrita de seus trabalhos.
-
 
 
 # Especificidades do limarka
@@ -71,12 +70,15 @@ Consulte o arquivo [CONTRIBUTING.md](CONTRIBUTING.md) para verificar todas as fo
 
 <!-- Point to other key resources, such as a contributing.md file and a roadmap. -->
 
+## Deseja entrar em contato?
+
+O meio de comunicação oficial do limarka é uma sala de bate papo no gitter: [![Join the chat at https://gitter.im/abntex/limarka](https://badges.gitter.im/abntex/limarka.svg)](https://gitter.im/abntex/limarka?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 # Links
 
 - A documentação do limarka será mantida no [wiki do projeto](https://github.com/abntex/limarka/wiki).
 - [Vídeos](https://www.youtube.com/playlist?list=PLTnAY6TvPRKK6OgGYy3UA0oFdfCfRZesY) -- recomendo assistir em velocidade rápida
 - [Convite para realização de experimento de utilização](https://github.com/abntex/limarka/wiki/Experimentos)
-- [Fórum de usuários no google groups](https://groups.google.com/forum/#!forum/limarka)
 
 # Por que escrever em Markdown em vez de Latex?
 

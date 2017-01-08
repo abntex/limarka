@@ -10,14 +10,18 @@ require 'pdf_forms'
 require 'github_changelog_generator/task'
 
 
-desc 'Executa os testes sem compilação latex'
-RSpec::Core::RakeTask.new('spec:semlatex') do |t|
+desc 'Executa os testes com compilação Latex'
+RSpec::Core::RakeTask.new('spec:latex') do |t|
+  t.rspec_opts = "--tag compilacao"
+end
+
+RSpec::Core::RakeTask.new('spec') do |t|
+  # Enquanto os testes latex não estiverem passando no travis eles estão removidos daqui.
   t.rspec_opts = "--tag ~compilacao"
 end
 
-RSpec::Core::RakeTask.new(:spec)
 
-task :default => [:configuracao_padrao, 'spec:semlatex']
+task :default => [:configuracao_padrao, 'spec']
 
 GitHubChangelogGenerator::RakeTask.new :changelog do |c|
   c.future_release = "v"+Limarka::VERSION
