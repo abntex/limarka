@@ -15,11 +15,7 @@ RSpec::Core::RakeTask.new('spec:latex') do |t|
   t.rspec_opts = "--tag compilacao"
 end
 
-RSpec::Core::RakeTask.new('spec') do |t|
-  # Enquanto os testes latex não estiverem passando no travis eles estão removidos daqui.
-  t.rspec_opts = "--tag ~compilacao"
-end
-
+RSpec::Core::RakeTask.new('spec')
 
 task :default => [:configuracao_padrao, 'spec']
 

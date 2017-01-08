@@ -14,5 +14,5 @@ before_install:
 - echo 'selected_scheme scheme-small' > temp.profile && sudo ./install-tl -no-gui -profile temp.profile
 #- sudo apt-get install libreoffice
 script: 
-- bundle exec rspec -t latex_minimo
+- bundle exec rake
 
