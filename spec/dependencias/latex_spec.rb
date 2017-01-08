@@ -36,6 +36,28 @@ describe 'Compilação Latex', :dependencias, :dependencias_latex do
   end
 
 
+  context 'de arquivo abntex2 mínimo com títulos com acentos e latexmk', :latex_minimo do
+    let(:input_dir) {"spec/latex/exemplo-minimo-com-acentos"}
+    
+    before do
+      Dir.chdir(output_dir) do
+        system "latexmk -quiet -pdflatex=\"xelatex %O %S\" -pdf -dvi- -ps- -f  xxx-Monografia.tex"
+        system "pdftotext -enc UTF-8 xxx-Monografia.pdf"
+      end
+    end
+    
+    it 'gera o PDF' do
+      expect(File).to exist(output_dir+"/xxx-Monografia.pdf")
+    end
+
+    it 'o capítulo é prefixado com o número dele' do
+      expect(File.read(output_dir+"/xxx-Monografia.txt")).to include("1 Introdução")
+    end
+
+    
+  end
+
+
   context 'compilando um arquivo tex pequeno com latexmk' do
     let(:input_dir) {"spec/latex/exemplo-pequeno-latex"}
    
