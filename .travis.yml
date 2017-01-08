@@ -5,7 +5,7 @@ rvm:
 - 2.3.1
 before_install:
 - sudo apt-get update -qq
-- sudo apt-get install -qq ruby-full pdftk poppler-utils xclip libreoffice
+- sudo apt-get install -qq ruby-full pdftk poppler-utils xclip latexmk libreoffice
 - sudo apt-get install -qq language-pack-pt
 - wget https://github.com/jgm/pandoc/releases/download/1.19.1/pandoc-1.19.1-1-amd64.deb
 - sudo dpkg -i pandoc-1.19.1-1-amd64.deb
