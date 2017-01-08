@@ -13,5 +13,5 @@ before_install:
 - tar -xf install-tl-unx.tar.gz && cd install-tl-*
 - echo 'selected_scheme scheme-small' > temp.profile && sudo ./install-tl -no-gui -profile temp.profile && cd ..
 script: 
-- bundle exec rspec latex_minimo
+- bundle exec rspec -t latex_minimo
 
