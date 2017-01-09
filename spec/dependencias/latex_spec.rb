@@ -14,6 +14,8 @@ describe 'Compilação Latex', :dependencias, :dependencias_latex do
     FileUtils.cp_r input_dir+"/.", output_dir
   end
 
+  
+
   context 'de arquivo abntex2 mínimo com latexmk', :latex_minimo do
     let(:input_dir) {"spec/latex/exemplo-minimo"}
     let(:output_dir) {input_dir.gsub("spec","test")}
@@ -21,7 +23,6 @@ describe 'Compilação Latex', :dependencias, :dependencias_latex do
     before do
       Dir.chdir(output_dir) do
         system "latexmk -quiet -pdflatex=\"xelatex %O %S\" -pdf -dvi- -ps- -f  xxx-Monografia.tex"
-        system "pdftotext -enc UTF-8 xxx-Monografia.pdf"
       end
     end
     
@@ -30,6 +31,9 @@ describe 'Compilação Latex', :dependencias, :dependencias_latex do
     end
 
     it 'o capítulo é prefixado com o número dele' do
+      expect(File).to exist(output_dir+"/xxx-Monografia.pdf")
+      system "pdftotext -enc UTF-8 xxx-Monografia.pdf"
+      expect(File).to exist(output_dir+"/xxx-Monografia.txt")
       expect(File.read(output_dir+"/xxx-Monografia.txt")).to include("1 Chapter example")
     end
 
@@ -44,7 +48,6 @@ describe 'Compilação Latex', :dependencias, :dependencias_latex do
     before do
       Dir.chdir(output_dir) do
         system "latexmk -quiet -pdflatex=\"xelatex %O %S\" -pdf -dvi- -ps- -f  xxx-Monografia.tex"
-        system "pdftotext -enc UTF-8 xxx-Monografia.pdf"
       end
     end
     
@@ -53,6 +56,9 @@ describe 'Compilação Latex', :dependencias, :dependencias_latex do
     end
 
     it 'o capítulo é prefixado com o número dele' do
+      expect(File).to exist(output_dir+"/xxx-Monografia.pdf")
+      system "pdftotext -enc UTF-8 xxx-Monografia.pdf"
+      expect(File).to exist(output_dir+"/xxx-Monografia.txt")
       expect(File.read(output_dir+"/xxx-Monografia.txt")).to include("1 Introdução")
     end
 
