@@ -1,19 +1,26 @@
 # Change Log
 
+## [v0.6.2](https://github.com/abntex/limarka/tree/v0.6.2) (2017-01-09)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.6.1...v0.6.2)
+
+**Bugs corrigidos:**
+
+- problema no windows [\#115](https://github.com/abntex/limarka/issues/115)
+
 ## [v0.6.1](https://github.com/abntex/limarka/tree/v0.6.1) (2017-01-08)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.6.0...v0.6.1)
 
 **Melhorias implementadas:**
 
-- Configurar deployment a partir do travis [\#111](https://github.com/abntex/limarka/issues/111)
 - Utilizar sistema de integração contínua [\#108](https://github.com/abntex/limarka/issues/108)
 
 **Bugs corrigidos:**
 
-- Testes latex não estão passando no servidor de integração contínua [\#109](https://github.com/abntex/limarka/issues/109)
+- O build no servidor de integração contínua está falhando [\#109](https://github.com/abntex/limarka/issues/109)
 
 **Issues fechados:**
 
+- Sala no gitter será o meio oficial de comunicação [\#112](https://github.com/abntex/limarka/issues/112)
 - Inclusão de badges no README [\#106](https://github.com/abntex/limarka/issues/106)
 
 ## [v0.6.0](https://github.com/abntex/limarka/tree/v0.6.0) (2016-12-27)
