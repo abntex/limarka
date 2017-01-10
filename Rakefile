@@ -12,12 +12,12 @@ require 'github_changelog_generator/task'
 
 desc 'Executa os testes ruby'
 RSpec::Core::RakeTask.new('spec') do |t|
-  t.rspec_opts = "--tag ~compilacao"
+  t.rspec_opts = "--tag ~compilacao --tag ~dependencias_latex" 
 end
 
 desc 'Executa os testes com compilação Latex'
 RSpec::Core::RakeTask.new('spec:latex') do |t|
-  t.rspec_opts = "--tag compilacao"
+  t.rspec_opts = "--tag compilacao --tag dependencias_latex"
 end
 
 task :default => [:configuracao_padrao, 'spec']
