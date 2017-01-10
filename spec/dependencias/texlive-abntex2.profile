@@ -12,3 +12,5 @@ collection-publishers 1
 collection-xetex 1
 abntex2 1
 latexmk 1
+texlive.infra 1
+texlive.infra.x86_64-linux 1
