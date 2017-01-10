@@ -10,3 +10,5 @@ collection-latexextra 1
 collection-latexrecommended 1
 collection-publishers 1
 collection-xetex 1
+abntex2 1
+latexmk 1
