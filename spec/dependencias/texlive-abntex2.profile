@@ -1,5 +1,12 @@
-selected_scheme scheme-full
+selected_scheme scheme-small
 option_letter 0
 portable 0
 option_doc 0
 option_src 0
+collection-fontsrecommended 1
+collection-langportuguese 1
+collection-latex 1
+collection-latexextra 1
+collection-latexrecommended 1
+collection-publishers 1
+collection-xetex 1
