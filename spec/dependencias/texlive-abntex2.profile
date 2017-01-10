@@ -1,4 +1,8 @@
-selected_scheme scheme-full
+selected_scheme scheme-medium
+collection-publishers 1
+collection-fontsrecommended 1
+collection-latexextra 1
+collection-langportuguese 1
 option_letter 0
 portable 0
 option_doc 0
