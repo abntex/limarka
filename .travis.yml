@@ -10,7 +10,6 @@ before_install:
 - tar -xf install-tl-unx.tar.gz
 - cd install-tl-* && sudo ./install-tl -no-gui -profile ../spec/dependencias/texlive-abntex2.profile -no-verify-downloads && cd ..
 - export PATH=$PATH:/usr/local/texlive/2016/bin/x86_64-linux
-- sudo tlmgr update && tlmgr install abntex2 latexmk
 script:
 - latexmk -v
 - xelatex -v
