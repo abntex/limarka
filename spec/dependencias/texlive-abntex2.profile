@@ -5,6 +5,7 @@ texlive-lang-portuguese 1
 texlive-latex-extra 1
 texlive-fonts-recommended 1
 collection-xetex 1
+latexmk 1
 option_letter 0
 portable 0
 option_doc 0

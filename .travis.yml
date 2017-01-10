@@ -5,7 +5,7 @@ rvm:
 - 2.3.1
 before_install:
 - sudo apt-get update -qq
-- sudo apt-get install -y -qq poppler-utils language-pack-pt
+- sudo apt-get install -y -qq poppler-utils language-pack-pt ruby-full
 install:
 - wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 - tar -xf install-tl-unx.tar.gz
