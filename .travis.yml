@@ -13,6 +13,7 @@ before_install:
 script:
 - latexmk -v
 - xelatex -v
+- pdftotext -v
 - bundle exec rspec -t latex_minimo
 after_failure:
 - cd /usr/local/texlive && find . -iname latexmk
