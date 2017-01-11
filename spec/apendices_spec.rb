@@ -61,7 +61,7 @@ APENDICE
       expect(@cv.texto_tex).to include("\\chapter{Segundo apêndice}")
     end
 
-    describe 'no pdf', :pdf, :lento do
+    describe 'no pdf', :compilacao, :lento do
       before do
         @cv.compila
       end

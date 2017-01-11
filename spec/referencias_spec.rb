@@ -80,7 +80,7 @@ CITACAO
       expect(@cv.texto_tex).to include("Citando o ano: \\citeyear{ABNT-citacao}.")
     end
     
-    describe 'o pdf', :pdf, :lento do
+    describe 'o pdf', :compilacao, :lento do
       before do
         @cv.compila
       end

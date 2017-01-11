@@ -1,6 +1,5 @@
 # Contribuindo com o projeto
 
-
 No momento, as maiores contribuições são: utilizar a ferramenta, [realizar o experimento]
 e [divulgá-la](https://github.com/abntex/limarka/wiki/Imprensa).
 
@@ -9,7 +8,57 @@ e [divulgá-la](https://github.com/abntex/limarka/wiki/Imprensa).
 Pull requests são sempre bem vindos. Ao participar desse projeto você está de 
 acordo com o [código de conduda].
 
+O projeto tem como origem uma pesquisa científica (em andamento) sobre utilização de linguagem de marcação de texto para elaboração de monografias.
+
+- [Realize o experimento de utilização](https://github.com/abntex/limarka/wiki/Experimentos)
+
+# Professor
+
+Como professor você pode contribuir com o limarka divulgando-o e ofertando o limarka como uma opção para seus alunos realizarem tarefas. 
+
+- Ao solicitar relatórios de atividades aos alunos, sugira a utilização do limarka. Embora o limarka tenha o propósito de produzir trabalhos de conclusão de curso, ele pode ser facilmente utilizado para elaboração de relatórios. 
+
+- Sugira seus orientandos experimentarem o limarka. O limarka é gratuito e livre, pode ser utilizado no Linux, OS X e Windows. Não recomendamos utilizar o limarka em trabalhos de conclusão que exigam bastante fórmulas, teoremas ou provas. Os editores Latex oferecem melhor suporte para isso.
+
+- Atualize sua página pessoal/institucional adicionando uma [matéria ou link sobre o limarka](https://github.com/abntex/limarka/wiki/Imprensa). Seus alunos e outras pessoas poderão conhecer a ferramenta dessa forma.
+
+- Solicite incluir o limarka como uma alternativa nos materiais de instruções de produção de trabalhos de conclusão, ou nas disciplinas de Metodologia. O momento ideal para apresentar aos alunos a ferramenta são nas aulas de Metodologia. Por enquanto o foco da ferramenta são trabalho de conclusão, mas em breve também será possível realizar artigos.
+
+- Divulgue um notícia sobre o limarka nas listas de professores ou alunos. O público alvo da ferramenta são os estudantes, essas listas propocionam encontrá-los.
+
+- Recomende a veiculação de uma matéria sobre o limarka na agência de noticias de sua instituição. As agências de notícias das instituições são um ótimo meio para divulgação, verifique como contactar agência e recomende uma matéria para ser veiculada.
+
+- Clique na estrela [no repositório do projeto](https://github.com/abntex/limarka) (equivale a um *like*) no github.
+
+# Estudante
+
+- Utilize o limarka para elaboração de relatórios
+- Participe do [experimente de uso da ferramenta](https://github.com/abntex/limarka/wiki/Experimentos) - NECESSITA-SE URGENTEMENTE!
+- Compartilhe alguma notícia do limarka em suas redes sociais ou lista de alunos ou de laboratórios
+- Escreva seu trabalho de conclusão ou sua proposta/projeto com o limarka e compartilhe sua experiência
+- Clique na estrela [no repositório do projeto](https://github.com/abntex/limarka) (equivale a um *like*) no github.
+
+# Designer
+
+- [Precisamos de ajuda para criar um logotipo para o projeto](https://github.com/abntex/limarka/issues/102).
+
+# Usuário Latex
+
+TODO.
+
+# Desenvolvedor Ruby
+
+Deseja participar do desenvolvimento do limarka? Considere os [issues marcados com o label help needed](https://github.com/abntex/limarka/labels/help%20wanted) como um convite para contribuir conosco.
+
+Correção de bugs e implementação de novas funcionalidades através de Pull requests são sempre bem vindos.
+
+Ao participar desse projeto você está de acordo com o [código de conduda].
+
 [código de conduda]: https://github.com/abntex/limarka/blob/master/CODE_OF_CONDUCT.md
+
+## Implementando uma nova funcionalidade
+
+[Crie um issue](https://github.com/abntex/limarka/issues/new) descrevendo a nova funcionalidade.
 
 Realize um fork no projeto, depois faça o clone do seu fork:
 
@@ -27,28 +76,24 @@ Crie uma branch a partir da master para sua funcionalidade:
 
     git checkout -b minha-funcionalidade
 
-Realize as alterações. Adicione testes para as suas mudanças. Faça os testes passarem:
+Realize as alterações. Adicione testes (opicional, mas desejado) para as suas mudanças. Faça os testes passarem:
 
     rake
+    git add arquivo-modificado1 arquivo-modificado2
+    git commit
+    
+Se existir um Issue referente a funcionalidade implementada [utilize o número do issue na mensagem de commit](https://help.github.com/articles/closing-issues-via-commit-messages/) para manter rastreabilidade.
 
-Se existir um Issue referente a funcionalidade implementada:
+Faça um Push para o seu fork:
 
-- [Utilizar o número do issue na mensagem de commit](https://help.github.com/articles/closing-issues-via-commit-messages/).
-- Altere o título do issue para o texto que deseja ser adicionado ao [CHANGELOG](https://github.com/abntex/limarka/blob/master/CHANGELOG.md)
+    git push origin minha-funcionalidade
 
-Faça um Push para o seu fork e [submeta um pull request][pr].
+[Submeta um pull request](https://github.com/abntex/limarka/compare/). Altere o título do issue/PR para o texto que deseja ser adicionado ao [CHANGELOG](https://github.com/abntex/limarka/blob/master/CHANGELOG.md)
+
+## Desenvolvimento
+
+Talvez você deseje consulta a página sobre o [desenvolvimento da ferramenta](https://github.com/abntex/limarka/wiki/Desenvolvimento).
+
+# Participando no fórum
 
 Você também pode participar do [fórum de discussão do limarka](https://groups.google.com/forum/#!forum/limarka).
-[pr]: https://github.com/abntex/limarka/compare/
-
-# Experimento de Utilização
-
-O projeto tem como origem uma pesquisa científica (em andamento) sobre utilização de linguagem de marcação de texto para elaboração de monografias.
-
-- [Realize o experimento de utilização](https://github.com/abntex/limarka/wiki/Experimentos)
-
-
-# Desenvolvimento
-
-- [Deseja contribuir com o desenvolvimento?](https://github.com/abntex/limarka/wiki/Desenvolvimento)
-

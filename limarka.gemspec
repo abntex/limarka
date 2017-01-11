@@ -25,12 +25,12 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "github_changelog_generator"
   
   spec.add_dependency "clipboard"
+  spec.add_dependency "ffi"
   spec.add_dependency "colorize"
   spec.add_dependency "pdf-forms", "~> 1.1.1"
   spec.add_dependency "pandoc-ruby"
   spec.add_dependency "thor"
   spec.add_dependency 'bibtex-ruby'
-
-  
+  spec.add_dependency 'terminal-table'
 end
 

@@ -23,7 +23,7 @@ TEXTO
     FileUtils.mkdir_p output_dir
   end
 
-  context 'quando configurado como projeto ',  :pdf, :lento,  :folha_aprovacao => 'ativada'  do
+  context 'quando configurado como projeto ',  :compilacao, :lento,  :folha_aprovacao => 'ativada'  do
     let (:output_dir) {"tmp/preambulo/projeto"}
     let (:configuracao_especifica) {{"projeto" => true}}
 
@@ -42,7 +42,7 @@ TEXTO
   end
 
 
-  context 'quando configurado como trabalho final ',  :pdf, :lento,  :folha_aprovacao => 'ativada'  do
+  context 'quando configurado como trabalho final ',  :compilacao, :lento,  :folha_aprovacao => 'ativada'  do
     let (:output_dir) {"tmp/preambulo/trabalho-final"}
     let (:configuracao_especifica) {{"projeto" => false}}
 

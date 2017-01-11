@@ -1,11 +1,43 @@
 # Change Log
 
+## [v0.6.2](https://github.com/abntex/limarka/tree/v0.6.2) (2017-01-09)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.6.1...v0.6.2)
+
+**Bugs corrigidos:**
+
+- problema no windows [\#115](https://github.com/abntex/limarka/issues/115)
+
+## [v0.6.1](https://github.com/abntex/limarka/tree/v0.6.1) (2017-01-08)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.6.0...v0.6.1)
+
+**Melhorias implementadas:**
+
+- Utilizar sistema de integração contínua [\#108](https://github.com/abntex/limarka/issues/108)
+
+**Bugs corrigidos:**
+
+- O build no servidor de integração contínua está falhando [\#109](https://github.com/abntex/limarka/issues/109)
+
+**Issues fechados:**
+
+- Sala no gitter será o meio oficial de comunicação [\#112](https://github.com/abntex/limarka/issues/112)
+- Inclusão de badges no README [\#106](https://github.com/abntex/limarka/issues/106)
+
+## [v0.6.0](https://github.com/abntex/limarka/tree/v0.6.0) (2016-12-27)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.5.5...v0.6.0)
+
+**Melhorias implementadas:**
+
+- Criação de um logo para o projeto [\#102](https://github.com/abntex/limarka/issues/102)
+- Inclusão de menu interativo [\#100](https://github.com/abntex/limarka/issues/100)
+
 ## [v0.5.5](https://github.com/abntex/limarka/tree/v0.5.5) (2016-12-19)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.5.4...v0.5.5)
 
 **Melhorias implementadas:**
 
 - Remover dependência de execução pdftotext [\#97](https://github.com/abntex/limarka/issues/97)
+- Tornar compatível com o Windows [\#87](https://github.com/abntex/limarka/issues/87)
 
 ## [v0.5.4](https://github.com/abntex/limarka/tree/v0.5.4) (2016-12-19)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.5.3...v0.5.4)

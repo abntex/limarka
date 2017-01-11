@@ -28,7 +28,7 @@ TEXTO
     FileUtils.mkdir_p output_dir
   end
 
-  context 'quando ativada',  :pdf, :lento do
+  context 'quando ativada',  :compilacao, :lento do
     let (:output_dir) {"tmp/lista_tabelas/ativada"}
     let (:configuracao_da_tabela) {{'lista_tabelas' => true}}
     let (:t) {Limarka::Trabalho.new(configuracao: configuracao_padrao.merge(configuracao_da_tabela), texto: texto)}
@@ -45,7 +45,7 @@ TEXTO
     end
   end
 
-  context 'quando desativada',  :pdf, :lento do
+  context 'quando desativada',  :compilacao, :lento do
     let (:output_dir) {"tmp/lista_tabelas/ativada"}
     let (:configuracao_da_tabela) {{'lista_tabelas' => false}}
     let (:t) {Limarka::Trabalho.new(configuracao: configuracao_padrao.merge(configuracao_da_tabela), texto: texto)}

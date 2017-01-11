@@ -10,14 +10,17 @@ require 'pdf_forms'
 require 'github_changelog_generator/task'
 
 
-desc 'Executa os testes rápidos, que não possuem a tag :lento'
-RSpec::Core::RakeTask.new('spec:fast') do |t|
-  t.rspec_opts = "--tag ~lento"
+desc 'Executa os testes ruby'
+RSpec::Core::RakeTask.new('spec') do |t|
+  t.rspec_opts = "--tag ~compilacao --tag ~dependencias_latex" 
 end
 
-RSpec::Core::RakeTask.new(:spec)
+desc 'Executa os testes com compilação Latex'
+RSpec::Core::RakeTask.new('spec:latex') do |t|
+  t.rspec_opts = "--tag compilacao --tag dependencias_latex"
+end
 
-task :default => [:configuracao_padrao, 'spec:fast']
+task :default => [:configuracao_padrao, 'spec']
 
 GitHubChangelogGenerator::RakeTask.new :changelog do |c|
   c.future_release = "v"+Limarka::VERSION

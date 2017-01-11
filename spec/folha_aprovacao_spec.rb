@@ -24,7 +24,7 @@ TEXTO
     FileUtils.mkdir_p output_dir
   end
 
-  context 'quando geração ativada',  :pdf, :lento,  :folha_aprovacao => 'ativada'  do
+  context 'quando geração ativada',  :compilacao, :lento,  :folha_aprovacao => 'ativada'  do
     let (:output_dir) {"tmp/folha_aprovacao/geracao"}
     let (:avalidor1) {"Nome-do-Avaliador1"}
     let (:area_de_concentracao) {"MinhaÁreaDeConcentração"}
@@ -60,7 +60,7 @@ TEXTO
 
 
   
-  context 'quando geração desativada',  :pdf, :lento, :folha_aprovacao => 'desativada' do
+  context 'quando geração desativada',  :compilacao, :lento, :folha_aprovacao => 'desativada' do
     let (:output_dir) {"tmp/folha_aprovacao/desativada"}
     let (:avalidor1) {"Nome-do-Avaliador1"}
     let (:configuracao_especifica) {{"folha_de_aprovacao" => false, "avaliador1"=>avalidor1}}
@@ -78,7 +78,7 @@ TEXTO
     end
   end
 
-  context 'quando inclusão de escaneada ativada',  :pdf, :lento, :folha_aprovacao => 'escaneada' do
+  context 'quando inclusão de escaneada ativada',  :compilacao, :lento, :folha_aprovacao => 'escaneada' do
     let (:output_dir) {"tmp/folha_aprovacao/inclusao"}
     let (:avalidor1) {"Nome-do-Avaliador1"}
     let (:configuracao_especifica) {{"incluir_folha_de_aprovacao" => true}}
