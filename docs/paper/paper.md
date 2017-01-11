@@ -25,8 +25,9 @@ end of their course. But these documents must be written according to Brazilian'
 (it's for sale), it changes over time and has many rules.
 
 Limarka makes possible to produce these documents according to ABNT standard,
-by writing it with Markdown. When Markdown is not expressive enough to follow 
-ABNT rules, the user will need to input Latex code, and limarka makes it easier.
+by writing it with Markdown. Where the Markdown syntax is not expressive enough 
+to follow ABNT rules, the user will need to input Latex code, and limarka 
+makes it easier.
 
 Limarka uses @pandoc to convert documents from Markdown to Latex, but uses custom
 templates based on @abnTeX2 and configuration is done by filling a PDF @form, 
