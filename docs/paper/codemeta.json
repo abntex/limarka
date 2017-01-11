@@ -1,0 +1,23 @@
+{
+  "@context": "https://raw.githubusercontent.com/mbjones/codemeta/master/codemeta.jsonld",
+  "@type": "Code",
+  "author": [
+    {
+      "@id": "http://orcid.org/0000-0002-9165-9438",
+      "@type": "Person",
+      "email": "eduardo.ufpb@gmail.com",
+      "name": "Eduardo de Santana Medeiros Alexandre",
+      "affiliation": "Universidade Federal da Paraíba"
+    }
+  ],
+  "identifier": "",
+  "codeRepository": "https://github.com/abntex/limarka",
+  "datePublished": "2016-12-08",
+  "dateModified": "2016-12-08",
+  "dateCreated": "2016-12-08",
+  "description": "Limarka makes possible to write dissertation and thesis with Markdown and produces PDFs according to Brazilian's ABNT standard.",
+  "keywords": "limarka,ABNT,markdown,dissertation,thesis",
+  "license": "MIT",
+  "title": "limarka",
+  "version": "v0.5.1"
+}
