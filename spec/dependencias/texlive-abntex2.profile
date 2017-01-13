@@ -1,7 +1,7 @@
 selected_scheme scheme-medium
 collection-basic 1
 collection-binextra 1
-collection-context 1
+collection-context 0
 collection-fontsrecommended 1
 collection-fontutils 1
 collection-genericrecommended 1
