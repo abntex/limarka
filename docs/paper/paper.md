@@ -6,6 +6,7 @@ tags:
   - writing
   - dissertation
   - thesis
+  - abnt
 authors:
  - name: Eduardo S M Alexandre
    orcid: 0000-0002-9165-9438
@@ -13,7 +14,7 @@ authors:
 affiliations:
  - name: Universidade Federal da Paraíba
    index: 1
-date: 8 December 2016
+date: 15 January 2017
 bibliography: paper.bib
 ---
 
