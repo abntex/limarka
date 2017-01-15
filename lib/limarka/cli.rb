@@ -284,7 +284,8 @@ TEX
         when "rascunho"
           system "limarka", "exec", "--rascunho=rascunho.md"
         else
-          "You gave me #{cmd} -- I have no idea what to do with that."
+          "Você digitou a opção #{cmd} -- esta não é uma opção válida, apresentando o menu.\n"
+          puts table
         end
       end
 
