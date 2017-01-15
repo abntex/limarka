@@ -1,11 +1,32 @@
 # Change Log
 
+## [v0.6.3](https://github.com/abntex/limarka/tree/v0.6.3) (2017-01-15)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.6.2...v0.6.3)
+
+**Melhorias implementadas:**
+
+- Fazer os testes Latex passarem no travis [\#113](https://github.com/abntex/limarka/issues/113)
+- Tornar a ajuda \(o wiki\) acessível off-line [\#105](https://github.com/abntex/limarka/issues/105)
+- Melhorias de navegação no Wiki [\#101](https://github.com/abntex/limarka/issues/101)
+
+**Bugs corrigidos:**
+
+- Erro quando há espaço no path do diretório no Windows [\#117](https://github.com/abntex/limarka/issues/117)
+
+**Issues fechados:**
+
+- Apresentar a ferramenta utilizando gif animados [\#114](https://github.com/abntex/limarka/issues/114)
+- Write a better CONTRIBUTING and README [\#99](https://github.com/abntex/limarka/issues/99)
+- Software paper writing [\#94](https://github.com/abntex/limarka/issues/94)
+- Several actions related to the software paper [\#93](https://github.com/abntex/limarka/issues/93)
+- Comunicar a equipe do abntex sobre o lançamento do limarka [\#66](https://github.com/abntex/limarka/issues/66)
+
 ## [v0.6.2](https://github.com/abntex/limarka/tree/v0.6.2) (2017-01-09)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.6.1...v0.6.2)
 
 **Bugs corrigidos:**
 
-- problema no windows [\#115](https://github.com/abntex/limarka/issues/115)
+- Falta do gem ffi causa problema no Windows [\#115](https://github.com/abntex/limarka/issues/115)
 
 ## [v0.6.1](https://github.com/abntex/limarka/tree/v0.6.1) (2017-01-08)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.6.0...v0.6.1)
