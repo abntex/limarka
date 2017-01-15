@@ -14,7 +14,7 @@ O limarka é uma ferramenta que possibilita seus usuários escreverem relatório
 
 ![logo](https://raw.githubusercontent.com/wiki/abntex/limarka/imagens/escrevendo-objetivos-em-markdown.gif)
 
-# Especificidades do limarka
+# Quem utiliza o limarka diz que ele é fácil e prazeroso, descrubra o porquê!
 
 <!-- Explain what makes your project special, useful, exciting! -->
 
