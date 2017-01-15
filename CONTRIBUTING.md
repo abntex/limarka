@@ -12,6 +12,8 @@ O projeto tem como origem uma pesquisa científica (em andamento) sobre utiliza�
 
 - [Realize o experimento de utilização](https://github.com/abntex/limarka/wiki/Experimentos)
 
+Acesse o [chat no gitter](http://gitter.im/abntex/limarka) e fale conosco, independente do seu perfil.
+
 # Professor
 
 Como professor você pode contribuir com o limarka divulgando-o e ofertando o limarka como uma opção para seus alunos realizarem tarefas. 
@@ -38,13 +40,9 @@ Como professor você pode contribuir com o limarka divulgando-o e ofertando o li
 - Escreva seu trabalho de conclusão ou sua proposta/projeto com o limarka e compartilhe sua experiência
 - Clique na estrela [no repositório do projeto](https://github.com/abntex/limarka) (equivale a um *like*) no github.
 
-# Designer
-
-- [Precisamos de ajuda para criar um logotipo para o projeto](https://github.com/abntex/limarka/issues/102).
-
 # Usuário Latex
 
-TODO.
+Gostaríamos de converter as [customizações conhecidas do abnTeX2](https://github.com/abntex/abntex2/wiki/CustomizacoesConhecidas) para utilização com o limarka.
 
 # Desenvolvedor Ruby
 
@@ -55,6 +53,20 @@ Correção de bugs e implementação de novas funcionalidades através de Pull r
 Ao participar desse projeto você está de acordo com o [código de conduda].
 
 [código de conduda]: https://github.com/abntex/limarka/blob/master/CODE_OF_CONDUCT.md
+
+# Desenvolvedor WEB
+
+Nós desejamos melhorar a experiência de utilização da ferramenta implementando 
+um site que gere conteúdos dinâmicos.
+
+Suponha que um usuário deseja adicionar uma referência de um artigo, gostaria
+que o usuário clicasse em "Artigo" e um formulário fosse apresentado para 
+preenchimento e acordo com os campos bib desse tipo de entrada. Quando o usuário
+vai preenchendo o código bib é gerado automaticamente para inserção no arquivo
+de referências.
+
+Para compreender a funcionalidade veja o site [http://shields.io](http://shields.io/) e clique em algum dos badges.
+
 
 ## Implementando uma nova funcionalidade
 

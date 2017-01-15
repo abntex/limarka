@@ -10,11 +10,7 @@ Olá! Bem vindo ao limarka!
 
 O limarka é uma ferramenta que possibilita seus usuários escreverem relatórios ou trabalhos de conclusão de curso (Monografia, TCC, Dissertação ou Tese) em arquivos somente texto e **produzir PDFs em conformidades com as Normas da ABNT**. A produção desse tipo de trabalho é um momento sensível na vida dos estudantes, que pode contribuir para evasão no ensino superior. O objetivo do limarka é liberar dos estudantes os esforços de formatação e adequação às Normas da ABNT, deixando-os concentrar-se no planejamento, execução e escrita de seus trabalhos.
 
-# Utilizando o limarka
-
-![logo](https://raw.githubusercontent.com/wiki/abntex/limarka/imagens/escrevendo-objetivos-em-markdown.gif)
-
-# Quem utiliza o limarka diz que ele é fácil e prazeroso, descrubra o porquê!
+# Quem utiliza o limarka diz que ele é fácil e prazeroso, descubra o porquê!
 
 <!-- Explain what makes your project special, useful, exciting! -->
 
@@ -25,12 +21,16 @@ O limarka é uma ferramenta que possibilita seus usuários escreverem relatório
 * Permite a escrita do trabalho em arquivos somente texto, utilizando Markdown
 * As configurações são realizadas em um arquivo de formulário em PDF
 
+## Exemplo de utilização do limarka
+
+![logo](https://raw.githubusercontent.com/wiki/abntex/limarka/imagens/escrevendo-objetivos-em-markdown.gif)
+
 # Como iniciar utilização
 
 <!-- Show how to get started using or contribution to the project -->
 
-- [Veja se o visual do PDF gerado com a ferramenta lhe satisfaz](https://github.com/abntex/trabalho-academico-limarka/releases/download/v0.2.0/xxx-Monografia-projeto.pdf)
 - [Para começar a utilizar a ferramenta siga as instruções no wiki do projeto](https://github.com/abntex/limarka/wiki)
+- Lembre-se de acessar o [chat no gitter](http://gitter.im/abntex/limarka) para tirar suas dúvidas sobre a ferramenta.
 
 # Contribuindo com o projeto
 
@@ -60,12 +60,21 @@ Veja como é fácil contribuir!
 
 - Auxilie na criação de templates latex customizados para as instituições
 
-## Desenvolvedor Ruby 
+## Desenvolvedor Ruby
 
 [![GitHub issues](https://img.shields.io/github/issues/abntex/limarka.svg)](https://github.com/abntex/limarka/issues)
 
 - [Escolha uma das funcionalidades para implementar](https://github.com/abntex/limarka/issues)
 - Notifique ou corrija um Bug
+
+Acesse o [chat no gitter](http://gitter.im/abntex/limarka) e fale conosco!
+
+## Desenvolvedor Web
+
+Nós desejamos melhorar a experiência de utilização da ferramenta implementando 
+um site que gere conteúdos dinâmicos, gostaria de contribuir? 
+
+Acesse o [chat no gitter](http://gitter.im/abntex/limarka) e fale conosco!
 
 ## Todas as formas de contribuição
 
@@ -75,7 +84,7 @@ Consulte o arquivo [CONTRIBUTING.md](CONTRIBUTING.md) para verificar todas as fo
 
 ## Deseja entrar em contato?
 
-O meio de comunicação oficial do limarka é uma sala de bate papo no gitter: [![Join the chat at https://gitter.im/abntex/limarka](https://badges.gitter.im/abntex/limarka.svg)](https://gitter.im/abntex/limarka?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+O meio de comunicação oficial do limarka é uma sala de bate papo no gitter: [![Join the chat at https://gitter.im/abntex/limarka](https://badges.gitter.im/abntex/limarka.svg)](https://gitter.im/abntex/limarka)
 
 # Links
 
@@ -83,39 +92,12 @@ O meio de comunicação oficial do limarka é uma sala de bate papo no gitter: [
 - [Vídeos](https://www.youtube.com/playlist?list=PLTnAY6TvPRKK6OgGYy3UA0oFdfCfRZesY) -- recomendo assistir em velocidade rápida
 - [Convite para realização de experimento de utilização](https://github.com/abntex/limarka/wiki/Experimentos)
 
-# Por que escrever em Markdown em vez de Latex?
-
-O LaTeX é ótimo e bastante útil para quem deseja percorrer uma carreira de Pesquisador. Muitos *journals* disponibilizam modelos somente em LaTeX para produção de artigos, aprender LaTeX irá ser útil nessa carreira. Mas se você não pretende utilizar LaTeX após a conclusão do seu curso, por que investir na longa curva de aprendizado do LaTeX?
-
-Com o limarka você agora possui outra alternativa de investimento: *aprender Markdown* (que é bastante simples).
-
-O [Markdown](https://pt.wikipedia.org/wiki/Markdown) é uma [linguagem simples de marcação](https://en.wikipedia.org/wiki/Lightweight_markup_language). Os princípios das linguagem simples de marcação estão sendo popularizados em diversas ferramentas de interação social, veja alguns exemplos: [Github](https://help.github.com/articles/basic-writing-and-formatting-syntax/), [Moodle](https://docs.moodle.org/23/en/Markdown), [WhatsApp](https://www.whatsapp.com/faq/en/general/26000002), [Facebook](http://wersm.com/facebook-is-testing-rich-text-formatting-with-markdown/) [Google Plus](https://plus.google.com/+SarahHill/posts/TWYwPctEpJp), [Jekyll](http://jekyllrb.com), etc.
-
-Após ou durante conclusão do seu curso, você pretende:
-
-- Interagir através da escrita em redes sociais ou fóruns de discussão?
-- Editar Wikis ou formatar mensagens?
-- Participar em projetos no Github?
-- Escrever documentações de softwares?
-- Gerar código HTML a partir de texto?
-- Elaborar *ebooks*?
-
-Se você respondeu afirmativamente a algumas dessas perguntas, aprender uma linguagem simples de marcação (como o Markdown) é um investimento rentável.
-
-**OBS:** A implementação atual do limarka ainda exige conhecimentos mínimos do Latex.
-
-# Qual a relação do limarka com o abnTeX?
-
-O [abnTeX](https://github.com/abntex) provém  uma suíte para LaTeX que atende os requisitos das normas da ABNT (Associação Brasileira de Normas Técnicas) para elaboração de trabalhos acadêmicos como teses, dissertações, projetos de pesquisa e outros documentos do gênero.
-
-O limarka converte os textos produzidos em Markdown para LaTeX, utilizando os modelos do abnTeX2 (que são extensivamente testados e incrementados pela comunidade nacional), produzindo um PDF em conformidade com as Normas da ABNT. O limarka é um projeto pertencente ao grupo do [abnTeX](https://github.com/abntex).
-
-# Funcionalidades
+# Funcionalidades do limarka
 
 - Utilização da linguagem Markdown para escrita do texto;
 - Configurações através de formulário PDF ou arquivo YAML;
 - Possibilidade de inclusão de códigos Latex;
-- Facilidade para geração de códigos para inclusão de Figuras, Tabelas, Referências e Citações;
+- Facilidade para geração de códigos para inclusão de Figuras, Quadros, Tabelas, Referências e Citações;
 - Facilidade em edição ou personalização de templates;
 - Facilidade de obter suporte ao código Latex gerado (compatível com o estilo do abnTeX2);
 
