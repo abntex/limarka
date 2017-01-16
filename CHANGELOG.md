@@ -1,5 +1,12 @@
 # Change Log
 
+## [v0.6.4](https://github.com/abntex/limarka/tree/v0.6.4) (2017-01-16)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.6.3...v0.6.4)
+
+**Issues fechados:**
+
+- Updating version software of the paper [\#120](https://github.com/abntex/limarka/issues/120)
+
 ## [v0.6.3](https://github.com/abntex/limarka/tree/v0.6.3) (2017-01-15)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.6.2...v0.6.3)
 
@@ -15,11 +22,11 @@
 
 **Issues fechados:**
 
+- Comunicar a equipe do abntex sobre o lançamento do limarka [\#66](https://github.com/abntex/limarka/issues/66)
 - Apresentar a ferramenta utilizando gif animados [\#114](https://github.com/abntex/limarka/issues/114)
 - Write a better CONTRIBUTING and README [\#99](https://github.com/abntex/limarka/issues/99)
 - Software paper writing [\#94](https://github.com/abntex/limarka/issues/94)
 - Several actions related to the software paper [\#93](https://github.com/abntex/limarka/issues/93)
-- Comunicar a equipe do abntex sobre o lançamento do limarka [\#66](https://github.com/abntex/limarka/issues/66)
 
 ## [v0.6.2](https://github.com/abntex/limarka/tree/v0.6.2) (2017-01-09)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.6.1...v0.6.2)
