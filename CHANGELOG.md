@@ -1,5 +1,12 @@
 # Change Log
 
+## [v0.6.5](https://github.com/abntex/limarka/tree/v0.6.5) (2017-01-16)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.6.4...v0.6.5)
+
+**Melhorias implementadas:**
+
+- Documentação da API [\#121](https://github.com/abntex/limarka/issues/121)
+
 ## [v0.6.4](https://github.com/abntex/limarka/tree/v0.6.4) (2017-01-16)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.6.3...v0.6.4)
 
