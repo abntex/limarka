@@ -2,7 +2,9 @@
 
 module Limarka
 
+  # Tentativa para criar um modelo de cronograma. Não é utilizado ainda.
   # Ver https://github.com/abntex/limarka/issues/90
+  # @see Cli
   class Cronograma
     attr_accessor :tabela, :legenda, :fonte, :rotulo
     

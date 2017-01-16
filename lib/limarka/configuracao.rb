@@ -8,6 +8,10 @@ require 'open3'
 
 module Limarka
 
+  # Representa os comandos de linha sobre configuracao.
+  #
+  # Invoque `limarka help configuracao` para verificar os comandos.
+  # @see Cli
   class Configuracao < Thor
 
     method_option :output_dir, :aliases => '-o', :desc => 'Diretório onde será salvo a exportação', :default => '.'

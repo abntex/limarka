@@ -10,9 +10,13 @@ require 'bibtex'
 
 module Limarka
 
+  # Essa class é responsável por ser a abstração de converter o arquivo
+  # em Markdown para Latex.
   class Conversor
-    # trabalho
+    # o trabalho
     attr_accessor :t
+    # opções de execução
+    # @see Cli
     attr_accessor :options
     attr_accessor :pretextual_tex
     attr_accessor :postextual_tex
@@ -27,7 +31,7 @@ module Limarka
     end
 
 
-    ## Cria o arquivo 
+    ## Converte o trabalho para Latex
     def convert()
       FileUtils.mkdir_p(options[:output_dir])
 
@@ -73,6 +77,8 @@ module Limarka
 
     PRETEXTUAL = "templates/pretextual.tex"
 
+    # Escreve no arquivo o conteúdo gerado referente ao pretextual do documento.
+    # @param tempfile arquivo onde será escrito
     def pretextual(tempfile)
       s = StringIO.new
       necessita_de_arquivo_de_texto = ["errata"]
@@ -100,6 +106,8 @@ module Limarka
     end
 
     POSTEXTUAL = "templates/postextual.tex"
+    # Escreve no arquivo o conteúdo gerado referente ao pós-textual do documento.
+    # @param tempfile arquivo onde será escrito    
     def postextual(tempfile)
       # Referências (obrigatório)
       # Glossário (opcional)
@@ -137,25 +145,6 @@ module Limarka
       b.save_to referencias_bib_file
     end
     
-    def secao(template, condicao_para_conteudo, conteudo_externo)
-      s = StringIO.new
-      
-      Open3.popen3("pandoc -f markdown \"--data-dir=#{options[:templates_dir]}\" --template=#{template} --chapter -t latex") {|stdin, stdout, stderr, wait_thr|
-        stdin.write(hash_to_yaml(t.configuracao))
-        stdin.write("\n")
-        if (condicao_para_conteudo) then
-          stdin.write(conteudo_externo)
-          stdin.write("\n")
-        end
-        stdin.close
-        s << stdout.read
-        exit_status = wait_thr.value # Process::Status object returned.
-        if(exit_status!=0) then puts ("Erro: " + stderr.read).red end
-      }
-      s.string
-    end
-
-    
     def secao_referencias
       secao("postextual1-referencias", false, t.referencias)
     end
@@ -168,9 +157,11 @@ module Limarka
       secao("postextual4-anexos", t.anexos?, t.anexos)
     end
     
+    # @note Ainda não implementado
     def secao_glossario
     end
 
+    # @note Ainda não implementado
     def secao_indice
     end
     
@@ -234,6 +225,27 @@ module Limarka
         'xxx-Monografia-projeto.tex'
       end
 
+    end
+
+    private
+    
+    # Utilizado para gerar seções específicas do documento
+    def secao(template, condicao_para_conteudo, conteudo_externo)
+      s = StringIO.new
+      
+      Open3.popen3("pandoc -f markdown \"--data-dir=#{options[:templates_dir]}\" --template=#{template} --chapter -t latex") {|stdin, stdout, stderr, wait_thr|
+        stdin.write(hash_to_yaml(t.configuracao))
+        stdin.write("\n")
+        if (condicao_para_conteudo) then
+          stdin.write(conteudo_externo)
+          stdin.write("\n")
+        end
+        stdin.close
+        s << stdout.read
+        exit_status = wait_thr.value # Process::Status object returned.
+        if(exit_status!=0) then puts ("Erro: " + stderr.read).red end
+      }
+      s.string
     end
 
   end

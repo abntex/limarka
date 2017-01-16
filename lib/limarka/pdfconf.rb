@@ -7,18 +7,28 @@ require 'open3'
 
 module Limarka
 
+  # Essa classe é responsável por ler os valores salvos em um formulário PDF
+  # e gerar um hash compatível com configuração de um {Trabalho}.
+  # @see Trabalho#configuracao
   class Pdfconf
 
+
+    # @return [PdfForms::Pdf]    
     attr_reader :pdf
-    
+
+    # @param pdf [PdfForms::Pdf]
     def initialize(pdf: nil)
       @pdf = pdf
     end
 
+    # Atualiza um campo do formulário. Útil para execução de testes.
     def update(field, value)
       pdf.field(field).instance_variable_set(:@value, value)
     end
 
+    # Exporta um hash que será utilizado como configuração.
+    # @return [Hash] que é utilizado como configuração
+    # @see {Trabalho#configuracao}
     def exporta(valida=true)
       h = {}
       h.merge! caixas_de_texto

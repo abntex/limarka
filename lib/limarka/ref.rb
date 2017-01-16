@@ -6,6 +6,10 @@ require 'clipboard'
 
 module Limarka
 
+  # Essa classe contem os comandos de linhas referente aos comandos de `ref`.
+  # Execute `limarka help ref` para conhecer os comandos.
+  # Ela é incluída em {Cli}, utiliza a mesma sintaxe daquela classe.
+  # @see Cli
   class Ref < Thor
     include Thor::Actions
     

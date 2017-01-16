@@ -1,8 +1,12 @@
 # coding: utf-8
 
 module Limarka
+
+  # Esta classe representa o seu trabalho acadêmico.
+  # @author Eduardo de Sanana Medeiros Alexandre
   class Trabalho
-    # Todas as chaves de configuração devem ser string (e não utilizar simbolos!)
+    # Todas as chaves de configuração devem ser string (não utilizar simbolos!)
+    # @return [Hash] a configuração desse trabalho.
     attr_accessor :configuracao
     attr_accessor :texto, :anexos, :apendices, :errata
     attr_reader :referencias
@@ -21,6 +25,9 @@ module Limarka
 #      @configuracao = c.inject({}){|h,(k,v)| h[k.to_s] = v; h} # convert to strings
 #    end
 
+
+    # Atualiza a configuração do trabalho.
+    # @param configuracao [Hash]
     def configuracao=(configuracao)
       @configuracao = configuracao or {}
       siglas = @configuracao['siglas']
@@ -28,6 +35,7 @@ module Limarka
         @configuracao['siglas'] = nil
       end
     end
+
 
 
     def anexos=(a)
@@ -39,14 +47,17 @@ module Limarka
       end
     end
 
+    # @return o valor de `anexos` na configuração.
     def anexos?
       @configuracao['anexos']
     end
 
+    # @return o valor de `errata` na configuração.
     def errata?
       @configuracao['errata']
     end
 
+    # Atualiza errata na configuração
     def errata=(e)
       @errata = e
       if (e) then
@@ -103,6 +114,8 @@ module Limarka
       'configuracao.yaml'
     end
 
+    # Ler os arquivos e atualiza a configuração, texto, referências, apendices e anexos.
+    # @param options opção criada em {Cli}
     def atualiza_de_arquivos(options)
       self.configuracao = ler_configuracao(options)
       puts "Configuração lida: #{configuracao}" if options[:verbose]
@@ -114,6 +127,11 @@ module Limarka
       self.anexos = ler_anexos if anexos?
     end
 
+    # Ler a configuração. A origem da configuração é determinada pelo valor de `options[:configuracao_yaml]`.
+    # Se contém valor verdadeiro, ler do arquivo `configuracao.yaml`, caso contrário ler de `configuracao.pdf`.
+    # @param options [Hash] criado na classe {Cli}
+    # @return configuracao
+    # @see {Cli}
     def ler_configuracao(options)
       if options and options[:configuracao_yaml] then
         raise IOError, "Arquivo configuracao.yaml não foi encontrado, talvez esteja executando dentro de um diretório que não contém um projeto válido?" unless File.exist?('configuracao.yaml')
@@ -124,6 +142,10 @@ module Limarka
       end
     end
 
+    # Ler configuração do arquivo pdf
+    # @param file arquivo pdf
+    # @return [Hash] configuração exportada a partir da leitura do arquivo pdf
+    # @see Pdfconf#exporta
     def ler_configuracao_pdf(file)
       raise IOError, 'Arquivo não encontrado: ' + file unless File.exist? (file)
       pdf = PdfForms::Pdf.new file, (PdfForms.new 'pdftk'), utf8_fields: true
@@ -140,6 +162,7 @@ module Limarka
     end
     
     def ler_texto(rascunho_file)
+      # Ficou estranho esse código, merece um refactory.
       if (rascunho_file) then
         File.open(rascunho_file, 'r') {|f| f.read}
       else  
@@ -147,18 +170,25 @@ module Limarka
       end
     end
     
+    # Ler referências do arquivo de referências.
+    # @return [String] conteúdo do arquivo de referências
     def ler_referencias(configuracao)
       arquivo_de_referencias = configuracao['referencias_caminho']
       File.open(arquivo_de_referencias, 'r') {|f| f.read}
     end
 
+    # Salva o hash no formato yaml no caminho especificado. Adiciona o `\n---\n`
+    # para manter compatível com o leitor pandoc.
+    # @param hash que será exportado.
+    # @param caminho [String] aonde será salvo o arquivo
     def self.save_yaml(hash, caminho)
       File.open(caminho, 'w') do |f|
         f.write YAML.dump(hash)
         f.write "\n---\n"
       end
     end
-    
+   
+    # Salva os conteúdos do trabalho em arquivos no diretórios especificado. 
     def save(dir)
       Dir.chdir(dir) do
         File.open(Trabalho.default_texto_file, 'w'){|f| f.write texto} if texto

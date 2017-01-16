@@ -13,6 +13,12 @@ require 'terminal-table'
 
 module Limarka
 
+  # Essa classe é responsável por interpretar e executar os comandos de linha
+  # da ferramenta. Para compreender sua utilização recomendo consultar a
+  # documentação do [thor](http://whatisthor.com).
+  #
+  # @author Eduardo de Santana Medeiros Alexandre
+  # 
   class Cli < Thor
     include Thor::Actions
     
