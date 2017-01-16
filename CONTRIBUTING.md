@@ -106,6 +106,3 @@ Faça um Push para o seu fork:
 
 Talvez você deseje consulta a página sobre o [desenvolvimento da ferramenta](https://github.com/abntex/limarka/wiki/Desenvolvimento).
 
-# Participando no fórum
-
-Você também pode participar do [fórum de discussão do limarka](https://groups.google.com/forum/#!forum/limarka).
