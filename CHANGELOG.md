@@ -1,5 +1,13 @@
 # Change Log
 
+## [v0.6.6](https://github.com/abntex/limarka/tree/v0.6.6) (2017-01-22)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.6.5...v0.6.6)
+
+**Bugs corrigidos:**
+
+- Erro ao ler campos multi-linhas de configuração salva com o PDF-XChange Viewer  [\#124](https://github.com/abntex/limarka/issues/124)
+- Erro nas referências quando title está entre duplas chaves e contem subtítulo [\#122](https://github.com/abntex/limarka/issues/122)
+
 ## [v0.6.5](https://github.com/abntex/limarka/tree/v0.6.5) (2017-01-16)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.6.4...v0.6.5)
 
