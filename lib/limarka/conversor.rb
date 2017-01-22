@@ -24,6 +24,7 @@ module Limarka
     attr_accessor :txt
     attr_accessor :usa_pdftotext
     
+    # @param trabalho [Trabalho]
     def initialize(trabalho, options)
       self.t = trabalho
       self.options = options
@@ -129,7 +130,9 @@ module Limarka
       File.open(tempfile, 'w') { |file| file.write(postextual_tex) }
     end
 
-    ## arquivo temporário de referencias
+    # Cria arquivo temporário de referencias.
+    # 
+    # Separa o título em subtítulo quando contém `:`.
     def cria_xxx_referencias
       referencias_tempfile = Tempfile.new('referencias')
       File.open(referencias_tempfile, 'w') {|file| file.write(t.referencias)}
@@ -137,6 +140,10 @@ module Limarka
       b.each do |entry|
         if entry.title.include?(':') then
           s = entry.title.split(':')
+          if entry.title.start_with?("{") and entry.title.end_with?("}") then
+            s[0] = s[0][1..-1] # remove {
+            s[1] = s[1][1..-1] # remove }
+          end
           entry['title'] = s[0].strip
           entry['subtitle'] = s[1].strip
         end
