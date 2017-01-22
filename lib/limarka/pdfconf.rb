@@ -26,6 +26,13 @@ module Limarka
       pdf.field(field).instance_variable_set(:@value, value)
     end
 
+    # Ler valor do campo. Converte o final de linha para utilizar `universal_newline`.
+    def ler_campo(campo)
+      value = pdf.field(campo).value
+      value = value.encode(:universal_newline => true) if value
+      value
+    end
+
     # Exporta um hash que será utilizado como configuração.
     # @return [Hash] que é utilizado como configuração
     # @see {Trabalho#configuracao}
@@ -71,18 +78,18 @@ module Limarka
 
     def lista_ilustracoes
       campo = 'lista_ilustracoes_combo'
-      {'lista_ilustracoes' => pdf.field(campo).value.include?('Gerar')}
+      {'lista_ilustracoes' => ler_campo(campo).include?('Gerar')}
     end
 
     def lista_tabelas
       campo = 'lista_tabelas_combo'
-      {'lista_tabelas' => pdf.field(campo).value.include?('Gerar')}
+      {'lista_tabelas' => ler_campo(campo).include?('Gerar')}
     end
 
     def lista_siglas
       h = {}
       ['siglas','simbolos'].each do |campo|
-        str = pdf.field(campo).value
+        str = ler_campo(campo)
         if (str) then
           sa = [] # sa: s-array
           str.each_line do |linha|
@@ -96,7 +103,7 @@ module Limarka
     end
     
     def referencias
-      value = pdf.field('referencias_sistema_combo').value
+      value = ler_campo('referencias_sistema_combo')
       if value.include?('Numérica')  then
         {'referencias_sistema' => 'num'}
       elsif value.include?('Alfabética')  then
@@ -108,7 +115,7 @@ module Limarka
 
     def projeto
       campo = 'projeto_combo'
-      value = pdf.field(campo).value
+      value = ler_campo(campo)
 
       if value.include?('Projeto')  then
         {'projeto' => true}
@@ -121,7 +128,7 @@ module Limarka
 
     def ficha_catalografica
       campo = 'ficha_catalografica_combo'
-      value = pdf.field(campo).value
+      value = ler_campo(campo)
 
       if value.include?('Sem ficha')  then
         {'incluir_ficha_catalografica' => false}
@@ -135,7 +142,7 @@ module Limarka
     
     def nivel_educacao
       campo = 'nivel_educacao_combo'
-      value = pdf.field(campo).value
+      value = ler_campo(campo)
 
       if value.include?('Graduação')  then
         {'graduacao' => true, 'especializacao' => false, 'mestrado' => false, 'doutorado' => false, 'tipo_do_trabalho'=>'Monografia'}
@@ -152,7 +159,7 @@ module Limarka
 
     def folha_de_aprovacao
       campo = 'folha_de_aprovacao_combo'
-      value = pdf.field(campo).value
+      value = ler_campo(campo)
 
       if value.include?('Não gerar')  then
         {'folha_de_aprovacao' => false}
@@ -167,7 +174,7 @@ module Limarka
 
     
     def desativado?(campo)
-      pdf.field(campo).value.include?('Desativad') # a(o)
+      ler_campo(campo).include?('Desativad') # a(o)
     end
 
     # Substitui ',' e ';' por '.'  
@@ -183,7 +190,7 @@ module Limarka
       h = {}
       pdf.fields.each do |f|
         if (f.type == "Text") then
-          h[f.name] = f.value
+          h[f.name] = ler_campo(f.name)
         end
       end
       atualiza_palavras_chave(h)
