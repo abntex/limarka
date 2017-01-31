@@ -164,7 +164,7 @@ module Limarka
       if value.include?('Não gerar')  then
         {'folha_de_aprovacao' => false}
       elsif value.include?('Gerar folha')  then
-        {'folha_de_aprovacao' => true}
+        {'folha_de_aprovacao' => true, 'aprovacao_mes' => ler_campo('aprovacao_mes')}
       elsif value.include?('escaneada')  then
         {'incluir_folha_de_aprovacao' => true}
       else
