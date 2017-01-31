@@ -1,5 +1,12 @@
 # Change Log
 
+## [v0.6.7](https://github.com/abntex/limarka/tree/v0.6.7) (2017-01-31)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.6.6...v0.6.7)
+
+**Bugs corrigidos:**
+
+- Geração da folha de aprovação não apresenta o mês [\#128](https://github.com/abntex/limarka/issues/128)
+
 ## [v0.6.6](https://github.com/abntex/limarka/tree/v0.6.6) (2017-01-22)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.6.5...v0.6.6)
 
