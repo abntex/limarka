@@ -1,0 +1,184 @@
+%FDF-1.2
+%‚„œ”
+1 0 obj 
+<<
+/FDF 
+<<
+/Fields [
+<<
+/V ()
+/T (resumen)
+>> 
+<<
+/V (Anexos Desativado)
+/T (anexos_combo)
+>> 
+<<
+/V ()
+/T (coorientador)
+>> 
+<<
+/V (Dispensar uso de lista de ilustraÁıes)
+/T (lista_ilustracoes_combo)
+>> 
+<<
+/V (Gerar folha de aprovaÁ„o)
+/T (folha_de_aprovacao_combo)
+>> 
+<<
+/V ()
+/T (abstract_texto)
+>> 
+<<
+/V (Universidade/Faculdade do Brasil)
+/T (instituicao)
+>> 
+<<
+/V (ComputaÁ„o)
+/T (area_de_concentracao)
+>> 
+<<
+/V (Meu-curso)
+/T (curso)
+>> 
+<<
+/V ()
+/T (palavras_chave)
+>> 
+<<
+/V (Nome-do-Orientador)
+/T (orientador)
+>> 
+<<
+/V (Dispensar uso de lista de tabelas)
+/T (lista_tabelas_combo)
+>> 
+<<
+/V (Nome do autor)
+/T (author)
+>> 
+<<
+/V (GraduaÁ„o)
+/T (nivel_educacao_combo)
+>> 
+<<
+/V ()
+/T (linha_de_pesquisa)
+>> 
+<<
+/V (2017)
+/T (date)
+>> 
+<<
+/V (Cicrano)
+/T (avaliador3)
+>> 
+<<
+/V (Beltrano)
+/T (avaliador2)
+>> 
+<<
+/V (TÌtulo do trabalho)
+/T (title)
+>> 
+<<
+/V ()
+/T (palabras_clave)
+>> 
+<<
+/V (Fulano)
+/T (avaliador1)
+>> 
+<<
+/V (18)
+/T (aprovacao_dia)
+>> 
+<<
+/V ()
+/T (mots_cles)
+>> 
+<<
+/V (Programa de PÛs-GraduaÁ„o em XXX)
+/T (programa)
+>> 
+<<
+/V (Minha-titulaÁ„o)
+/T (titulacao)
+>> 
+<<
+/V (Cidade - UF)
+/T (local)
+>> 
+<<
+/V ()
+/T (keywords)
+>> 
+<<
+/V ()
+/T (resume)
+>> 
+<<
+/V ()
+/T (simbolos)
+>> 
+<<
+/V (ReferÍncias AlfabÈtica \(padr„o\))
+/T (referencias_sistema_combo)
+>> 
+<<
+/V (Errata Desativada)
+/T (errata_combo)
+>> 
+<<
+/V ()
+/T (dedicatoria)
+>> 
+<<
+/V ()
+/T (resumo)
+>> 
+<<
+/V (Projeto ou Proposta para QualificaÁ„o/AvaliaÁ„o)
+/T (projeto_combo)
+>> 
+<<
+/V (referencias.bib)
+/T (referencias_caminho)
+>> 
+<<
+/V (ABNT: AssociaÁ„o Brasileira de Normas TÈcnicas)
+/T (siglas)
+>> 
+<<
+/V (ApÍndices Desativado)
+/T (apendices_combo)
+>> 
+<<
+/V (Sem ficha catalogr·fica)
+/T (ficha_catalografica_combo)
+>> 
+<<
+/V ()
+/T (epigrafe)
+>> 
+<<
+/V (Maio)
+/T (aprovacao_mes)
+>> 
+<<
+/V ()
+/T (proposito)
+>> 
+<<
+/V ()
+/T (agradecimentos)
+>>]
+>>
+>>
+endobj 
+trailer
+
+<<
+/Root 1 0 R
+>>
+%%EOF
