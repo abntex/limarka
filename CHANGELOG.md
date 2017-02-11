@@ -1,5 +1,12 @@
 # Change Log
 
+## [v0.7.1](https://github.com/abntex/limarka/tree/v0.7.1) (2017-02-11)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.7.0...v0.7.1)
+
+**Melhorias implementadas:**
+
+- Atualização do pandoc para versão 1.19.2 [\#130](https://github.com/abntex/limarka/issues/130)
+
 ## [v0.7.0](https://github.com/abntex/limarka/tree/v0.7.0) (2017-02-11)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.6.7...v0.7.0)
 
