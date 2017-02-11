@@ -174,7 +174,7 @@ module Limarka
     
     def textual(pretextual_tempfile, postextual_tempfile)
       valida_yaml
-      Open3.popen3("pandoc -f markdown+raw_tex -t latex -s \"--data-dir=#{options[:templates_dir]}\" --template=trabalho-academico --normalize --chapter --include-before-body=#{pretextual_tempfile.path}  --include-after-body=#{postextual_tempfile.path} --filter pandoc_abnt") {|stdin, stdout, stderr, wait_thr|
+      Open3.popen3("pandoc -f markdown+raw_tex -t latex -s \"--data-dir=#{options[:templates_dir]}\" --template=trabalho-academico --normalize --top-level-division=chapter --include-before-body=#{pretextual_tempfile.path}  --include-after-body=#{postextual_tempfile.path} --filter pandoc_abnt") {|stdin, stdout, stderr, wait_thr|
         stdin.write(File.read(options[:templates_dir] + '/templates/configuracao-tecnica.yaml'))
         stdin.write("\n")
         stdin.write(hash_to_yaml(t.configuracao))
@@ -240,7 +240,7 @@ module Limarka
     def secao(template, condicao_para_conteudo, conteudo_externo)
       s = StringIO.new
       
-      Open3.popen3("pandoc -f markdown \"--data-dir=#{options[:templates_dir]}\" --template=#{template} --chapter -t latex --filter pandoc_abnt") {|stdin, stdout, stderr, wait_thr|
+      Open3.popen3("pandoc -f markdown \"--data-dir=#{options[:templates_dir]}\" --template=#{template} --top-level-division=chapter -t latex --filter pandoc_abnt") {|stdin, stdout, stderr, wait_thr|
         stdin.write(hash_to_yaml(t.configuracao))
         stdin.write("\n")
         if (condicao_para_conteudo) then
