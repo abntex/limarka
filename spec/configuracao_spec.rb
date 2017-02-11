@@ -32,7 +32,7 @@ describe 'configuracao.pdf', :integracao do
     system "libreoffice --headless --convert-to pdf configuracao.odt", :out=>"/dev/null"
   end
 
-  let (:pdf){PdfForms::Pdf.new 'configuracao.pdf', (PdfForms.new 'pdftk'), utf8_fields: true}
+  let(:pdf){PdfForms::Pdf.new 'configuracao.pdf', (PdfForms.new 'pdftk'), utf8_fields: true}
   let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
   let(:exportacao){pdfconf.exporta}
   let(:template_output) {template_mesclado(template, exportacao)}
