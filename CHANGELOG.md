@@ -1,11 +1,18 @@
 # Change Log
 
-## [v0.6.7](https://github.com/abntex/limarka/tree/v0.6.7) (2017-01-31)
-[Full Changelog](https://github.com/abntex/limarka/compare/v0.6.6...v0.6.7)
+## [v0.7.0](https://github.com/abntex/limarka/tree/v0.7.0) (2017-02-11)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.6.7...v0.7.0)
+
+**Melhorias implementadas:**
+
+- Criar filtro para inclusão de Fonte em figuras [\#127](https://github.com/abntex/limarka/issues/127)
 
 **Bugs corrigidos:**
 
-- Geração da folha de aprovação não apresenta o mês [\#128](https://github.com/abntex/limarka/issues/128)
+- Folha de aprovação gerada não apresenta o mês [\#128](https://github.com/abntex/limarka/issues/128)
+
+## [v0.6.7](https://github.com/abntex/limarka/tree/v0.6.7) (2017-01-31)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.6.6...v0.6.7)
 
 ## [v0.6.6](https://github.com/abntex/limarka/tree/v0.6.6) (2017-01-22)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.6.5...v0.6.6)
