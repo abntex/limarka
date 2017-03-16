@@ -17,8 +17,8 @@ Gem::Specification.new do |spec|
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
-  spec.requirements << 'pandoc, v1.19.1'
-  spec.post_install_message << 'O limarka depende de uma versão nova do pandoc (v1.19.1 ou superior) que ainda não está disponível nos repositórios de muitas distribuições. Será necessário instalar a nova versão manualmente: https://github.com/abntex/limarka/issues/138'
+  spec.requirements = 'pandoc, v1.19.1'
+  spec.post_install_message = 'O limarka depende de uma versão nova do pandoc (v1.19.1 ou superior) que ainda não está disponível nos repositórios de muitas distribuições. Será necessário instalar a nova versão manualmente: https://github.com/abntex/limarka/issues/138'
   
 
   spec.add_development_dependency "bundler", "~> 1.12"
