@@ -1,5 +1,18 @@
 # Change Log
 
+## [v0.7.2.pre](https://github.com/abntex/limarka/tree/v0.7.2.pre) (2017-04-08)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.7.1...v0.7.2.pre)
+
+**Melhorias implementadas:**
+
+- Possibilitar escrita de capítulos sem numeração [\#142](https://github.com/abntex/limarka/issues/142)
+- Exibir mensagem indicando a versão requerida do pandoc após instalação [\#138](https://github.com/abntex/limarka/issues/138)
+
+**Bugs corrigidos:**
+
+- Problema ao executar filtro pandoc\_abnt no Windows [\#143](https://github.com/abntex/limarka/issues/143)
+- Identação na lista de siglas [\#139](https://github.com/abntex/limarka/issues/139)
+
 ## [v0.7.1](https://github.com/abntex/limarka/tree/v0.7.1) (2017-02-11)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.7.0...v0.7.1)
 
