@@ -250,7 +250,7 @@ module Limarka
         stdin.close
         s << stdout.read
         exit_status = wait_thr.value # Process::Status object returned.
-        if(exit_status!=0) then puts ("Erro: " + stderr.read).red end
+        if(exit_status!=0) then puts ("Erro: " + stderr.read + "\nENV: " + ENV + "\npandoc_abnt_path: #{pandoc_abnt_path}").red end
       }
       s.string
     end

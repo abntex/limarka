@@ -1,3 +1,3 @@
 module Limarka
-  VERSION = "0.7.2.pre5"
+  VERSION = "0.7.2.pre6"
 end
