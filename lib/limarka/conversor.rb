@@ -87,7 +87,7 @@ module Limarka
       "epigrafe", "resumo", "abstract", "lista_ilustracoes", "lista_tabelas", 
       "lista_siglas", "lista_simbolos", "sumario"].each_with_index do |secao,indice|
         template = "pretextual#{indice+1}-#{secao}"
-        Open3.popen3(ENV,"pandoc -f markdown \"--data-dir=#{options[:templates_dir]}\" --template=#{template} -t latex --filter #{pandoc_abnt_path}") {|stdin, stdout, stderr, wait_thr|
+        Open3.popen3("pandoc -f markdown \"--data-dir=#{options[:templates_dir]}\" --template=#{template} -t latex --filter #{pandoc_abnt_path}") {|stdin, stdout, stderr, wait_thr|
           stdin.write(hash_to_yaml(t.configuracao))
           stdin.write("\n")
           if t.errata? and necessita_de_arquivo_de_texto.include?(secao) then
@@ -174,7 +174,7 @@ module Limarka
     
     def textual(pretextual_tempfile, postextual_tempfile)
       valida_yaml
-      Open3.popen3(ENV,"pandoc -f markdown+raw_tex -t latex -s \"--data-dir=#{options[:templates_dir]}\" --template=trabalho-academico --normalize --top-level-division=chapter --include-before-body=#{pretextual_tempfile.path}  --include-after-body=#{postextual_tempfile.path} --filter #{pandoc_abnt_path}") {|stdin, stdout, stderr, wait_thr|
+      Open3.popen3("pandoc -f markdown+raw_tex -t latex -s \"--data-dir=#{options[:templates_dir]}\" --template=trabalho-academico --normalize --top-level-division=chapter --include-before-body=#{pretextual_tempfile.path}  --include-after-body=#{postextual_tempfile.path} --filter #{pandoc_abnt_path}") {|stdin, stdout, stderr, wait_thr|
         stdin.write(File.read(options[:templates_dir] + '/templates/configuracao-tecnica.yaml'))
         stdin.write("\n")
         stdin.write(hash_to_yaml(t.configuracao))
@@ -240,7 +240,7 @@ module Limarka
     def secao(template, condicao_para_conteudo, conteudo_externo)
       s = StringIO.new
       
-      Open3.popen3(ENV,"pandoc -f markdown \"--data-dir=#{options[:templates_dir]}\" --template=#{template} --top-level-division=chapter -t latex --filter #{pandoc_abnt_path}") {|stdin, stdout, stderr, wait_thr|
+      Open3.popen3("pandoc -f markdown \"--data-dir=#{options[:templates_dir]}\" --template=#{template} --top-level-division=chapter -t latex --filter #{pandoc_abnt_path}") {|stdin, stdout, stderr, wait_thr|
         stdin.write(hash_to_yaml(t.configuracao))
         stdin.write("\n")
         if (condicao_para_conteudo) then
@@ -250,13 +250,13 @@ module Limarka
         stdin.close
         s << stdout.read
         exit_status = wait_thr.value # Process::Status object returned.
-        if(exit_status!=0) then puts ("Erro: " + stderr.read + "\nENV: " + ENV.to_s + "\npandoc_abnt_path: #{pandoc_abnt_path}").red end
+        if(exit_status!=0) then puts ("Erro: " + stderr.read).red end
       }
       s.string
     end
 
     def pandoc_abnt_path 
-      ENV["PANDOC_ABNT_PATH"] or "pandoc_abnt"
+      ENV["PANDOC_ABNT_BAT"] or "pandoc_abnt"
     end
 
   end
