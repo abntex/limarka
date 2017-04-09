@@ -23,9 +23,7 @@ module Limarka
     attr_accessor :texto_tex
     attr_accessor :txt
     attr_accessor :usa_pdftotext
-    
-    pandoc_abnt_path = ENV["PANDOC_ABNT_PATH"] or "pandoc_abnt"
-    
+        
     # @param trabalho [Trabalho]
     def initialize(trabalho, options)
       self.t = trabalho
@@ -255,6 +253,10 @@ module Limarka
         if(exit_status!=0) then puts ("Erro: " + stderr.read).red end
       }
       s.string
+    end
+
+    def pandoc_abnt_path 
+      ENV["PANDOC_ABNT_PATH"] or "pandoc_abnt"
     end
 
   end
