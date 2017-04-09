@@ -1,7 +1,7 @@
 # Change Log
 
-## [v0.7.2.pre](https://github.com/abntex/limarka/tree/v0.7.2.pre) (2017-04-08)
-[Full Changelog](https://github.com/abntex/limarka/compare/v0.7.1...v0.7.2.pre)
+## [v0.7.2](https://github.com/abntex/limarka/tree/v0.7.2) (2017-04-08)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.7.1...v0.7.2)
 
 **Melhorias implementadas:**
 
