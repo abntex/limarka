@@ -2,7 +2,8 @@
 
 [![Build Status](https://travis-ci.org/abntex/limarka.svg?branch=master)](https://travis-ci.org/abntex/limarka) [![Gem Version](https://badge.fury.io/rb/limarka.svg)](https://badge.fury.io/rb/limarka) [![Join the chat at https://gitter.im/abntex/limarka](https://badges.gitter.im/abntex/limarka.svg)](https://gitter.im/abntex/limarka?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-![Normas da ABNT em 2017: Atualizadas](https://img.shields.io/badge/Normas da ABNT em 2017-Atualizadas-brightgreen.svg) ![NBR 14724:2011 100%](https://img.shields.io/badge/NBR 2014724%3A2011-100%25-brightgreen.svg)
+![Normas da ABNT em 2017: Atualizadas](https://img.shields.io/badge/Normas da ABNT em 2017-Atualizadas-brightgreen.svg) 
+![NBR 14724:2011 100%](https://img.shields.io/badge/NBR 2014724%3A2011-100%25-brightgreen.svg)
 
 Olá! Bem vindo ao limarka!
 
