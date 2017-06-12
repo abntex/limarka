@@ -6,7 +6,7 @@ require 'open3'
 
 describe 'Folha de Aprovação', :folha_aprovacao do
   
-  let!(:options) {{output_dir: output_dir, templates_dir: Dir.pwd}}
+  let!(:options) {{output_dir: output_dir, templates_dir: modelo_dir}}
   let(:tex_file) {Limarka::Conversor.tex_file(t.configuracao)}
   let (:t) {Limarka::Trabalho.new(configuracao: configuracao_padrao.merge(configuracao_especifica), texto: texto)}
   let (:texto) {<<-TEXTO
@@ -22,6 +22,7 @@ TEXTO
   before do
     FileUtils.rm_rf output_dir
     FileUtils.mkdir_p output_dir
+    FileUtils.cp "#{modelo_dir}/latexcustomizacao.sty",output_dir
   end
 
   context 'quando geração ativada',  :compilacao, :lento,  :folha_aprovacao => 'ativada'  do

@@ -6,6 +6,8 @@ require 'pdf_forms'
 
 describe Limarka::Pdfconf do
 
+  let!(:root_dir){Dir.pwd}
+
   describe "#ler_campo" do
     
     context "quando campo multi-linhas salvo pelo evince", :pdf_evince, :i124 do
@@ -46,12 +48,14 @@ ES: Engenharia de Software"}
       let(:pdf_file){"test/formulario-pdf/fdf/gerar-folha-de-aprovacao.pdf"}
       let(:test_dir){"test/formulario-pdf/fdf"}
       before(:context) do
-        system "libreoffice --headless --convert-to pdf configuracao.odt", :out=>"/dev/null"
+        Dir.chdir(modelo_dir) do
+          system "libreoffice --headless --convert-to pdf configuracao.odt", :out=>"/dev/null"
+        end
       end
 
       before do
         FileUtils.mkdir_p test_dir
-        system "pdftk configuracao.pdf fill_form #{fdf_file} output #{pdf_file}"
+        system "pdftk #{modelo_dir}/configuracao.pdf fill_form #{fdf_file} output #{pdf_file}"
         pdf = PdfForms::Pdf.new pdf_file, (PdfForms.new 'pdftk'), utf8_fields: true
         @pdfconf = Limarka::Pdfconf.new(pdf: pdf)
       end

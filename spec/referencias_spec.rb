@@ -7,7 +7,7 @@ describe 'Referências', :referencias do
 
 
   let (:seed) {Random.new_seed}
-  let!(:options) {{output_dir: output_dir, templates_dir: Dir.pwd}}
+  let!(:options) {{output_dir: output_dir, templates_dir: modelo_dir}}
   
   context 'quando configurada para ler de referencias.bib', :referencias, :referencias_bib do
     let (:configuracao) {configuracao_padrao.merge({'referencias_caminho' => 'referencias.bib', 'referencias_sistema'=>'alf'})}
@@ -42,6 +42,8 @@ REFERENCIAS
     let (:trabalho) {Limarka::Trabalho.new(texto: texto, referencias_bib: referencias_bib, configuracao: configuracao)}
     before do
       FileUtils.rm_rf output_dir
+      FileUtils.mkdir_p output_dir
+      FileUtils.cp "#{modelo_dir}/latexcustomizacao.sty",output_dir
       
       @cv = Limarka::Conversor.new(trabalho, options)
       @cv.convert

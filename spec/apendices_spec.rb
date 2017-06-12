@@ -5,10 +5,12 @@ require 'limarka/conversor'
 
 describe 'Apendices', :apendices do
 
-  let!(:options) {{output_dir: output_dir, templates_dir: Dir.pwd}}  
+  let!(:options) {{output_dir: output_dir, templates_dir: modelo_dir}}  
   let (:configuracao) {configuracao_padrao}
   before do
     FileUtils.rm_rf output_dir
+    FileUtils.mkdir_p output_dir
+    FileUtils.cp "#{modelo_dir}/latexcustomizacao.sty",output_dir
   end
 
   context 'quando configurado como oculto' do

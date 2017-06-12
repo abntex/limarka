@@ -5,7 +5,7 @@ require 'limarka/conversor'
 
 describe 'Anexos', :anexos do
   
-  let!(:options) {{output_dir: output_dir, templates_dir: Dir.pwd}}
+  let!(:options) {{output_dir: output_dir, templates_dir: modelo_dir}}
   let(:tex_file) {Limarka::Conversor.tex_file(t.configuracao)}
   let (:anexos) {<<-ANEXO
 # Primeiro anexo
@@ -22,6 +22,7 @@ ANEXO
   before do
     FileUtils.rm_rf output_dir
     FileUtils.mkdir_p output_dir
+    FileUtils.cp "#{modelo_dir}/latexcustomizacao.sty",output_dir
   end
 
   context 'quando configurado como desativado' do
@@ -33,7 +34,7 @@ ANEXO
       @cv.convert
     end
     
-    it 'não serao gerados', :wip do
+    it 'não serao gerados' do
       expect(@cv.texto_tex).to include("% Anexos desativados")
       expect(@cv.texto_tex).not_to include("\\begin{anexosenv}")
       expect(@cv.texto_tex).not_to include("\\partanexos")
@@ -47,7 +48,7 @@ ANEXO
 
   context 'quando configurado para serem gerados' do
     let (:output_dir) {"tmp/anexos/ativado"}
-    let (:t) {Limarka::Trabalho.new(configuracao: configuracao_padrao, anexos: anexos)}
+    let (:t) {Limarka::Trabalho.new(configuracao: configuracao_padrao.merge({input_dir: modelo_dir}), anexos: anexos)}
 
     before do
       @cv = Limarka::Conversor.new(t, options)
@@ -58,12 +59,12 @@ ANEXO
       expect(File).to exist(@cv.texto_tex_file)
     end
     
-    it 'a seção de anexos foi criada', :wip do
+    it 'a seção de anexos foi criada' do
       expect(@cv.texto_tex).to include("\\begin{anexosenv}")
       expect(@cv.texto_tex).to include("\\partanexos")
       expect(@cv.texto_tex).to include("\\end{anexosenv}")
     end
-    it 'os anexos foram incluído no arquivo', :wip do
+    it 'os anexos foram incluído no arquivo' do
       expect(@cv.texto_tex).to include("\\chapter{Primeiro anexo}")
       expect(@cv.texto_tex).to include("\\chapter{Segundo anexo}")
     end

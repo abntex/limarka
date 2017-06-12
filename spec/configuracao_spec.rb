@@ -11,7 +11,7 @@ describe 'configuracao.pdf', :integracao do
     yaml_tempfile = Tempfile.new('yaml')
     result = ''
     begin
-      Open3.popen3("pandoc -f markdown --data-dir=. --template=#{template} -t latex") {|stdin, stdout, stderr, wait_thr|
+      Open3.popen3("pandoc -f markdown --data-dir=#{modelo_dir} --template=#{template} -t latex") {|stdin, stdout, stderr, wait_thr|
         stdin.write(hash_to_yaml(yaml_hash))
         stdin.close
         result << stdout.read
@@ -29,10 +29,12 @@ describe 'configuracao.pdf', :integracao do
   
   before (:all) do
     # Precisa do libreoffice e ele precisa está fechado!
-    system "libreoffice --headless --convert-to pdf configuracao.odt", :out=>"/dev/null"
+    Dir.chdir(modelo_dir) do
+      system "libreoffice --headless --convert-to pdf configuracao.odt", :out=>"/dev/null"
+    end
   end
 
-  let(:pdf){PdfForms::Pdf.new 'configuracao.pdf', (PdfForms.new 'pdftk'), utf8_fields: true}
+  let(:pdf){PdfForms::Pdf.new "#{modelo_dir}/configuracao.pdf", (PdfForms.new 'pdftk'), utf8_fields: true}
   let(:pdfconf){Limarka::Pdfconf.new(pdf: pdf)}
   let(:exportacao){pdfconf.exporta}
   let(:template_output) {template_mesclado(template, exportacao)}

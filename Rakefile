@@ -48,8 +48,11 @@ end
 
 desc 'Cria configuração padrão para execução dos testes, o libreoffice precisa está fechado!'
 task :configuracao_padrao do
-  system "libreoffice --headless --convert-to pdf configuracao.odt"
-  system 'bundle', 'exec', 'limarka', 'configuracao', 'exporta', '-o', 'spec/configuracao_padrao'
+  Dir.chdir('modelo-oficial') do
+    system "libreoffice --headless --convert-to pdf configuracao.odt"
+  end
+  configuracao_padrao_spec_dir = File.absolute_path('spec/configuracao_padrao')
+  system 'bundle', 'exec', 'limarka', 'configuracao', 'exporta', '-o', configuracao_padrao_spec_dir,'-i','modelo-oficial'
 end
 
 directory 'dissertacao-limarka/output'

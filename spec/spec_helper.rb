@@ -4,7 +4,9 @@ require 'limarka'
 require 'yaml'
 require 'pry-byebug'
 
-
+def modelo_dir
+  Dir.pwd + '/modelo-oficial'
+end
 
 @configuracao_padrao = nil
 ## Para regerar o arquivo de configuração invoke rake configuracao_padrao

@@ -246,11 +246,15 @@ CONF
       let (:configuracao_esperada) {{"title" => "Título do trabalho"}}
       before do
         # Precisa do libreoffice e ele precisa está fechado!
-        system "libreoffice --headless --convert-to pdf configuracao.odt", :out=>"/dev/null"
+        Dir.chdir(modelo_dir) do
+          system "libreoffice --headless --convert-to pdf configuracao.odt", :out=>"/dev/null"
+        end
         # expect(t).to receive(:ler_configuracao_pdf) {configuracao}
       end
       it 'ler configuracao do arquivo' do
-        expect(t.ler_configuracao(options)).to include(configuracao_esperada)
+        Dir.chdir(modelo_dir) do
+          expect(t.ler_configuracao(options)).to include(configuracao_esperada)
+        end
       end
     end
 

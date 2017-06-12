@@ -1,26 +1,26 @@
 ---
-instituicao: Universidade/Faculdade do Brasil
 author: Nome do autor
 title: Título do trabalho
 local: Cidade - UF
+instituicao: Universidade/Faculdade do Brasil
 date: '2016'
-linha_de_pesquisa: ''
-area_de_concentracao: Computação
 titulacao: Minha-titulação
 curso: Meu-curso
-coorientador: ''
 programa: Programa de Pós-Graduação em XXX
+area_de_concentracao: Computação
+linha_de_pesquisa: ''
+coorientador: ''
 orientador: Nome-do-Orientador
 referencias_caminho: referencias.bib
 proposito: ''
-palavras_chave: ''
 resumo: ''
+palavras_chave: ''
 keywords: ''
 abstract_texto: ''
 resumen: ''
 palabras_clave: ''
-mots_cles: ''
 resume: ''
+mots_cles: ''
 siglas:
 - s: ABNT
   d: Associação Brasileira de Normas Técnicas
@@ -28,9 +28,9 @@ simbolos:
 dedicatoria: ''
 agradecimentos: ''
 epigrafe: ''
-avaliador1: Nome-do-Prof-Convidado1
-aprovacao_dia: '1'
 avaliador2: Nome-do-Prof-Convidado2
+aprovacao_dia: '1'
+avaliador1: Nome-do-Prof-Convidado1
 avaliador3: ''
 graduacao: true
 especializacao: false

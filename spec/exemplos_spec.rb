@@ -57,7 +57,7 @@ END
   }
   
   
-  let!(:templates_dir){Dir.pwd}
+  let!(:templates_dir){modelo_dir}
   let(:t){Limarka::Trabalho.new(configuracao: configuracao_padrao, texto: texto, anexos: anexos, referencias_bib: referencias_bib, apendices: apendices, errata: errata)}
 
   before do

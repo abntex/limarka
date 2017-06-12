@@ -32,7 +32,7 @@ describe 'Monografias', :monografia do
       FileUtils.mkdir_p test_dir
       FileUtils.cp_r source_dir, test_dir+'/..'
       Limarka::Trabalho.save_yaml(configuracao, test_dir+'/configuracao.yaml')
-      system('bundle', 'exec', 'limarka', 'exec', '-i', test_dir, '-y', '--no-compila-tex')
+      system('bundle', 'exec', 'limarka', 'exec', '-i', test_dir, '-y', '--no-compila-tex','-t', File.absolute_path(modelo_dir))
     end
     it "proposta de monografia em latex gerada com sucesso", :proposito_gerado do
       expect(File).to exist(tex_file)

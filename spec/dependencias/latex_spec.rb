@@ -18,7 +18,7 @@ describe 'Compilação Latex', :dependencias, :dependencias_latex do
     
     it 'O pdf é gerado e o capítulo é prefixado com o número dele' do
       Dir.chdir(output_dir) do
-        system "latexmk --quiet --xelatex -f xxx-Monografia.tex"
+        system "latexmk --quiet --xelatex -f xxx-Monografia.tex", :out=>"/dev/null"
         expect(File).to exist("xxx-Monografia.pdf")
         system "pdftotext -enc UTF-8 xxx-Monografia.pdf"
         expect(File).to exist("xxx-Monografia.txt")
@@ -34,7 +34,7 @@ describe 'Compilação Latex', :dependencias, :dependencias_latex do
     
     it 'O pdf é gerado e o capítulo é prefixado com o número dele' do
       Dir.chdir(output_dir) do
-        system "latexmk --quiet --xelatex -f xxx-Monografia.tex"
+        system "latexmk --quiet --xelatex -f xxx-Monografia.tex", :out=>"/dev/null"
         expect(File).to exist("xxx-Monografia.pdf")
         system "pdftotext -enc UTF-8 xxx-Monografia.pdf"
         expect(File).to exist("xxx-Monografia.txt")
@@ -50,7 +50,7 @@ describe 'Compilação Latex', :dependencias, :dependencias_latex do
    
     it 'O pdf é gerado segundo as normas da ABNT' do
       Dir.chdir(output_dir) do
-        system "latexmk --quiet --xelatex -f xxx-Monografia.tex"
+        system "latexmk --quiet --xelatex -f xxx-Monografia.tex", :out=>"/dev/null"
         expect(File).to exist("xxx-Monografia.pdf")
         system "pdftotext -enc UTF-8 xxx-Monografia.pdf"
         expect(File).to exist("xxx-Monografia.txt")

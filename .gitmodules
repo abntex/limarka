@@ -1,0 +1,3 @@
+[submodule "modelo-oficial"]
+	path = modelo-oficial
+	url = https://github.com/abntex/trabalho-academico-limarka.git
