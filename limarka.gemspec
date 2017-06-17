@@ -36,5 +36,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'bibtex-ruby'
   spec.add_dependency 'terminal-table'
   spec.add_dependency 'pandoc_abnt'
+  spec.add_dependency 'guard'
+  spec.add_dependency 'guard-shell'
 end
 
