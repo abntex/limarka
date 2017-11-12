@@ -1,0 +1,46 @@
+FROM edusantana/ruby-latex-full
+
+LABEL maintainer="eduardo.ufpb@gmail.com"
+LABEL limarka.version="v0.7.2"
+
+WORKDIR /tmp
+
+#FROM latex_base as runtime
+# Instala pandoc
+ADD https://github.com/jgm/pandoc/releases/download/1.19.2.1/pandoc-1.19.2.1-1-amd64.deb /tmp/
+RUN dpkg -i pandoc-*.deb && rm pandoc-*.deb
+
+# Instalando dependências de runtime
+RUN apt-get update && apt-get install -y -qq \
+	locales \
+	pdftk \
+	poppler-utils \
+	xclip
+
+# Instalando dependências de teste
+#FROM runtime as teste
+#COPY . /app/
+#RUN apt-get update && apt-get install -y -qq libreoffice-writer
+RUN gem install limarka guard guard-shell
+
+VOLUME ["/trabalho"]
+WORKDIR /trabalho
+
+#RUN locale-gen pt_BR && locale-gen pt_BR.UTF-8 && dpkg-reconfigure locales && update-locale 
+
+
+#ENV LANG=pt_BR.UTF-8
+
+# Set the locale
+#RUN apt-get update && apt-get install -y locales && locale-gen pt_BR.UTF-8
+
+#RUN locale-gen --no-purge pt_BR.UTF-8
+#update-locale LANG=pt_BR.UTF-8
+#echo locales locales/locales_to_be_generated multiselect pt_BR.UTF-8 UTF-8 | DEBIAN_FRONTEND=noninteractive debconf-set-selections
+#echo locales locales/default_environment_locale select pt_BR.UTF-8 | DEBIAN_FRONTEND=noninteractive debconf-set-selections
+#DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
+
+# Instalando dependências de teste
+CMD ["--help"]
+ENTRYPOINT ["/usr/local/bundle/bin/limarka"]
+
