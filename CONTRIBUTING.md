@@ -5,7 +5,7 @@ e [divulgá-la](https://github.com/abntex/limarka/wiki/Imprensa).
 
 [realizar o experimento]: https://github.com/abntex/limarka/wiki/Experimentos
 
-Pull requests são sempre bem vindos. Ao participar desse projeto você está de 
+Pull requests são sempre bem vindos. Ao participar desse projeto você está de
 acordo com o [código de conduda].
 
 O projeto tem como origem uma pesquisa científica (em andamento) sobre utilização de linguagem de marcação de texto para elaboração de monografias.
@@ -16,9 +16,9 @@ Acesse o [chat no gitter](http://gitter.im/abntex/limarka) e fale conosco, indep
 
 # Professor
 
-Como professor você pode contribuir com o limarka divulgando-o e ofertando o limarka como uma opção para seus alunos realizarem tarefas. 
+Como professor você pode contribuir com o limarka divulgando-o e ofertando o limarka como uma opção para seus alunos realizarem tarefas.
 
-- Ao solicitar relatórios de atividades aos alunos, sugira a utilização do limarka. Embora o limarka tenha o propósito de produzir trabalhos de conclusão de curso, ele pode ser facilmente utilizado para elaboração de relatórios. 
+- Ao solicitar relatórios de atividades aos alunos, sugira a utilização do limarka. Embora o limarka tenha o propósito de produzir trabalhos de conclusão de curso, ele pode ser facilmente utilizado para elaboração de relatórios.
 
 - Sugira seus orientandos experimentarem o limarka. O limarka é gratuito e livre, pode ser utilizado no Linux, OS X e Windows. Não recomendamos utilizar o limarka em trabalhos de conclusão que exigam bastante fórmulas, teoremas ou provas. Os editores Latex oferecem melhor suporte para isso.
 
@@ -56,11 +56,11 @@ Ao participar desse projeto você está de acordo com o [código de conduda].
 
 # Desenvolvedor WEB
 
-Nós desejamos melhorar a experiência de utilização da ferramenta implementando 
+Nós desejamos melhorar a experiência de utilização da ferramenta implementando
 um site que gere conteúdos dinâmicos.
 
 Suponha que um usuário deseja adicionar uma referência de um artigo, gostaria
-que o usuário clicasse em "Artigo" e um formulário fosse apresentado para 
+que o usuário clicasse em "Artigo" e um formulário fosse apresentado para
 preenchimento e acordo com os campos bib desse tipo de entrada. Quando o usuário
 vai preenchendo o código bib é gerado automaticamente para inserção no arquivo
 de referências.
@@ -75,6 +75,8 @@ Para compreender a funcionalidade veja o site [http://shields.io](http://shields
 Realize um fork no projeto, depois faça o clone do seu fork:
 
     git clone git@github.com:your-username/limarka.git
+    git submodule init
+    git submodule update
 
 Configure sua máquina:
 
@@ -93,7 +95,7 @@ Realize as alterações. Adicione testes (opicional, mas desejado) para as suas 
     rake
     git add arquivo-modificado1 arquivo-modificado2
     git commit
-    
+
 Se existir um Issue referente a funcionalidade implementada [utilize o número do issue na mensagem de commit](https://help.github.com/articles/closing-issues-via-commit-messages/) para manter rastreabilidade.
 
 Faça um Push para o seu fork:
@@ -105,4 +107,3 @@ Faça um Push para o seu fork:
 ## Desenvolvimento
 
 Talvez você deseje consulta a página sobre o [desenvolvimento da ferramenta](https://github.com/abntex/limarka/wiki/Desenvolvimento).
-
