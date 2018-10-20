@@ -8,7 +8,8 @@ before_install:
 - sudo apt-get install -y -qq ruby-full pdftk xclip poppler-utils language-pack-pt libreoffice
 - wget https://github.com/jgm/pandoc/releases/download/1.19.2.1/pandoc-1.19.2.1-1-amd64.deb && sudo dpkg -i pandoc-*.deb
 - wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && tar -xf install-tl-unx.tar.gz && cd install-tl-* && sudo ./install-tl -no-gui -profile ../spec/dependencias/texlive-abntex2.profile -no-verify-downloads && cd ..
-- export PATH=$PATH:/usr/local/texlive/2017/bin/x86_64-linux
+- export PATH=$PATH:/usr/local/texlive/2018/bin/x86_64-linux
+
 script:
 - latexmk -v
 - xelatex -v
