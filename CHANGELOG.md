@@ -1,6 +1,20 @@
 # Change Log
 
-## [v0.7.2](https://github.com/abntex/limarka/tree/v0.7.2) (2017-04-08)
+## [v0.8.0](https://github.com/abntex/limarka/tree/v0.8.0) (2018-10-20)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.7.2...v0.8.0)
+
+**Melhorias implementadas:**
+
+- Possibilita checar e notificar problemas de dependências no sistema [\#165](https://github.com/abntex/limarka/issues/165)
+- limarka --version inclui versões das dependências [\#149](https://github.com/abntex/limarka/issues/149)
+- Limarka dependende de guard-shell possibilitando geração automática [\#141](https://github.com/abntex/limarka/issues/141)
+- Template extraído para submódulo modelo-oficial [\#79](https://github.com/abntex/limarka/issues/79)
+
+**Issues fechados:**
+
+- Distribuição do limarka através de imagem Docker [\#155](https://github.com/abntex/limarka/issues/155)
+
+## [v0.7.2](https://github.com/abntex/limarka/tree/v0.7.2) (2017-04-09)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.7.1...v0.7.2)
 
 **Melhorias implementadas:**
