@@ -18,11 +18,18 @@ module Limarka
   # documentação do [thor](http://whatisthor.com).
   #
   # @author Eduardo de Santana Medeiros Alexandre
-  # 
+  #
   class Cli < Thor
     include Thor::Actions
-    
-    default_command :exec  
+
+    default_command :exec
+
+    desc "check", "Verifica se o sistema está utilizando as dependências compatíveis"
+    def check
+      c = Limarka::Check.new()
+      c.check()
+    end
+
 
     method_option :configuracao_yaml, :aliases => '-y', :type => :boolean, :desc => 'Ler configuração exportada (configuracao.yaml) em vez de configuracao.pdf', :default => false
     method_option :input_dir, :aliases => '-i', :desc => 'Diretório onde será executado a ferramenta', :default => '.'
@@ -32,7 +39,7 @@ module Limarka
     method_option :rascunho, :aliases => '-r', :desc => 'Ler de um arquivo de rascunho em vez de "trabalho-academico.md"', :banner => "RASCUNHO_FILE"
     method_option :verbose, :aliases => '-v', :desc => 'Imprime mais detalhes da execução', :default => false, :type => :boolean
     method_option :version, :desc => 'Imprime a versão do limarka', :default => false, :type => :boolean
-    
+
     desc "exec", "Executa o sistema para geração do documento latex e compilação"
     def exec
 
@@ -46,8 +53,8 @@ module Limarka
         puts s
         return
       end
-      
-      #options[:output_dir] = File.absolute_path(options[:output_dir]) 
+
+      #options[:output_dir] = File.absolute_path(options[:output_dir])
       Dir.chdir(options[:input_dir]) do
         t = Limarka::Trabalho.new
         t.atualiza_de_arquivos(options)
@@ -58,7 +65,7 @@ module Limarka
       end
     end
 
-    
+
     desc "importa ARQUIVO", "Cria um arquivo trabalho-academico.md com o conteúdo convertido de ARQUIVO"
     long_desc "Converte documento do Word (ou similar) para trabalho-academico.md. O arquivo será criado no mesmo diretório que contém ARQUIVO. Útil quando possuímos um arquivo já digitado no word e desejamos utilizar o limarka. Mantém, por exemplo, as marcações de itálico, negrito e notas de rodapé."
     def importa(arquivo)
@@ -69,7 +76,7 @@ module Limarka
     method_option :interativo, :aliases => '-i', :desc => 'Solicita os parâmetros de forma interativa.', :type => :boolean, :default => false
     method_option :clipboard, :aliases => '-c', :desc => 'Utiliza o conteúdo da área de transferência como o nome do arquivo.', :type => :boolean, :default => false
 
-#     method_option :arquivo, :aliases => '-a', :desc => 'Caminho completo ou apenas o nome do arquivo na pasta imagens. Somente arquivos existêntes são válidos. Se não for especificado e o nome do arquivo esteja copiado (na área de transferência), e o arquivo existir, ele será utilizado.'  
+#     method_option :arquivo, :aliases => '-a', :desc => 'Caminho completo ou apenas o nome do arquivo na pasta imagens. Somente arquivos existêntes são válidos. Se não for especificado e o nome do arquivo esteja copiado (na área de transferência), e o arquivo existir, ele será utilizado.'
     method_option :legenda, :aliases => '-l', :desc => 'Legenda da figura.', :default => "Legenda da figura."
     method_option :fonte, :aliases => '-f', :desc => 'Fonte da imagem.', :default => "Autor."
     method_option :rotulo, :aliases => '-r', :desc => 'Rótulo para ser utilizado na referenciação da figura, caso não especificado um será proposto.'
@@ -80,7 +87,7 @@ Esse comando imprime (1) o código para inclusão de uma figura (2) e como refer
 DESC
     desc "fig ARQUIVO", "Imprime códigos para inclusão de imagens em conformidade com ABNT (em LaTeX)"
     def fig(arquivo=nil)
-      
+
       if (options[:clipboard]) then
         arquivo = Clipboard.paste         # Ler do clipboard, requer xclip: sudo apt-get install xclip
       end
@@ -89,9 +96,9 @@ DESC
         if arquivo.start_with?("file://") then
           arquivo = arquivo[7,-1]
         end
-      end       
+      end
 
-      
+
       if (options[:interativo]) then
         arquivo =   ask_figura_arquivo(arquivo)
         valida_figura_arquivo(arquivo) # antecipando validação issue #78
@@ -106,20 +113,20 @@ DESC
         rotulo = options[:rotulo]
         if (not arquivo) then
           arquivo = ask_figura_arquivo(nil)
-        end       
+        end
         valida_figura_arquivo(arquivo) # antecipando validação issue #78
         rotulo = "fig:" + propoe_rotulo(File.basename arquivo, ".*") if rotulo.nil?
         valida_figura_rotulo(rotulo)   # antecipando validação issue #78
         dimensoes = options[:dimensoes]
       end
-      
-      
-      
-      
+
+
+
+
       dimensoes.each do |dim|
 
         escala = (dim.to_f)/100
-        
+
         figura_tex = <<TEX
 
 \\begin{figure}[htbp]
@@ -154,14 +161,14 @@ DESC
       else
         rotulo = "tab:"+(Time.now.to_i % 100000).to_s
       end
-      
+
       nota = options[:nota]
       if nota then
         nota_linha = "  \\nota{#{nota}}%\n"
       else
         nota_linha = ""
       end
-      
+
       valida_tabela_rotulo(rotulo)
 
       say <<TEX
@@ -196,9 +203,9 @@ DESC
    Nome & Nascimento & Documento \\\\
   \\midrule \\midrule
    Maria da Silva & 11/11/1111 & 111.111.111-11 \\\\
-  \\midrule 
+  \\midrule
    João Souza & 11/11/2111 & 211.111.111-11 \\\\
-  \\midrule 
+  \\midrule
    Laura Vicuña & 05/04/1891 & 3111.111.111-11 \\\\
   \\bottomrule
 \\end{tabular}%
@@ -273,7 +280,7 @@ TEX
         t << ["sair","Termina o menu interativo."]
       end
       puts table
-      puts "Pressione TAB para completar o comando ao digitar: 'sa'+TAB completa para 'sair'"      
+      puts "Pressione TAB para completar o comando ao digitar: 'sa'+TAB completa para 'sair'"
       sair = false
       until sair do
         cmd = ask("Qual comando deseja executar?", :limited_to => ["exec", "figura", "tabela", "cronograma","rascunho","web","menu","sair"])
@@ -286,7 +293,7 @@ TEX
           system "limarka","exec"
         when "web"
           puts "https://github.com/abntex/limarka/wiki"
-          puts "" 
+          puts ""
         when "figura"
           system "limarka", "fig","-i"
         when "tabela"
@@ -301,7 +308,7 @@ TEX
         end
       end
 
-      
+
     end
 
 
@@ -320,8 +327,8 @@ TEX
       def valida_figura_arquivo(arquivo)
         raise RuntimeError, "Arquivo especificado para a figura não existe: '#{arquivo}'." unless File.file?(arquivo)
       end
-    
-      def ask_figura_arquivo(arquivo = nil)        
+
+      def ask_figura_arquivo(arquivo = nil)
         if arquivo.nil? then
           arquivos = Dir["imagens/*"].select{ |f| File.file? f }.sort
           print_table arquivos.map.with_index{ |a, i| [i+1, *a]}
@@ -338,9 +345,9 @@ TEX
           legenda = legenda_padrao
         else
           legenda = legenda_lida
-        end 
+        end
       end
-      
+
       def ask_figura_fonte
         fonte_padrao = "Autor."
         fonte_lida = ask("Insira o texto da fonte [#{fonte_padrao}]):")
@@ -348,11 +355,11 @@ TEX
           fonte = fonte_padrao
         else
           fonte = fonte_lida
-        end 
+        end
       end
       def ask_figura_rotulo(rotulo, arquivo)
         # http://stackoverflow.com/questions/1268289/how-to-get-rid-of-non-ascii-characters-in-ruby
-        
+
         if (not rotulo) then
           rotulo_proposto = "fig:" + propoe_rotulo(File.basename arquivo, ".*")
           rotulo_lido = ask("Rótulo para referenciar a figura [#{rotulo_proposto}]. fig:" )
@@ -361,7 +368,7 @@ TEX
           else
             rotulo = "fig:"+rotulo_lido
           end
-        end      
+        end
         rotulo
       end
 
@@ -386,7 +393,7 @@ TEX
     end
 
 
-    
+
 
     desc "configuracao help", "Exporta e atualiza configurações"
     subcommand "configuracao", Limarka::Configuracao
@@ -396,5 +403,3 @@ TEX
 
   end
 end
-
-
