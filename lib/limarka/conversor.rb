@@ -23,7 +23,7 @@ module Limarka
     attr_accessor :texto_tex
     attr_accessor :txt
     attr_accessor :usa_pdftotext
-        
+
     # @param trabalho [Trabalho]
     def initialize(trabalho, options)
       self.t = trabalho
@@ -45,7 +45,7 @@ module Limarka
         pretextual(pretextual_tempfile)
         postextual(postextual_tempfile)
         textual(pretextual_tempfile,postextual_tempfile)
-        
+
         ensure
           pretextual_tempfile.close
           pretextual_tempfile.unlink
@@ -73,7 +73,7 @@ module Limarka
       s << "---\n\n"
       s.string
     end
-    
+
 
 
     PRETEXTUAL = "templates/pretextual.tex"
@@ -83,8 +83,8 @@ module Limarka
     def pretextual(tempfile)
       s = StringIO.new
       necessita_de_arquivo_de_texto = ["errata"]
-      ["folha_de_rosto", "errata", "folha_de_aprovacao", "dedicatoria", "agradecimentos", 
-      "epigrafe", "resumo", "abstract", "lista_ilustracoes", "lista_tabelas", 
+      ["folha_de_rosto", "errata", "folha_de_aprovacao", "dedicatoria", "agradecimentos",
+      "epigrafe", "resumo", "abstract", "lista_ilustracoes", "lista_tabelas",
       "lista_siglas", "lista_simbolos", "sumario"].each_with_index do |secao,indice|
         template = "pretextual#{indice+1}-#{secao}"
         Open3.popen3("pandoc -f markdown \"--data-dir=#{options[:templates_dir]}\" --template=#{template} -t latex --filter #{pandoc_abnt_path}") {|stdin, stdout, stderr, wait_thr|
@@ -108,7 +108,7 @@ module Limarka
 
     POSTEXTUAL = "templates/postextual.tex"
     # Escreve no arquivo o conteúdo gerado referente ao pós-textual do documento.
-    # @param tempfile arquivo onde será escrito    
+    # @param tempfile arquivo onde será escrito
     def postextual(tempfile)
       # Referências (obrigatório)
       # Glossário (opcional)
@@ -125,13 +125,13 @@ module Limarka
       s << secao_indice
 
       cria_xxx_referencias
-      
+
       @postextual_tex = s.string
       File.open(tempfile, 'w') { |file| file.write(postextual_tex) }
     end
 
     # Cria arquivo temporário de referencias.
-    # 
+    #
     # Separa o título em subtítulo quando contém `:`.
     def cria_xxx_referencias
       referencias_tempfile = Tempfile.new('referencias')
@@ -148,10 +148,10 @@ module Limarka
           entry['subtitle'] = s[1].strip
         end
       end
-      
+
       b.save_to referencias_bib_file
     end
-    
+
     def secao_referencias
       secao("postextual1-referencias", false, t.referencias)
     end
@@ -163,7 +163,7 @@ module Limarka
     def secao_anexos
       secao("postextual4-anexos", t.anexos?, t.anexos)
     end
-    
+
     # @note Ainda não implementado
     def secao_glossario
     end
@@ -171,10 +171,10 @@ module Limarka
     # @note Ainda não implementado
     def secao_indice
     end
-    
+
     def textual(pretextual_tempfile, postextual_tempfile)
       valida_yaml
-      Open3.popen3("pandoc -f markdown+raw_tex -t latex -s \"--data-dir=#{options[:templates_dir]}\" --template=trabalho-academico --normalize --top-level-division=chapter --include-before-body=#{pretextual_tempfile.path}  --include-after-body=#{postextual_tempfile.path} --filter #{pandoc_abnt_path}") {|stdin, stdout, stderr, wait_thr|
+      Open3.popen3("pandoc -f markdown+raw_tex -t latex -s \"--data-dir=#{options[:templates_dir]}\" --template=trabalho-academico --top-level-division=chapter --include-before-body=#{pretextual_tempfile.path}  --include-after-body=#{postextual_tempfile.path} --filter #{pandoc_abnt_path}") {|stdin, stdout, stderr, wait_thr|
         stdin.write(File.read(options[:templates_dir] + '/templates/configuracao-tecnica.yaml'))
         stdin.write("\n")
         stdin.write(hash_to_yaml(t.configuracao))
@@ -187,14 +187,14 @@ module Limarka
       }
       File.open(texto_tex_file, 'w')  { |f| f.write(@texto_tex)}
     end
-    
+
     def pretextual_tex_file
       "#{options[:output_dir]}/xxx-pretextual.tex"
     end
     def postextual_tex_file
       "#{options[:output_dir]}/xxx-postextual.tex"
     end
-    
+
     def texto_tex_file
       "#{options[:output_dir]}/#{Conversor.tex_file(t.configuracao)}"
     end
@@ -205,7 +205,7 @@ module Limarka
     def referencias_bib_file
       "#{options[:output_dir]}/xxx-referencias.bib"
     end
-    
+
     def valida_yaml
       # não faz nada por enquanto
     end
@@ -235,11 +235,11 @@ module Limarka
     end
 
     private
-    
+
     # Utilizado para gerar seções específicas do documento
     def secao(template, condicao_para_conteudo, conteudo_externo)
       s = StringIO.new
-      
+
       Open3.popen3("pandoc -f markdown \"--data-dir=#{options[:templates_dir]}\" --template=#{template} --top-level-division=chapter -t latex --filter #{pandoc_abnt_path}") {|stdin, stdout, stderr, wait_thr|
         stdin.write(hash_to_yaml(t.configuracao))
         stdin.write("\n")
@@ -255,11 +255,9 @@ module Limarka
       s.string
     end
 
-    def pandoc_abnt_path 
+    def pandoc_abnt_path
       ENV["PANDOC_ABNT_BAT"] or "pandoc_abnt"
     end
 
   end
 end
-
-
