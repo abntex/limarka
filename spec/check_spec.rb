@@ -9,14 +9,21 @@ describe Limarka::Check, :check do
   let (:pandoc_versao_compativel) {'1.19.3'}
   let (:pandoc_versao_superior) {'2.0.0'}
 
+  describe '#ler_pandoc_version' do
+    let(:c) {Limarka::Check.new()}
+    it 'ler a versão do pandoc do sistema' do
+      expect(c.ler_pandoc_version).to eq(`pandoc --version`.split("\n")[0].split(" ")[1])
+    end
+  end
+
   describe '#check' do
-
-
     context 'lendo versões do sistema (real)' do
       let(:c) {Limarka::Check.new()}
-      before{ c.check }
       it 'ler a versão do pandoc do sistema' do
-        expect(c.pandoc).to eq(`pandoc --version`.split("\n")[0].split(" ")[1])
+        expect(c).to receive(:ler_pandoc_version)
+        expect(c).to receive(:verifica_compatibilidade)
+        allow(STDOUT).to receive(:puts) # this disables puts
+        c.check
       end
     end
 

@@ -18,24 +18,23 @@ module Limarka
 
     def check
       if sistema
-        ler_pandoc
+        ler_pandoc_version
       end
       verifica_compatibilidade
       puts "OK."
     end
 
+    def ler_pandoc_version
+      self.pandoc = `pandoc --version`.split("\n")[0].split(" ")[1]
+    end
 
     private
 
     def verifica_compatibilidade
       #byebug
       if Gem::Version.new(pandoc) < Gem::Version.new(Check::PANDOC_VERSAO_MINIMA) || Gem::Version.new(pandoc) >= Gem::Version.new(Check::PANDOC_VERSAO_MAXIMA)
-        raise VersaoIncompativelError, "Versão incompatível do pandoc. Versão compatível: #{PANDOC_VERSAO_MINIMA} <= Versão < #{PANDOC_VERSAO_MAXIMA}"
+        raise VersaoIncompativelError, "Versão incompatível do pandoc. Versão compatível: #{Check::PANDOC_VERSAO_MINIMA} <= Versão < #{Check::PANDOC_VERSAO_MAXIMA}"
       end
-    end
-
-    def ler_pandoc
-      self.pandoc = `pandoc --version`.split("\n")[0].split(" ")[1]
     end
 
   end
