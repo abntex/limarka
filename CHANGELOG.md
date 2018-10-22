@@ -1,5 +1,12 @@
 # Change Log
 
+## [v1.0.1](https://github.com/abntex/limarka/tree/v1.0.1) (2018-10-22)
+[Full Changelog](https://github.com/abntex/limarka/compare/v1.0.0...v1.0.1)
+
+**Bugs corrigidos:**
+
+- Limarka ainda informava que a versão 2.X era incompatível [\#167](https://github.com/abntex/limarka/issues/167)
+
 ## [v1.0.0](https://github.com/abntex/limarka/tree/v1.0.0) (2018-10-22)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.8.0...v1.0.0)
 
