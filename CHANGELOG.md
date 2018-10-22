@@ -1,5 +1,12 @@
 # Change Log
 
+## [v1.0.0](https://github.com/abntex/limarka/tree/v1.0.0) (2018-10-22)
+[Full Changelog](https://github.com/abntex/limarka/compare/v0.8.0...v1.0.0)
+
+**Melhorias implementadas:**
+
+- Tornar o limarka compatível com o pandoc 2.0 [\#159](https://github.com/abntex/limarka/issues/159)
+
 ## [v0.8.0](https://github.com/abntex/limarka/tree/v0.8.0) (2018-10-20)
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.7.2...v0.8.0)
 
