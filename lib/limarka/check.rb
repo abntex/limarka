@@ -9,7 +9,7 @@ module Limarka
     attr_accessor :pandoc
     attr_accessor :sistema
     PANDOC_VERSAO_MINIMA = '1.19.1'
-    PANDOC_VERSAO_MAXIMA = '2.0.0'
+    PANDOC_VERSAO_MAXIMA = '3.0.0'
 
     def initialize(pandoc: nil, sistema: true)
       self.pandoc = pandoc

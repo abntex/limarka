@@ -4,10 +4,10 @@ require 'limarka'
 
 describe Limarka::Check, :check do
   let (:pandoc_min_version) {'1.19.1'}
-  let (:pandoc_max_version) {'2.0.0'}
+  let (:pandoc_max_version) {'3.0.0'}
   let (:pandoc_versao_inferior) {'1.19.0'}
   let (:pandoc_versao_compativel) {'1.19.3'}
-  let (:pandoc_versao_superior) {'2.0.0'}
+  let (:pandoc_versao_superior) {'4.0.0'}
 
   describe '#ler_pandoc_version' do
     let(:c) {Limarka::Check.new()}
