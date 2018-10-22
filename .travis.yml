@@ -20,4 +20,4 @@ script:
 - bundle exec rake spec:latex
 after_failure:
 - cd /usr/local/texlive && find . -iname latexmk
-- cat /usr/local/texlive/2017/install-tl.log
+- cat /usr/local/texlive/2018/install-tl.log
