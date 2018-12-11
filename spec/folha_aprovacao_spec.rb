@@ -5,7 +5,7 @@ require 'limarka/conversor'
 require 'open3'
 
 describe 'Folha de Aprovação', :folha_aprovacao do
-  
+
   let!(:options) {{output_dir: output_dir, templates_dir: modelo_dir}}
   let(:tex_file) {Limarka::Conversor.tex_file(t.configuracao)}
   let (:t) {Limarka::Trabalho.new(configuracao: configuracao_padrao.merge(configuracao_especifica), texto: texto)}
@@ -28,7 +28,7 @@ TEXTO
   context 'quando geração ativada',  :compilacao, :lento,  :folha_aprovacao => 'ativada'  do
     let (:output_dir) {"tmp/folha_aprovacao/geracao"}
     let (:avalidor1) {"Nome-do-Avaliador1"}
-    let (:area_de_concentracao) {"MinhaÁreaDeConcentração"}
+    let (:area_de_concentracao) {"MinhaÁrea"}
     let (:linha_de_pesquisa) {"BoaLinha"}
     let (:configuracao_especifica) {{"folha_de_aprovacao" => true, "avaliador1"=>avalidor1, "area_de_concentracao" => area_de_concentracao, "linha_de_pesquisa" => linha_de_pesquisa}}
 
@@ -38,7 +38,7 @@ TEXTO
       @cv.convert
       @cv.compila
     end
-    
+
     it "é gerada segundo as Normas da ABNT no PDF", :area_de_concentracao, :linha_de_pesquisa do
         expect(File).to exist(@cv.pdf_file)
         expect(@cv.txt).to include("Monografia aprovada.")
@@ -60,7 +60,7 @@ TEXTO
   end
 
 
-  
+
   context 'quando geração desativada',  :compilacao, :lento, :folha_aprovacao => 'desativada' do
     let (:output_dir) {"tmp/folha_aprovacao/desativada"}
     let (:avalidor1) {"Nome-do-Avaliador1"}
@@ -71,7 +71,7 @@ TEXTO
       @cv.convert
       @cv.compila
     end
-    
+
     it "não é gerada no PDF" do
         expect(File).to exist(@cv.pdf_file)
         expect(@cv.txt).not_to include("Monografia aprovada.")
@@ -94,18 +94,18 @@ TEXTO
         exit_status = wait_thr.value # Process::Status object returned.
         if(exit_status!=0) then puts ("Erro: " + stderr.read).red end
       }
-      
+
       @cv = Limarka::Conversor.new(t, options)
       @cv.convert
       @cv.compila
     end
-    
+
     it "imagens/folha-de-aprovacao-escaneada.pdf será incluído no PDF" do
         expect(File).to exist(@cv.pdf_file)
         expect(@cv.txt).to include("Folha de Aprovação")
         expect(@cv.txt).to include("Minha folha de aprovação personalizada")
     end
   end
-  
-  
+
+
 end

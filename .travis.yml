@@ -5,10 +5,11 @@ rvm:
 - 2.3.1
 before_install:
 - sudo apt-get update -qq
-- sudo apt-get install -y -qq ruby-full pdftk xclip poppler-utils language-pack-pt libreoffice
-- wget https://github.com/jgm/pandoc/releases/download/1.19.2.1/pandoc-1.19.2.1-1-amd64.deb && sudo dpkg -i pandoc-*.deb
-- wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && tar -xf install-tl-unx.tar.gz && cd install-tl-* && sudo ./install-tl -no-gui -profile ../spec/dependencias/texlive-abntex2.profile -no-verify-downloads && cd ..
-- export PATH=$PATH:/usr/local/texlive/2018/bin/x86_64-linux
+- sudo apt-get install -y -qq ruby-full pdftk xclip poppler-utils language-pack-pt libreoffice unzip pdfgrep locales
+- wget https://github.com/jgm/pandoc/releases/download/2.5/pandoc-2.5-1-amd64.deb && sudo dpkg -i pandoc-*.deb
+- wget -qO- "https://yihui.name/gh/tinytex/tools/install-unx.sh" | sh
+- tlmgr install memoir abntex2 lastpage microtype lipsum pdfpages ifetex textcase enumitem xcolor babel-portuges listings
+- export PATH=$PATH:~/bin
 
 script:
 - latexmk -v
@@ -16,8 +17,8 @@ script:
 - pdftotext -v
 - pandoc -v
 - libreoffice --version
+- bundle exec rspec -t @latex_minimo
 - bundle exec rake
 - bundle exec rake spec:latex
 after_failure:
-- cd /usr/local/texlive && find . -iname latexmk
-- cat /usr/local/texlive/2018/install-tl.log
+  - cat test/latex/exemplo-minimo/xxx-Monografia.log
