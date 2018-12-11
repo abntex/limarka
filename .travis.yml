@@ -8,7 +8,7 @@ before_install:
 - sudo apt-get install -y -qq ruby-full pdftk xclip poppler-utils language-pack-pt libreoffice
 - wget https://github.com/jgm/pandoc/releases/download/2.5/pandoc-2.5-1-amd64.deb && sudo dpkg -i pandoc-*.deb
 - wget -qO- "https://yihui.name/gh/tinytex/tools/install-unx.sh" | sh
-- tlmgr install abntex2
+- tlmgr install abntex2 memoir ifetex textcase enumitem lastpage microtype lipsum xcolor pdfpages babel-portuges
 - export PATH=$PATH:~/bin
 
 script:
