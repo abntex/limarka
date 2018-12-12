@@ -5,7 +5,8 @@ rvm:
 - 2.3.1
 before_install:
 - sudo apt-get update -qq
-- sudo apt-get install -y -qq ruby-full pdftk xclip poppler-utils language-pack-pt libreoffice
+- sudo apt-get install -y -qq ruby-full pdftk xclip poppler-utils language-pack-pt
+# libreoffice
 - wget https://github.com/jgm/pandoc/releases/download/2.5/pandoc-2.5-1-amd64.deb && sudo dpkg -i pandoc-*.deb
 - wget -qO- "https://yihui.name/gh/tinytex/tools/install-unx.sh" | sh
 - tlmgr install abntex2 memoir ifetex textcase enumitem lastpage microtype lipsum xcolor pdfpages babel-portuges
@@ -16,9 +17,9 @@ script:
 - xelatex -v
 - pdftotext -v
 - pandoc -v
-- libreoffice --version
-- bundle exec rake
-- bundle exec rake spec:latex
+#- libreoffice --version
+- bundle exec rspec -t dependencias_latex
+#- bundle exec rake
+#- bundle exec rake spec:latex
 after_failure:
-- cd /usr/local/texlive && find . -iname latexmk
-- cat /usr/local/texlive/2018/install-tl.log
+- test/latex/exemplo-minimo/xxx-Monografia.log
