@@ -39,6 +39,8 @@ O limarka é uma ferramenta que possibilita seus usuários escreverem relatório
 
 Veja como é fácil contribuir! 
 
+[![OpenCollective](https://opencollective.com/limarka/backers/badge.svg)](#backers) [![OpenCollective](https://opencollective.com/limarka/sponsors/badge.svg)](#sponsors)
+
 ## Professor
 
 - Atualize sua página pessoal/institucional adicionando uma [matéria ou link sobre o limarka](https://github.com/abntex/limarka/wiki/Imprensa)
