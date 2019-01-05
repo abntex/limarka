@@ -39,7 +39,7 @@ O limarka é uma ferramenta que possibilita seus usuários escreverem relatório
 
 Veja como é fácil contribuir! 
 
-[![OpenCollective](https://opencollective.com/limarka/backers/badge.svg)](#backers) [![OpenCollective](https://opencollective.com/limarka/sponsors/badge.svg)](#sponsors)
+[![OpenCollective](https://opencollective.com/limarka/backers/badge.svg)![OpenCollective](https://opencollective.com/limarka/sponsors/badge.svg)](https://opencollective.com/limarka/donate)
 
 ## Professor
 
