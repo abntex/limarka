@@ -6,5 +6,5 @@
 
 **Especificações do sistema**:
 
-<!-- Gosta do limarka? Por favor considere contribuir com o nosso projeto:
+<!-- Gosta do limarka? Por favor considere dar suporte ao projeto:
 👉  https://opencollective.com/limarka/donate -->
