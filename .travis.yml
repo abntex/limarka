@@ -17,6 +17,7 @@ script:
 - pdftotext -v
 - pandoc -v
 - libreoffice --version
+- bundle exec rspec -t @latex_minimo
 - bundle exec rake
 - bundle exec rake spec:latex
 #after_failure:
