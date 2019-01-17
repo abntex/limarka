@@ -1,5 +1,18 @@
 # Change Log
 
+## [v1.0.2](https://github.com/abntex/limarka/tree/v1.0.2) (2019-01-17)
+[Full Changelog](https://github.com/abntex/limarka/compare/v1.0.1...v1.0.2)
+
+**Melhorias implementadas:**
+
+- Utilizar o tinytex nos testes automatizados [\#164](https://github.com/abntex/limarka/issues/164)
+
+**Issues fechados:**
+
+- Atualizar documentação sobre o TinyTex [\#170](https://github.com/abntex/limarka/issues/170)
+- Atualizar documentação sobre o pacote pdftk no Ubuntu 18.04 [\#168](https://github.com/abntex/limarka/issues/168)
+- Atualizar documentação sobre dependências de compilação no Ubuntu 17.10.1 [\#160](https://github.com/abntex/limarka/issues/160)
+
 ## [v1.0.1](https://github.com/abntex/limarka/tree/v1.0.1) (2018-10-22)
 [Full Changelog](https://github.com/abntex/limarka/compare/v1.0.0...v1.0.1)
 
