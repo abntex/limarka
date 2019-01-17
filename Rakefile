@@ -12,7 +12,7 @@ require 'github_changelog_generator/task'
 
 desc 'Executa os testes ruby'
 RSpec::Core::RakeTask.new('spec') do |t|
-  t.rspec_opts = "--tag ~compilacao --tag ~dependencias_latex" 
+  t.rspec_opts = "--tag ~compilacao --tag ~dependencias_latex"
 end
 
 desc 'Executa os testes com compilação Latex'
@@ -24,10 +24,13 @@ task :default => [:configuracao_padrao, 'spec']
 
 GitHubChangelogGenerator::RakeTask.new :changelog do |c|
   c.future_release = "v"+Limarka::VERSION
+  c.header = "# Changelog\n\nTodas as mudanças relevantes deste projeto serão documentadas neste arquivo.\n"
   c.bug_prefix="**Bugs corrigidos:**"
   c.issue_prefix = "**Issues fechados:**"
   c.enhancement_prefix="**Melhorias implementadas:**"
   c.since_tag="0.2.0"
+  c.user="abntex"
+  c.project="limarka"
 end
 
 
