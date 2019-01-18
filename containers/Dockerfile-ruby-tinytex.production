@@ -4,18 +4,13 @@ LABEL maintainer="eduardo.ufpb@gmail.com"
 LABEL limarka.version="v1.0.1"
 LABEL pandoc.version="v2.5.1"
 
-WORKDIR /tmp
-ADD https://github.com/jgm/pandoc/releases/download/2.5/pandoc-2.5-1-amd64.deb /tmp/
-RUN dpkg -i pandoc-*.deb && rm pandoc-*.deb
-
-RUN gem install limarka guard guard-shell
-
 # Instala tinytex
-ENV PATH ~/bin:$PATH
+# VOLUME ["/root/.TinyTex"]
 RUN wget -qO- "https://yihui.name/gh/tinytex/tools/install-unx.sh" | sh
 
 # instala bibliotecas para o abntex2/limarka
-RUN /root/bin/tlmgr install memoir abntex2 lastpage microtype lipsum pdfpages ifetex textcase enumitem xcolor babel-portuges listings
+ENV PATH="/root/bin:${PATH}"
+RUN tlmgr install memoir abntex2 lastpage microtype lipsum pdfpages ifetex textcase enumitem xcolor babel-portuges listings
 
 RUN apt-get update && apt-get install -y -qq \
 	locales \
@@ -24,8 +19,15 @@ RUN apt-get update && apt-get install -y -qq \
 	poppler-utils \
 	unzip
 
+WORKDIR /tmp
+ADD https://github.com/jgm/pandoc/releases/download/2.5/pandoc-2.5-1-amd64.deb /tmp/
+RUN dpkg -i pandoc-*.deb && rm pandoc-*.deb
+
+RUN gem install limarka guard guard-shell
+
+
 VOLUME ["/trabalho"]
 WORKDIR /trabalho
 
-
-ENTRYPOINT /bin/bash
+CMD ["--help"]
+ENTRYPOINT ["/usr/local/bundle/bin/limarka"]

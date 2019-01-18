@@ -65,6 +65,23 @@ task :dissertacao => 'dissertacao-limarka/output' do
   system 'bundle', 'exec', 'limarka', 'exec', '-i', 'dissertacao-limarka', '-o', 'dissertacao-limarka/output'
 end
 
+namespace 'docker' do
+
+  desc 'Constroi imagem docker'
+  task 'build' do
+    sh 'docker build -t limarka -f containers/Dockerfile-ruby-tinytex.production .'
+  end
+
+  desc 'Executa o docker dentro do modelo'
+  task 'run' do
+    Dir.chdir('modelo-oficial') do
+      rm_rf("xxx*")
+      sh 'docker run --mount src=`pwd`,target=/trabalho,type=bind  limarka exec'
+    end
+  end
+
+end
+
 PREAMBULO="templates/preambulo.tex"
 PRETEXTUAL = "templates/pretextual.tex"
 POSTEXTUAL = "templates/postextual.tex"
