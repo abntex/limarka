@@ -9,5 +9,5 @@ rvm:
 script:
 - docker --version
 - bundle exec rake docker:build docker:run
-after_failure:
-  - ls -n modelo-oficial/xxx*
+- ls -n modelo-oficial/xxx*
+#after_failure:
