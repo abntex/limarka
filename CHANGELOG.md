@@ -1,6 +1,28 @@
-# Change Log
+# Changelog
+
+Todas as mudanças relevantes deste projeto serão documentadas neste arquivo.
+
+
+## [v1.0.2](https://github.com/abntex/limarka/tree/v1.0.2) (2019-01-17)
+
+[Full Changelog](https://github.com/abntex/limarka/compare/v1.0.1...v1.0.2)
+
+A partir desta versão o TinyTex passou a ser a [versão oficinal do Latex para o Limarka](https://github.com/abntex/limarka/wiki/Instala%C3%A7%C3%A3o-no-Linux).
+
+**OBS**: Não se faz necessário atualizar para essa versão.
+
+**Melhorias implementadas:**
+
+- Utilizar o tinytex nos testes automatizados [\#164](https://github.com/abntex/limarka/issues/164)
+
+**Issues fechados:**
+
+- Atualizar documentação sobre o pacote pdftk no Ubuntu 18.04 [\#168](https://github.com/abntex/limarka/issues/168)
+- Atualizar documentação sobre dependências de compilação no Ubuntu 17.10.1 [\#160](https://github.com/abntex/limarka/issues/160)
+- Atualizar documentação sobre o TinyTex [\#170](https://github.com/abntex/limarka/issues/170)
 
 ## [v1.0.1](https://github.com/abntex/limarka/tree/v1.0.1) (2018-10-22)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v1.0.0...v1.0.1)
 
 **Bugs corrigidos:**
@@ -8,6 +30,7 @@
 - Limarka ainda informava que a versão 2.X era incompatível [\#167](https://github.com/abntex/limarka/issues/167)
 
 ## [v1.0.0](https://github.com/abntex/limarka/tree/v1.0.0) (2018-10-22)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.8.0...v1.0.0)
 
 **Melhorias implementadas:**
@@ -15,6 +38,7 @@
 - Tornar o limarka compatível com o pandoc 2.0 [\#159](https://github.com/abntex/limarka/issues/159)
 
 ## [v0.8.0](https://github.com/abntex/limarka/tree/v0.8.0) (2018-10-20)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.7.2...v0.8.0)
 
 **Melhorias implementadas:**
@@ -29,6 +53,7 @@
 - Distribuição do limarka através de imagem Docker [\#155](https://github.com/abntex/limarka/issues/155)
 
 ## [v0.7.2](https://github.com/abntex/limarka/tree/v0.7.2) (2017-04-09)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.7.1...v0.7.2)
 
 **Melhorias implementadas:**
@@ -42,6 +67,7 @@
 - Identação na lista de siglas [\#139](https://github.com/abntex/limarka/issues/139)
 
 ## [v0.7.1](https://github.com/abntex/limarka/tree/v0.7.1) (2017-02-11)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.7.0...v0.7.1)
 
 **Melhorias implementadas:**
@@ -49,6 +75,7 @@
 - Atualização do pandoc para versão 1.19.2 [\#130](https://github.com/abntex/limarka/issues/130)
 
 ## [v0.7.0](https://github.com/abntex/limarka/tree/v0.7.0) (2017-02-11)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.6.7...v0.7.0)
 
 **Melhorias implementadas:**
@@ -60,9 +87,11 @@
 - Folha de aprovação gerada não apresenta o mês [\#128](https://github.com/abntex/limarka/issues/128)
 
 ## [v0.6.7](https://github.com/abntex/limarka/tree/v0.6.7) (2017-01-31)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.6.6...v0.6.7)
 
 ## [v0.6.6](https://github.com/abntex/limarka/tree/v0.6.6) (2017-01-22)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.6.5...v0.6.6)
 
 **Bugs corrigidos:**
@@ -71,6 +100,7 @@
 - Erro nas referências quando title está entre duplas chaves e contem subtítulo [\#122](https://github.com/abntex/limarka/issues/122)
 
 ## [v0.6.5](https://github.com/abntex/limarka/tree/v0.6.5) (2017-01-16)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.6.4...v0.6.5)
 
 **Melhorias implementadas:**
@@ -78,6 +108,7 @@
 - Documentação da API [\#121](https://github.com/abntex/limarka/issues/121)
 
 ## [v0.6.4](https://github.com/abntex/limarka/tree/v0.6.4) (2017-01-16)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.6.3...v0.6.4)
 
 **Issues fechados:**
@@ -85,6 +116,7 @@
 - Updating version software of the paper [\#120](https://github.com/abntex/limarka/issues/120)
 
 ## [v0.6.3](https://github.com/abntex/limarka/tree/v0.6.3) (2017-01-15)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.6.2...v0.6.3)
 
 **Melhorias implementadas:**
@@ -106,6 +138,7 @@
 - Several actions related to the software paper [\#93](https://github.com/abntex/limarka/issues/93)
 
 ## [v0.6.2](https://github.com/abntex/limarka/tree/v0.6.2) (2017-01-09)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.6.1...v0.6.2)
 
 **Bugs corrigidos:**
@@ -113,6 +146,7 @@
 - Falta do gem ffi causa problema no Windows [\#115](https://github.com/abntex/limarka/issues/115)
 
 ## [v0.6.1](https://github.com/abntex/limarka/tree/v0.6.1) (2017-01-08)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.6.0...v0.6.1)
 
 **Melhorias implementadas:**
@@ -129,6 +163,7 @@
 - Inclusão de badges no README [\#106](https://github.com/abntex/limarka/issues/106)
 
 ## [v0.6.0](https://github.com/abntex/limarka/tree/v0.6.0) (2016-12-27)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.5.5...v0.6.0)
 
 **Melhorias implementadas:**
@@ -137,6 +172,7 @@
 - Inclusão de menu interativo [\#100](https://github.com/abntex/limarka/issues/100)
 
 ## [v0.5.5](https://github.com/abntex/limarka/tree/v0.5.5) (2016-12-19)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.5.4...v0.5.5)
 
 **Melhorias implementadas:**
@@ -145,6 +181,7 @@
 - Tornar compatível com o Windows [\#87](https://github.com/abntex/limarka/issues/87)
 
 ## [v0.5.4](https://github.com/abntex/limarka/tree/v0.5.4) (2016-12-19)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.5.3...v0.5.4)
 
 **Bugs corrigidos:**
@@ -152,6 +189,7 @@
 - Problemas de codificação no Windows [\#98](https://github.com/abntex/limarka/issues/98)
 
 ## [v0.5.3](https://github.com/abntex/limarka/tree/v0.5.3) (2016-12-19)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.5.2...v0.5.3)
 
 **Bugs corrigidos:**
@@ -163,6 +201,7 @@
 - Creating an Open Canvas for limarka [\#95](https://github.com/abntex/limarka/issues/95)
 
 ## [v0.5.2](https://github.com/abntex/limarka/tree/v0.5.2) (2016-12-09)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.5.1...v0.5.2)
 
 **Melhorias implementadas:**
@@ -174,6 +213,7 @@
 - Alteração de configurações nos repositórios do projeto no github [\#85](https://github.com/abntex/limarka/issues/85)
 
 ## [v0.5.1](https://github.com/abntex/limarka/tree/v0.5.1) (2016-12-05)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.5.0...v0.5.1)
 
 **Bugs corrigidos:**
@@ -181,6 +221,7 @@
 - Correção da legenda da tabela [\#91](https://github.com/abntex/limarka/issues/91)
 
 ## [v0.5.0](https://github.com/abntex/limarka/tree/v0.5.0) (2016-12-05)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.4.6...v0.5.0)
 
 **Melhorias implementadas:**
@@ -189,6 +230,7 @@
 - Possibilita utilizações de arquivos de rascunho [\#82](https://github.com/abntex/limarka/issues/82)
 
 ## [v0.4.6](https://github.com/abntex/limarka/tree/v0.4.6) (2016-11-28)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.4.5...v0.4.6)
 
 **Melhorias implementadas:**
@@ -200,6 +242,7 @@
 - Apresentação do número da página [\#71](https://github.com/abntex/limarka/issues/71)
 
 ## [v0.4.5](https://github.com/abntex/limarka/tree/v0.4.5) (2016-11-20)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.4.4...v0.4.5)
 
 **Melhorias implementadas:**
@@ -216,6 +259,7 @@
 - Apresentação de funcionalidades no README [\#75](https://github.com/abntex/limarka/issues/75)
 
 ## [v0.4.4](https://github.com/abntex/limarka/tree/v0.4.4) (2016-11-18)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.4.3...v0.4.4)
 
 **Bugs corrigidos:**
@@ -223,6 +267,7 @@
 - Correção no comentário de inserir figura [\#73](https://github.com/abntex/limarka/issues/73)
 
 ## [v0.4.3](https://github.com/abntex/limarka/tree/v0.4.3) (2016-11-18)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.4.2...v0.4.3)
 
 **Melhorias implementadas:**
@@ -236,6 +281,7 @@
 - Tarefa rake para geração de releases [\#22](https://github.com/abntex/limarka/issues/22)
 
 ## [v0.4.2](https://github.com/abntex/limarka/tree/v0.4.2) (2016-11-18)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.4.1...v0.4.2)
 
 **Melhorias implementadas:**
@@ -243,6 +289,7 @@
 - Opção de criar tabelas [\#37](https://github.com/abntex/limarka/issues/37)
 
 ## [v0.4.1](https://github.com/abntex/limarka/tree/v0.4.1) (2016-11-17)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.4.0...v0.4.1)
 
 **Issues fechados:**
@@ -250,6 +297,7 @@
 - Possibilitar incluir referência bibtex da área de transferência [\#69](https://github.com/abntex/limarka/issues/69)
 
 ## [v0.4.0](https://github.com/abntex/limarka/tree/v0.4.0) (2016-11-16)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/v0.3.0...v0.4.0)
 
 **Melhorias implementadas:**
@@ -258,6 +306,7 @@
 - Aumentar o provisionamento de inclusão de Figura [\#39](https://github.com/abntex/limarka/issues/39)
 
 ## [v0.3.0](https://github.com/abntex/limarka/tree/v0.3.0) (2016-11-02)
+
 [Full Changelog](https://github.com/abntex/limarka/compare/0.2.0...v0.3.0)
 
 **Bugs corrigidos:**
@@ -295,4 +344,4 @@
 
 
 
-\* *This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
