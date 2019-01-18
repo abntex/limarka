@@ -24,8 +24,14 @@ RUN apt-get update && apt-get install -y -qq \
 	poppler-utils \
 	unzip
 
+RUN useradd -s /bin/sh 
+RUN mkdir -p /trabalho
+RUN chmod -R 777 /trabalho
+RUN chown -R limarka:limarka /trabalho
+USER limarka
+
 VOLUME ["/trabalho"]
 WORKDIR /trabalho
 
-
-ENTRYPOINT /bin/bash
+CMD ["--help"]
+ENTRYPOINT ["/usr/local/bundle/bin/limarka"]
