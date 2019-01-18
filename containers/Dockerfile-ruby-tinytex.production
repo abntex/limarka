@@ -12,6 +12,9 @@ RUN gem install limarka guard guard-shell
 # https://www.tug.org/texlive/doc/tlbuild.html#Prerequisites
 # build-essential clisp fontconfig
 
+RUN apt-get install -y -qq \
+	wget clisp fontconfig
+
 # Instala tinytex
 # VOLUME ["/root/.TinyTex"]
 RUN wget -qO- "https://yihui.name/gh/tinytex/tools/install-unx.sh" | sh
