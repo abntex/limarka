@@ -4,6 +4,13 @@ LABEL maintainer="eduardo.ufpb@gmail.com"
 LABEL limarka.version="v1.0.1"
 LABEL pandoc.version="v2.5.1"
 
+RUN apt-get update
+
+# Latex
+RUN apt-get install -y -qq \
+	wget fontconfig
+
+# Limara
 RUN apt-get update && apt-get install -y -qq \
 	build-essential
 
@@ -13,7 +20,7 @@ RUN gem install limarka guard guard-shell
 # build-essential clisp fontconfig
 
 RUN apt-get install -y -qq \
-	wget clisp fontconfig
+	wget fontconfig
 
 # Instala tinytex
 # VOLUME ["/root/.TinyTex"]
