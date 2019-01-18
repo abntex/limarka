@@ -1,8 +1,10 @@
-FROM ruby:2
+FROM ruby:2-slim
 
 LABEL maintainer="eduardo.ufpb@gmail.com"
 LABEL limarka.version="v1.0.1"
 LABEL pandoc.version="v2.5.1"
+
+RUN gem install limarka guard guard-shell
 
 # Instala tinytex
 # VOLUME ["/root/.TinyTex"]
@@ -23,7 +25,7 @@ WORKDIR /tmp
 ADD https://github.com/jgm/pandoc/releases/download/2.5/pandoc-2.5-1-amd64.deb /tmp/
 RUN dpkg -i pandoc-*.deb && rm pandoc-*.deb
 
-RUN gem install limarka guard guard-shell
+
 
 
 VOLUME ["/trabalho"]
