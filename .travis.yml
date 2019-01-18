@@ -10,4 +10,5 @@ script:
 - docker --version
 - bundle exec rake docker:build docker:run
 after_failure:
-  - cat ls -n modelo-oficial/xxx*
+  - cat /usr/local/bundle/extensions/x86_64-linux/2.6.0/ffi-1.10.0/mkmf.log
+  - ls -n modelo-oficial/xxx*
