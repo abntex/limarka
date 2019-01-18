@@ -9,5 +9,6 @@ rvm:
 script:
 - docker --version
 - bundle exec rake docker:build docker:run
-- ls -n modelo-oficial/xxx*
+- ls -n modelo-oficial/*
+- file modelo-oficial/xxx-Monografia-projeto.pdf
 #after_failure:
