@@ -1,21 +1,34 @@
-FROM ruby:2
+FROM ruby:2-slim
 
 LABEL maintainer="eduardo.ufpb@gmail.com"
 LABEL limarka.version="v1.0.1"
 LABEL pandoc.version="v2.5.1"
 
-WORKDIR /tmp
-ADD https://github.com/jgm/pandoc/releases/download/2.5/pandoc-2.5-1-amd64.deb /tmp/
-RUN dpkg -i pandoc-*.deb && rm pandoc-*.deb
+RUN apt-get update
+
+# Latex
+RUN apt-get install -y -qq \
+	wget fontconfig
+
+# Limara
+RUN apt-get update && apt-get install -y -qq \
+	build-essential
 
 RUN gem install limarka guard guard-shell
 
+# https://www.tug.org/texlive/doc/tlbuild.html#Prerequisites
+# build-essential clisp fontconfig
+
+RUN apt-get install -y -qq \
+	wget fontconfig
+
 # Instala tinytex
-ENV PATH ~/bin:$PATH
+# VOLUME ["/root/.TinyTex"]
 RUN wget -qO- "https://yihui.name/gh/tinytex/tools/install-unx.sh" | sh
 
 # instala bibliotecas para o abntex2/limarka
-RUN /root/bin/tlmgr install memoir abntex2 lastpage microtype lipsum pdfpages ifetex textcase enumitem xcolor babel-portuges listings
+ENV PATH="/root/bin:${PATH}"
+RUN tlmgr install memoir abntex2 lastpage microtype lipsum pdfpages ifetex textcase enumitem xcolor babel-portuges listings
 
 RUN apt-get update && apt-get install -y -qq \
 	locales \
@@ -24,14 +37,18 @@ RUN apt-get update && apt-get install -y -qq \
 	poppler-utils \
 	unzip
 
-RUN useradd -s /bin/sh 
-RUN mkdir -p /trabalho
-RUN chmod -R 777 /trabalho
-RUN chown -R limarka:limarka /trabalho
-USER limarka
+WORKDIR /tmp
+ADD https://github.com/jgm/pandoc/releases/download/2.5/pandoc-2.5-1-amd64.deb /tmp/
+RUN dpkg -i pandoc-*.deb && rm pandoc-*.deb
 
 VOLUME ["/trabalho"]
 WORKDIR /trabalho
+
+#RUN useradd -s /bin/sh
+#RUN mkdir -p /trabalho
+#RUN chmod -R 777 /trabalho
+#RUN chown -R limarka:limarka /trabalho
+#USER limarka
 
 CMD ["--help"]
 ENTRYPOINT ["/usr/local/bundle/bin/limarka"]
