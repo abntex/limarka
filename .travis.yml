@@ -9,15 +9,15 @@ rvm:
 script:
 - docker --version
 - docker build -t limarka1 -f containers/Dockerfile-ruby-tinytex.production .
-- cd modelo-oficial && docker run --mount src=`pwd`,target=/trabalho,type=bind limarka1 exec && cd ..
+- cd modelo-oficial && docker run --name limarka --mount src=`pwd`,target=/trabalho,type=bind limarka1 exec && cd ..
 - ls -n modelo-oficial/
 - file modelo-oficial/xxx-Monografia-projeto.pdf
 - sed -i '8 a \\\\usepackage{subfig}' modelo-oficial/latexcustomizacao.sty
 - cat modelo-oficial/latexcustomizacao.sty
 - rm -rf modelo-oficial/xxx*
-- cd modelo-oficial && docker run -d --name limarka --mount src=`pwd`,target=/trabalho,type=bind limarka1 && cd ..
-- docker exec limarka tlmgr install subfig
-- docker exec limarka exec
+- docker commit -c "RUN tlmgr install subfig" limarka limarka1
+- docker rm limarka
+- cd modelo-oficial && docker run --mount src=`pwd`,target=/trabalho,type=bind limarka1 exec && cd ..
 - ls -n modelo-oficial/
 - cat modelo-oficial/xxx-Monografia-projeto.log
 - file modelo-oficial/xxx-Monografia-projeto.pdf
