@@ -13,4 +13,12 @@ script:
 - file modelo-oficial/xxx-Monografia-projeto.pdf
 - pdftotext xxx-Monografia-projeto.pdf
 - cat xxx-Monografia-projeto.txt
+- sed -i '8 a \usepackage{subfig}' modelo-oficial/latexcustomizacao.sty
+- cat modelo-oficial/latexcustomizacao.sty
+- rm -rf modelo-oficial/xxx*
+- bundle exec rake docker:build docker:run
+- ls -n modelo-oficial/
+- cat modelo-oficial/xxx-Monografia-projeto.log
+- file modelo-oficial/xxx-Monografia-projeto.pdf
+
 #after_failure:
