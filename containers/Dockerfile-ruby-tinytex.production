@@ -50,5 +50,4 @@ WORKDIR /trabalho
 #RUN chown -R limarka:limarka /trabalho
 #USER limarka
 
-CMD ["--help"]
-ENTRYPOINT ["/usr/local/bundle/bin/limarka"]
+CMD /bin/bash
