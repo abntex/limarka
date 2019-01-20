@@ -1,30 +1,36 @@
-FROM ruby:2
+FROM ruby:2-slim
 
 LABEL maintainer="eduardo.ufpb@gmail.com"
 LABEL limarka.version="v1.0.1"
 LABEL pandoc.version="v2.5.1"
 
-# Instala tinytex
-# VOLUME ["/root/.TinyTex"]
-RUN wget -qO- "https://yihui.name/gh/tinytex/tools/install-unx.sh" | sh
-
-# instala bibliotecas para o abntex2/limarka
-ENV PATH="/root/bin:${PATH}"
-RUN tlmgr install memoir abntex2 lastpage microtype lipsum pdfpages ifetex textcase enumitem xcolor babel-portuges listings
+# Tentamos seguir as melhores práticas:
+# https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
 
 RUN apt-get update && apt-get install -y -qq \
+	build-essential \
+	fontconfig \
 	locales \
 	pdfgrep \
 	pdftk \
 	poppler-utils \
-	unzip
-
-WORKDIR /tmp
-ADD https://github.com/jgm/pandoc/releases/download/2.5/pandoc-2.5-1-amd64.deb /tmp/
-RUN dpkg -i pandoc-*.deb && rm pandoc-*.deb
+	unzip \
+	wget
 
 RUN gem install limarka guard guard-shell
 
+# Instala tinytex (/root/.TinyTex)
+RUN wget -qO- "https://yihui.name/gh/tinytex/tools/install-unx.sh" | sh
+ENV PATH="/root/bin:${PATH}"
+
+# instala bibliotecas para o abntex2/limarka
+RUN tlmgr install memoir abntex2 lastpage microtype lipsum pdfpages ifetex textcase enumitem xcolor babel-portuges listings
+
+# Instala o pandoc
+WORKDIR /tmp
+RUN wget https://github.com/jgm/pandoc/releases/download/2.5/pandoc-2.5-1-amd64.deb \
+    && dpkg -i pandoc-*.deb \
+		&& rm pandoc-*.deb
 
 VOLUME ["/trabalho"]
 WORKDIR /trabalho

@@ -69,7 +69,12 @@ namespace 'docker' do
 
   desc 'Constroi imagem docker'
   task 'build' do
-    sh 'docker build -t limarka -f containers/Dockerfile-ruby-tinytex.production .'
+    sh 'bin/build-docker.sh'
+  end
+
+  desc 'Publica imagens docker do limarka no travis'
+  task 'deploy' do
+    sh 'bin/deploy-docker.sh'
   end
 
   desc 'Executa o docker dentro do modelo'
