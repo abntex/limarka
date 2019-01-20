@@ -8,16 +8,16 @@ rvm:
 
 script:
 - docker --version
-- docker build -t limarka1 -f containers/Dockerfile-ruby-tinytex.production .
-- cd modelo-oficial && docker run -d -it --name limarka_teste --mount src=`pwd`,target=/trabalho,type=bind limarka1  && cd ..
-- docker exec limarka_teste limarka exec 
+- docker build -t limarka -f containers/Dockerfile-ruby-tinytex.production .
+- docker run --mount src=`pwd`,target=/trabalho,type=bind limarka exec
 - ls -n modelo-oficial/
 - file modelo-oficial/xxx-Monografia-projeto.pdf
+- rm -rf modelo-oficial/xxx*
 - sed -i '8 a \\\\usepackage{subfig}' modelo-oficial/latexcustomizacao.sty
 - cat modelo-oficial/latexcustomizacao.sty
-- rm -rf modelo-oficial/xxx*
-- docker exec limarka_teste tlmgr install subfig
-- docker exec limarka_teste limarka exec
+- echo "FROM limarka:latest" > Dockerfile && echo "RUN tlmgr install subfig" >> Dockerfile
+- cd modelo-oficial && docker build -t limarka:custom . && cd ..
+- docker run --mount src=`pwd`,target=/trabalho,type=bind limarka:custom exec
 - ls -n modelo-oficial/
 - cat modelo-oficial/xxx-Monografia-projeto.log
 - file modelo-oficial/xxx-Monografia-projeto.pdf

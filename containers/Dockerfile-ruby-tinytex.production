@@ -44,10 +44,4 @@ RUN dpkg -i pandoc-*.deb && rm pandoc-*.deb
 VOLUME ["/trabalho"]
 WORKDIR /trabalho
 
-#RUN useradd -s /bin/sh
-#RUN mkdir -p /trabalho
-#RUN chmod -R 777 /trabalho
-#RUN chown -R limarka:limarka /trabalho
-#USER limarka
-
 CMD /bin/bash
