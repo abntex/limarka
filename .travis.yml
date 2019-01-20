@@ -16,6 +16,7 @@ script:
 - sed -i '8 a \\\\usepackage{subfig}' modelo-oficial/latexcustomizacao.sty
 - cat modelo-oficial/latexcustomizacao.sty
 - echo "FROM limarka:latest" > Dockerfile && echo "RUN tlmgr install subfig" >> Dockerfile
+- cat Dockerfile
 - cd modelo-oficial && docker build -t limarka:custom . && cd ..
 - docker run --mount src=`pwd`,target=/trabalho,type=bind limarka:custom exec
 - ls -n modelo-oficial/
