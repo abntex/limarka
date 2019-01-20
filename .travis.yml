@@ -7,9 +7,10 @@ rvm:
 - 2.3.1
 
 script:
+- pwd
 - docker --version
 - docker build -t edusantana/limarka -f containers/Dockerfile-ruby-tinytex.production .
-- cd modelo-oficial && docker run --mount src=`pwd`,target=/trabalho,type=bind edusantana/limarka exec
+- cd modelo-oficial && docker run --mount src=`pwd`,target=/trabalho,type=bind edusantana/limarka exec && cd ..
 - ls -n modelo-oficial/
 - file modelo-oficial/xxx-Monografia-projeto.pdf
 - rm -rf modelo-oficial/xxx*
