@@ -69,16 +69,28 @@ namespace 'docker' do
 
   desc 'Constroi imagem docker'
   task 'build' do
-    sh 'docker build -t limarka -f containers/Dockerfile-ruby-tinytex.production .'
+    sh 'docker build -t limarka:latest -f containers/Dockerfile-ruby-tinytex.production .'
+    Dir.chdir('modelo-oficial') do
+      sh 'docker build -t limarka:custom .'
+    end
   end
 
   desc 'Executa o docker dentro do modelo'
   task 'run' do
     Dir.chdir('modelo-oficial') do
       rm_rf("xxx*")
-      sh 'docker run --mount src=`pwd`,target=/trabalho,type=bind  limarka exec'
+      sh 'docker run --mount src=`pwd`,target=/trabalho,type=bind limarka exec'
     end
   end
+
+  desc 'Executa o docker dentro do modelo'
+  task 'run:custom' do
+    Dir.chdir('modelo-oficial') do
+      rm_rf("xxx*")
+      sh 'docker run --mount src=`pwd`,target=/trabalho,type=bind limarka:custom exec'
+    end
+  end
+
 
 end
 
