@@ -8,19 +8,18 @@ rvm:
 
 script:
 - docker --version
-- docker build -t limarka -f containers/Dockerfile-ruby-tinytex.production .
-- docker run --mount src=`pwd`,target=/trabalho,type=bind limarka exec
+- docker build -t edusantana/limarka -f containers/Dockerfile-ruby-tinytex.production .
+- docker run --mount src=`pwd`,target=/trabalho,type=bind edusantana/limarka exec
 - ls -n modelo-oficial/
 - file modelo-oficial/xxx-Monografia-projeto.pdf
 - rm -rf modelo-oficial/xxx*
 - sed -i '8 a \\\\usepackage{subfig}' modelo-oficial/latexcustomizacao.sty
 - cat modelo-oficial/latexcustomizacao.sty
-- echo "FROM limarka:latest" > Dockerfile && echo "RUN tlmgr install subfig" >> Dockerfile
-- cat Dockerfile
-- cd modelo-oficial && docker build -t limarka:custom . && cd ..
-- docker run --mount src=`pwd`,target=/trabalho,type=bind limarka:custom exec
+- echo "FROM limarka:latest" > modelo-oficial/Dockerfile && echo "RUN tlmgr install subfig" >> modelo-oficial/Dockerfile
+- cat modelo-oficial/Dockerfile
+- cd modelo-oficial && docker build -t limarka:custom --cache-from edusantana/limarka . && cd ..
+- cd modelo-oficial && docker run --mount src=`pwd`,target=/trabalho,type=bind limarka:custom exec && cd ..
 - ls -n modelo-oficial/
 - cat modelo-oficial/xxx-Monografia-projeto.log
 - file modelo-oficial/xxx-Monografia-projeto.pdf
-
 #after_failure:
