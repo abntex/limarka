@@ -44,4 +44,5 @@ RUN dpkg -i pandoc-*.deb && rm pandoc-*.deb
 VOLUME ["/trabalho"]
 WORKDIR /trabalho
 
-CMD /bin/bash
+CMD ["--help"]
+ENTRYPOINT ["/usr/local/bundle/bin/limarka"]
