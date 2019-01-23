@@ -37,7 +37,7 @@ deploy:
       tags: true
   - provider: script
     skip_cleanup: true
-    script: bin/build-docker.sh && bin/deploy-docker.sh branch dev
+    script: bin/build-docker.sh && bin/deploy-docker.sh branch $TRAVIS_BRANCH
     on:
       branch: master
       tags: false
