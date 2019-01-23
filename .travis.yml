@@ -20,5 +20,5 @@ deploy:
     skip_cleanup: true
     script: bin/build-docker.sh && bin/deploy-docker.sh branch dev
     on:
-      branch: master
+      branch: 176-docker-tag-build
       tags: false
