@@ -4,7 +4,8 @@ language: ruby
 services:
 - docker
 rvm:
-- 2.3.1
+- 2.4
+cache: bundle
 
 before_install:
 - sudo apt-get update -qq
@@ -24,7 +25,6 @@ script:
 - bundle exec rspec -t @latex_minimo
 - bundle exec rake
 - bundle exec rake spec:latex
-- bundle exec rake docker:build
 
 after_failure:
   - cat test/latex/exemplo-minimo/xxx-Monografia.log
@@ -32,6 +32,12 @@ after_failure:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: bin/deploy-docker.sh
+    script: bin/build-docker.sh && bin/deploy-docker.sh tag $TRAVIS_TAG
+    on:
+      tags: true
+  - provider: script
+    skip_cleanup: true
+    script: bin/build-docker.sh && bin/deploy-docker.sh branch dev
     on:
       branch: master
+      tags: false
