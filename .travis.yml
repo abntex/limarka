@@ -32,6 +32,12 @@ after_failure:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: bin/deploy-docker.sh
+    script: bin/build-docker.sh && bin/deploy-docker.sh tag $TRAVIS_TAG
+    on:
+      tag: true
+  - provider: script
+    skip_cleanup: true
+    script: bin/build-docker.sh && bin/deploy-docker.sh branch dev
     on:
       branch: master
+      tags: false
