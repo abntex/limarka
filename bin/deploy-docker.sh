@@ -1,7 +1,6 @@
 # $1: comando valor
 # tag v1.2.3
 # branch master
-
 # http://codewiki.wikidot.com/shell-script:if-else
 if [ "$1" = "tag" ]
 then
