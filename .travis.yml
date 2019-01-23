@@ -8,15 +8,8 @@ rvm:
 cache: bundle
 
 before_install:
-- sudo apt-get update -qq && sudo apt-get install -y -qq \
-    language-pack-pt \
-    libreoffice \
-    locales \
-    pdfgrep \
-    poppler-utils \
-    pdftk xclip \
-    ruby-full \
-    unzip
+- sudo apt-get update -qq	- sudo apt-get update -qq
+- sudo apt-get install -y -qq ruby-full pdftk xclip poppler-utils language-pack-pt libreoffice unzip pdfgrep locales
 - wget https://github.com/jgm/pandoc/releases/download/2.5/pandoc-2.5-1-amd64.deb && sudo dpkg -i pandoc-*.deb
 - wget -qO- "https://yihui.name/gh/tinytex/tools/install-unx.sh" | sh
 - tlmgr install memoir abntex2 lastpage microtype lipsum pdfpages ifetex textcase enumitem xcolor babel-portuges listings
