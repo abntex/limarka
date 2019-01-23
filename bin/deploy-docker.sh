@@ -13,14 +13,14 @@ then
     MAJOR=`echo $2|cut -f 1 -d '.'`
     MINOR=`echo $2|cut -f 2 -d '.'`
     #PATCH=`echo $1|cut -f 3 -d '.'`
-    echo "Aplicando tags de versão..."
-    echo docker tag limarka "limarka/limarka"
-    echo docker tag limarka "limarka/limarka:$MAJOR"
-    echo docker tag limarka "limarka/limarka:$MAJOR.$MINOR"
+    echo "Aplicando tags da versão $2..."
+    docker tag limarka "limarka/limarka"
+    docker tag limarka "limarka/limarka:$MAJOR"
+    docker tag limarka "limarka/limarka:$MAJOR.$MINOR"
     echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    echo docker push "limarka/limarka"
-    echo docker push "limarka/limarka:$MAJOR"
-    echo docker push "limarka/limarka:$MAJOR.$MINOR"
+    docker push "limarka/limarka"
+    docker push "limarka/limarka:$MAJOR"
+    docker push "limarka/limarka:$MAJOR.$MINOR"
   else
     >&2 echo "Erro: faltou informar o nome da tag. Ex: tag v1.2.3"
     exit 1
@@ -29,10 +29,10 @@ elif [ "$1" = "branch" ]
 then
   if [ -n "$2" ]
   then
-    echo "Aplicando tag de branch..."
-    echo docker tag limarka limarka/limarka:$2
+    echo "Aplicando tag $2 na branch..."
+    docker tag limarka limarka/limarka:$2
     echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    echo docker push limarka/limarka:$2
+    docker push limarka/limarka:$2
   else
     >&2 echo "Erro: faltou informar o nome da tag para branch. Ex: branch dev"
     exit 1
