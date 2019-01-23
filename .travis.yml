@@ -31,7 +31,6 @@ script:
 - bundle exec rspec -t @latex_minimo
 - bundle exec rake
 - bundle exec rake spec:latex
-- bundle exec rake docker:build
 
 after_failure:
   - cat test/latex/exemplo-minimo/xxx-Monografia.log
