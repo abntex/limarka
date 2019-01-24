@@ -1,0 +1,19 @@
+FROM limarka/ruby-latex-pandoc
+
+# Tentamos seguir as melhores práticas:
+# https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
+
+RUN apt-get update && apt-get install -y -qq \
+	pdfgrep \
+	pdftk \
+	poppler-utils
+
+RUN gem install limarka guard guard-shell
+
+
+
+VOLUME ["/trabalho"]
+WORKDIR /trabalho
+
+CMD ["--help"]
+ENTRYPOINT ["/usr/local/bundle/bin/limarka"]

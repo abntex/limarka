@@ -71,6 +71,18 @@ namespace 'docker' do
   task 'build' do
     sh 'bin/build-docker.sh'
   end
+  desc 'Constroi imagem ruby:latex'
+  task 'build:ruby-latex' do
+    sh 'docker build -t limarka/ruby-latex -f containers/Dockerfile-ruby-tinytex .'
+  end
+  desc 'Constroi imagem ruby:latex:pandoc'
+  task 'build:ruby-latex-pandoc' do
+    sh 'docker build -t limarka/ruby-latex-pandoc -f containers/Dockerfile-ruby-tinytex-pandoc .'
+  end
+  desc 'Constroi imagem ruby:latex:pandoc:limarka'
+  task 'build:ruby-latex-pandoc-limarka' do
+    sh 'docker build -t limarka/limarka - < containers/Dockerfile-ruby-tinytex-pandoc-limarka'
+  end
 
   desc 'Publica imagens docker do limarka no travis'
   task 'deploy' do

@@ -1,0 +1,10 @@
+FROM limarka/ruby-latex
+
+# Tentamos seguir as melhores práticas:
+# https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
+
+# Instala o pandoc
+WORKDIR /tmp
+RUN wget https://github.com/jgm/pandoc/releases/download/2.5/pandoc-2.5-1-amd64.deb \
+    && dpkg -i pandoc-*.deb \
+		&& rm pandoc-*.deb
