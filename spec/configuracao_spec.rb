@@ -7,6 +7,13 @@ require 'open3'
 
 describe 'configuracao.pdf', :integracao do
 
+
+  # digita bundle exec rspec spec/configuracao_spec.rb no seu terminal
+  # ok.... então primeiro vamos descrever o arquivo configuraçao.pdf
+  # Você me ver digitando?
+  #Sim
+#Teria que digitar dentro do projeto trabalho-academico?
+# Es
   def template_mesclado(template, yaml_hash)
     yaml_tempfile = Tempfile.new('yaml')
     result = ''
@@ -18,7 +25,7 @@ describe 'configuracao.pdf', :integracao do
         exit_status = wait_thr.value # Process::Status object returned.
         if(exit_status!=0) then puts ("Erro: " + s).red end
       }
-      
+
     ensure
       yaml_tempfile.close
       yaml_tempfile.unlink
@@ -26,9 +33,13 @@ describe 'configuracao.pdf', :integracao do
 
     result
   end
-  
+
   before (:all) do
     # Precisa do libreoffice e ele precisa está fechado!
+    # esse comando é executado antes de todos os testes...
+    # ele converte o arquivo odt e gera um pdf
+    # eu nunca testei desenvolvimento no windows.
+
     Dir.chdir(modelo_dir) do
       system "libreoffice --headless --convert-to pdf configuracao.odt", :out=>"/dev/null"
     end
@@ -59,7 +70,7 @@ describe 'configuracao.pdf', :integracao do
     end
   end
 
-  
+
   shared_examples 'um combo desativado por padrão' do
     it 'é um campo do tipo combo' do
       expect(field).not_to be nil
@@ -90,7 +101,7 @@ describe 'configuracao.pdf', :integracao do
       expect(field.options).to include(opcoes[2])
       expect(field.options).to include(opcoes[3])
     end
-    
+
     it 'seu valor padrão é Graduação' do
       expect(field.value_default).to eq(valor_padrao)
     end
@@ -121,7 +132,7 @@ describe 'configuracao.pdf', :integracao do
         it 'exporta mestrado => true' do
           expect(pdfconf.exporta).to include(configuracao_exportada)
         end
-      end      
+      end
       context 'quando Doutorado' do
         let(:valor_configurado) {opcoes[3]}
         let(:configuracao_exportada) {{'graduacao' => false, 'especializacao' => false, 'mestrado' => false, 'doutorado' => true, 'tipo_do_trabalho'=>'Tese'}}
@@ -131,7 +142,7 @@ describe 'configuracao.pdf', :integracao do
         it 'exporta doutorado => true' do
           expect(pdfconf.exporta).to include(configuracao_exportada)
         end
-      end      
+      end
 
     end
   end
@@ -150,7 +161,7 @@ describe 'configuracao.pdf', :integracao do
     it 'possui 2 opções de configuração' do
       expect(field.options).to eq(opcoes)
     end
-    
+
     it 'seu valor padrão é Proposta ou Projeto' do
       expect(field.value_default).to eq(valor_padrao)
     end
@@ -174,7 +185,7 @@ describe 'configuracao.pdf', :integracao do
       end
     end
   end
-  
+
   describe 'apendices_combo', :apendices, :pdf do
     let(:campo) {'apendices_combo'}
     let(:tipo) {'Choice'}
@@ -183,7 +194,7 @@ describe 'configuracao.pdf', :integracao do
     let(:field) {pdf.field(campo)}
 
     it_behaves_like 'um combo desativado por padrão'
-    
+
     describe 'na exportação para yaml', :pdfconf do
       context 'quando desativada (valor padrão)' do
         let(:configuracao) {{'apendices' => false}}
@@ -201,7 +212,7 @@ describe 'configuracao.pdf', :integracao do
         it 'exporta a configuração de ativada' do
           expect(pdfconf.exporta).to include(configuracao)
         end
-      end      
+      end
     end
   end
 
@@ -213,7 +224,7 @@ describe 'configuracao.pdf', :integracao do
     let(:field) {pdf.field(campo)}
     let(:template) {'postextual4-anexos'}
     let(:codigo_latex){'\\begin{anexosenv}'}
-    
+
     it_behaves_like 'um combo desativado por padrão'
 
     describe 'na exportação para yaml', :pdfconf do
@@ -238,7 +249,7 @@ describe 'configuracao.pdf', :integracao do
         it 'o template inclui o anexo', :template, :template_anexo do
           expect(template_mesclado(template, pdfconf.exporta)).to include(codigo_latex)
         end
-      end      
+      end
     end
   end
 
@@ -250,7 +261,7 @@ describe 'configuracao.pdf', :integracao do
     let(:field) {pdf.field(campo)}
     let(:template) {'pretextual2-errata'}
     let(:codigo_latex){'\\begin{errata}'}
-    
+
     it_behaves_like 'um combo desativado por padrão'
 
     describe 'na exportação para yaml', :pdfconf do
@@ -277,7 +288,7 @@ describe 'configuracao.pdf', :integracao do
           expect(template_mesclado(template, pdfconf.exporta)).to include(codigo_latex)
         end
 
-      end      
+      end
     end
   end
 
@@ -298,7 +309,7 @@ describe 'configuracao.pdf', :integracao do
       expect(field.options).to include(opcoes[1])
       expect(field.options).to include(opcoes[2])
     end
-    
+
     it 'seu valor padrão é Não Gerar' do
       expect(field.value_default).to eq(valor_padrao)
     end
@@ -329,8 +340,9 @@ CODIGO
 % ---
 
 % Isto é um exemplo de Folha de aprovação, elemento obrigatório da NBR
-% 14724/2011 (seção 4.2.1.3). 
+% 14724/2011 (seção 4.2.1.3).
 % Este modelo será utilizado antes da aprovação do trabalho.
+
 \\begin{folhadeaprovacao}
 CODIGO
         }
@@ -366,7 +378,7 @@ CODIGO
       end
     end
   end
-  
+
   describe 'referencias_combo', :referencias, :pdf do
     let(:campo) {'referencias_sistema_combo'}
     let(:tipo) {'Choice'}
@@ -426,11 +438,11 @@ CODIGO
       expect(field.options).to include(opcoes[0])
       expect(field.options).to include(opcoes[1])
     end
-    
+
     it 'seu valor padrão é Sem ficha' do
       expect(field.value_default).to eq(valor_padrao)
     end
-    
+
     describe 'na exportação para yaml', :pdfconf do
       context 'quando Sem ficha catalográfica (valor padrão)' do
         let(:configuracao_exportada) {{'incluir_ficha_catalografica' => false}}
@@ -457,6 +469,59 @@ CODIGO
     end
   end
 
+describe 'lista_quadros', :lista_quadros do
+  let(:campo) {'lista_quadros_combo'}
+  let(:tipo) {'Choice'}
+  let(:opcoes) {['Dispensar uso de lista de quadros','Gerar lista de quadros']}
+  let(:valor_padrao) {opcoes[0]}
+  let(:field) {pdf.field(campo)}
+  let(:template){'pretextual9-lista_ilustracoes'}
+  let(:codigo_latex){<<-CODIGO
+\\pdfbookmark[0]{\\listofquadrosname}{loq}
+\\listofquadros*
+\\cleardoublepage
+CODIGO
+  }
+
+  it 'é um campo do tipo combo' do
+    expect(field).not_to be nil
+    expect(field.type).to eq(tipo)
+  end
+  it 'possui 2 opções de configuração' do
+    expect(field.options).to include(opcoes[0])
+    expect(field.options).to include(opcoes[1])
+  end
+
+
+  describe 'na exportação para yaml', :pdfconf do
+    context 'Dispensar uso de lista de quadros (valor padrão)' do
+      let(:configuracao_exportada) {{'lista_quadros' => false}}
+      it 'exporta lista_quadros => false' do
+        expect(pdfconf.exporta).to include(configuracao_exportada)
+      end
+      it 'o template não inclui a lista de quadros', :template, :template_lista_quadros do
+        expect(template_mesclado(template, pdfconf.exporta)).not_to include(codigo_latex)
+      end
+    end
+    context 'quando Gerar lista de quadros' do
+      let(:sistema_numerico) {opcoes[1]}
+      let(:configuracao_exportada) {{'lista_quadros' => true}}
+      before do
+        pdfconf.update(campo, sistema_numerico)
+      end
+      it 'exporta lista_quadros => true' do
+        expect(pdfconf.exporta).to include(configuracao_exportada)
+      end
+      it 'o template inclui a lista de quadros', :template, :template_lista_quadros do
+        expect(template_mesclado(template, pdfconf.exporta)).to include(codigo_latex)
+      end
+    end
+  end
+
+
+
+end
+
   describe 'lista_ilustracoes_combo', :lista_ilustracoes do
     let(:campo) {'lista_ilustracoes_combo'}
     let(:tipo) {'Choice'}
@@ -479,11 +544,11 @@ CODIGO
       expect(field.options).to include(opcoes[0])
       expect(field.options).to include(opcoes[1])
     end
-    
+
     it 'seu valor padrão é Sem Lista' do
       expect(field.value_default).to eq(valor_padrao)
     end
-    
+
     describe 'na exportação para yaml', :pdfconf do
       context 'quando Sem Lista (valor padrão)' do
         let(:configuracao_exportada) {{'lista_ilustracoes' => false}}
@@ -525,11 +590,11 @@ CODIGO
       expect(field.options).to include(opcoes[0])
       expect(field.options).to include(opcoes[1])
     end
-    
+
     it 'seu valor padrão é Sem Lista' do
       expect(field.value_default).to eq(valor_padrao)
     end
-    
+
     describe 'na exportação para yaml', :pdfconf do
       let(:template){'pretextual10-lista_tabelas'}
       context 'quando Sem Lista (valor padrão)' do
@@ -584,10 +649,10 @@ TEX
 
     context 'quando vazio' do
       let(:valor_do_campo){""}
-    
+
       before do
         pdfconf.update(campo, valor_do_campo)
-      end 
+      end
 
       describe 'na exportação para yaml', :pdfconf do
         let(:configuracao_exportada) {{'simbolos' => nil}}
@@ -614,10 +679,10 @@ TEX
       let(:d1) {"Letra grega Gama"}
       let(:d2) {"Pertence"}
       let(:valor_do_campo){"#{s1}: #{d1}\n#{s2}: #{d2}"}
-    
+
       before do
         pdfconf.update(campo, valor_do_campo)
-      end 
+      end
 
       describe 'na exportação para yaml', :pdfconf do
         let(:configuracao_exportada) {{'simbolos' => [{'s'=> s1,'d'=> d1},{'s'=> s2,'d'=> d2}]}}
@@ -638,10 +703,10 @@ TEX
 TEX
         end
       end
-    end    
+    end
   end
 
-  
+
   describe 'siglas', :siglas do
     let(:campo) {'siglas'}
     let(:tipo) {'Text'}
@@ -662,7 +727,7 @@ TEX
     end
 
     context 'quando vazia' do
-      
+
       before do
         pdfconf.update(campo, '')
       end
@@ -704,9 +769,9 @@ TEX
         end
       end
     end
-    
+
   end
-  
+
   describe 'referencias_caminho', :referencias, :pdf do
     let(:campo) {'referencias_caminho'}
     let(:tipo) {'Text'}
@@ -748,5 +813,5 @@ TEX
   end
 
 
-  
+
 end

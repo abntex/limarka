@@ -17,20 +17,20 @@ Gem::Specification.new do |spec|
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
-  spec.requirements = 'pandoc, v1.19.1'
+  #spec.requirements = 'pandoc, v1.19.1'
   spec.post_install_message = 'Gostou do limarka? Considere contribuir com o projeto: https://opencollective.com/limarka/donate'
 
-
-  spec.add_development_dependency "bundler", "~> 1.12"
-  spec.add_development_dependency "rake", "~> 11.0"
-  spec.add_development_dependency "rspec", "~> 3.5"
+# essas são as ferramentas de desenvolvimento
+  spec.add_development_dependency "bundler", "~> 2.0"
+  spec.add_development_dependency "rake", "~> 12.0"
+  spec.add_development_dependency "rspec", "~> 3.8"
   spec.add_development_dependency "pry-byebug"
   spec.add_development_dependency "github_changelog_generator"
 
   spec.add_dependency "clipboard"
   spec.add_dependency "ffi"
   spec.add_dependency "colorize"
-  spec.add_dependency "pdf-forms", "~> 1.1.1"
+  spec.add_dependency "pdf-forms", "~> 1.2"
   spec.add_dependency "pandoc-ruby"
   spec.add_dependency "thor"
   spec.add_dependency 'bibtex-ruby'

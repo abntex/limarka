@@ -48,6 +48,7 @@ module Limarka
       h.merge! errata
       h.merge! referencias
       h.merge! lista_ilustracoes
+      h.merge! lista_quadros
       h.merge! lista_tabelas
       h.merge! lista_siglas
 
@@ -74,6 +75,11 @@ module Limarka
 
     def errata
       {'errata' => !desativado?('errata_combo')}
+    end
+
+    def lista_quadros
+      campo = 'lista_quadros_combo'
+      {'lista_quadros' => ler_campo(campo).include?('Gerar')}
     end
 
     def lista_ilustracoes
