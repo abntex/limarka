@@ -36,6 +36,10 @@ describe 'configuracao.pdf', :integracao do
 
   before (:all) do
     # Precisa do libreoffice e ele precisa está fechado!
+    # esse comando é executado antes de todos os testes...
+    # ele converte o arquivo odt e gera um pdf
+    # eu nunca testei desenvolvimento no windows.
+
     Dir.chdir(modelo_dir) do
       system "libreoffice --headless --convert-to pdf configuracao.odt", :out=>"/dev/null"
     end
@@ -338,6 +342,7 @@ CODIGO
 % Isto é um exemplo de Folha de aprovação, elemento obrigatório da NBR
 % 14724/2011 (seção 4.2.1.3).
 % Este modelo será utilizado antes da aprovação do trabalho.
+
 \\begin{folhadeaprovacao}
 CODIGO
         }
@@ -349,6 +354,7 @@ CODIGO
           expect(pdfconf.exporta).to include(configuracao_exportada)
         end
         it 'o template gera uma folha de aprovação', :template, :template_folha_de_aprovacao do
+          byebug
           expect(template_mesclado(template, pdfconf.exporta)).to include(codigo_latex)
         end
       end
@@ -464,22 +470,16 @@ CODIGO
     end
   end
 
-# bundle exec rspec -t wip (no termianl)
-# primeiro temos que ver o teste falhar... nesse caso (como você já implementou)
-# temos que mudar o nosso teste. vamos colocar um campo que não existe: lista_quadros_combo2
-# executa e ver o teste falhando.
-# viu  teste falhando?
-
 describe 'lista_quadros', :lista_quadros, :wip do
-  let(:campo) {'lista_quadros_combo2'}
+  let(:campo) {'lista_quadros_combo'}
   let(:tipo) {'Choice'}
   let(:opcoes) {['Dispensar uso de lista de quadros','Gerar lista de quadros']}
   let(:valor_padrao) {opcoes[0]}
   let(:field) {pdf.field(campo)}
   let(:template){'pretextual9-lista_ilustracoes'}
   let(:codigo_latex){<<-CODIGO
-\\pdfbookmark[0]{\\listfigurename}{lof}
-\\listoffigures*
+\\pdfbookmark[0]{\\listofquadrosname}{loq}
+\\listofquadros*
 \\cleardoublepage
 CODIGO
   }
@@ -492,6 +492,34 @@ CODIGO
     expect(field.options).to include(opcoes[0])
     expect(field.options).to include(opcoes[1])
   end
+
+
+  describe 'na exportação para yaml', :pdfconf do
+    context 'Dispensar uso de lista de quadros (valor padrão)' do
+      let(:configuracao_exportada) {{'lista_quadros' => false}}
+      it 'exporta lista_quadros => false' do
+        expect(pdfconf.exporta).to include(configuracao_exportada)
+      end
+      it 'o template não inclui a lista de quadros', :template, :template_lista_quadros do
+        expect(template_mesclado(template, pdfconf.exporta)).not_to include(codigo_latex)
+      end
+    end
+    context 'quando Gerar lista de quadros' do
+      let(:sistema_numerico) {opcoes[1]}
+      let(:configuracao_exportada) {{'lista_quadros' => true}}
+      before do
+        pdfconf.update(campo, sistema_numerico)
+      end
+      it 'exporta lista_quadros => true' do
+        expect(pdfconf.exporta).to include(configuracao_exportada)
+      end
+      it 'o template inclui a lista de quadros', :template, :template_lista_quadros do
+        expect(template_mesclado(template, pdfconf.exporta)).to include(codigo_latex)
+      end
+    end
+  end
+
+
 
 end
 
