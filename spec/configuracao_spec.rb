@@ -354,7 +354,6 @@ CODIGO
           expect(pdfconf.exporta).to include(configuracao_exportada)
         end
         it 'o template gera uma folha de aprovação', :template, :template_folha_de_aprovacao do
-          byebug
           expect(template_mesclado(template, pdfconf.exporta)).to include(codigo_latex)
         end
       end
@@ -470,7 +469,7 @@ CODIGO
     end
   end
 
-describe 'lista_quadros', :lista_quadros, :wip do
+describe 'lista_quadros', :lista_quadros do
   let(:campo) {'lista_quadros_combo'}
   let(:tipo) {'Choice'}
   let(:opcoes) {['Dispensar uso de lista de quadros','Gerar lista de quadros']}
