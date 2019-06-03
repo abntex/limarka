@@ -62,6 +62,9 @@ module Limarka
         system "latexmk --quiet --xelatex -f #{basename}",  :out=>File::NULL, :err=>File::NULL
         if (usa_pdftotext) then
           system "pdftotext -enc UTF-8 #{basename}.pdf"
+          # Comando sed para corrigir junção do fi (ligatures)
+          # https://superuser.com/questions/220363/cleaning-up-pdftotext-font-issues/231637#231637
+          system "sed -i -e 's/ﬃ/ffi/g' -e 's/ﬁ/fi/g' -e 's/ﬀ/ff/g' -e 's/ﬂ/fl/g' -e 's/ﬄ/ffl/g' #{basename}.txt"
           File.open("#{basename}.txt", 'r') {|f| @txt = f.read}
         end
       end
