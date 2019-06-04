@@ -23,64 +23,49 @@ Nome do autor
 Título do trabalho
 
 Cidade - UF
-2016
+2019
     TEXTO
     }
 
-
   before do
-    FileUtils.rm_rf output_dir
-    FileUtils.mkdir_p output_dir
-    FileUtils.cp_r "#{modelo_dir}/.",output_dir
+    cria_copia_do_modelo(output_dir)
+    @cv = Limarka::Conversor.new(t, options)
+    @cv.convert
   end
 
-  context 'quando incluído capa pdf personalizada' do
-    let (:output_dir) {"tmp/capa/pdf-personalizada"}
+  context 'quando fornece pdf personalizado' do
+    let (:output_dir) {"tmp/capa/capa-pdf-personalizada"}
     let (:configuracao_especifica) {{'capa_pdf_caminho'=> 'imagens/capa.pdf'}}
 
-    before do
-      @cv = Limarka::Conversor.new(t, options)
-      @cv.convert
-    end
-
     it 'capa não será gerada' do
-      expect(@cv.texto_tex).not_to include("\\imprimircapa")
       expect(@cv.texto_tex).not_to include("% Gerando capa abnTeX2")
+      expect(@cv.texto_tex).not_to include("\\imprimircapa")
     end
     it 'o pdf da capa é utilizado' do
-      expect(@cv.texto_tex).to include("\\includepdf{imagens/capa.pdf}")
       expect(@cv.texto_tex).to include("% Incluindo capa personalizada de pdf")
+      expect(@cv.texto_tex).to include("\\includepdf{imagens/capa.pdf}")
     end
 
     describe 'no pdf', :compilacao, :lento do
       before do
         @cv.compila
       end
-      it "a capa foi incluída" do
+      it "a capa foi incluída apropriadamente" do
         expect(@cv.txt).to include("Capa personalizada")
-      end
-      it "o texto de geração de capa não foi incluído" do
         expect(@cv.txt).not_to include(texto_gerado_para_capa)
       end
     end
   end
 
-  context 'quando capa pdf personalizada não for preenchido' do
+  context 'quando NÃO fornece pdf personalizado' do
     let (:output_dir) {"tmp/capa/sem-capa-personalizada"}
     let (:configuracao_especifica) {{'capa_pdf_caminho'=> ''}}
-
-    before do
-      Dir.chdir output_dir do
-        @cv = Limarka::Conversor.new(t, options)
-        @cv.convert
-      end
-    end
 
     it 'nenhuma capa é incluída' do
       expect(@cv.texto_tex).not_to include("\\includepdf")
       expect(@cv.texto_tex).not_to include("% Incluindo capa personalizada de pdf")
     end
-      it 'capa será gerada' do
+    it 'capa será gerada' do
       expect(@cv.texto_tex).to include("\\imprimircapa")
       expect(@cv.texto_tex).to include("% Gerando capa abnTeX2")
     end
@@ -89,10 +74,8 @@ Cidade - UF
       before do
         @cv.compila
       end
-      it "a capa foi gerada" do
+      it "a capa foi gerada apropriadamente" do
         expect(@cv.txt).to include(texto_gerado_para_capa)
-      end
-      it "o texto da capa pdf personalizada não foi incluído" do
         expect(@cv.txt).not_to include("Capa personalizada")
       end
     end
