@@ -1,8 +1,6 @@
 FROM ruby:2-slim
 
 LABEL maintainer="eduardo.ufpb@gmail.com"
-LABEL limarka.version="v1.0.1"
-LABEL pandoc.version="v2.5.1"
 
 # Tentamos seguir as melhores práticas:
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
@@ -28,7 +26,7 @@ RUN tlmgr install memoir abntex2 lastpage microtype lipsum pdfpages ifetex textc
 
 # Instala o pandoc
 WORKDIR /tmp
-RUN wget https://github.com/jgm/pandoc/releases/download/2.5/pandoc-2.5-1-amd64.deb \
+RUN wget https://github.com/jgm/pandoc/releases/download/2.7.2/pandoc-2.7.2-1-amd64.deb \
     && dpkg -i pandoc-*.deb \
 		&& rm pandoc-*.deb
 
