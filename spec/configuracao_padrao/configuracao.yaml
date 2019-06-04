@@ -1,10 +1,10 @@
 ---
-capa_pdf_caminho: imagens/capa.pdf
+instituicao: Universidade/Faculdade do Brasil
 author: Nome do autor
 title: Título do trabalho
 local: Cidade - UF
-instituicao: Universidade/Faculdade do Brasil
 date: '2019'
+capa_pdf_caminho: ''
 titulacao: Minha-titulação
 curso: Meu-curso
 programa: Programa de Pós-Graduação em XXX
