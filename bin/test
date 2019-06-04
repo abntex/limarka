@@ -3,4 +3,4 @@
 set -e
 
 echo "===> Executa os testes rápidos..."
-rake spec:fast
+rake spec
