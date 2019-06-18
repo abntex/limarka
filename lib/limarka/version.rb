@@ -1,3 +1,4 @@
 module Limarka
-  VERSION = "1.1.0"
+  # O Versionamento é ano e mês
+  VERSION = "19.5"
 end

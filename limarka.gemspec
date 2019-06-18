@@ -3,12 +3,20 @@ lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'limarka/version'
 
+IS_TAGGED = ENV['TRAVIS_TAG'] == "v#{Limarka::VERSION}"
+IS_ORIGIN = ENV['TRAVIS_REPO_SLUG'] == 'abntex/limarka'
+BUILD_NUMBER = ENV['TRAVIS_BUILD_NUMBER']
+
 Gem::Specification.new do |spec|
   spec.name          = "limarka"
-  spec.version       = Limarka::VERSION
+  spec.version       = if BUILD_NUMBER && IS_ORIGIN && !IS_TAGGED
+    # Prereleasing on Travis CI
+    Limarka::VERSION + ".pre.#{BUILD_NUMBER}"
+  else
+    Limarka::VERSION
+  end
   spec.authors       = ["Eduardo de Santana Medeiros Alexandre"]
   spec.email         = ["eduardo.ufpb@gmail.com"]
-
   spec.summary       = %q{Ferramenta para compilação de trabalhos acadêmicos com markdown e abnTeX2}
   spec.description   = %q{Com essa ferramenta você poderá escrever sua monografia, dissertação ou tese utilizando Markdown (linguagem mais simples que Latex).}
   spec.homepage      = "https://github.com/abntex/limarka"
