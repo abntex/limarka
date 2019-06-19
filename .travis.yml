@@ -33,13 +33,14 @@ before_install:
   textcase
   xcolor
 - export PATH=$PATH:~/bin
+before_script:
+  - latexmk -v
+  - xelatex -v
+  - pdftotext -v
+  - pandoc -v
+  - docker --version
+  - libreoffice --version
 script:
-- latexmk -v
-- xelatex -v
-- pdftotext -v
-- pandoc -v
-- docker --version
-- libreoffice --version
 - bundle exec rspec -t @latex_minimo
 - bundle exec rake
 - bundle exec rake spec:latex

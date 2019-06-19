@@ -7,8 +7,6 @@ require 'open3'
 require 'yaml'
 require 'rake/clean'
 require 'pdf_forms'
-require 'github_changelog_generator/task'
-
 
 desc 'Executa os testes ruby'
 RSpec::Core::RakeTask.new('spec') do |t|
@@ -21,18 +19,6 @@ RSpec::Core::RakeTask.new('spec:latex') do |t|
 end
 
 task :default => [:configuracao_padrao, 'spec']
-
-GitHubChangelogGenerator::RakeTask.new :changelog do |c|
-  c.future_release = "v"+Limarka::VERSION
-  c.header = "# Changelog\n\nTodas as mudanças relevantes deste projeto serão documentadas neste arquivo.\n"
-  c.bug_prefix="**Bugs corrigidos:**"
-  c.issue_prefix = "**Issues fechados:**"
-  c.enhancement_prefix="**Melhorias implementadas:**"
-  c.since_tag="0.2.0"
-  c.user="abntex"
-  c.project="limarka"
-end
-
 
 # http://stackoverflow.com/questions/19841865/ruby-gem-to-extract-form-data-from-fillable-pdf
 # https://github.com/jkraemer/pdf-forms/blob/master/test/pdf_test.rb
