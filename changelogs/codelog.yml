@@ -1,0 +1,16 @@
+# Changelog Header  -------------------------------------------------
+
+header_textfile: changelogs/header.txt
+default_changelog_filename: CHANGELOG.md
+
+# Tag formatting  ---------------------------------------------------
+
+version_prefix: ""
+version_suffix: ""
+date_prefix: ""
+
+# Date formatting  --------------------------------------------------
+
+show_date: true
+date_input_format: "%Y-%m-%d"
+date_output_format: "%Y-%m-%d"

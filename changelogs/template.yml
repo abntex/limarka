@@ -1,0 +1,20 @@
+"Melhorias implementadas":
+  - Nova funcionalidade implementada
+
+"Mudanças":
+  - Novo comportamento
+
+"Deprecated":
+  - Funcionalidades que serão removidas em breve
+
+"Removido":
+  - Funcionalidades que serão removidas
+
+"Correções":
+  - Alterações em código com erro
+
+"Segurança":
+  - Mudanças que corrigem vulnerabilidade
+
+"Deploy notes":
+  - Mudanças que impactam no processo de implantação
