@@ -22,4 +22,5 @@ echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 for tag in $tags
 do
   docker push "$tag"
+  echo Imagem docker publicada
 done
