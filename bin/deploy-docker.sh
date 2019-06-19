@@ -1,6 +1,4 @@
-# $1: comando valor
-#   v1.2.3
-#   dev
+# $1: TAG
 # http://codewiki.wikidot.com/shell-script:if-else
 if [ -n "$1" ]
 then
@@ -8,19 +6,30 @@ then
     # https://semver.org/lang/pt-BR/
     ANO=`echo $1|cut -f 1 -d '.'`
     MES=`echo $1|cut -f 2 -d '.'`
-    tags="limarka/limarka limarka/limarka:$ANO limarka/limarka:$ANO.$MES"
+    rtptags="limarka/ruby-latex-pandoc limarka/ruby-latex-pandoc:$ANO limarka/ruby-latex-pandoc:$ANO.$MES"
+    ltags="limarka/limarka limarka/limarka:$ANO limarka/limarka:$ANO.$MES"
 else
-    tags="limarka/limarka:dev"
+    rtptags="limarka/ruby-latex-pandoc:dev"
+    ltags="limarka/limarka:dev"
 fi
 
-echo "Aplicando tags: $tags..."
-for tag in $tags
+echo "Aplicando tags..."
+for tag in $rtptags
+do
+  docker tag ruby-latex-pandoc "$tag"
+done
+for tag in $ltags
 do
   docker tag limarka "$tag"
 done
+
+echo "Publicando tags..."
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-for tag in $tags
+for tag in $rtptags
 do
   docker push "$tag"
-  echo Imagem docker publicada
+done
+for tag in $ltags
+do
+  docker push "$tag"
 done
