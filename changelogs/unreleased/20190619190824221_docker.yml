@@ -1,0 +1,5 @@
+"Mudanças":
+  - >
+    Novas imagens do docker passaram a ser geradas no processo de build.
+    Imagens de desenvolvimento: `limarka/ruby-latex-pandoc:dev` e `limarka/limarka:dev`
+    Imagens de release: `limarka/limarka`, `limarka/limarka:ANO` e `limarka/limarka:ANO.MES`
