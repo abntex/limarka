@@ -16,10 +16,10 @@ fi
 echo "Aplicando tags: $tags..."
 for tag in $tags
 do
-  echo docker tag limarka "$tag"
+  docker tag limarka "$tag"
 done
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 for tag in $tags
 do
-  echo docker push "$tag"
+  docker push "$tag"
 done
