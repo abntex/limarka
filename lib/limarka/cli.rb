@@ -48,8 +48,8 @@ module Limarka
         s = `pandoc --version`
         s << `ruby --version`
         s << `pdftk --version`
-        s <<`latexmk --version`
-        s << `xelatex --version `
+        s << `latexmk --version`
+        s << `xelatex --version`
         puts s
         return
       end

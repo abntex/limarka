@@ -8,16 +8,18 @@ then
     # https://semver.org/lang/pt-BR/
     ANO=`echo $1|cut -f 1 -d '.'`
     MES=`echo $1|cut -f 2 -d '.'`
-    declare -a tags=("limarka/limarka" "limarka/limarka:$ANO" "limarka/limarka:$ANO.$MES")
+    tags="limarka/limarka limarka/limarka:$ANO limarka/limarka:$ANO.$MES"
 else
-    declare -a tags=("limarka/limarka:dev")
+    tags="limarka/limarka:dev"
 fi
 
-echo "Aplicando tags: ${tags[*]}..."
-for tag in "${tags[@]}"; do
-  docker tag limarka "$tag"
+echo "Aplicando tags: $tags..."
+for tag in $tags
+do
+  echo docker tag limarka "$tag"
 done
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-for tag in "${tags[@]}"; do
-  docker push "$tag"
+for tag in $tags
+do
+  echo docker push "$tag"
 done
