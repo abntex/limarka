@@ -5,7 +5,7 @@ services:
 - docker
 jobs:
   include:
-    - stage: ruby
+    - stage: test
       before_install:
       - sudo apt-get update -qq
       - sudo apt-get install -y -qq
@@ -25,7 +25,7 @@ jobs:
         - libreoffice --version
       script:
       - bundle exec rake spec:ruby
-    - stage: pdf
+    - stage: test
       cache:
         directories:
           - $HOME/.TinyTeX
