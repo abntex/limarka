@@ -22,6 +22,7 @@ before_install:
 - wget -nv https://github.com/jgm/pandoc/releases/download/2.7.2/pandoc-2.7.2-1-amd64.deb
   && sudo dpkg -i pandoc-*.deb
 - export PATH=$PATH:~/bin
+- which tlmgr
 - if ! which tlmgr > /dev/null; then bin/install-latex.sh; fi
 before_script:
   - latexmk -v
