@@ -9,13 +9,18 @@ require 'rake/clean'
 require 'pdf_forms'
 
 desc 'Executa os testes ruby'
-RSpec::Core::RakeTask.new('spec') do |t|
+RSpec::Core::RakeTask.new('spec:ruby') do |t|
   t.rspec_opts = "--tag ~compilacao --tag ~dependencias_latex"
 end
 
-desc 'Executa os testes com compilação Latex'
-RSpec::Core::RakeTask.new('spec:latex') do |t|
+desc 'Executa os testes nos pdf compilados'
+RSpec::Core::RakeTask.new('spec:pdf') do |t|
   t.rspec_opts = "--tag compilacao --tag dependencias_latex"
+end
+
+desc 'Executa o teste mínimo de compilação'
+RSpec::Core::RakeTask.new('spec:latex_minimo') do |t|
+  t.rspec_opts = "--tag latex_minimo"
 end
 
 task :default => [:configuracao_padrao, 'spec']

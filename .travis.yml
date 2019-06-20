@@ -3,6 +3,10 @@ sudo: required
 language: ruby
 services:
 - docker
+env:
+  - RSPEC=pdf
+  - RSPEC=ruby
+  - RSPEC=latex_minimo
 cache:
   directories:
   - $HOME/.TinyTeX
@@ -31,9 +35,7 @@ before_script:
   - docker --version
   - libreoffice --version
 script:
-- bundle exec rspec -t @latex_minimo
-- bundle exec rake
-- bundle exec rake spec:latex
+- bundle exec rake spec:$RSPEC
 after_failure:
 - cat test/latex/exemplo-minimo/xxx-Monografia.log
 deploy:

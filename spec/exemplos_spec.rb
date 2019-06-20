@@ -66,7 +66,7 @@ END
     t.save test_dir # Salva os arquivos que serão lidos
   end
 
-  context "exec -y configuracao.yaml -t templates_dir (invocação)", :compilacao do
+  context "exec -y configuracao.yaml -t templates_dir (invocação)" do
     let(:test_dir){'tmp/exemplos/exemplo1'}
     before do
       expect_any_instance_of(Limarka::Cli).to receive(:exec)
@@ -78,7 +78,7 @@ END
     end
   end
 
-  context "exec -y configuracao.yaml -t templates_dir", :compilacao do
+  context "exec -y configuracao.yaml -t templates_dir" do
     let(:test_dir){'tmp/exemplos/exemplo2'}
     before do
       Dir.chdir test_dir do
