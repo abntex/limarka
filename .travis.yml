@@ -3,14 +3,15 @@ sudo: required
 language: ruby
 services:
 - docker
-env:
-  - RSPEC=pdf
-  - RSPEC=ruby
-  - RSPEC=latex_minimo
+jobs:
+  include:
+    - name: pdf
+      env: RSPEC=pdf
+    - name: ruby
+      env: RSPEC=ruby
 cache:
   directories:
   - $HOME/.TinyTeX
-  - $HOME/bin
 before_install:
 - sudo apt-get update -qq
 - sudo apt-get install -y -qq
@@ -25,7 +26,7 @@ before_install:
   xclip
 - wget -nv https://github.com/jgm/pandoc/releases/download/2.7.3/pandoc-2.7.3-1-amd64.deb
   && sudo dpkg -i pandoc-*.deb
-- export PATH=$PATH:~/bin
+- export PATH=$PATH:~/.TinyTeX2/bin/x86_64-linux
 - if ! command -v tlmgr > /dev/null; then bin/install-latex.sh; fi
 before_script:
   - latexmk -v
