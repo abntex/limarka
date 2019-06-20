@@ -3,7 +3,10 @@ sudo: required
 language: ruby
 services:
 - docker
-cache: bundle
+cache:
+  directories:
+  - .TinyTeX
+  - bin
 before_install:
 - sudo apt-get update -qq
 - sudo apt-get install -y -qq
@@ -18,21 +21,8 @@ before_install:
   xclip
 - wget https://github.com/jgm/pandoc/releases/download/2.7.2/pandoc-2.7.2-1-amd64.deb
   && sudo dpkg -i pandoc-*.deb
-- wget -qO- "https://yihui.name/gh/tinytex/tools/install-unx.sh" | sh
-- tlmgr install
-  abntex2
-  babel-portuges
-  enumitem
-  ifetex
-  lastpage
-  lipsum
-  listings
-  memoir
-  microtype
-  pdfpages
-  textcase
-  xcolor
 - export PATH=$PATH:~/bin
+- if ! which tlmgr > /dev/null; then bin/install-latex.sh; fi
 before_script:
   - latexmk -v
   - xelatex -v
