@@ -27,7 +27,7 @@ RUN rm -rf /var/lib/apt/lists/* \
     && localedef -i pt_BR -c -f UTF-8 -A /usr/share/locale/locale.alias pt_BR.UTF-8
 ENV LANG pt_BR.UTF8
 
-# Instala o pandoc
+# Instalação do pandoc
 WORKDIR /tmp
 RUN wget https://github.com/jgm/pandoc/releases/download/2.7.3/pandoc-2.7.3-1-amd64.deb \
 && dpkg -i pandoc-*.deb \
