@@ -5,8 +5,8 @@ services:
 - docker
 cache:
   directories:
-  - .TinyTeX
-  - bin
+  - $HOME/.TinyTeX
+  - $HOME/bin
 before_install:
 - sudo apt-get update -qq
 - sudo apt-get install -y -qq
