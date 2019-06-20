@@ -13,7 +13,7 @@ RSpec::Core::RakeTask.new('spec:ruby') do |t|
   t.rspec_opts = "--tag ~compilacao --tag ~dependencias_latex"
 end
 
-desc 'Executa os testes nos pdf compilados'
+desc 'Executa os testes com geração de pdf'
 RSpec::Core::RakeTask.new('spec:pdf') do |t|
   t.rspec_opts = "--tag compilacao --tag dependencias_latex"
 end
@@ -23,7 +23,7 @@ RSpec::Core::RakeTask.new('spec:latex_minimo') do |t|
   t.rspec_opts = "--tag latex_minimo"
 end
 
-task :default => [:configuracao_padrao, 'spec']
+task :default => [:configuracao_padrao, 'spec:ruby']
 
 # http://stackoverflow.com/questions/19841865/ruby-gem-to-extract-form-data-from-fillable-pdf
 # https://github.com/jkraemer/pdf-forms/blob/master/test/pdf_test.rb
