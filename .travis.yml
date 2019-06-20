@@ -57,6 +57,8 @@ jobs:
       after_failure:
       - cat test/latex/exemplo-minimo/xxx-Monografia.log
     - stage: deploy
+      script:
+        - echo Realizando deploy
       deploy:
       - provider: rubygems
         api_key:
