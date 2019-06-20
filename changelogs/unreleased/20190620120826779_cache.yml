@@ -1,0 +1,2 @@
+"Melhorias implementadas":
+  - Otimização da execução dos testes no Travis através do cache com o TinyTex entre execuções.
