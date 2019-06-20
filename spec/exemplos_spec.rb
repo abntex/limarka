@@ -6,7 +6,7 @@ require 'limarka/cli'
 require 'yaml'
 
 describe 'Exemplo1', :exemplos do
-  
+
 
   let(:tex_file){test_dir+'/xxx-Monografia-projeto.tex'}
   let(:texto) {<<-END
@@ -55,8 +55,8 @@ Folha| Linha| Onde se lê     | Leia-se
 10   |12    |aranhaarranha   | aranha arranha
 END
   }
-  
-  
+
+
   let!(:templates_dir){modelo_dir}
   let(:t){Limarka::Trabalho.new(configuracao: configuracao_padrao, texto: texto, anexos: anexos, referencias_bib: referencias_bib, apendices: apendices, errata: errata)}
 
@@ -76,7 +76,6 @@ END
         Limarka::Cli.start(["exec","-y","configuracao.yaml", '-t', templates_dir])
       end
     end
-    
   end
 
   context "exec -y configuracao.yaml -t templates_dir", :compilacao do
@@ -107,8 +106,8 @@ END
     it "lança erro indicando mensagem sugestiva" do
       Dir.chdir test_dir do
         expect{Limarka::Cli.start(["exec","-y", '-t', templates_dir])}.to raise_error(IOError, "Arquivo configuracao.yaml não foi encontrado, talvez esteja executando dentro de um diretório que não contém um projeto válido?")
-      end      
+      end
     end
   end
-  
+
 end
