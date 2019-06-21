@@ -12,6 +12,7 @@ jobs:
       before_script:
         - pandoc -v
         - libreoffice --version
+        - pdftk --version
       script:
       - bundle exec rake spec:ruby
     - stage: test
@@ -29,6 +30,7 @@ jobs:
         - pandoc -v
         - docker --version
         - libreoffice --version
+        - pdftk --version
       script:
       - bundle exec rake spec:pdf
       after_failure:
