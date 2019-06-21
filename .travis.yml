@@ -8,7 +8,7 @@ jobs:
     - stage: test
       before_install:
       - sudo apt-get update -qq
-      - bin/instalador.sh -t none
+      - bin/instalador.sh -P -t none
       before_script:
         - pandoc -v
         - libreoffice --version
@@ -21,7 +21,7 @@ jobs:
       before_install:
       - sudo apt-get update -qq
       - export PATH=$PATH:~/.TinyTeX2/bin/x86_64-linux
-      - bin/instalador.sh -t tiny -C
+      - bin/instalador.sh -P -t tiny -C
       before_script:
         - latexmk -v
         - xelatex -v
