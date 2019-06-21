@@ -79,8 +79,10 @@ if [ "$distro" = "Ubuntu" -o "$distro" = "ManjaroLinux" ]; then
       ruby-full \
       unzip \
       xclip
-      if [ "$codename" = "Bionic" ]; then
-        $dry add-apt-repository ppa:malteworld/ppa -y
+      if [ "$codename" = "xenial" ]; then
+        $dry sudo apt-get install pdftk -y
+      elif [ "$codename" = "bionic" ]; then
+        $dry sudo add-apt-repository ppa:malteworld/ppa -y
         $dry sudo apt-get update
         $dry sudo apt-get install pdftk -y
       else
