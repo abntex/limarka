@@ -8,18 +8,7 @@ jobs:
     - stage: test
       before_install:
       - sudo apt-get update -qq
-      - sudo apt-get install -y -qq
-        language-pack-pt
-        libreoffice
-        locales
-        pdfgrep
-        pdftk
-        poppler-utils
-        ruby-full
-        unzip
-        xclip
-      - wget -nv https://github.com/jgm/pandoc/releases/download/2.7.3/pandoc-2.7.3-1-amd64.deb
-        && sudo dpkg -i pandoc-*.deb
+      - bin/instalador.sh -t none
       before_script:
         - pandoc -v
         - libreoffice --version
@@ -31,20 +20,8 @@ jobs:
           - $HOME/.TinyTeX
       before_install:
       - sudo apt-get update -qq
-      - sudo apt-get install -y -qq
-        language-pack-pt
-        libreoffice
-        locales
-        pdfgrep
-        pdftk
-        poppler-utils
-        ruby-full
-        unzip
-        xclip
-      - wget -nv https://github.com/jgm/pandoc/releases/download/2.7.3/pandoc-2.7.3-1-amd64.deb
-        && sudo dpkg -i pandoc-*.deb
       - export PATH=$PATH:~/.TinyTeX2/bin/x86_64-linux
-      - if ! command -v tlmgr > /dev/null; then bin/install-latex.sh; fi
+      - bin/instalador.sh -t tiny -C
       before_script:
         - latexmk -v
         - xelatex -v
@@ -57,8 +34,7 @@ jobs:
       after_failure:
       - cat test/latex/exemplo-minimo/xxx-Monografia.log
     - stage: deploy
-      script:
-        - echo Realizando deploy
+      script: skip
       deploy:
       - provider: rubygems
         api_key:
