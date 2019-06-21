@@ -61,14 +61,6 @@ while getopts "DPCd:t:c:g:p:" opt; do
   esac
 done
 
-
-if [ "$pandoc" -eq 1 ]
-then
-  #echo Instalando o pandoc...
-  $dry wget -nv https://github.com/jgm/pandoc/releases/download/2.7.3/pandoc-2.7.3-1-amd64.deb \
-    && $dry sudo dpkg -i pandoc-*.deb
-fi
-
 # ler distribuição: lsb_release -c -s
 if [ "$codename" = "xenial" ]; then
 
@@ -94,7 +86,7 @@ if [ "$codename" = "xenial" ]; then
 
     tex_em_cache=0
     if [ $cache -eq 1 ]; then
-      if ! command -v tlmgr > /dev/null; then
+      if command -v tlmgr > /dev/null; then
         tex_em_cache=1
         echo TinyTeX encontrado no cache.
       fi
@@ -134,3 +126,10 @@ if [ "$codename" = "xenial" ]; then
   fi #tex
 
 fi # xenial
+
+if [ "$pandoc" -eq 1 ]
+then
+  #echo Instalando o pandoc...
+  $dry wget -nv https://github.com/jgm/pandoc/releases/download/2.7.3/pandoc-2.7.3-1-amd64.deb \
+    && $dry sudo dpkg -i pandoc-*.deb
+fi
