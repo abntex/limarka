@@ -30,7 +30,7 @@ jobs:
         - docker --version
         - libreoffice --version
       script:
-      - bundle exec rake spec:ruby
+      - bundle exec rake spec:pdf
       after_failure:
       - cat test/latex/exemplo-minimo/xxx-Monografia.log
     - stage: deploy
