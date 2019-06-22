@@ -3,6 +3,8 @@ sudo: required
 language: ruby
 services:
 - docker
+notifications:
+  webhooks: https://coveralls.io/webhook
 jobs:
   include:
     - stage: testes
