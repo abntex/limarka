@@ -1,2 +1,3 @@
 "Melhorias implementadas":
   - Otimização da execução dos testes no Travis através do cache com o TinyTex entre execuções.
+  - Testes e deploys realizados em 2 stages no Travis (Otimização do tempo do teste e deploy)

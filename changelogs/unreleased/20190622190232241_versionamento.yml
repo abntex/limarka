@@ -1,0 +1,2 @@
+"Mudanças":
+  - Versionamento do limarka foi simplificado, agora utiliza ANO.MÊS (yy.d) para a versões oficiais, E ANO.MÊS-pre.NUMBER (yy.d-pre-n) para versões em desenvolvimento. Essa mudança permite o desenvolvimento mais ágil.
