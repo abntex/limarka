@@ -14,7 +14,7 @@ describe 'Compilação Latex', :dependencias, :dependencias_latex do
 
   context 'de arquivo abntex2 mínimo com latexmk', :latex_minimo do
     let(:input_dir) {"spec/latex/exemplo-minimo"}
-    let(:output_dir) {input_dir.gsub("spec","test")}
+    let(:output_dir) {input_dir.gsub("spec","tmp")}
 
     it 'O pdf é gerado e o capítulo é prefixado com o número dele' do
       Dir.chdir(output_dir) do
@@ -30,7 +30,7 @@ describe 'Compilação Latex', :dependencias, :dependencias_latex do
 
   context 'de arquivo abntex2 mínimo com títulos com acentos e latexmk', :latex_minimo do
     let(:input_dir) {"spec/latex/exemplo-minimo-com-acentos"}
-    let(:output_dir) {input_dir.gsub("spec","test")}
+    let(:output_dir) {input_dir.gsub("spec","tmp")}
 
     it 'O pdf é gerado e o capítulo é prefixado com o número dele' do
       Dir.chdir(output_dir) do
@@ -46,7 +46,7 @@ describe 'Compilação Latex', :dependencias, :dependencias_latex do
 
   context 'compilando um arquivo tex pequeno com latexmk', :latex_minimo do
     let(:input_dir) {"spec/latex/exemplo-pequeno-latex"}
-    let(:output_dir) {input_dir.gsub("spec","test")}
+    let(:output_dir) {input_dir.gsub("spec","tmp")}
 
     it 'O pdf é gerado segundo as normas da ABNT' do
       Dir.chdir(output_dir) do
