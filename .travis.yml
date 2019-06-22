@@ -5,30 +5,29 @@ services:
 - docker
 jobs:
   include:
-    - stage: test
+    - stage: testes
       before_install:
       - sudo apt-get update -qq
-      - bin/instalador.sh -P -t none
+      - bin/instalador.sh -dp
       before_script:
         - pandoc -v
         - libreoffice --version
         - pdftk --version
       script:
       - bundle exec rake spec:ruby
-    - stage: test
+    - stage: testes
       cache:
         directories:
           - $HOME/.TinyTeX
       before_install:
       - sudo apt-get update -qq
       - export PATH=$PATH:~/.TinyTeX2/bin/x86_64-linux
-      - bin/instalador.sh -P -t tiny -C
+      - bin/instalador.sh -dptc
       before_script:
         - latexmk -v
         - xelatex -v
         - pdftotext -v
         - pandoc -v
-        - docker --version
         - libreoffice --version
         - pdftk --version
       script:
