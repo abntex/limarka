@@ -4,6 +4,10 @@ require 'limarka'
 require 'yaml'
 require 'pry-byebug'
 
+# https://coveralls.io/github/abntex/limarka
+require 'coveralls'
+Coveralls.wear!
+
 def modelo_dir
   Dir.pwd + '/modelo-oficial'
 end
