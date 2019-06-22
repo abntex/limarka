@@ -1,7 +1,19 @@
 # Changelog
-
 Todas as mudanças relevantes deste projeto serão documentadas neste arquivo.
+O formato é baseado em [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
+## 19.06 - 2019-06-22
+### Melhorias implementadas
+- Otimização da execução dos testes no Travis através do cache com o TinyTex entre execuções.
+- Testes e deploys realizados em 2 stages no Travis (Otimização do tempo do teste e deploy)
+- Os testes automatizados geram [relatório de cobertura dos testes](https://coveralls.io/github/abntex/limarka) - [\#152](https://github.com/abntex/limarka/issues/152)
 
+### Mudanças
+- Versionamento do limarka foi simplificado, agora utiliza ANO.MÊS (yy.d) para a versões oficiais, E ANO.MÊS-pre.NUMBER (yy.d-pre-n) para versões em desenvolvimento. Essa mudança permite o desenvolvimento mais ágil.
+- Novas imagens do docker passaram a ser geradas no processo de build. Imagens de desenvolvimento: `limarka/ruby-latex-pandoc:dev` e `limarka/limarka:dev` Imagens de release: `limarka/limarka`, `limarka/limarka:ANO` e `limarka/limarka:ANO.MES`
+- Gestão do changelog passou ser feito com o codelog - [\#191](https://github.com/abntex/limarka/issues/191)
+
+---
+<!-- Old changelog starts here -->
 
 ## [v1.1.0](https://github.com/abntex/limarka/tree/v1.1.0) (2019-06-04)
 [Full Changelog](https://github.com/abntex/limarka/compare/v1.0.2...v1.1.0)
