@@ -5,6 +5,9 @@ services:
 - docker
 notifications:
   webhooks: https://coveralls.io/webhook
+env:
+  global:
+    - COVERALLS_PARALLEL=true
 jobs:
   include:
     - stage: testes
