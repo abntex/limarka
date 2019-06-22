@@ -1,6 +1,6 @@
 ![logo](https://raw.githubusercontent.com/wiki/abntex/limarka/imagens/limarka-logo.png)
 
-[![Build Status](https://travis-ci.org/abntex/limarka.svg?branch=master)](https://travis-ci.org/abntex/limarka)[![Coverage Status](https://coveralls.io/repos/github/abntex/limarka/badge.svg?branch=master)](https://coveralls.io/github/abntex/limarka?branch=master)[![Gem Version](https://badge.fury.io/rb/limarka.svg)](https://badge.fury.io/rb/limarka) [![Join the chat at https://gitter.im/abntex/limarka](https://badges.gitter.im/abntex/limarka.svg)](https://gitter.im/abntex/limarka?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://travis-ci.org/abntex/limarka.svg?branch=master)](https://travis-ci.org/abntex/limarka) [![Coverage Status](https://coveralls.io/repos/github/abntex/limarka/badge.svg?branch=master)](https://coveralls.io/github/abntex/limarka?branch=master) [![Gem Version](https://badge.fury.io/rb/limarka.svg)](https://badge.fury.io/rb/limarka) [![Join the chat at https://gitter.im/abntex/limarka](https://badges.gitter.im/abntex/limarka.svg)](https://gitter.im/abntex/limarka?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ![Normas da ABNT em 2017: Atualizadas](https://img.shields.io/badge/Normas%20da%20ABNT%20em%202017-Atualizadas-brightgreen.svg)
 ![NBR 14724:2011 100%](https://img.shields.io/badge/NBR%202014724%3A2011-100%25-brightgreen.svg)
