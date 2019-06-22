@@ -48,6 +48,10 @@ jobs:
         gem: limarka
         on:
           repo: abntex/limarka
+          branch: master
       - provider: script
         skip_cleanup: true
         script: bin/build-docker.sh && bin/deploy-docker.sh $TRAVIS_TAG
+        on:
+          repo: abntex/limarka
+          branch: master
