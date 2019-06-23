@@ -41,7 +41,7 @@ jobs:
       - cat test/latex/exemplo-minimo/xxx-Monografia.log
     - stage: deploy
       install: skip
-      script: echo tag: $TRAVIS_TAG  slug: $TRAVIS_REPO_SLUG branch: $TRAVIS_BRANCH
+      script: echo tag: $TRAVIS_TAG slug: $TRAVIS_REPO_SLUG branch: $TRAVIS_BRANCH
       deploy:
       - provider: rubygems
         api_key:
