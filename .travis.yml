@@ -40,7 +40,8 @@ jobs:
       after_failure:
       - cat test/latex/exemplo-minimo/xxx-Monografia.log
     - stage: deploy
-      script: skip
+      install: skip
+      script: echo tag: $TRAVIS_TAG  slug: $TRAVIS_REPO_SLUG branch: $TRAVIS_BRANCH
       deploy:
       - provider: rubygems
         api_key:
@@ -54,6 +55,7 @@ jobs:
           secure: YLuHbYsHGPTHoXIBr874CbIAn0/z0H0B8aW39NDQIwk7SMsd4HBgTq/6zgtUVLsp3AO9daHzk0FGcMKAOh9fxFzUuA5MmQTdQA8A3VI7JRM2BEVl8x6Hw2bjMTYMCAVGNGZT9oFKIq2lHByf9zDoQlT7CobKCY3Ofa0MTKcGgvfnqaW+VGosKrcYyZ9HPxBkH8SGnzef1joIcdtWOi3HHV28AacgRslWEkwTmYrsQcamTafQazuIbdhQ5UzvKS6PuIX56wvP6ugy9QTPtsU82x7oaDk+5e8ULJ2BMu/jwM4H3/aJ8ASg17a2EeIJRFckjQpMc+P3WCnbTu4tV2NqsXRzNmTcqwsM4bHTX2/WPlvVNwmTE9f5wSR9uCoQbDvCimCoo0miAE7xMbik0zvWVYZFtIcw3Rn+F+36jXXzY5xLSSYIZgJATbQgnNrYzCs54mUtmF+kUhYzDov4VfYcbc4ihEP6A/AdxvxuO4/xkGIsxlzxjCSw/Bs369zDXO5uUtORSQsLYPW4gZM+p++UMR63l7Radaq45HX0AVtkg9oWMj/UO8XCE2nMEUelcfeseuyy8ZB/Ga97KFVQH/LZLJYYU8+qDXQdfe8oWOlthuOA2QKyErDWQ9YWW2LVRhTacVjLBkYeChgpCReT1FDW982jfSWFCJTtb/XkM+D/90U=
         on:
           tag: true
+          all_branches: true
       - provider: script
         script: bin/build-docker.sh && bin/deploy-docker.sh
         on:
