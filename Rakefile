@@ -56,6 +56,14 @@ task :dissertacao => 'dissertacao-limarka/output' do
   system 'bundle', 'exec', 'limarka', 'exec', '-i', 'dissertacao-limarka', '-o', 'dissertacao-limarka/output'
 end
 
+task 'tag' do
+  system 'git', 'commit', '-m', %Q(Gerando versão v#{Limarka::VERSION})
+  system 'git', 'tag',  %Q(#{Limarka::VERSION})
+  system 'git', 'push'
+  system 'git', 'push', '--tags'
+end
+
+# Desatualizado
 namespace 'docker' do
 
   desc 'Constroi imagem docker'
