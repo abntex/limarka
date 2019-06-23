@@ -56,9 +56,10 @@ task :dissertacao => 'dissertacao-limarka/output' do
   system 'bundle', 'exec', 'limarka', 'exec', '-i', 'dissertacao-limarka', '-o', 'dissertacao-limarka/output'
 end
 
+desc "Apllica tag v#{Limarka::VERSION}"
 task 'tag' do
   system 'git', 'commit', '-m', %Q(Gerando versão v#{Limarka::VERSION})
-  system 'git', 'tag',  %Q(#{Limarka::VERSION})
+  system 'git', 'tag',  %Q(v#{Limarka::VERSION})
   system 'git', 'push'
   system 'git', 'push', '--tags'
 end
