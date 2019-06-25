@@ -59,6 +59,7 @@ module Limarka
     def compila
       Dir.chdir(options[:output_dir]) do
         basename = File.basename(texto_tex_file, '.tex')
+        system "python ~/.TinyTeX/texmf-dist/scripts/texliveonfly/texliveonfly.py --compiler=xelatex #{basename}",  :out=>'xxx-latexmk-std.txt', :err=>'xxx-latexmk-erros.txt'
         system "latexmk --quiet --xelatex -f #{basename}",  :out=>'xxx-latexmk-std.txt', :err=>'xxx-latexmk-erros.txt'
         if (usa_pdftotext) then
           system "pdftotext -enc UTF-8 #{basename}.pdf"

@@ -89,7 +89,9 @@ if [ "$codename" = "xenial" ]; then
           microtype \
           pdfpages \
           textcase \
-          xcolor
+          xcolor \
+          texliveonfly \
+          psnfss
           tlmgr option -- autobackup 0
       else
         $dry wget -qO- "https://yihui.name/gh/tinytex/tools/install-unx.sh" \| sh
@@ -104,7 +106,9 @@ if [ "$codename" = "xenial" ]; then
           microtype \
           pdfpages \
           textcase \
-          xcolor
+          xcolor \
+          texliveonfly \
+          psnfss
           $dry tlmgr option -- autobackup 0
       fi
 
