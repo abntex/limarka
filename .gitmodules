@@ -1,3 +1,4 @@
 [submodule "modelo-oficial"]
 	path = modelo-oficial
-	url = https://github.com/abntex/trabalho-academico-limarka/tree/%2325-fontes-texto
+	url = https://github.com/abntex/trabalho-academico-limarka.git
+	branch = 25-fontes-texto
