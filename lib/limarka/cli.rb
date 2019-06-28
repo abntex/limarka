@@ -311,8 +311,24 @@ TEX
 
     end
 
+    def self.command_line_options_file
+      ".limarka"
+    end
+
+    def self.inicia(given_args = ARGV, config = {})
+      array = []
+      if File.file?(self.command_line_options_file) then
+        string = IO.read(self.command_line_options_file)
+        array = string.split(/\n+|\r+/).reject(&:empty?)
+      end
+
+      self.start(given_args + array, config)
+    end
+
 
     no_commands do
+
+
       def valida_figura_rotulo (rotulo)
         if (not rotulo =~ (/^[a-zA-Z][\w\-:]*$/)) then
           raise RuntimeError, "O rótulo não deve conter caracteres especiais. Forneça um rótulo ou remova os caracteres especiais do nome do arquivo. Rótulo atual: '#{rotulo}'"
