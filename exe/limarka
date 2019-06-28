@@ -7,5 +7,4 @@ Encoding.default_internal = Encoding::UTF_8
 require "limarka"
 require "limarka/cli"
 
-Limarka::Cli.start(ARGV)
-
+Limarka::Cli.inicio(ARGV)
