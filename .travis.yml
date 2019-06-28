@@ -19,7 +19,7 @@ jobs:
         - libreoffice --version
         - pdftk --version
       script:
-      - skip
+      - bundle exec rake spec:ruby
     - stage: testes
       cache:
         directories:
@@ -36,7 +36,7 @@ jobs:
         - libreoffice --version
         - pdftk --version
       script:
-      - skip
+      - bundle exec rake spec:pdf
       after_failure:
       - cat test/latex/exemplo-minimo/xxx-Monografia.log
     - stage: deploy
