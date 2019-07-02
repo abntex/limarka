@@ -5,48 +5,60 @@ require 'limarka/cli'
 
 describe Limarka::Cli, :cli do
 
-  describe "#command_line_options_file" do
-    it "retorna .limarka" do
-      expect(Limarka::Cli.command_line_options_file).to eq('.limarka')
+  describe "#exec", :filtros do
+
+    context "--filtros-lua filtro.lua", :filtro => 'lua' do
+      let (:output_dir) {"tmp/cli/filtros/lua"}
+      let (:texto) {%Q(
+# Início
+
+{{mundo}}
+)}
+
+      before do
+        FileUtils.rm_rf output_dir
+        FileUtils.mkdir_p output_dir
+        #FileUtils.cp "#{modelo_dir}/latexcustomizacao.sty",output_dir
+        IO.write(File.join(output_dir,'trabalho-academico.md'), texto)
+        IO.write(File.join(output_dir,'configuracao.yaml'), JSON.pretty_generate(configuracao_padrao))
+        FileUtils.cp_r "modelo-oficial/referencias.bib",output_dir
+        FileUtils.cp_r "test/filtros/lua/filtro.lua",output_dir
+      end
+
+
+      it "o filtro é executado durante conversão" do
+        Limarka::Cli.start(["exec","-y", "--filtros-lua", "filtro.lua", "--no-compila-tex", "--input-dir", output_dir, "-t", modelo_dir])
+        expect(Limarka::Cli.cv.texto_tex).to include("Olá mundo!")
+      end
     end
+
+    context "--filtros filtro.rb", :filtro => 'ruby' do
+      let (:output_dir) {"tmp/cli/filtros/ruby"}
+      let (:texto) {%Q(
+# inicio
+
+abc def ghi
+)}
+
+      before do
+        FileUtils.rm_rf output_dir
+        FileUtils.mkdir_p output_dir
+        #FileUtils.cp "#{modelo_dir}/latexcustomizacao.sty",output_dir
+        IO.write(File.join(output_dir,'trabalho-academico.md'), texto)
+        IO.write(File.join(output_dir,'configuracao.yaml'), JSON.pretty_generate(configuracao_padrao))
+        FileUtils.cp_r "modelo-oficial/referencias.bib",output_dir
+        FileUtils.cp_r "test/filtros/ruby/filtro.rb",output_dir
+      end
+
+
+      it "o filtro é executado durante conversão" do
+        Limarka::Cli.start(["exec","-y", "--filtros", "filtro.rb", "--no-compila-tex", "--input-dir", output_dir, "-t", modelo_dir])
+        expect(Limarka::Cli.cv.texto_tex).to include("ABC DEF GHi")
+      end
+    end
+
+
   end
 
-
-  describe "#inicia" do
-    context "Quando existe arquivo .limarka" do
-      let(:execution_dir){"tmp/cli/aquivo_de_parametros_existente"}
-      let(:conteudo_do_arquivo){"""
---input_dir
-.
-"""}
-      before do
-        FileUtils.rm_rf execution_dir
-        FileUtils.mkdir_p execution_dir
-      end
-      it "adiciona seu conteúdo como parâmetros para invocar o start" do
-        expect(Limarka::Cli).to receive(:start).with(["exec","--input_dir", "."], {})
-        Dir.chdir execution_dir do
-          IO.write(Limarka::Cli.command_line_options_file, conteudo_do_arquivo)
-          Limarka::Cli.inicia(["exec"])
-        end
-      end
-    end
-
-    context "Quando não existe arquivo .limarka" do
-      let(:execution_dir){"tmp/cli/aquivo_de_parametros_inexistente"}
-      before do
-        FileUtils.rm_rf execution_dir
-        FileUtils.mkdir_p execution_dir
-      end
-      it "start é iniciado com os parâmetros passados" do
-        expect(Limarka::Cli).to receive(:start).with(["exec"], {})
-        Dir.chdir execution_dir do
-          Limarka::Cli.inicia(["exec"])
-        end
-      end
-    end
-
-
-  end
 
 end

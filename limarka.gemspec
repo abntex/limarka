@@ -34,7 +34,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.8"
   spec.add_development_dependency "pry-byebug"
   spec.add_development_dependency "codelog"
-  spec.add_development_dependency 'coveralls'
+  spec.add_development_dependency "coveralls"
+  spec.add_development_dependency "paru"
 
   spec.add_dependency "clipboard"
   spec.add_dependency "ffi"
@@ -42,10 +43,10 @@ Gem::Specification.new do |spec|
   spec.add_dependency "pdf-forms", "~> 1.2"
   spec.add_dependency "pandoc-ruby"
   spec.add_dependency "thor"
-  spec.add_dependency 'bibtex-ruby'
-  spec.add_dependency 'terminal-table'
-  spec.add_dependency 'pandoc_abnt', "~> 2.0.0"
-  spec.add_dependency 'guard'
-  spec.add_dependency 'guard-shell'
+  spec.add_dependency "bibtex-ruby"
+  spec.add_dependency "terminal-table"
+  spec.add_dependency "pandoc_abnt", "~> 2.0.0"
+  spec.add_dependency "guard"
+  spec.add_dependency "guard-shell"
 
 end

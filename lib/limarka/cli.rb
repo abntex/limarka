@@ -24,12 +24,13 @@ module Limarka
 
     default_command :exec
 
+    @@cv = nil
+
     desc "check", "Verifica se o sistema está utilizando as dependências compatíveis"
     def check
       c = Limarka::Check.new()
       c.check()
     end
-
 
     method_option :configuracao_yaml, :aliases => '-y', :type => :boolean, :desc => 'Ler configuração exportada (configuracao.yaml) em vez de configuracao.pdf', :default => false
     method_option :input_dir, :aliases => '-i', :desc => 'Diretório onde será executado a ferramenta', :default => '.'
@@ -39,6 +40,8 @@ module Limarka
     method_option :rascunho, :aliases => '-r', :desc => 'Ler de um arquivo de rascunho em vez de "trabalho-academico.md"', :banner => "RASCUNHO_FILE"
     method_option :verbose, :aliases => '-v', :desc => 'Imprime mais detalhes da execução', :default => false, :type => :boolean
     method_option :version, :desc => 'Imprime a versão do limarka', :default => false, :type => :boolean
+    method_option :filtros_lua, :type => :array, :required => false
+    method_option :filtros, :type => :array, :required => false
 
     desc "exec", "Executa o sistema para geração do documento latex e compilação"
     def exec
@@ -58,10 +61,10 @@ module Limarka
       Dir.chdir(options[:input_dir]) do
         t = Limarka::Trabalho.new
         t.atualiza_de_arquivos(options)
-        cv = Limarka::Conversor.new(t,options)
-        cv.convert
-        cv.usa_pdftotext = false
-        cv.compila if options[:compila_tex]
+        @@cv = Limarka::Conversor.new(t,options)
+        @@cv.convert
+        @@cv.usa_pdftotext = false
+        @@cv.compila if options[:compila_tex]
       end
     end
 
@@ -311,23 +314,12 @@ TEX
 
     end
 
-    def self.command_line_options_file
-      ".limarka"
-    end
-
-    def self.inicia(given_args = ARGV, config = {})
-      array = []
-      if File.file?(self.command_line_options_file) then
-        string = IO.read(self.command_line_options_file)
-        array = string.split(/\n+|\r+/).reject(&:empty?)
-      end
-
-      self.start(given_args + array, config)
-    end
-
 
     no_commands do
 
+      def self.cv
+        @@cv
+      end
 
       def valida_figura_rotulo (rotulo)
         if (not rotulo =~ (/^[a-zA-Z][\w\-:]*$/)) then

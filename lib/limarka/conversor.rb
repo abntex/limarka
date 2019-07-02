@@ -175,9 +175,26 @@ module Limarka
     def secao_indice
     end
 
+    def filtros_lua
+      result = ""
+      if options[:filtros_lua]
+        result = options[:filtros_lua].reduce("") { |cmd, filtro| "#{cmd} --lua-filter #{filtro}" }
+      end
+      result
+    end
+
+    def filtros
+      result = ""
+      if options[:filtros]
+        result = options[:filtros].reduce("") { |cmd, filtro| "#{cmd} --filter #{filtro}" }
+      end
+      result
+    end
+
+
     def textual(pretextual_tempfile, postextual_tempfile)
       valida_yaml
-      Open3.popen3("pandoc -f markdown+raw_tex -t latex -s \"--data-dir=#{options[:templates_dir]}\" --template=trabalho-academico --top-level-division=chapter --include-before-body=#{pretextual_tempfile.path}  --include-after-body=#{postextual_tempfile.path} --filter #{pandoc_abnt_path}") {|stdin, stdout, stderr, wait_thr|
+      Open3.popen3("pandoc -f markdown+raw_tex -t latex -s \"--data-dir=#{options[:templates_dir]}\" --template=trabalho-academico --top-level-division=chapter --include-before-body=#{pretextual_tempfile.path}  --include-after-body=#{postextual_tempfile.path} #{filtros_lua} #{filtros} --filter #{pandoc_abnt_path}") {|stdin, stdout, stderr, wait_thr|
         stdin.write(File.read(options[:templates_dir] + '/templates/configuracao-tecnica.yaml'))
         stdin.write("\n")
         stdin.write(hash_to_yaml(t.configuracao))
