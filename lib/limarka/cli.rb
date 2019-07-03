@@ -40,8 +40,8 @@ module Limarka
     method_option :rascunho, :aliases => '-r', :desc => 'Ler de um arquivo de rascunho em vez de "trabalho-academico.md"', :banner => "RASCUNHO_FILE"
     method_option :verbose, :aliases => '-v', :desc => 'Imprime mais detalhes da execução', :default => false, :type => :boolean
     method_option :version, :desc => 'Imprime a versão do limarka', :default => false, :type => :boolean
-    method_option :filtros_lua, :type => :array, :required => false
-    method_option :filtros, :type => :array, :required => false
+    method_option :filtros, :type => :array, :required => false, :desc => 'Sequencia de filtros pandoc que serão utilizados'
+    method_option :filtros_lua, :type => :array, :required => false, :desc => 'Sequencia de filtros lua pandoc que serão utilizados'
 
     desc "exec", "Executa o sistema para geração do documento latex e compilação"
     def exec
