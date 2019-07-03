@@ -26,6 +26,10 @@ module Limarka
 
     @@cv = nil
 
+    def self.exit_on_failure?
+      true
+    end
+
     desc "check", "Verifica se o sistema está utilizando as dependências compatíveis"
     def check
       c = Limarka::Check.new()
