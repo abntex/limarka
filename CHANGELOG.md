@@ -1,6 +1,14 @@
 # Changelog
 Todas as mudanças relevantes deste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
+## 19.7.2 - 2019-07-03
+### Deprecated
+- Comando 'check' será removido em breve
+
+### Correções
+- `help exec` passou a mostrar os parâmetros dos filtros.
+
+---
 ## 19.7 - 2019-07-02
 ### Melhorias implementadas
 - Possível utilizar filtros pandoc através das opções --filtros ou --filtros-lua [\#158](https://github.com/abntex/limarka/issues/158)
