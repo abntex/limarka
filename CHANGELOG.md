@@ -1,6 +1,11 @@
 # Changelog
 Todas as mudanças relevantes deste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
+## 19.7 - 2019-07-02
+### Melhorias implementadas
+- Possível utilizar filtros pandoc através das opções --filtros ou --filtros-lua [\#158](https://github.com/abntex/limarka/issues/158)
+
+---
 ## 19.06 - 2019-06-22
 ### Melhorias implementadas
 - Otimização da execução dos testes no Travis através do cache com o TinyTex entre execuções.

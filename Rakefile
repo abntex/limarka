@@ -64,6 +64,11 @@ task 'tag' do
   system 'git', 'push', '--tags'
 end
 
+desc "Gera codelog para release de v#{Limarka::VERSION}"
+task 'codelog' do
+  system 'codelog', 'release', "#{Limarka::VERSION}"
+end
+
 # Desatualizado
 namespace 'docker' do
 
