@@ -38,7 +38,32 @@ jobs:
       script:
       - bundle exec rake spec:pdf
       after_failure:
-      - cat test/latex/exemplo-minimo/xxx-Monografia.log
+      - cat tmp/anexos/ativado/xxx-Monografia-projeto.log
+      - cat tmp/anexos/ativado/xxx-Monografia-projeto.log
+      - cat tmp/apendices/ativado/xxx-Monografia-projeto.log
+      - cat tmp/capa/capa-pdf-personalizada/xxx-Monografia-projeto.log
+      - cat tmp/capa/sem-capa-personalizada/xxx-Monografia-projeto.log
+      - cat tmp/errata/ativada/xxx-Monografia-projeto.log
+      - cat tmp/errata/desativada/xxx-Monografia-projeto.log
+      - cat tmp/exemplos/exemplo2/xxx-Monografia-projeto.log
+      - cat tmp/folha_aprovacao/desativada/xxx-Monografia-projeto.log
+      - cat tmp/folha_aprovacao/geracao-proposito-personalizado/xxx-Monografia-projeto.log
+      - cat tmp/folha_aprovacao/geracao/xxx-Monografia-projeto.log
+      - cat tmp/folha_aprovacao/inclusao/xxx-Monografia-projeto.log
+      - cat tmp/latex/exemplo-minimo-com-acentos/xxx-Monografia.log
+      - cat tmp/latex/exemplo-minimo/xxx-Monografia.log
+      - cat tmp/latex/exemplo-pequeno-latex/xxx-Monografia.log
+      - cat tmp/lista_ilustracoes/ativada/xxx-Monografia-projeto.log
+      - cat tmp/lista_tabelas/ativada/xxx-Monografia-projeto.log
+      - cat tmp/lista_tabelas/desativada/xxx-Monografia-projeto.log
+      - cat tmp/preambulo/projeto/xxx-Monografia-projeto.log
+      - cat tmp/preambulo/trabalho-final/xxx-Monografia.log
+      - cat tmp/referencias_bib/xxx-Monografia-projeto.log
+      - cat tmp/siglas/especificadas/xxx-Monografia-projeto.log
+      - cat tmp/siglas/padrao/xxx-Monografia-projeto.log
+      - cat tmp/simbolos/especificados/xxx-Monografia-projeto.log
+      - cat tmp/sumario/sem-siglas/xxx-Monografia-projeto.log
+      - cat tmp/sumario/siglas-nil/xxx-Monografia-projeto.log
     - stage: deploy
       install: skip
       script: echo tag $TRAVIS_TAG slug $TRAVIS_REPO_SLUG branch $TRAVIS_BRANCH
