@@ -18,7 +18,6 @@ describe Limarka::Cli, :cli do
       before do
         FileUtils.rm_rf output_dir
         FileUtils.mkdir_p output_dir
-        #FileUtils.cp "#{modelo_dir}/latexcustomizacao.sty",output_dir
         IO.write(File.join(output_dir,'trabalho-academico.md'), texto)
         IO.write(File.join(output_dir,'configuracao.yaml'), JSON.pretty_generate(configuracao_padrao))
         FileUtils.cp_r "modelo-oficial/referencias.bib",output_dir
@@ -43,7 +42,6 @@ abc def ghi
       before do
         FileUtils.rm_rf output_dir
         FileUtils.mkdir_p output_dir
-        #FileUtils.cp "#{modelo_dir}/latexcustomizacao.sty",output_dir
         IO.write(File.join(output_dir,'trabalho-academico.md'), texto)
         IO.write(File.join(output_dir,'configuracao.yaml'), JSON.pretty_generate(configuracao_padrao))
         FileUtils.cp_r "modelo-oficial/referencias.bib",output_dir

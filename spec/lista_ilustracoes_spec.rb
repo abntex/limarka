@@ -4,7 +4,7 @@ require 'spec_helper'
 require 'limarka/conversor'
 
 describe 'Lista de Ilustrações', :lista_ilustracoes do
-  
+
   let!(:options) {{output_dir: output_dir, templates_dir: modelo_dir}}
   let(:tex_file) {Limarka::Conversor.tex_file(t.configuracao)}
   let (:texto) {<<-TEXTO
@@ -20,7 +20,6 @@ TEXTO
   before do
     FileUtils.rm_rf output_dir
     FileUtils.mkdir_p output_dir
-    FileUtils.cp "#{modelo_dir}/latexcustomizacao.sty",output_dir
   end
 
   context 'quando ativada',  :compilacao, :lento do
@@ -33,7 +32,7 @@ TEXTO
       @cv.convert
       @cv.compila
     end
-    
+
     it "é gerada segundo as Normas da ABNT no PDF" do
         expect(File).to exist(@cv.pdf_file)
         expect(@cv.txt).to include("Lista de ilustrações\nFigura 1 – Minha figura")
@@ -50,11 +49,11 @@ TEXTO
       @cv.convert
       @cv.compila
     end
-    
+
     it "nao é gerada no PDF" do
         expect(File).to exist(@cv.pdf_file)
         expect(@cv.txt).not_to include("Lista de ilustrações")
     end
   end
-  
+
 end

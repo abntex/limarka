@@ -4,7 +4,7 @@ require 'spec_helper'
 require 'limarka/conversor'
 
 describe 'Lista de Siglas', :siglas do
-  
+
   let!(:options) {{output_dir: output_dir, templates_dir: modelo_dir}}
   let(:tex_file) {Limarka::Conversor.tex_file(t.configuracao)}
   let (:texto) {<<-TEXTO
@@ -19,7 +19,6 @@ TEXTO
   before do
     FileUtils.rm_rf output_dir
     FileUtils.mkdir_p output_dir
-    FileUtils.cp "#{modelo_dir}/latexcustomizacao.sty",output_dir
   end
 
   context 'em sua configuração padrão', :siglas => "padrao" do
@@ -30,7 +29,7 @@ TEXTO
       @cv = Limarka::Conversor.new(t, options)
       @cv.convert
     end
-    
+
     it 'imprime a lista de siglas com uma única sigla' do
       expect(@cv.texto_tex).to include("\\begin{siglas}")
       expect(@cv.texto_tex).to include("ABNT")
@@ -39,7 +38,7 @@ TEXTO
     end
 
     describe "no pdf", :compilacao do
-      
+
       before do
         @cv.compila
       end
@@ -54,9 +53,9 @@ TXT
       end
     end
 
-    
+
   end
-  
+
   context 'quando siglas forem especificadas' do
     let (:output_dir) {"tmp/siglas/especificadas"}
     let (:siglas){{'siglas' => [{'s'=>"SQN",'d'=>'Só que não.'}, {'s'=>'OMG', 'd'=>'Oh My God!'}]}}
@@ -66,7 +65,7 @@ TXT
       @cv = Limarka::Conversor.new(t, options)
       @cv.convert
     end
-    
+
     it 'seu código é gerado' do
       expect(@cv.texto_tex).to include("\\begin{siglas}")
       expect(@cv.texto_tex).to include("\\end{siglas}")

@@ -22,7 +22,6 @@ TEXTO
   before do
     FileUtils.rm_rf output_dir
     FileUtils.mkdir_p output_dir
-    FileUtils.cp "#{modelo_dir}/latexcustomizacao.sty",output_dir
   end
 
   context 'quando geração ativada',  :compilacao, :lento,  :folha_aprovacao => 'ativada'  do

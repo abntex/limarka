@@ -17,9 +17,6 @@ def cria_copia_do_modelo(output_dir)
   FileUtils.mkdir_p output_dir
   FileUtils.cp_r "#{modelo_dir}/imagens",output_dir
   FileUtils.cp_r "#{modelo_dir}/templates",output_dir
-  ['latexcustomizacao.sty'].each do |f|
-    FileUtils.cp_r "#{modelo_dir}/#{f}",output_dir
-  end
 end
 
 @configuracao_padrao = nil

@@ -4,7 +4,7 @@ require 'spec_helper'
 require 'limarka/conversor'
 
 describe 'Anexos', :anexos do
-  
+
   let!(:options) {{output_dir: output_dir, templates_dir: modelo_dir}}
   let(:tex_file) {Limarka::Conversor.tex_file(t.configuracao)}
   let (:anexos) {<<-ANEXO
@@ -22,7 +22,6 @@ ANEXO
   before do
     FileUtils.rm_rf output_dir
     FileUtils.mkdir_p output_dir
-    FileUtils.cp "#{modelo_dir}/latexcustomizacao.sty",output_dir
   end
 
   context 'quando configurado como desativado' do
@@ -33,7 +32,7 @@ ANEXO
       @cv = Limarka::Conversor.new(t, options)
       @cv.convert
     end
-    
+
     it 'não serao gerados' do
       expect(@cv.texto_tex).to include("% Anexos desativados")
       expect(@cv.texto_tex).not_to include("\\begin{anexosenv}")
@@ -58,7 +57,7 @@ ANEXO
     it  'cria o arquivo latex' do
       expect(File).to exist(@cv.texto_tex_file)
     end
-    
+
     it 'a seção de anexos foi criada' do
       expect(@cv.texto_tex).to include("\\begin{anexosenv}")
       expect(@cv.texto_tex).to include("\\partanexos")

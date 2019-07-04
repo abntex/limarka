@@ -4,7 +4,7 @@ require 'spec_helper'
 require 'limarka/conversor'
 
 describe 'Lista de Simbolos', :simbolos do
-  
+
   let!(:options) {{output_dir: output_dir, templates_dir: modelo_dir}}
   let(:tex_file) {Limarka::Conversor.tex_file(t.configuracao)}
   let (:texto) {<<-TEXTO
@@ -19,9 +19,8 @@ TEXTO
   before do
     FileUtils.rm_rf output_dir
     FileUtils.mkdir_p output_dir
-    FileUtils.cp "#{modelo_dir}/latexcustomizacao.sty",output_dir
   end
-  
+
   context 'quando simbolos forem especificados', :compilacao, :lento, :simbolos => 'especificado' do
     let (:output_dir) {"tmp/simbolos/especificados"}
     let (:simbolos){{'simbolos' => [{'s'=>"in",'d'=>'Pertence'}, {'s'=>'zeta', 'd'=>'Letra Zeta'}]}}
@@ -32,7 +31,7 @@ TEXTO
       @cv.convert
       @cv.compila
     end
-    
+
     it "lista de simbolos é gerada segundo as Normas da ABNT" do
       expect(File).to exist(@cv.pdf_file)
       expect(@cv.txt).to include(<<-TXT)
