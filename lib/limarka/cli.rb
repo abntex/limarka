@@ -26,10 +26,6 @@ module Limarka
 
     @@cv = nil
 
-    def self.exit_on_failure?
-      true
-    end
-
     desc "check", "Verifica se o sistema está utilizando as dependências compatíveis"
     def check
       c = Limarka::Check.new()
@@ -40,14 +36,14 @@ module Limarka
     method_option :input_dir, :aliases => '-i', :desc => 'Diretório onde será executado a ferramenta', :default => '.'
     method_option :output_dir, :aliases => '-o', :desc => 'Diretório onde serão gerados os arquivos', :default => '.'
     method_option :compila_tex, :aliases => '-c', :desc => 'Compila arquivo tex gerando um PDF', :default => true, :type => :boolean
-    method_option :templates_dir, :aliases => '-t', :desc => 'Diretório que contem a pasta "templates" (pandoc --data-dir)', :default => Dir.pwd
+    method_option :templates_dir, :aliases => '-t', :desc => 'Diretório que contem a pasta templates (pandoc --data-dir)', :default => Dir.pwd
     method_option :rascunho, :aliases => '-r', :desc => 'Ler de um arquivo de rascunho em vez de "trabalho-academico.md"', :banner => "RASCUNHO_FILE"
     method_option :verbose, :aliases => '-v', :desc => 'Imprime mais detalhes da execução', :default => false, :type => :boolean
     method_option :version, :desc => 'Imprime a versão do limarka', :default => false, :type => :boolean
-    method_option :filtros, :desc => 'Sequencia de filtros pandoc que serão utilizados', :banner => "filtro1 filtro2 filtro3", :type => :array, :required => false
-    method_option :filtros_lua, :desc => 'Sequencia de filtros lua pandoc que serão utilizados', :banner => "f1.lua f2.lua fN.lua", :type => :array, :required => false
+    method_option :filtros, :type => :array, :required => false, :desc => 'Sequencia de filtros pandoc que serão utilizados', :banner => "filtro1 filtro2 filtro3"
+    method_option :filtros_lua, :type => :array, :required => false, :desc => 'Sequencia de filtros lua pandoc que serão utilizados', :banner => "f1.lua f2.lua f3.lua"
 
-    desc "exec", "Executa o limarka para geração do PDF."
+    desc "exec", "Executa o sistema para geração do documento latex e compilação"
     def exec
 
       if (options[:version]) then
