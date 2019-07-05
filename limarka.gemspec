@@ -36,6 +36,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "codelog"
   spec.add_development_dependency "coveralls"
   spec.add_development_dependency "paru"
+  spec.add_development_dependency "cucumber"
+  spec.add_development_dependency "aruba"
 
   spec.add_dependency "clipboard"
   spec.add_dependency "ffi"

@@ -107,3 +107,10 @@ Faça um Push para o seu fork:
 ## Desenvolvimento
 
 Talvez você deseje consulta a página sobre o [desenvolvimento da ferramenta](https://github.com/abntex/limarka/wiki/Desenvolvimento).
+
+# Testes de aceitação
+
+- [https://cucumber.io/docs/gherkin/reference/](https://cucumber.io/docs/gherkin/reference/)
+- [aruba](https://app.cucumber.pro/projects/aruba)
+- [aruba/matchers](https://github.com/cucumber/aruba/tree/master/spec/aruba/matchers)
+- [cucumber-ruby API](https://www.rubydoc.info/github/cucumber/cucumber-ruby/)

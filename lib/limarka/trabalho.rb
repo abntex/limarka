@@ -10,7 +10,7 @@ module Limarka
     attr_accessor :configuracao
     attr_accessor :texto, :anexos, :apendices, :errata
     attr_reader :referencias
-    
+
     def initialize(configuracao: {}, texto: nil, anexos: nil, apendices: nil, referencias_bib: nil, errata: nil)
       self.configuracao = configuracao
       self.texto = texto
@@ -67,7 +67,7 @@ module Limarka
       end
     end
 
-    
+
     def apendices=(a)
       @apendices = a
       if (a) then
@@ -84,15 +84,15 @@ module Limarka
     def anexos?
       @configuracao['anexos']
     end
-    
+
     def referencias_bib?
       @referencias
     end
-    
+
     def referencias_bib=(ref)
       @referencias = ref
     end
-    
+
     def self.default_texto_file
       "trabalho-academico.md"
     end
@@ -160,21 +160,25 @@ module Limarka
     def ler_anexos
       File.open('anexos.md', 'r') {|f| f.read} if anexos?
     end
-    
+
     def ler_texto(rascunho_file)
       # Ficou estranho esse código, merece um refactory.
       if (rascunho_file) then
         File.open(rascunho_file, 'r') {|f| f.read}
-      else  
+      else
         File.open('trabalho-academico.md', 'r') {|f| f.read}
       end
     end
-    
+
     # Ler referências do arquivo de referências.
     # @return [String] conteúdo do arquivo de referências
     def ler_referencias(configuracao)
       arquivo_de_referencias = configuracao['referencias_caminho']
-      File.open(arquivo_de_referencias, 'r') {|f| f.read}
+      if File.exist?(arquivo_de_referencias)
+        return File.open(arquivo_de_referencias, 'r') {|f| f.read}
+      else
+        return ""
+      end
     end
 
     # Salva o hash no formato yaml no caminho especificado. Adiciona o `\n---\n`
@@ -187,8 +191,8 @@ module Limarka
         f.write "\n---\n"
       end
     end
-   
-    # Salva os conteúdos do trabalho em arquivos no diretórios especificado. 
+
+    # Salva os conteúdos do trabalho em arquivos no diretórios especificado.
     def save(dir)
       Dir.chdir(dir) do
         File.open(Trabalho.default_texto_file, 'w'){|f| f.write texto} if texto
