@@ -1,6 +1,17 @@
 # Changelog
 Todas as mudanças relevantes deste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
+## 19.7.3 - 2019-07-05
+### Removido
+- Remoção da opção de upgrade do pdf (que nunca foi implementada)
+
+### Mudanças
+- Arquivo `latexcustomizacao.sty` referencias passaram a ser opcionais - [#194](https://github.com/abntex/limarka/issues/194)
+
+### Melhorias implementadas
+- Agora é possível ativar [outras extensões do pandoc](https://pandoc.org/MANUAL.html#non-pandoc-extensions) - [#63](https://github.com/abntex/limarka/issues/63)
+
+---
 ## 19.7.2 - 2019-07-03
 ### Deprecated
 - Comando 'check' será removido em breve
