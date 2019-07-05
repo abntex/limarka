@@ -34,3 +34,11 @@ end
 Dado("arquivo configuracao.yaml com configuração padrão") do
   FileUtils.cp_r File.join(@inicio, "spec/configuracao_padrao/configuracao.yaml"),'.'
 end
+
+Dado("existe um filtro executável filtro.rb") do
+  FileUtils.cp_r File.join(@inicio,"test/filtros/ruby/filtro.rb"), "."
+end
+
+Dado("existe um filtro lua filtro.lua") do
+  FileUtils.cp_r File.join(@inicio,"test/filtros/lua/filtro.lua"), "."
+end
