@@ -10,7 +10,7 @@ describe Limarka::Trabalho do
   let (:referencias_bib) {'@book {}'}
   let (:errata) {'Errata1'}
   let(:test_dir) {'tmp/trabalho'}
-  
+
   describe '#new' do
     context 'com argumentos' do
       let(:t) {Limarka::Trabalho.new(configuracao: configuracao, texto: texto, anexos: anexos, apendices: apendices, referencias_bib: referencias_bib)}
@@ -116,7 +116,7 @@ describe Limarka::Trabalho do
       expect(t.configuracao).to include('title' => 'meu título')
     end
   end
-  
+
   describe '#save', :save do
     let(:t) {Limarka::Trabalho.new(configuracao: {'title' => 'meu título'}, texto: texto, anexos: anexos, apendices: apendices)}
     before do
@@ -208,7 +208,7 @@ describe Limarka::Trabalho do
         expect(File).not_to exist(test_dir + '/' + Limarka::Trabalho.default_errata_file)
       end
     end
-        
+
   end
 
   describe '#ler_configuracao', :ler_configuracao do
@@ -239,7 +239,7 @@ CONF
         expect { t.ler_configuracao(options) }.to raise_error(IOError, "Arquivo configuracao.yaml não foi encontrado, talvez esteja executando dentro de um diretório que não contém um projeto válido?")
       end
     end
-    
+
     context 'quando optado por ler configuração de configuracao.pdf existente', :lento, :libreoffice, :configuracao do
       let (:arquivo_de_configuracao) {'configuracao.pdf'}
       let (:options) {{configuracao_yaml: false}}
@@ -283,13 +283,14 @@ CONF
       let (:configuracao) {{'referencias_caminho' => 'jabref.bib'}}
       let (:conteudo) {"@book{mybook}"}
       before do
+        allow(File).to receive(:exist?).with('jabref.bib') {true}
         expect(File).to receive(:open).with('jabref.bib', 'r').and_yield(StringIO.new(conteudo))
       end
       it 'ler o arquivo e retorna seu conteúdo' do
         expect(t.ler_referencias(configuracao)).to eq(conteudo)
       end
     end
-    
+
   end
 
   describe '#ler_apendices' do

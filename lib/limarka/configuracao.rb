@@ -34,17 +34,5 @@ module Limarka
       end
     end
 
-
-    method_option :pdf_antigo, :aliases => "-p", :required => true
-    desc "upgrade", "Após atualização de versão, atualiza os valores do novo arquivo configuracao.pdf a partir do antigo (que precisa ser especificado)"
-    def upgrade
-      puts "Ainda falta implementar".red
-      #t = Limarka::Trabalho.new
-      #configuracao = t.ler_configuracao(:configuracao_yaml => true)
-
-    end
-
   end
 end
-
-

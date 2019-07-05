@@ -2,6 +2,7 @@
 
 
 Before do
+  FileUtils.rm_rf File.join('tmp', 'cucumber')
   @inicio = Dir.pwd
 end
 After do

@@ -20,6 +20,7 @@ jobs:
         - pdftk --version
       script:
       - bundle exec rake spec:ruby
+      - bundle exec rake cucumber:ruby
     - stage: testes
       cache:
         directories:
@@ -37,6 +38,7 @@ jobs:
         - pdftk --version
       script:
       - bundle exec rake spec:pdf
+      - bundle exec rake cucumber:pdf
       after_failure:
       - cat test/latex/exemplo-minimo/xxx-Monografia.log
     - stage: deploy

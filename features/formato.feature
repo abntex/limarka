@@ -1,12 +1,11 @@
 # language: pt
 @extensao
-Funcionalidade: Habilitando extensões pandoc
+Funcionalidade: Formato e extensões pandoc
 
 O limarka utiliza [pandoc](https://pandoc.org) para geração do PDF.
 
-Como usuário do limarka eu gostaria poder escolher quais extensões do
-pandoc eu poderia utilizar no meu trabalho, extendendo qual o formato do
-arquivo que limarka irá interpretar.
+Como usuário do limarka eu gostaria poder extender o formato do arquivo
+de texto habilitando extensões do pandoc.
 
 Contexto:
   Dado um diretório com o template oficial
@@ -20,10 +19,11 @@ Contexto:
   E arquivo configuracao.yaml com configuração padrão
 
 @wip
-Cenário: caso normal
-  Neste caso, o texto normal não será convertido em link.
+Cenário: caso normal, utilizando o formato pré-definido do limarka
+  O comportamento padrão do limarka não gera links clicáveis no texto, a
+  não ser que o usuário utilize a sintaxe apropriada de link.
 
-  Quando executar limarka "-y"
+  Quando executar limarka "-y --no-compila-tex"
   Então o arquivo tex gerado contém "https://github.com/abntex/limarka"
   Mas o arquivo tex gerado não contém "\\url{https://github.com/abntex/limarka}"
 

@@ -23,6 +23,18 @@ RSpec::Core::RakeTask.new('spec:latex_minimo') do |t|
   t.rspec_opts = "--tag latex_minimo"
 end
 
+namespace :cucumber do
+  desc 'Executa testes cucumber que NÃO envolvem gerão de pdfs'
+  task :ruby do
+    system "cucumber -t 'not @pdf'"
+  end
+
+  desc 'Executa testes cucumber que envolvem gerão de pdfs'
+  task :pdf do
+    system "cucumber -t '@pdf'"
+  end
+end
+
 task :default => [:configuracao_padrao, 'spec:ruby']
 
 # http://stackoverflow.com/questions/19841865/ruby-gem-to-extract-form-data-from-fillable-pdf
