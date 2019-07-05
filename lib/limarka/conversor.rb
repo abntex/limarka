@@ -215,7 +215,7 @@ module Limarka
     end
 
     def texto_tex_file
-      "#{options[:output_dir]}/#{Conversor.tex_file(t.configuracao)}"
+      "#{options[:output_dir]}/#{Conversor.tex_file}"
     end
     def pdf_file
       texto_tex_file.sub('.tex','.pdf')
@@ -229,7 +229,7 @@ module Limarka
       # não faz nada por enquanto
     end
 
-    def self.tex_file(configuracao)
+    def self.tex_file()
       "xxx-trabalho-academico.tex"
     end
 

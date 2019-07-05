@@ -9,7 +9,7 @@ describe 'Capa', :capa do
   let!(:configuracao) {configuracao_padrao.merge(configuracao_especifica)}
   let!(:options) {{output_dir: output_dir, templates_dir: modelo_dir}}
   let (:t) {Limarka::Trabalho.new(configuracao: configuracao, texto: texto)}
-  let(:tex_file) {Limarka::Conversor.tex_file(t.configuracao)}
+  let(:tex_file) {Limarka::Conversor.tex_file}
   let (:texto) {<<-TEXTO
   # Primeiro Capítulo
 

@@ -8,7 +8,7 @@ require 'yaml'
 describe 'Exemplo1', :exemplos do
 
 
-  let(:tex_file){Limarka::Conversor.tex_file({})}
+  let(:tex_file){Limarka::Conversor.tex_file}
   let(:texto) {<<-END
 # Introdução
 

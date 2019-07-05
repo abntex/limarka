@@ -7,7 +7,7 @@ require 'open3'
 describe 'Folha de Aprovação', :folha_aprovacao do
 
   let!(:options) {{output_dir: output_dir, templates_dir: modelo_dir}}
-  let(:tex_file) {Limarka::Conversor.tex_file(t.configuracao)}
+  let(:tex_file) {Limarka::Conversor.tex_file}
   let (:t) {Limarka::Trabalho.new(configuracao: configuracao_padrao.merge(configuracao_especifica), texto: texto)}
   let (:texto) {<<-TEXTO
 # Primeiro Capítulo

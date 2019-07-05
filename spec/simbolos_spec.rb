@@ -6,7 +6,7 @@ require 'limarka/conversor'
 describe 'Lista de Simbolos', :simbolos do
 
   let!(:options) {{output_dir: output_dir, templates_dir: modelo_dir}}
-  let(:tex_file) {Limarka::Conversor.tex_file(t.configuracao)}
+  let(:tex_file) {Limarka::Conversor.tex_file}
   let (:texto) {<<-TEXTO
 # Primeiro Capítulo
 

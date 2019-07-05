@@ -8,7 +8,7 @@ describe Limarka::Conversor do
   describe ".tex_file", :tipo_trabalho, :nivel_educacao do
       let (:configuracao_exportada) {}
       it "retorna xxx-trabalho-academico.tex" do
-        expect(Limarka::Conversor.tex_file({})).to eq('xxx-trabalho-academico.tex')
+        expect(Limarka::Conversor.tex_file).to eq('xxx-trabalho-academico.tex')
       end
   end
 
