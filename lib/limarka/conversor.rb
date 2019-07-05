@@ -230,27 +230,7 @@ module Limarka
     end
 
     def self.tex_file(configuracao)
-      if (configuracao['graduacao'] and configuracao['projeto']) then
-        'xxx-Monografia-projeto.tex'
-      elsif (configuracao['graduacao'] and not configuracao['projeto']) then
-        'xxx-Monografia.tex'
-      elsif (configuracao['especializacao'] and configuracao['projeto']) then
-        'xxx-TFC-projeto.tex'
-      elsif (configuracao['especializacao'] and not configuracao['projeto']) then
-        'xxx-TFC.tex'
-      elsif (configuracao['mestrado'] and configuracao['projeto']) then
-        'xxx-Dissertacao-projeto.tex'
-      elsif (configuracao['mestrado'] and not configuracao['projeto']) then
-        'xxx-Dissertacao.tex'
-      elsif (configuracao['doutorado'] and configuracao['projeto']) then
-        'xxx-Tese-projeto.tex'
-      elsif (configuracao['doutorado'] and not configuracao['projeto']) then
-        'xxx-Tese.tex'
-      else
-        # valor padrão, caso não configurado.
-        'xxx-Monografia-projeto.tex'
-      end
-
+      "xxx-trabalho-academico.tex"
     end
 
     private

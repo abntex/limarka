@@ -8,7 +8,7 @@ require 'yaml'
 describe 'Exemplo1', :exemplos do
 
 
-  let(:tex_file){test_dir+'/xxx-Monografia-projeto.tex'}
+  let(:tex_file){Limarka::Conversor.tex_file({})}
   let(:texto) {<<-END
 # Introdução
 
@@ -84,15 +84,15 @@ END
       Dir.chdir test_dir do
         Limarka::Cli.start(["exec","-y", '-t', templates_dir])
       end
-      @tex = File.open(tex_file, 'r'){|f| f.read}
+      #@tex = File.open(tex_file, 'r'){|f| f.read}
     end
 
     it "gera arquivo latex" do
-      expect(File).to exist(tex_file)
-      expect(@tex).to include("\\cite{ABNT-citacao}") # Citação
-      expect(@tex).to include("Primeiro anexo")
-      expect(@tex).to include("Primeiro apêndice")
-      expect(@tex).to include("A aranha arranha a rã")
+      #expect(File).to exist(tex_file)
+      expect(Limarka::Cli.cv.texto_tex).to include("\\cite{ABNT-citacao}") # Citação
+      expect(Limarka::Cli.cv.texto_tex).to include("Primeiro anexo")
+      expect(Limarka::Cli.cv.texto_tex).to include("Primeiro apêndice")
+      expect(Limarka::Cli.cv.texto_tex).to include("A aranha arranha a rã")
     end
   end
 
