@@ -18,14 +18,13 @@ Contexto:
   """
   E arquivo configuracao.yaml com configuração padrão
 
-@wip
 Cenário: caso normal, utilizando o formato pré-definido do limarka
   O comportamento padrão do limarka não gera links clicáveis no texto, a
   não ser que o usuário utilize a sintaxe apropriada de link.
 
   Quando executar limarka "-y --no-compila-tex"
   Então o arquivo tex gerado contém "https://github.com/abntex/limarka"
-  Mas o arquivo tex gerado não contém "\\url{https://github.com/abntex/limarka}"
+  Mas o arquivo tex gerado não contém "\url{https://github.com/abntex/limarka}"
 
 Cenário: habilitando uma extensão pandoc
   Neste cenário iremos habilitar a extensão 'autolink_bare_uris'
@@ -38,4 +37,4 @@ Cenário: habilitando uma extensão pandoc
   formato: "+autolink_bare_uris"
   """
   Quando executar limarka "-y --no-compila-tex"
-  Então o arquivo tex gerado contém "\\url{https://github.com/abntex/limarka}"
+  Então o arquivo tex gerado contém "\url{https://github.com/abntex/limarka}"

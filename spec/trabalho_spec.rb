@@ -310,4 +310,21 @@ CONF
     end
   end
 
+
+  describe "#formato" do
+    context "quando configuracao não contém propriedade 'formato'" do
+      let(:t) {Limarka::Trabalho.new(configuracao: configuracao.merge('formato' => nil))}
+      fit 'retorna o formato padrão: "markdown+raw_tex"' do
+        expect(t.formato).to eq("markdown+raw_tex")
+      end
+    end
+    context "quando configuracao contém propriedade 'formato'" do
+      let(:extensao){'+abracadabra'}
+      let(:t) {Limarka::Trabalho.new(configuracao: configuracao.merge('formato' => extensao))}
+      fit 'retorna o valor padrão concatenado com o valor do formato' do
+        expect(t.formato).to eq("markdown+raw_tex+abracadabra")
+      end
+    end
+  end
+
 end

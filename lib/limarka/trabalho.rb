@@ -204,5 +204,18 @@ module Limarka
       end
 
     end
+
+    def self.formato_padrao
+      "markdown+raw_tex"
+    end
+
+    def formato
+      result = Trabalho.formato_padrao
+      unless @configuracao["formato"].nil? then
+        result << @configuracao["formato"]
+      end
+      result
+    end
+
   end
 end
