@@ -26,12 +26,12 @@ end
 namespace :cucumber do
   desc 'Executa testes cucumber que NÃO envolvem gerão de pdfs'
   task :ruby do
-    system "cucumber -t 'not @pdf'"
+    system "cucumber -t 'not @pdf' -f progress"
   end
 
   desc 'Executa testes cucumber que envolvem gerão de pdfs'
   task :pdf do
-    system "cucumber -t '@pdf'"
+    system "cucumber -t '@pdf' -f progress"
   end
 end
 
