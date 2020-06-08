@@ -36,10 +36,12 @@ jobs:
         - git clone https://github.com/abntex/trabalho-academico-limarka.git modelo-oficial
       script:
       - bundle exec rspec spec/dependencias/latex_spec.rb
+      - bundle exec rspec spec/simples_spec.rb
       - bundle exec rake spec:pdf
       - bundle exec rake cucumber:pdf
       after_failure:
       - cat test/latex/exemplo-minimo/xxx-Monografia.log
+      - cat tmp/simples/xxx-trabalho-academico.log
     - stage: deploy
       install: skip
       script: echo tag $TRAVIS_TAG slug $TRAVIS_REPO_SLUG branch $TRAVIS_BRANCH

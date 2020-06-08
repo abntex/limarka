@@ -115,7 +115,7 @@ if [ "$codename" = "bionic" ]; then
 
   fi #tex
 
-fi # xenial
+fi #
 
 if [ -n "$pandoc" ];
 then
