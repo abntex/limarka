@@ -22,7 +22,9 @@ ENV PATH="/root/bin:${PATH}"
 RUN tlmgr install \
 	abntex2 \
 	babel-portuges \
+	bookmark \
 	enumitem \
+	epstopdf-pkg \
 	ifetex \
 	lastpage \
 	lipsum \
@@ -30,6 +32,7 @@ RUN tlmgr install \
 	ltcaption \
 	memoir \
 	microtype \
+	pdflscape \
 	pdfpages \
 	textcase \
 	xcolor
