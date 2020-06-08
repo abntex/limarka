@@ -27,6 +27,7 @@ RUN tlmgr install \
 	lastpage \
 	lipsum \
 	listings \
+	ltcaption \
 	memoir \
 	microtype \
 	pdfpages \

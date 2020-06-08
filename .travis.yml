@@ -41,7 +41,9 @@ jobs:
       - bundle exec rake cucumber:pdf
       after_failure:
       - cat test/latex/exemplo-minimo/xxx-Monografia.log
+      - cat tmp/simples/xxx-trabalho-academico.tex
       - cat tmp/simples/xxx-trabalho-academico.log
+      - cat tmp/simples/xxx-trabalho-academico.txt
     - stage: deploy
       install: skip
       script: echo tag $TRAVIS_TAG slug $TRAVIS_REPO_SLUG branch $TRAVIS_BRANCH
