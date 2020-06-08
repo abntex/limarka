@@ -34,7 +34,6 @@ jobs:
         - xelatex -v
         - pdftotext -v
         - pandoc -v
-        - pdftk --version
       script:
       - bundle exec rspec spec/dependencias/latex_spec.rb
       - bundle exec rake spec:pdf
