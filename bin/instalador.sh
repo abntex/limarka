@@ -80,16 +80,20 @@ if [ "$codename" = "xenial" ]; then
         wget -qO- "https://yihui.name/gh/tinytex/tools/install-unx.sh" | sh
         tlmgr install abntex2 \
           babel-portuges \
+          bookmark \ # nova dependencia
           enumitem \
+          epstopdf-pkg \ # nova dependencia
           ifetex \
           lastpage \
           lipsum \
           listings \
           memoir \
           microtype \
+          pdflscape \ # nova dependencia
           pdfpages \
           textcase \
           xcolor
+
           tlmgr option -- autobackup 0
       else
         $dry wget -qO- "https://yihui.name/gh/tinytex/tools/install-unx.sh" \| sh
