@@ -38,6 +38,7 @@ jobs:
         - libreoffice --version
         - pdftk --version
       script:
+      - bundle exec rspec spec/dependencias/latex_spec.rb
       - bundle exec rake spec:pdf
       - bundle exec rake cucumber:pdf
       after_failure:
