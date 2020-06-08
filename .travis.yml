@@ -17,7 +17,6 @@ jobs:
       - git clone https://github.com/abntex/trabalho-academico-limarka.git modelo-oficial
       before_script:
         - pandoc -v
-        - libreoffice --version
         - pdftk --version
       script:
       - bundle exec rake spec:ruby
