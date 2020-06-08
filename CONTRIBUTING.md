@@ -84,9 +84,10 @@ Certifique-se que os testes estão passando:
 
     rake
 
-Crie uma branch a partir da master para sua funcionalidade:
+Escreva [o codelog](https://github.com/codus/codelog) da funcionalidade que deseja implementar:
 
-    git checkout -b minha-funcionalidade
+    codelog new <NAME>
+
 
 Realize as alterações. Adicione testes (opicional, mas desejado) para as suas mudanças. Faça os testes passarem:
 
@@ -98,7 +99,7 @@ Se existir um Issue referente a funcionalidade implementada [utilize o número d
 
 Faça um Push para o seu fork:
 
-    git push origin minha-funcionalidade
+    git push origin
 
 [Submeta um pull request](https://github.com/abntex/limarka/compare/). Altere o título do issue/PR para o texto que deseja ser adicionado ao [CHANGELOG](https://github.com/abntex/limarka/blob/master/CHANGELOG.md)
 

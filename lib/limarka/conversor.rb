@@ -1,6 +1,5 @@
 # coding: utf-8
 require "thor"
-require 'pdf_forms'
 require 'yaml'
 require 'colorize'
 require 'open3'

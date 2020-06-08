@@ -240,34 +240,6 @@ CONF
       end
     end
 
-    context 'quando optado por ler configuração de configuracao.pdf existente', :lento, :libreoffice, :configuracao do
-      let (:arquivo_de_configuracao) {'configuracao.pdf'}
-      let (:options) {{configuracao_yaml: false}}
-      let (:configuracao_esperada) {{"title" => "Título do trabalho"}}
-      before do
-        # Precisa do libreoffice e ele precisa está fechado!
-        Dir.chdir(modelo_dir) do
-          system "libreoffice --headless --convert-to pdf configuracao.odt", :out=>"/dev/null"
-        end
-        # expect(t).to receive(:ler_configuracao_pdf) {configuracao}
-      end
-      it 'ler configuracao do arquivo' do
-        Dir.chdir(modelo_dir) do
-          expect(t.ler_configuracao(options)).to include(configuracao_esperada)
-        end
-      end
-    end
-
-    context 'quando optado por ler configuração de PDF inexistente', :configuracao do
-      let (:arquivo_de_configuracao) {'configuracao.pdf'}
-      let (:options) {{configuracao_yaml: false}}
-      before do
-        allow(File).to receive(:exist?).with(arquivo_de_configuracao).and_return(false)
-      end
-      it 'emite error informando que não encontrou o arquivo' do
-        expect {t.ler_configuracao(options)}.to raise_error(IOError, "Arquivo configuracao.pdf não foi encontrado, talvez esteja executando dentro de um diretório que não contém um projeto válido?")
-      end
-    end
   end
 
   describe '#ler_referencias' do

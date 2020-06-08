@@ -1,0 +1,22 @@
+"Melhorias implementadas":
+  - Nova funcionalidade implementada
+
+"Mudanças":
+  - As configurações serão possíveis apenas a partir de arquivo YAML
+
+"Deprecated":
+  - Funcionalidades que serão removidas em breve
+
+"Removido":
+  - Arquivo de configuração em pdf [#169](https://github.com/abntex/limarka/issues/169)
+  - Dependências de execução pdftk [#169](https://github.com/abntex/limarka/issues/169)
+  - Dependências do clipboard [#169](https://github.com/abntex/limarka/issues/169)
+
+"Correções":
+  - Alterações em código com erro
+
+"Segurança":
+  - Mudanças que corrigem vulnerabilidade
+
+"Deploy notes":
+  - Mudanças que impactam no processo de implantação

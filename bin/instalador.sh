@@ -117,6 +117,6 @@ fi # xenial
 
 if [ -n "$pandoc" ];
 then
-  $dry wget -nv https://github.com/jgm/pandoc/releases/download/2.7.3/pandoc-2.7.3-1-amd64.deb
+  $dry wget -nv https://github.com/jgm/pandoc/releases/download/2.9.2.1/pandoc-2.9.2.1-1-amd64.deb
   $dry sudo dpkg -i pandoc-*.deb && $dry rm pandoc-*.deb
 fi

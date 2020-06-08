@@ -1,14 +1,11 @@
 # coding: utf-8
 require "thor"
-require 'pdf_forms'
 require 'yaml'
 require 'colorize'
 require 'open3'
-
 require 'limarka/configuracao'
 require 'limarka/ref'
 require 'limarka/conversor'
-require 'clipboard'
 require 'terminal-table'
 
 module Limarka

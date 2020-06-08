@@ -2,7 +2,6 @@
 require "thor"
 require 'open3'
 require 'bibtex'
-require 'clipboard'
 
 module Limarka
 
@@ -12,7 +11,7 @@ module Limarka
   # @see Cli
   class Ref < Thor
     include Thor::Actions
-    
+
     method_option :clipboard, :aliases => '-c', :desc => 'Incluir referência bibtex do clipboard (área de transferência)', :default => false, :type => :boolean
     method_option :bibfile, :aliases => '-f', :desc => 'Arquivo de referências bibtex onde será incluído a referência', :default => "referencias.bib", :type => :string
     desc "add", "Adiciona referência ao arquivo de bibliografia."
@@ -21,8 +20,6 @@ Quando você estiver navegando poderá copiar a referência bibtex (do google ac
 DESC
     def add
       if (options[:clipboard]) then
-        referencia = Clipboard.paste 
-      else 
         referencia = $stdin.read
       end
       begin
@@ -30,7 +27,7 @@ DESC
         error = entry.length.zero?
         if not error then
           append_to_file options[:bibfile], referencia
-          
+
           puts <<MSG
 A seguinte referência foi adicionado ao arquivo '#{options[:bibfile]}':
 #{referencia}
@@ -48,5 +45,3 @@ MSG
     end
   end
 end
-
-

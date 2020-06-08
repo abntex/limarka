@@ -7,7 +7,7 @@ bundle install
 
 # Do any other automated setup that you need to do here
 
-echo Configurando submódulo e baixando modelo-oficial
+# Configurando submódulo e baixando modelo-oficial
 git submodule init
 git submodule update
 
