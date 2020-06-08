@@ -76,7 +76,8 @@ if [ "$codename" = "bionic" ]; then
     else
       if [ -z "$dry" ]; then
         wget -qO- "https://yihui.name/gh/tinytex/tools/install-unx.sh" | sh
-        tlmgr install abntex2 \
+        tlmgr install \
+          abntex2 \
           babel-portuges \
           bookmark \
           enumitem \
