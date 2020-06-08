@@ -31,7 +31,7 @@ TEXTO
     end
 
     it 'gera arquivo tex corretamente' do
-      expect(File).to exist(@cv.tex_file)
+      expect(File).to exist(@cv.texto_tex_file)
       expect(@cv.texto_tex).to include("\\chapter{Primeiro capítulo}")
       expect(@cv.texto_tex).to include("Primeiro parágrafo.")
     end
