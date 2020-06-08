@@ -75,8 +75,6 @@ Para compreender a funcionalidade veja o site [http://shields.io](http://shields
 Realize um fork no projeto, depois faça o clone do seu fork:
 
     git clone git@github.com:your-username/limarka.git
-    git submodule init
-    git submodule update
 
 Configure sua máquina:
 
