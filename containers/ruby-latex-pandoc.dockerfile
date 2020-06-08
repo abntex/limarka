@@ -44,6 +44,6 @@ ENV LANG pt_BR.UTF8
 
 # Instalação do pandoc
 WORKDIR /tmp
-RUN wget https://github.com/jgm/pandoc/releases/download/2.7.3/pandoc-2.7.3-1-amd64.deb \
+RUN wget https://github.com/jgm/pandoc/releases/download/2.9.2.1/pandoc-2.9.2.1-1-amd64.deb \
 && dpkg -i pandoc-*.deb \
 && rm pandoc-*.deb

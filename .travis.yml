@@ -62,3 +62,5 @@ jobs:
         script: bin/build-docker.sh && bin/deploy-docker.sh $TRAVIS_TAG
         on:
           tags: true
+        after_failure:
+          - cat /root/.TinyTeX/texmf-var/web2c/tlmgr.log
