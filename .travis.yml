@@ -14,9 +14,9 @@ jobs:
       before_install:
       - sudo apt-get update -qq
       - bin/instalador.sh -dp
-      - git clone https://github.com/abntex/trabalho-academico-limarka.git modelo-oficial
       before_script:
         - pandoc -v
+        - git clone https://github.com/abntex/trabalho-academico-limarka.git modelo-oficial
       script:
       - bundle exec rake spec:ruby
       - bundle exec rake cucumber:ruby
@@ -33,6 +33,7 @@ jobs:
         - xelatex -v
         - pdftotext -v
         - pandoc -v
+        - git clone https://github.com/abntex/trabalho-academico-limarka.git modelo-oficial
       script:
       - bundle exec rspec spec/dependencias/latex_spec.rb
       - bundle exec rake spec:pdf
