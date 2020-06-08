@@ -85,6 +85,7 @@ if [ "$codename" = "bionic" ]; then
           lastpage \
           lipsum \
           listings \
+          ltcaption \
           memoir \
           microtype \
           pdflscape \
