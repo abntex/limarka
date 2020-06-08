@@ -49,15 +49,13 @@ while getopts "Dcdtpn" opt; do
 done
 
 # ler distribuição: lsb_release -c -s
-if [ "$codename" = "xenial" ]; then
+if [ "$codename" = "bionic" ]; then
 
   if [ -n "$dependencias" ]; then
     $dry sudo apt-get install -y -qq \
       language-pack-pt \
-      libreoffice \
       locales \
       pdfgrep \
-      pdftk \
       poppler-utils \
       ruby-full \
       unzip \

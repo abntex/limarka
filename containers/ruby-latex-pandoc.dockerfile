@@ -10,7 +10,6 @@ RUN apt-get update && apt-get install -y -qq \
 	fontconfig \
 	locales \
 	pdfgrep \
-	pdftk \
 	poppler-utils \
 	unzip \
 	wget
@@ -20,7 +19,19 @@ RUN wget -qO- "https://yihui.name/gh/tinytex/tools/install-unx.sh" | sh
 ENV PATH="/root/bin:${PATH}"
 
 # instala bibliotecas para o abntex2/limarka
-RUN tlmgr install memoir abntex2 lastpage microtype lipsum pdfpages ifetex textcase enumitem xcolor babel-portuges listings
+RUN tlmgr install \
+	abntex2 \
+	babel-portuges \
+	enumitem \
+	ifetex \
+	lastpage \
+	lipsum \
+	listings \
+	memoir \
+	microtype \
+	pdfpages \
+	textcase \
+	xcolor
 
 # Configurando o idioma português #175: https://hub.docker.com/_/debian/#locales
 RUN rm -rf /var/lib/apt/lists/* \
