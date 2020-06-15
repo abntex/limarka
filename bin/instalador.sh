@@ -52,14 +52,21 @@ done
 if [ "$codename" = "bionic" ]; then
 
   if [ -n "$dependencias" ]; then
-    $dry sudo apt-get install -y -qq \
+    $dry sudo apt-get install -y -qq --no-install-recommends \
       language-pack-pt \
       locales \
       pdfgrep \
       poppler-utils \
-      ruby-full \
+      ruby-bundler \
+      ruby-json \
+      ruby-ffi \
+      libffi-dev \
       unzip \
-      xclip
+      xclip \
+      wget \
+      perl \
+      luajit \
+      python 
   fi
 
   if [ -n "$tex" ]; then
@@ -80,33 +87,42 @@ if [ "$codename" = "bionic" ]; then
           abntex2 \
           babel-portuges \
           bookmark \
+          caption \    
           enumitem \
           epstopdf-pkg \
-          ifetex \
           lastpage \
           lipsum \
           listings \
-          ltcaption \
           memoir \
           microtype \
           pdflscape \
           pdfpages \
+          psnfss \
+          shipunov \
+          texliveonfly \
           textcase \
           xcolor
 
           tlmgr option -- autobackup 0
       else
         $dry wget -qO- "https://yihui.name/gh/tinytex/tools/install-unx.sh" \| sh
-        $dry tlmgr install abntex2 \
+        $dry tlmgr install \
+          abntex2 \
           babel-portuges \
+          bookmark \
+          caption \    
           enumitem \
-          ifetex \
+          epstopdf-pkg \
           lastpage \
           lipsum \
           listings \
           memoir \
           microtype \
+          pdflscape \
           pdfpages \
+          psnfss \
+          shipunov \
+          texliveonfly \
           textcase \
           xcolor
           $dry tlmgr option -- autobackup 0

@@ -16,7 +16,7 @@ jobs:
       - bin/instalador.sh -dp
       before_script:
         - pandoc -v
-        - git clone https://github.com/abntex/trabalho-academico-limarka.git modelo-oficial
+        - git clone --depth=1 https://github.com/abntex/trabalho-academico-limarka.git modelo-oficial
       script:
       - bundle exec rake spec:ruby
       - bundle exec rake cucumber:ruby
@@ -26,14 +26,14 @@ jobs:
           - $HOME/.TinyTeX
       before_install:
       - sudo apt-get update -qq
-      - export PATH=$PATH:~/.TinyTeX2/bin/x86_64-linux
+      - export PATH=$PATH:~/.TinyTeX/bin/x86_64-linux
       - bin/instalador.sh -dptc
       before_script:
         - latexmk -v
         - xelatex -v
         - pdftotext -v
         - pandoc -v
-        - git clone https://github.com/abntex/trabalho-academico-limarka.git modelo-oficial
+        - git clone --depth=1 https://github.com/abntex/trabalho-academico-limarka.git modelo-oficial
       script:
       - bundle exec rspec spec/dependencias/latex_spec.rb
       - bundle exec rspec spec/simples_spec.rb
