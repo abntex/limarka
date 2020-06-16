@@ -15,7 +15,7 @@ else
     ltags="limarka/limarka:dev"
 fi
 
-echo "Aplicando tags..."
+echo "Aplicando tags: $rtptags e $ltags"
 for tag in $rtptags
 do
   docker tag ruby-latex-pandoc "$tag"
