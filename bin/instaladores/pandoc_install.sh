@@ -11,7 +11,7 @@ while getopts "q" opt; do
   esac
 done
 
-if [ $quiet eq 1 ]
+if [ $quiet eq 1 ]; then
   wget -nv $PANDOC_DEB
 else
   wget -c $PANDOC_DEB
