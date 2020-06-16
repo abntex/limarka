@@ -13,7 +13,7 @@ else
       abntex2 \
       babel-portuges \
       bookmark \
-      caption \    
+      caption \
       enumitem \
       epstopdf-pkg \
       lastpage \
