@@ -1,6 +1,8 @@
 #!/usr/bin/env sh
 
-sudo apt-get install -y -qq \
-  language-pack-pt \
+apt-get install -y -qq \
+  libfontconfig \
   locales \
+  perl-doc \
+  wget \
   unzip

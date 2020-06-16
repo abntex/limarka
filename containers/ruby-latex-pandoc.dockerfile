@@ -9,13 +9,13 @@ WORKDIR /tmp
 COPY bin/instaladores/dependencias_execucao_install.sh \
 	bin/instaladores/pandoc_install.sh \
 	bin/instaladores/tinytex_install.sh \
-	.
+	/tmp/
 
-RUN apt-get update && dependencias_execucao_install.sh
+RUN apt-get update && /tmp/dependencias_execucao_install.sh
 
 # Instala tinytex (/root/.TinyTex)
 # e bibliotecas para o abntex2/limarka
-RUN bin/instaladores/tinytex_install.sh
+RUN IGNORE_CACHE=1 /tmp/tinytex_install.sh
 ENV PATH="/root/bin:~/.TinyTeX/bin/x86_64-linux:${PATH}"
 
 # Configurando o idioma português #175: https://hub.docker.com/_/debian/#locales
@@ -24,4 +24,4 @@ RUN rm -rf /var/lib/apt/lists/* \
 ENV LANG pt_BR.UTF8
 
 # Instalação do pandoc
-RUN pandoc_install.sh
+RUN /tmp/pandoc_install.sh
