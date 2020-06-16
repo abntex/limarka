@@ -14,8 +14,8 @@ jobs:
       name: "Testes RUBY"
       before_install:
       - sudo apt-get update -qq
-      - bin/instaladores/dependencias_execucao_install.sh && bin/instaladores/dependencias_desenvolvimento_install.sh
-      - bin/instaladores/pandoc_install.sh -q
+      - sudo bin/instaladores/dependencias_execucao_install.sh && sudo bin/instaladores/dependencias_desenvolvimento_install.sh
+      - sudo bin/instaladores/pandoc_install.sh -q
       before_script:
         - pandoc -v
         - git clone --depth=1 https://github.com/abntex/trabalho-academico-limarka.git modelo-oficial
@@ -29,9 +29,9 @@ jobs:
           - $HOME/.TinyTeX
       before_install:
       - sudo apt-get update -qq
-      - bin/instaladores/dependencias_execucao_install.sh && bin/instaladores/dependencias_desenvolvimento_install.sh
-      - bin/instaladores/pandoc_install.sh -q
-      - bin/instaladores/tinytex_install.sh
+      - sudo bin/instaladores/dependencias_execucao_install.sh && sudo bin/instaladores/dependencias_desenvolvimento_install.sh
+      - sudo bin/instaladores/pandoc_install.sh -q
+      - sudo bin/instaladores/tinytex_install.sh
       - export PATH=$PATH:~/.TinyTeX/bin/x86_64-linux
       before_script:
         - tlmgr --version && tlmgr show --only-installed

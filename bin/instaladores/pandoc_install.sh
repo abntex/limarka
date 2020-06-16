@@ -17,4 +17,4 @@ else
   wget -c $PANDOC_DEB
 fi
 
-sudo dpkg -i pandoc-*.deb && rm pandoc-*.deb
+dpkg -i pandoc-*.deb && rm pandoc-*.deb
