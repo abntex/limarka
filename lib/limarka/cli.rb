@@ -47,7 +47,6 @@ module Limarka
         puts "limarka "+Limarka::VERSION
         s = `pandoc --version`
         s << `ruby --version`
-        s << `pdftk --version`
         s << `latexmk --version`
         s << `xelatex --version`
         puts s
