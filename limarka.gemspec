@@ -50,5 +50,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "pandoc_abnt", "~> 2.0.0"
   spec.add_dependency "guard"
   spec.add_dependency "guard-shell"
+  spec.add_dependency "guard-rake"
 
 end
