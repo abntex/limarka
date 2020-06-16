@@ -50,7 +50,8 @@ jobs:
       - cat tmp/simples/xxx-trabalho-academico.tex
       - cat tmp/simples/xxx-trabalho-academico.log
       - cat tmp/simples/xxx-trabalho-academico.txt
-    - stage: deploy
+    - stage: testes
+      name: "Deploy docker and rubygems"
       install: skip
       script: echo tag $TRAVIS_TAG slug $TRAVIS_REPO_SLUG branch $TRAVIS_BRANCH
       deploy:
