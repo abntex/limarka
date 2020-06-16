@@ -12,16 +12,12 @@ module Limarka
   class Ref < Thor
     include Thor::Actions
 
-    method_option :clipboard, :aliases => '-c', :desc => 'Incluir referência bibtex do clipboard (área de transferência)', :default => false, :type => :boolean
     method_option :bibfile, :aliases => '-f', :desc => 'Arquivo de referências bibtex onde será incluído a referência', :default => "referencias.bib", :type => :string
     desc "add", "Adiciona referência ao arquivo de bibliografia."
     long_desc <<-DESC
-Quando você estiver navegando poderá copiar a referência bibtex (do google acadêmico, Zotero, etc.) e incluir ao arquivo de gerência de bibliografia (geralmente referencias.bib) utilizando esse comando. A inclusão do texto ocorrerá da entrada padrão, a não ser que a leitura do clipboard seja acionada (opção `-c`).
+Quando você estiver navegando poderá copiar a referência bibtex (do google acadêmico, Zotero, etc.) e incluir ao arquivo de gerência de bibliografia (geralmente referencias.bib) utilizando esse comando. A inclusão do texto ocorrerá da entrada padrão.
 DESC
     def add
-      if (options[:clipboard]) then
-        referencia = $stdin.read
-      end
       begin
         entry = BibTeX.parse(referencia)
         error = entry.length.zero?

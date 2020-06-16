@@ -62,7 +62,6 @@ if [ "$codename" = "bionic" ]; then
       ruby-ffi \
       libffi-dev \
       unzip \
-      xclip \
       wget \
       perl \
       luajit \

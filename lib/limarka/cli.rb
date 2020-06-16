@@ -74,7 +74,6 @@ module Limarka
     end
 
     method_option :interativo, :aliases => '-i', :desc => 'Solicita os parâmetros de forma interativa.', :type => :boolean, :default => false
-    method_option :clipboard, :aliases => '-c', :desc => 'Utiliza o conteúdo da área de transferência como o nome do arquivo.', :type => :boolean, :default => false
 
 #     method_option :arquivo, :aliases => '-a', :desc => 'Caminho completo ou apenas o nome do arquivo na pasta imagens. Somente arquivos existêntes são válidos. Se não for especificado e o nome do arquivo esteja copiado (na área de transferência), e o arquivo existir, ele será utilizado.'
     method_option :legenda, :aliases => '-l', :desc => 'Legenda da figura.', :default => "Legenda da figura."
@@ -87,10 +86,6 @@ Esse comando imprime (1) o código para inclusão de uma figura (2) e como refer
 DESC
     desc "fig ARQUIVO", "Imprime códigos para inclusão de imagens em conformidade com ABNT (em LaTeX)"
     def fig(arquivo=nil)
-
-      if (options[:clipboard]) then
-        arquivo = Clipboard.paste         # Ler do clipboard, requer xclip: sudo apt-get install xclip
-      end
 
       if (arquivo) then
         if arquivo.start_with?("file://") then
