@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 # $1: TAG
 # http://codewiki.wikidot.com/shell-script:if-else
 if [ -n "$1" ]
