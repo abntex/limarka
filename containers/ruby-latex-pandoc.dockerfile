@@ -5,37 +5,18 @@ LABEL maintainer="eduardo.ufpb@gmail.com"
 # Tentamos seguir as melhores práticas:
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
 
-RUN apt-get update && apt-get install -y -qq \
-	build-essential \
-	fontconfig \
-	locales \
-	pdfgrep \
-	poppler-utils \
-	unzip \
-	wget
+WORKDIR /tmp
+COPY bin/instaladores/dependencias_execucao_install.sh \
+	bin/instaladores/pandoc_install.sh \
+	bin/instaladores/tinytex_install.sh \
+	.
+
+RUN apt-get update && dependencias_execucao_install.sh
 
 # Instala tinytex (/root/.TinyTex)
-RUN wget -qO- "https://yihui.name/gh/tinytex/tools/install-unx.sh" | sh
-ENV PATH="/root/bin:${PATH}"
-
-# instala bibliotecas para o abntex2/limarka
-RUN tlmgr install \
-	abntex2 \
-	babel-portuges \
-	bookmark \
-	enumitem \
-	epstopdf-pkg \
-	ifetex \
-	lastpage \
-	lipsum \
-	listings \
-	ltcaption \
-	memoir \
-	microtype \
-	pdflscape \
-	pdfpages \
-	textcase \
-	xcolor
+# e bibliotecas para o abntex2/limarka
+RUN bin/instaladores/tinytex_install.sh
+ENV PATH="/root/bin:~/.TinyTeX/bin/x86_64-linux:${PATH}"
 
 # Configurando o idioma português #175: https://hub.docker.com/_/debian/#locales
 RUN rm -rf /var/lib/apt/lists/* \
@@ -43,7 +24,4 @@ RUN rm -rf /var/lib/apt/lists/* \
 ENV LANG pt_BR.UTF8
 
 # Instalação do pandoc
-WORKDIR /tmp
-RUN wget https://github.com/jgm/pandoc/releases/download/2.9.2.1/pandoc-2.9.2.1-1-amd64.deb \
-&& dpkg -i pandoc-*.deb \
-&& rm pandoc-*.deb
+RUN pandoc_install.sh
