@@ -66,7 +66,7 @@ if [ "$codename" = "bionic" ]; then
       wget \
       perl \
       luajit \
-      python 
+      python
   fi
 
   if [ -n "$tex" ]; then
@@ -87,7 +87,7 @@ if [ "$codename" = "bionic" ]; then
           abntex2 \
           babel-portuges \
           bookmark \
-          caption \    
+          caption \
           enumitem \
           epstopdf-pkg \
           lastpage \
@@ -110,7 +110,7 @@ if [ "$codename" = "bionic" ]; then
           abntex2 \
           babel-portuges \
           bookmark \
-          caption \    
+          caption \
           enumitem \
           epstopdf-pkg \
           lastpage \

@@ -11,9 +11,11 @@ env:
 jobs:
   include:
     - stage: testes
+      name: "Testes do ruby (sem compilação pdf)"
       before_install:
       - sudo apt-get update -qq
-      - bin/instalador.sh -dp
+      - bin/instaladores/dependencias_install.sh
+      - bin/instaladores/pandoc_install.sh -q
       before_script:
         - pandoc -v
         - git clone --depth=1 https://github.com/abntex/trabalho-academico-limarka.git modelo-oficial
@@ -21,14 +23,18 @@ jobs:
       - bundle exec rake spec:ruby
       - bundle exec rake cucumber:ruby
     - stage: testes
+      name: "Testes do latex (com compilação pdf)"
       cache:
         directories:
           - $HOME/.TinyTeX
       before_install:
       - sudo apt-get update -qq
+      - bin/instaladores/dependencias_install.sh
+      - bin/instaladores/pandoc_install.sh -q
+      - bin/instaladores/tinytex_install.sh
       - export PATH=$PATH:~/.TinyTeX/bin/x86_64-linux
-      - bin/instalador.sh -dptc
       before_script:
+        - tlmgr --version && tlmgr show --only-installed
         - latexmk -v
         - xelatex -v
         - pdftotext -v
