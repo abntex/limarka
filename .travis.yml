@@ -11,7 +11,7 @@ env:
 jobs:
   include:
     - stage: testes
-      name: "Testes do ruby (sem compilação pdf)"
+      name: "Testes RUBY"
       before_install:
       - sudo apt-get update -qq
       - bin/instaladores/dependencias_execucao_install.sh && bin/instaladores/dependencias_desenvolvimento_install.sh
@@ -23,7 +23,7 @@ jobs:
       - bundle exec rake spec:ruby
       - bundle exec rake cucumber:ruby
     - stage: testes
-      name: "Testes do latex (com compilação pdf)"
+      name: "Testes com LaTeX (PDFs)"
       cache:
         directories:
           - $HOME/.TinyTeX
