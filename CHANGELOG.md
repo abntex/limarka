@@ -1,12 +1,43 @@
 # Changelog
 Todas as mudanças relevantes deste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
+## 20.7.13 - 2020-07-13
+### Mudanças
+- Utilização de `biblatex-abnt` em vez de `abntex2-cite`  por padrão
+- As configurações serão possíveis apenas a partir de arquivo YAML
+- Agora o nome do pdf gerado independe do tipo do trabalho. [#196](https://github.com/abntex/limarka/issues/196)
+
+### Melhorias implementadas
+- Nova funcionalidade implementada
+- Inclusão de tarefa rake de desenvolvimento `rake codelog:new[funcionalidade]`
+- Configurando mirror de NY (mais rápido) para instalar o TinyTex
+
+### Deprecated
+- Funcionalidades que serão removidas em breve
+- Opção `-y` será removida na próxima versão
+
+### Removido
+- Arquivo de configuração em pdf [#169](https://github.com/abntex/limarka/issues/169)
+- Dependências de execução pdftk [#169](https://github.com/abntex/limarka/issues/169)
+- Dependências do clipboard [#169](https://github.com/abntex/limarka/issues/169)
+
+### Correções
+- Alterações em código com erro
+
+### Segurança
+- Mudanças que corrigem vulnerabilidade
+
+### Deploy notes
+- Mudanças que impactam no processo de implantação
+- Problema com uso da opção `--filtro`
+
+---
 ## 19.7.3 - 2019-07-05
 ### Removido
 - Remoção da opção de upgrade do pdf (que nunca foi implementada)
 
 ### Mudanças
-- Arquivo `latexcustomizacao.sty` referencias passaram a ser opcionais - [#194](https://github.com/abntex/limarka/issues/194)
+- Arquivos `latexcustomizacao.sty` e referencias passaram a ser opcionais - [#194](https://github.com/abntex/limarka/issues/194)
 
 ### Melhorias implementadas
 - Agora é possível ativar [outras extensões do pandoc](https://pandoc.org/MANUAL.html#non-pandoc-extensions) - [#63](https://github.com/abntex/limarka/issues/63)

@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 quiet=0
-PANDOC_DEB=https://github.com/jgm/pandoc/releases/download/2.9.2.1/pandoc-2.9.2.1-1-amd64.deb
+PANDOC_DEB=https://github.com/jgm/pandoc/releases/download/2.10/pandoc-2.10-1-amd64.deb
 
 while getopts "q" opt; do
   case $opt in
