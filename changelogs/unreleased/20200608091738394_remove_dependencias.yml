@@ -6,6 +6,7 @@
 
 "Deprecated":
   - Funcionalidades que serão removidas em breve
+  - Opção `-y` será removida na próxima versão
 
 "Removido":
   - Arquivo de configuração em pdf [#169](https://github.com/abntex/limarka/issues/169)

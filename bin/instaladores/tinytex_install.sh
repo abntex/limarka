@@ -5,9 +5,12 @@ if [ "$IGNORE_CACHE" != "1" ] && command -v tlmgr > /dev/null; then
   echo TinyTeX não será instalado pois foi encontrado no cache.
 else
     wget -qO- "https://yihui.name/gh/tinytex/tools/install-unx.sh" | sh
-    ~/bin/tlmgr install \
+    ~/bin/tlmgr --no-verify-downloads install \
       abntex2 \
       babel-portuges \
+      biber \
+      biblatex \
+      biblatex-abnt \
       bookmark \
       caption \
       enumitem \

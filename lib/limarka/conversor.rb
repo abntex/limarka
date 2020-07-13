@@ -5,6 +5,7 @@ require 'colorize'
 require 'open3'
 require 'fileutils'
 require 'bibtex'
+require 'tempfile'
 
 
 module Limarka
