@@ -50,6 +50,7 @@ abc def ghi
 
 
       it "o filtro é executado durante conversão" do
+        skip # error with paru -- https://github.com/htdebeer/paru/issues/59
         Limarka::Cli.start(["exec","-y", "--filtros", "filtro.rb", "--no-compila-tex", "--input-dir", output_dir, "-t", modelo_dir])
         expect(Limarka::Cli.cv.texto_tex).to include("ABC DEF GHi")
       end
