@@ -61,6 +61,12 @@ task 'codelog' do
   system 'codelog', 'release', "#{Limarka::VERSION}"
 end
 
+desc "Gera entrada par ao codelog"
+task 'codelog:new', [:feature] do |t, args|
+  system 'codelog', 'new', args[:feature]
+end
+
+
 # Desatualizado
 namespace 'docker' do
 

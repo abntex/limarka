@@ -86,8 +86,9 @@ Certifique-se que os testes estão passando:
 
 Escreva [o codelog](https://github.com/codus/codelog) da funcionalidade que deseja implementar:
 
-    codelog new <NAME>
+    rake codelog:new[nome-da-funcionalidade]
 
+NOTE: Atualize o arquivo `[changelogs/unreleased/XXXXXXXXXXXXXXXXX_nome-da-funcionalidade.yml` incluindo texto para release notes.
 
 Realize as alterações. Adicione testes (opicional, mas desejado) para as suas mudanças. Faça os testes passarem:
 

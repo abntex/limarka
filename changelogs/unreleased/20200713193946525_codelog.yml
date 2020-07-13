@@ -1,0 +1,2 @@
+"Melhorias implementadas":
+  - Inclusão de tarefa rake de desenvolvimento `rake codelog:new[funcionalidade]`
